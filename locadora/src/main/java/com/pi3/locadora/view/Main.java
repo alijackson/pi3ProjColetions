@@ -51,7 +51,7 @@ public class Main extends HttpServlet{
         if(criarUser.getLogin().equalsIgnoreCase(login) &&
                 criarUser.getSenha().equalsIgnoreCase(senha))
         {
-            temp = "Acesso permitido";
+            temp = "Acesso permitido!";
         }
         
         request.setAttribute("result", temp);
