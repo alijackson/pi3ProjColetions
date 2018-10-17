@@ -30,13 +30,11 @@ public class Main extends HttpServlet{
                 throws ServletException, IOException{
         
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("login.jsp");
+                = request.getRequestDispatcher("cadastro_cliente.jsp");
         
         dispatcher.forward(request, response);
         
     }
-    
-    
     @Override
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response)
