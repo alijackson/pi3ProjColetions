@@ -5,6 +5,7 @@
  */
 package com.pi3.locadora.view;
 
+import br.com.model.Cliente;
 import com.pi3.locadora.user.AddUser;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -30,7 +31,7 @@ public class Main extends HttpServlet{
                 throws ServletException, IOException{
         
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("cadastro_cliente.jsp");
+                = request.getRequestDispatcher("cadastrar_cliente.jsp");
         
         dispatcher.forward(request, response);
         
@@ -39,20 +40,33 @@ public class Main extends HttpServlet{
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-        AddUser criarUser = new AddUser("Administrador", "admin", "admin");
+//        AddUser criarUser = new AddUser("Administrador", "admin", "admin");
+//        
+//        String login = request.getParameter("login");
+//        String senha = request.getParameter("senha");
+//        String temp = "Acesso negado!";
         
-        String login = request.getParameter("login");
-        String senha = request.getParameter("senha");
-        String temp = "Acesso negado!";
+        Cliente cliente = new Cliente(
+                request.getParameter("nome"), 
+                request.getParameter("cel"), 
+                request.getParameter("cpf"), request.getParameter("cnh"), 
+                request.getParameter("dataNasc"));
         
+        if(request.getParameter("email") != null &&
+                !request.getParameter("email").equals(""))
+            cliente.setEmail(request.getParameter("email"));
         
-        if(criarUser.getLogin().equalsIgnoreCase(login) &&
-                criarUser.getSenha().equalsIgnoreCase(senha))
-        {
-            temp = "Acesso permitido!";
-        }
-        
-        request.setAttribute("result", temp);
+        if(request.getParameter("tel") != null &&
+                !request.getParameter("tel").equals(""))
+            cliente.setTelefoneFixo(request.getParameter("tel"));
+                
+//        if(criarUser.getLogin().equalsIgnoreCase(login) &&
+//                criarUser.getSenha().equalsIgnoreCase(senha))
+//        {
+//            temp = "Acesso permitido!";
+//        }
+//        
+        request.setAttribute("result", "Ocorreu tudo bem\n"+cliente.getNome()+"\n"+cliente.getCpf());
         
         RequestDispatcher dispatcher
                 = request.getRequestDispatcher("resultado.jsp");

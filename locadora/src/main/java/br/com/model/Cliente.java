@@ -82,5 +82,16 @@ public class Cliente {
     private String cpf;
     private String numeroCNH;
     private String dataNascimento;
-
+    
+    public Cliente(){}
+    public Cliente(String nome, String telefoneCelular,
+                    String cpf, String numeroCnh, String dataNascimento)
+    {
+        setNome(nome);
+        setTelefoneCelular(telefoneCelular);
+        setCpf(cpf);
+        setNumeroCNH(numeroCnh);
+        setDataNascimento(dataNascimento);
+    
+    }
 }

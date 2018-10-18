@@ -25,56 +25,56 @@
         <!-- Primeira lateral-->
       </div>
       <div class="col-8" style="background: write">
-        <form id="form">
+          <form id="form" action="main" method="post">
           <div class="form-row">
             <!-- Inicio de First Nome -->
-            <div class="form-group col-md-4">
+            <div class="form-group">
               <span id="erroNome">Insira o nome</span>
               <label for="inputNome">Nome</label>
-              <input type="text" class="form-control" id="Nome" placeholder="Nome">
+              <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome Completo">
             </div>
             <!-- Inicio de SobreNome -->
-            <div class="form-group col-md-8">
+<!--            <div class="form-group col-md-8">
               <label for="inputSobreNome">Sobre Nome</label>
               <input type="text" class="form-control" id="SobreNome" placeholder="Sobre Nome">
-            </div>
+            </div> -->
           </div>
           <!-- Inicio de CPF -->
           <div class="form-group">
             <label for="cpf">CPF</label>
-            <input type="text" class="form-control" id="cpf" placeholder="123.123.123-75">
+            <input type="text" class="form-control" id="cpf" name="cpf" placeholder="123.123.123-12">
           </div>
           <!-- Inicio de E-mail -->
           <div class="form-group">
             <label for="email">E-mail</label>
-            <input type="email" class="form-control" id="email" placeholder="exemplo@exemplo.com.br">
+            <input type="email" class="form-control" id="email" name="email" placeholder="exemplo@exemplo.com.br">
           </div>
           <div class="form-row">
             <!-- Inicio de telefone fixo -->
             <div class="form-group col-md-6">
-              <label for="tel">NÂº Tel</label>
-              <input type="text" class="form-control" id="tel">
+              <label for="tel">Nº Tel</label>
+              <input type="text" class="form-control" id="tel" name="tel">
             </div>
             <!-- Inicio de telefone Celular -->
             <div class="form-group col-md-6">
-              <label for="cel">NÂº Cel</label>
-              <input type="text" class="form-control" id="cel">
+              <label for="cel">Nº Cel</label>
+              <input type="text" class="form-control" id="cel" name="cel">
             </div>
 
             <!-- Inicio de Data de Nascimento -->
             <div class="form-group col-md-6">
               <label for="dataNasc">Data de nascimento</label>
-              <input type="text" class="form-control" id="dataNasc">
+              <input type="text" class="form-control" id="dataNasc" name="dataNasc">
             </div>
             <div class="form-group col-md-6">
-              <label for="cnh">NÂº CNH</label>
-              <input type="text" class="form-control" id="cnh">
+              <label for="cnh">Nº CNH</label>
+              <input type="text" class="form-control" id="cnh" name="cnh">
             </div>
           </div>
-          <div class="form-group col-md-2">
+<!--          <div class="form-group col-md-2">
             <label for="inputZip">Estado</label>
-            <input type="text" class="form-control" id="inputZip">
-          </div>
+            <input type="text" class="form-control" id="estado">
+          </div> -->
 
           <button type="submit" class="btn btn-primary">Salvar</button>
 
