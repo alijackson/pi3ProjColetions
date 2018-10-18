@@ -6,7 +6,7 @@
 package com.pi3.locadora.view;
 
 import br.com.model.Cliente;
-import com.pi3.locadora.user.AddUser;
+
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
