@@ -99,7 +99,7 @@ public class Cliente {
     private String telefoneFixo;
     private String telefoneCelular;
     private String email;
-    private int numeroCNH;
+    private Integer numeroCNH;
     private String dataNascimento;
     private int idade;
     

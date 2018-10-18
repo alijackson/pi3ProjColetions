@@ -1,9 +1,12 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>Home</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- Bootstrap CSS -->
@@ -32,7 +35,7 @@
                                         <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Cadastrar</a>
+                                        <a class="nav-link" href="cadastrar_cliente.jsp">Cadastrar</a>
                                     </li>
                                 </ul>
                             </div>
@@ -43,6 +46,7 @@
                     </div>
                     <div class="col">
                         <table class="table table-striped">
+                            <tbody>
                             <thead>
                                 <tr>
                                     <a href="index.jsp"></a>
@@ -52,6 +56,7 @@
                                     <th scope="col">E-mail</th>
                                 </tr>
                             </thead>
+                            
                             <c:forEach items="${listaCliente}" var="cliente">
                                 <tr>
                                     <td><c:out value="${cliente.getId()}" /></td>
@@ -60,7 +65,7 @@
                                     <td><c:out value="${cliente.getEmail()}" /></td>
                                 </tr>
                             </c:forEach>
-                            <!--/tbody>-->
+                            </tbody>
                         </table>
                     </div>
                 </div>

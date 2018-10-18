@@ -31,7 +31,7 @@
             </div>
 
             <div class="col-8" style="background: write">
-                <form id="form" action="main" method="post">
+                <form id="form" action="cadastrar" method="post" >
                     <div class="form-row">
                         <!-- Inicio de First Nome -->
                         <div class="form-group col-md-10" >
@@ -67,12 +67,12 @@
                     <div class="form-row">
                         <!-- Inicio de telefone fixo -->
                         <div class="form-group col-md-5">
-                            <label for="tel">NÂº Tel</label>
+                            <label for="tel">Nº Tel</label>
                             <input type="text" class="form-control" id="tel" name="tel">
                         </div>
                         <!-- Inicio de telefone Celular -->
                         <div class="form-group col-md-5">
-                            <label for="cel">NÂº Cel</label>
+                            <label for="cel">Nº Cel</label>
                             <input type="text" class="form-control" id="cel" name="cel">
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                             <input type="number" class="form-control" id="idade" name="idade">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="cnh">NÂº CNH</label>
+                            <label for="cnh">Nº CNH</label>
                             <input type="number" class="form-control" id="cnh" name="cnh">
                         </div>
                     </div>

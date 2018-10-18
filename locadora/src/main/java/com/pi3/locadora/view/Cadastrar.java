@@ -22,30 +22,26 @@ import javax.servlet.http.HttpServletResponse;
  * @author alijackson.msilva
  */
 
-@WebServlet(name = "CadastroClient", urlPatterns = {"/main"})
-
-public class Main extends HttpServlet{
-    
-    
+@WebServlet(name = "ProdutoServlet", urlPatterns = {"/cadastrar"})
+public class Cadastrar extends HttpServlet{
+    /*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+    public Cadastrar(){}
     @Override
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response)
                 throws ServletException, IOException
     {
-        ArrayList<Cliente> listCliente = new ArrayList<Cliente>();
-        
-        ClienteDAO getAllCliente = new ClienteDAO();
-        
-        listCliente = getAllCliente.ApresentarClientes();
-        
-        request.setAttribute("listaCliente", listCliente);
-        
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("index.jsp");
+                = request.getRequestDispatcher("cadastrar_cliente.jsp");
         
         dispatcher.forward(request, response);
         
     }
+    
     @Override
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response)
@@ -55,7 +51,7 @@ public class Main extends HttpServlet{
 //        String login = request.getParameter("login");
 //        String senha = request.getParameter("senha");
 //        String temp = "Acesso negado!";
-//        
+        
         Cliente cliente = new Cliente(
                 request.getParameter("nome"), 
                 request.getParameter("cel"), 

@@ -43,7 +43,7 @@ public class ClienteDAO {
             stmt.setString(3, c.getTelefoneFixo());
             stmt.setString(4, c.getTelefoneCelular());
             stmt.setString(5, c.getEmail());
-            stmt.setInt(6, c.getNumeroCNH());
+            stmt.setLong(6, c.getNumeroCNH());
             stmt.setString(7, c.getCpf());
             stmt.setString(8, c.getRg());
             stmt.setInt(9, c.getIdade());
