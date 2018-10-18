@@ -48,8 +48,7 @@ public class ValidacaoCliente {
         }
 
         //verificar se o cliente informou o número de cnh
-        if (cliente.getNumeroCNH() == null
-                || "".equals(cliente.getNumeroCNH())) {
+        if (cliente.getNumeroCNH() == 0) {
             return "É necessário informar o número de CNH";
         }
 

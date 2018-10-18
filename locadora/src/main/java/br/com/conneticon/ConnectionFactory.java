@@ -20,15 +20,16 @@ import java.util.logging.Logger;
 public class ConnectionFactory {
 
     private static final String DRIVER = "com.mysql.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost:3306/testeloja";
-    private static final String USER = "root";
-    private static final String PASS = "";
+    private static final String URL = "jdbc:mysql://localhost:3306/locadora";
+    private static final String USER = "teste";
+    private static final String PASS = "!@#asd(*&";
 
     public static Connection getConnection() {
 
         try {
             Class.forName(DRIVER);
             return DriverManager.getConnection(URL, USER, PASS);
+            
         } catch (ClassNotFoundException | SQLException ex) {
             throw new RuntimeException("Erro na conexão!", ex);
         }

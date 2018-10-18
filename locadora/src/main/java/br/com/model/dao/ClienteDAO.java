@@ -25,40 +25,48 @@ public class ClienteDAO {
 
     }
 
-    public void inserir(Cliente c) {
+    public String inserir(Cliente c) {
 
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
+        String log = "";
+        try 
+        {
 
-        try {
-
-            stmt = con.prepareStatement("INSERT INTO Cliente(nome,dataNascimento,telefoneFixo,telefoneCelular,email,numeroCNH, cpf) "
-                    + "VALUES(?,?,?,?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO cliente "
+                    + "(nome,dtNascimento,telFixo, "
+                    + "telCel,email,cnh,cpf,rg,idade) "
+                    + "VALUES(?,?,?,?,?,?,?,?,?)");
 
             stmt.setString(1, c.getNome());
             stmt.setString(2, c.getDataNascimento());
             stmt.setString(3, c.getTelefoneFixo());
             stmt.setString(4, c.getTelefoneCelular());
             stmt.setString(5, c.getEmail());
-            stmt.setString(6, c.getNumeroCNH());
+            stmt.setInt(6, c.getNumeroCNH());
             stmt.setString(7, c.getCpf());
+            stmt.setString(8, c.getRg());
+            stmt.setInt(9, c.getIdade());
 
-            stmt.executeUpdate();
+            stmt.execute();
 
-            JOptionPane.showMessageDialog(null, "Salvo com sucesso");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "erro ao salvar" + ex);
-        } finally {
+        } 
+        catch (SQLException ex) 
+        {
+            log = ex.toString();
+        } 
+        finally 
+        {
             ConnectionFactory.closeConnection(con, stmt);
         }
-
+        return log;
     }
 
     /**
      *
      * @return
      */
-    public List<Cliente> ApresentarClientes() {
+    public ArrayList<Cliente> ApresentarClientes() {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -66,21 +74,22 @@ public class ClienteDAO {
         ArrayList<Cliente> clientes = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM Cliente");
+            stmt = con.prepareStatement("SELECT * FROM cliente");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
 
                 Cliente c = new Cliente();
 
-                c.setId(rs.getInt("id"));
+                c.setId(rs.getInt("idCliente"));
                 c.setNome(rs.getString("nome"));
-                c.setDataNascimento(rs.getString("dataNascimento"));
-                c.setTelefoneFixo(rs.getString("telefoneFixo"));
-                c.setTelefoneCelular(rs.getString("telefoneCelular"));
+                c.setDataNascimento(rs.getString("dtNascimento"));
+                c.setTelefoneFixo(rs.getString("telFixo"));
+                c.setTelefoneCelular(rs.getString("telCel"));
                 c.setEmail(rs.getString("email"));
-                c.setNumeroCNH(rs.getString("numeroCNH"));
+                c.setNumeroCNH(rs.getInt("cnh"));
                 c.setCpf(rs.getString("cpf"));
+                
                 clientes.add(c);
             }
 
@@ -108,7 +117,7 @@ public class ClienteDAO {
             stmt.setString(3, c.getTelefoneFixo());
             stmt.setString(4, c.getTelefoneCelular());
             stmt.setString(5, c.getEmail());
-            stmt.setString(6, c.getNumeroCNH());
+            stmt.setInt(6, c.getNumeroCNH());
             stmt.setString(7, c.getCpf());
             stmt.setInt(8, c.getId());
 
@@ -123,8 +132,13 @@ public class ClienteDAO {
         }
 
     }
-
-    public void editar(Cliente c, int id) {
+    /**
+     * Função edita o usuario, 
+     * Dando um update no banco de dados.
+     * @param c
+     * Infomação para fazer o update no banco.
+     */
+    public void editar(Cliente c) {
 
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
@@ -133,16 +147,16 @@ public class ClienteDAO {
         try {
 
             stmt = con.prepareStatement("SELECT * FROM Cliente WHERE id = ?");
-            stmt.setInt(1, id);
+            stmt.setInt(1, c.getId());
             rs = stmt.executeQuery();
 
             if (rs.next()) {
                 c.setNome(rs.getString("nome"));
-                c.setDataNascimento(rs.getString("dataNascimento"));
-                c.setTelefoneFixo(rs.getString("telefoneFixo"));
-                c.setTelefoneCelular(rs.getString("telefoneCelular"));
+                c.setDataNascimento(rs.getString("dtNascimento"));
+                c.setTelefoneFixo(rs.getString("telFixo"));
+                c.setTelefoneCelular(rs.getString("telCel"));
                 c.setEmail(rs.getString("email"));
-                c.setNumeroCNH(rs.getString("numeroCNH"));
+                c.setNumeroCNH(rs.getInt("cnh"));
                 c.setCpf(rs.getString("cpf"));
 
             }
@@ -192,11 +206,11 @@ public class ClienteDAO {
                 Cliente c = new Cliente();
 
                 c.setNome(rs.getString("nome"));
-                c.setDataNascimento(rs.getString("dataNascimento"));
-                c.setTelefoneFixo(rs.getString("telefoneFixo"));
-                c.setTelefoneCelular(rs.getString("telefoneCelular"));
+                c.setDataNascimento(rs.getString("dtNascimento"));
+                c.setTelefoneFixo(rs.getString("telFixo"));
+                c.setTelefoneCelular(rs.getString("telCel"));
                 c.setEmail(rs.getString("email"));
-                c.setNumeroCNH(rs.getString("numeroCNH"));
+                c.setNumeroCNH(rs.getInt("cnh"));
                 c.setCpf(rs.getString("cpf"));
 
                 clientes.add(c);
@@ -223,17 +237,19 @@ public class ClienteDAO {
             stmt.setString(1, cpf);
             rs = stmt.executeQuery();
 
-            if (rs.next()) {
-
+            if (rs.next()) 
+            {    
                 result = true;
-
             }
 
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "erro ao salvar" + ex);
-        } finally {
+        } 
+        catch (SQLException ex) 
+        {
+            JOptionPane.showMessageDialog(null, "erro ao verificar cadastro do cliente" + ex);
+        } 
+        finally 
+        {
             ConnectionFactory.closeConnection(con, stmt, rs);
-
         }
         return result;
     }

@@ -6,8 +6,10 @@
 package com.pi3.locadora.view;
 
 import br.com.model.Cliente;
+import br.com.model.dao.ClienteDAO;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,10 +30,18 @@ public class Main extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response)
-                throws ServletException, IOException{
+                throws ServletException, IOException
+    {
+        ArrayList<Cliente> listCliente = new ArrayList<Cliente>();
+        
+        ClienteDAO getAllCliente = new ClienteDAO();
+        
+        listCliente = getAllCliente.ApresentarClientes();
+        
+        request.setAttribute("listaCliente", listCliente);
         
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("cadastrar_cliente.jsp");
+                = request.getRequestDispatcher("index.jsp");
         
         dispatcher.forward(request, response);
         
@@ -49,8 +59,10 @@ public class Main extends HttpServlet{
         Cliente cliente = new Cliente(
                 request.getParameter("nome"), 
                 request.getParameter("cel"), 
-                request.getParameter("cpf"), request.getParameter("cnh"), 
-                request.getParameter("dataNasc"));
+                request.getParameter("cpf"), request.getParameter("rg"),
+                Integer.parseInt(request.getParameter("cnh")), 
+                request.getParameter("dataNasc"),
+                Integer.parseInt(request.getParameter("idade")));
         
         if(request.getParameter("email") != null &&
                 !request.getParameter("email").equals(""))
@@ -66,7 +78,10 @@ public class Main extends HttpServlet{
 //            temp = "Acesso permitido!";
 //        }
 //        
-        request.setAttribute("result", "Ocorreu tudo bem\n"+cliente.getNome()+"\n"+cliente.getCpf());
+        ClienteDAO clienteDao = new ClienteDAO();
+        String log = clienteDao.inserir(cliente);
+                
+        request.setAttribute("result", "Ocorreu tudo bem\n"+"<br>"+log);
         
         RequestDispatcher dispatcher
                 = request.getRequestDispatcher("resultado.jsp");
