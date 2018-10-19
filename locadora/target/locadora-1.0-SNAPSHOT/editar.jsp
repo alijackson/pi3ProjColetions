@@ -92,12 +92,12 @@
                     <div class="form-row">
                         <!-- Inicio de telefone fixo -->
                         <div class="form-group col-md-5">
-                            <label for="tel">N Tel</label>
+                            <label for="tel">Nº Tel</label>
                             <input type="text" value = "${cliente.getTelefoneFixo()}" class="form-control" id="tel" name="tel">
                         </div>
                         <!-- Inicio de telefone Celular -->
                         <div class="form-group col-md-5">
-                            <label for="cel">N Cel</label>
+                            <label for="cel">Nº Cel</label>
                             <input type="text" value = "${cliente.getTelefoneCelular()}" class="form-control" id="cel" name="cel">
                         </div>
                     </div>
@@ -112,20 +112,16 @@
                             <input type="number" value = "${cliente.getIdade()}" class="form-control" id="idade" name="idade">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="cnh">N CNH</label>
+                            <label for="cnh">Nº CNH</label>
                             <input type="number" value = "${cliente.getNumeroCNH()}" class="form-control" id="cnh" name="cnh">
                         </div>
                     </div>
-                    <!--          <div class="form-group col-md-2">
-            <label for="inputZip">Estado</label>
-            <input type="text" class="form-control" id="estado">
-            </div> -->
-
+                        
                     <button type="submit" class="btn btn-primary">Salvar</button>
-                    <button type="button" class="btn btn-primary" 
-                    onclick="location.href = 'remov?id=<c:out value='${cliente.getId()}' />'">
-                        Excluir
-                    </button>
+                    
+                    <a href="remov?id=${cliente.getId()}" class="btn btn-danger" role="button">
+                        Excluir 
+                    </a>
 
                 </form>
 

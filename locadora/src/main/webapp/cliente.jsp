@@ -90,12 +90,12 @@
                     <div class="form-row">
                         <!-- Inicio de telefone fixo -->
                         <div class="form-group col-md-5">
-                            <label for="tel">Nï¿½ Tel</label>
+                            <label for="tel">Nº Tel</label>
                             <input type="text" class="form-control" id="tel" name="tel">
                         </div>
                         <!-- Inicio de telefone Celular -->
                         <div class="form-group col-md-5">
-                            <label for="cel">Nï¿½ Cel</label>
+                            <label for="cel">Nº Cel</label>
                             <input type="text" class="form-control" id="cel" name="cel">
                         </div>
                     </div>
@@ -110,7 +110,7 @@
                             <input type="number" class="form-control" id="idade" name="idade">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="cnh">Nï¿½ CNH</label>
+                            <label for="cnh">Nº CNH</label>
                             <input type="number" class="form-control" id="cnh" name="cnh" maxlength="9">
                         </div>
                     </div>
