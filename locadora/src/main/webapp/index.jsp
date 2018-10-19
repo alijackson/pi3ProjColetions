@@ -1,3 +1,5 @@
+<%@page import="br.com.model.Cliente"%>
+<%@page import="com.pi3.locadora.view.Service"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -6,21 +8,24 @@
 <head>
     <title>Home</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
-    
+
     <style>
         #trTable.a.hover{
             
             background-color: red;
         }
+        .center{
+            text-align: center;
+        }
     </style>
-    
-    
+
+
 </head>
 
 <body>
@@ -41,14 +46,19 @@
                             <div class="collapse navbar-collapse" id="navbarNav">
                                 <ul class="navbar-nav">
                                     <li class="nav-item active">
-                                        <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+                                        <a class="nav-link" href="main">Home<span class="sr-only">(current)</span></a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="cadastrar_cliente.jsp">Cadastrar</a>
+                                        <a class="nav-link" href="cadastrar">Cadastrar</a>
                                     </li>
                                 </ul>
                             </div>
                         </nav>
+                        <div class="center">
+                                <h1>
+                                    Clientes
+                                </h1>
+                        </div>
                     </div>
                     <div class="w-100">
 
@@ -56,28 +66,34 @@
                     <div class="col">
                         <table class="table table-striped" id="table">
                             <tbody>
-                            <thead>
-                                <tr>
-                                    
-                                    <th scope="col">#</th>
-                                    <th scope="col">Nome</th>
-                                    <th scope="col">CPF</th>
-                                    <th scope="col">E-mail</th>
-                                </tr>
-                            </thead>
-                            
-                            <c:forEach items="${listaCliente}" var="cliente">
-                                
-                                <tr onclick="location.href = 'cadastrar_cliente.jsp'" id="trTable">
-                                    <td><c:out value="${cliente.getId()}" /></td>
-                                    <td><c:out value="${cliente.getNome()}" /></td>
-                                    <td><c:out value="${cliente.getCpf()}" /></td>
-                                    <td><c:out value="${cliente.getEmail()}" /></td>
-                                </tr>
-                            </c:forEach>
+                                <thead>
+                                    <tr>
+
+                                        <th scope="col">#</th>
+                                        <th scope="col">Nome</th>
+                                        <th scope="col">CPF</th>
+                                        <th scope="col">E-mail</th>
+                                    </tr>
+                                </thead>
+
+                                <c:forEach items="${listaCliente}" var="cliente">
+                                    <tr onclick="location.href = 'edit?id=<c:out value='${cliente.getId()}' />'"  id="trTable"  >
+                                        <td>
+                                            <c:out value='${cliente.getId()}' />
+                                        </td>
+                                        <td>
+                                            <c:out value="${cliente.getNome()}" />
+                                        </td>
+                                        <td>
+                                            <c:out value="${cliente.getCpf()}" />
+                                        </td>
+                                        <td>
+                                            <c:out value="${cliente.getEmail()}" />
+                                        </td>
+                                    </tr>
+                                </c:forEach>
                             </tbody>
                         </table>
-                        
                     </div>
                 </div>
             </div>

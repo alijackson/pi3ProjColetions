@@ -7,9 +7,9 @@ $("#tel").mask('(00) 0000-0000');
 
 $("#cel").mask('(00) 0.0000-0000');
 
-$("#cnh").mask('00000000000');
-
 $("#idade").mask('000');
+
+$("#id").hide();
 
 //Assim que inicia o documento ocultar as mensagens de erro
 $(document).ready(function() {

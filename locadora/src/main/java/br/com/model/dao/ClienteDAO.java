@@ -35,8 +35,8 @@ public class ClienteDAO {
 
             stmt = con.prepareStatement("INSERT INTO cliente "
                     + "(nome,dtNascimento,telFixo, "
-                    + "telCel,email,cnh,cpf,rg,idade) "
-                    + "VALUES(?,?,?,?,?,?,?,?,?)");
+                    + "telCel,email,cnh,cpf,rg,idade,enable) "
+                    + "VALUES(?,?,?,?,?,?,?,?,?,1)");
 
             stmt.setString(1, c.getNome());
             stmt.setString(2, c.getDataNascimento());
@@ -74,7 +74,7 @@ public class ClienteDAO {
         ArrayList<Cliente> clientes = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM cliente");
+            stmt = con.prepareStatement("SELECT * FROM cliente WHERE enable=1");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -102,35 +102,39 @@ public class ClienteDAO {
         return clientes;
     }
 
-    public void atualizar(Cliente c) {
-
+    public String atualizar(Cliente c) {
+        
+        String retur = "";
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
-
         try {
 
-            stmt = con.prepareStatement("UPDATE Cliente SET nome = ?,dataNascimento = ?,telefoneFixo = ?,"
-                    + " telefoneCelular = ?,email = ? , numeroCNH = ?, cpf = ? WHERE id = ?");
+            stmt = con.prepareStatement("UPDATE cliente SET nome = ?, dtNascimento = ?, "
+                    + "idade = ?, cpf = ?, "
+                    + "telFixo = ?, telCel = ?,  email = ?, "
+                    + "CNH = ?, rg = ?  WHERE idCliente = ? ");
 
             stmt.setString(1, c.getNome());
-            stmt.setString(2, c.getCpf());
-            stmt.setString(3, c.getTelefoneFixo());
-            stmt.setString(4, c.getTelefoneCelular());
-            stmt.setString(5, c.getEmail());
-            stmt.setInt(6, c.getNumeroCNH());
-            stmt.setString(7, c.getCpf());
-            stmt.setInt(8, c.getId());
-
-            stmt.executeUpdate();
-
-            JOptionPane.showMessageDialog(null, "Alterado com sucesso");
+            stmt.setString(2, c.getDataNascimento());
+            stmt.setInt(3, c.getIdade());
+            stmt.setString(4, c.getCpf());
+            stmt.setString(5, c.getTelefoneFixo());
+            stmt.setString(6, c.getTelefoneCelular());
+            stmt.setString(7, c.getEmail());
+            stmt.setInt(8, c.getNumeroCNH());
+            stmt.setString(9, c.getRg());
+            stmt.setInt(10, c.getId());
+            
+            stmt.execute();
+            JOptionPane.showMessageDialog(null, "Alteração feita com Sucesso!");
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "erro ao atualizar" + ex);
+            retur = ex.toString();
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
-
+        
+        return retur;     
     }
     /**
      * Função edita o usuario, 
@@ -177,10 +181,11 @@ public class ClienteDAO {
 
         try {
 
-            stmt = con.prepareStatement("DELETE FROM Cliente WHERE id = ?");
+            stmt = con.prepareStatement("UPDATE Cliente SET enable=2 WHERE idcliente = ?");
             stmt.setInt(1, id);
-            stmt.executeUpdate();
-
+            stmt.execute();
+            
+            JOptionPane.showMessageDialog(null, id);
             JOptionPane.showMessageDialog(null, "Excluído  com sucesso");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "erro ao atualizar" + ex);
@@ -190,30 +195,32 @@ public class ClienteDAO {
 
     }
 
-    public List<Cliente> Pesquisa(String cpf) {
+    public Cliente Pesquisa(int id) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
-        List<Cliente> clientes = new ArrayList<>();
+        Cliente c = new Cliente();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM Cliente WHERE cpf = ?");
-            stmt.setString(1, cpf);
+            
+
+            stmt = con.prepareStatement("SELECT * FROM cliente WHERE idcliente = ?");
+            stmt.setInt(1, id);
             rs = stmt.executeQuery();
 
-            while (rs.next()) {
-                Cliente c = new Cliente();
-
+            if (rs.first()) {
+                c.setId(rs.getInt("idcliente"));
                 c.setNome(rs.getString("nome"));
                 c.setDataNascimento(rs.getString("dtNascimento"));
+                c.setIdade(rs.getInt("idade"));
                 c.setTelefoneFixo(rs.getString("telFixo"));
                 c.setTelefoneCelular(rs.getString("telCel"));
                 c.setEmail(rs.getString("email"));
                 c.setNumeroCNH(rs.getInt("cnh"));
                 c.setCpf(rs.getString("cpf"));
-
-                clientes.add(c);
+                c.setRg(rs.getString("rg"));
+                
             }
 
         } catch (SQLException ex) {
@@ -222,7 +229,7 @@ public class ClienteDAO {
             ConnectionFactory.closeConnection(con, stmt, rs);
 
         }
-        return clientes;
+        return c;
     }
 
     public boolean ChecarCliente(String cpf) {

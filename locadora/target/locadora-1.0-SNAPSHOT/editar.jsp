@@ -17,11 +17,7 @@
 </head>
 
 <body>
-    <div class="center">
-        <h1>
-            Cadastrar cliente
-        </h1>
-    </div>
+
     <br>
     <div class="container">
         <div class="row">
@@ -30,14 +26,41 @@
                 <!-- Primeira lateral-->
             </div>
 
-            <div class="col-8" style="background: write">
-                <form id="form" action="cadastrar" method="post" >
+            <div class="col-8" style="background: write" >
+                <form id="form" action="edit" method="post" items = "${Cliente}" var = "cliente">
                     <div class="form-row">
+                        <div class="col">
+                            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                                <a class="navbar-brand" href="#">Locadora</a>
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarNav">
+                                    <ul class="navbar-nav">
+                                        <li class="nav-item active">
+                                            <a class="nav-link" href="main">Home<span class="sr-only">(current)</span></a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="cadastrar">Cadastrar</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                            <div class="center">
+                                <h1>
+                                    <c:out value="${objetivo}" />
+                                </h1>
+                            </div>
+                        </div>
+                        <div class="w-100">
+
+                        </div>
                         <!-- Inicio de First Nome -->
-                        <div class="form-group col-md-10" >
+                        <div class="form-group col-md-10">
                             <span id="erroNome">Insira o nome</span>
                             <label for="inputNome">Nome</label>
-                            <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome Completo">
+                            <input type="text" value = "${cliente.getNome()}" class="form-control" id="nome" name="nome" />
                         </div>
                         <!-- Inicio de SobreNome -->
                         <!--            <div class="form-group col-md-8">
@@ -49,54 +72,60 @@
                     <div class="form-row">
                         <div class="form-group col-md-5">
                             <label for="cpf">CPF</label>
-                            <input type="text" class="form-control" id="cpf" name="cpf" placeholder="123.123.123-12">
-                        </div>
+                            <input type="text" value = "${cliente.getCpf()}" class="form-control" id="cpf" name="cpf" placeholder="123.123.123-12">
+                            <input value = "${cliente.getId()}" class="form-control" id="id" name="id">
+                   
+                   </div>
                         <div class="form-group col-md-5">
                             <label for="cpf">RG</label>
-                            <input type="text" class="form-control" id="rg" name="rg" placeholder="12.123.123-12">
+                            <input type="text" value = "${cliente.getRg()}" class="form-control" id="rg" name="rg" placeholder="12.123.123-12">
                         </div>
                     </div>
                     <!-- Inicio de E-mail -->
                     <div class="form-row">
                         <div class="form-group col-md-10">
                             <label for="email">E-mail</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="exemplo@exemplo.com.br">
+                            <input type="email" value = "${cliente.getEmail()}" class="form-control" id="email" name="email" placeholder="exemplo@exemplo.com.br">
                         </div>
                     </div>
-                    
+
                     <div class="form-row">
                         <!-- Inicio de telefone fixo -->
                         <div class="form-group col-md-5">
-                            <label for="tel">Nº Tel</label>
-                            <input type="text" class="form-control" id="tel" name="tel">
+                            <label for="tel">N Tel</label>
+                            <input type="text" value = "${cliente.getTelefoneFixo()}" class="form-control" id="tel" name="tel">
                         </div>
                         <!-- Inicio de telefone Celular -->
                         <div class="form-group col-md-5">
-                            <label for="cel">Nº Cel</label>
-                            <input type="text" class="form-control" id="cel" name="cel">
+                            <label for="cel">N Cel</label>
+                            <input type="text" value = "${cliente.getTelefoneCelular()}" class="form-control" id="cel" name="cel">
                         </div>
                     </div>
-                        <!-- Inicio de Data de Nascimento -->
+                    <!-- Inicio de Data de Nascimento -->
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="dataNasc">Data de nascimento</label>
-                            <input type="date" class="form-control" id="dataNasc" name="dataNasc">
+                            <input type="date" value = "${cliente.getDataNascimento()}" class="form-control" id="dataNasc" name="dataNasc">
                         </div>
                         <div class="form-group col-md-2">
                             <label for="dataNasc">Idade</label>
-                            <input type="number" class="form-control" id="idade" name="idade">
+                            <input type="number" value = "${cliente.getIdade()}" class="form-control" id="idade" name="idade">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="cnh">Nº CNH</label>
-                            <input type="number" class="form-control" id="cnh" name="cnh">
+                            <label for="cnh">N CNH</label>
+                            <input type="number" value = "${cliente.getNumeroCNH()}" class="form-control" id="cnh" name="cnh">
                         </div>
                     </div>
-            <!--          <div class="form-group col-md-2">
+                    <!--          <div class="form-group col-md-2">
             <label for="inputZip">Estado</label>
             <input type="text" class="form-control" id="estado">
             </div> -->
 
                     <button type="submit" class="btn btn-primary">Salvar</button>
+                    <button type="button" class="btn btn-primary" 
+                    onclick="location.href = 'remov?id=<c:out value='${cliente.getId()}' />'">
+                        Excluir
+                    </button>
 
                 </form>
 
