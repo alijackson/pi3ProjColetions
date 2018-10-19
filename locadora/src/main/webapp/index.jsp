@@ -12,6 +12,15 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
+    
+    <style>
+        #trTable.a.hover{
+            
+            background-color: red;
+        }
+    </style>
+    
+    
 </head>
 
 <body>
@@ -45,11 +54,11 @@
 
                     </div>
                     <div class="col">
-                        <table class="table table-striped">
+                        <table class="table table-striped" id="table">
                             <tbody>
                             <thead>
                                 <tr>
-                                    <a href="index.jsp"></a>
+                                    
                                     <th scope="col">#</th>
                                     <th scope="col">Nome</th>
                                     <th scope="col">CPF</th>
@@ -58,7 +67,8 @@
                             </thead>
                             
                             <c:forEach items="${listaCliente}" var="cliente">
-                                <tr>
+                                
+                                <tr onclick="location.href = 'cadastrar_cliente.jsp'" id="trTable">
                                     <td><c:out value="${cliente.getId()}" /></td>
                                     <td><c:out value="${cliente.getNome()}" /></td>
                                     <td><c:out value="${cliente.getCpf()}" /></td>
@@ -67,6 +77,7 @@
                             </c:forEach>
                             </tbody>
                         </table>
+                        
                     </div>
                 </div>
             </div>

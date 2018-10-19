@@ -14,7 +14,8 @@ $("#idade").mask('000');
 //Assim que inicia o documento ocultar as mensagens de erro
 $(document).ready(function() {
     $("#erroNome").hide();
-})
+});
+
 
 //Captura o evento de submit do form (caso o retorno seja FALSE nao submete o form)
 // $("#form").submit(function() {
