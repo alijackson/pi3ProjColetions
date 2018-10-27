@@ -7,7 +7,7 @@ package com.pi3.locadora.view;
 
 import br.com.model.Cliente;
 import br.com.model.dao.ClienteDAO;
-
+import com.pi3.locadora.user.AddUser;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
@@ -23,9 +23,8 @@ import javax.servlet.http.HttpSession;
  * @author alijackson.msilva
  */
 
-@WebServlet(name = "CadastroClient", urlPatterns = {"/main"})
-
-public class Main extends HttpServlet{
+@WebServlet(name = "login", urlPatterns = {"/login"})
+public class Login extends HttpServlet{
     
     
     @Override
@@ -33,20 +32,8 @@ public class Main extends HttpServlet{
             HttpServletResponse response)
                 throws ServletException, IOException
     {
-        ArrayList<Cliente> listCliente = new ArrayList<Cliente>();
-        
-        ClienteDAO getAllCliente = new ClienteDAO();
-        
-        listCliente = getAllCliente.ApresentarClientes();
-        
-        request.setAttribute("listaCliente", listCliente);
-        HttpSession sessao = request.getSession();
-        if(sessao.getAttribute("usuario") == null){
-        response.sendRedirect(request.getContextPath() + "/login");
-        return;
-        }
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("index.jsp");
+                = request.getRequestDispatcher("login.jsp");
         
         dispatcher.forward(request, response);
         
@@ -56,17 +43,30 @@ public class Main extends HttpServlet{
             HttpServletResponse response)
             throws ServletException, IOException {
         
-        ArrayList<Cliente> listCliente = new ArrayList<Cliente>();
+        AddUser user = new AddUser("teste", "teste", "teste");
         
-        ClienteDAO getAllCliente = new ClienteDAO();
+        String login = request.getParameter("login");
         
-        listCliente = getAllCliente.ApresentarClientes();
+        String senha = request.getParameter("senha");
         
-        request.setAttribute("listaCliente", listCliente);
+        if(login.equalsIgnoreCase(user.getLogin()))
+        {
+            HttpSession sessao = request.getSession();
+            request.setAttribute("usuario", login);
+            
+//        RequestDispatcher dispatcher
+//                = request.getRequestDispatcher("index.jsp");
+//        
+//        dispatcher.forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/main");
+            return;
+        }
         
+        request.setAttribute("msgErro", "Login incorreto");
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("index.jsp");
+                = request.getRequestDispatcher("login.jsp");
         
         dispatcher.forward(request, response);
     }
+    
 }
