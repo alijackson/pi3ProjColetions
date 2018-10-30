@@ -40,11 +40,15 @@ public class Main extends HttpServlet{
         listCliente = getAllCliente.ApresentarClientes();
         
         request.setAttribute("listaCliente", listCliente);
+        
         HttpSession sessao = request.getSession();
-        if(sessao.getAttribute("usuario") == null){
-        response.sendRedirect(request.getContextPath() + "/login");
-        return;
+        
+        if(sessao.getAttribute("usuario") == null)
+        {
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
         }
+        request.setAttribute("usuario", sessao.getAttribute("usuario"));
         RequestDispatcher dispatcher
                 = request.getRequestDispatcher("index.jsp");
         

@@ -43,7 +43,7 @@ public class Login extends HttpServlet{
             HttpServletResponse response)
             throws ServletException, IOException {
         
-        AddUser user = new AddUser("teste", "teste", "teste");
+        AddUser user = new AddUser("jackson", "jackson", "teste");
         
         String login = request.getParameter("login");
         
@@ -52,7 +52,7 @@ public class Login extends HttpServlet{
         if(login.equalsIgnoreCase(user.getLogin()))
         {
             HttpSession sessao = request.getSession();
-            request.setAttribute("usuario", login);
+            sessao.setAttribute("usuario", login);
             
 //        RequestDispatcher dispatcher
 //                = request.getRequestDispatcher("index.jsp");
