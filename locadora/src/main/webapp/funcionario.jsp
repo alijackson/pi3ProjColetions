@@ -243,6 +243,10 @@
             </div>
             <div class="modal-body">
                     <form>
+                         <div class="form-group">
+                              <label for="inputAddress">Nome</label>
+                              <input type="text" class="form-control" id="inputAddress" placeholder="ex: Jose Silva">
+                            </div>
                             <div class="form-row">
                               <div class="form-group col-md-6">
                                 <label for="inputEmail4">Email</label>

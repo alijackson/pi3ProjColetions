@@ -3,6 +3,7 @@ com\pi3\locadora\user\User.class
 br\com\model\Locacao.class
 br\com\validacao\ValidacaoVeiculo.class
 com\pi3\locadora\model\Login.class
+com\pi3\locadora\view\Login.class
 br\com\servico\ServicoCliente.class
 br\com\model\dao\LocacaoDAO.class
 br\com\validacao\ValidacaoCliente.class
@@ -17,5 +18,8 @@ br\com\model\Veiculo.class
 br\com\validacao\ValidacaoLocacao.class
 com\pi3\locadora\view\Main.class
 com\pi3\locadora\view\Service.class
+br\com\model\dao\FuncionarioDAO.class
+com\pi3\locadora\view\Remove.class
 br\com\model\dao\VeiculoDAO.class
 br\com\servico\ServicoVeiculo.class
+br\com\model\Funcionario.class
