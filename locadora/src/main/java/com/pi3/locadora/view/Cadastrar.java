@@ -29,6 +29,7 @@ public class Cadastrar extends HttpServlet{
  * and open the template in the editor.
  */
     public Cadastrar(){}
+   
     @Override
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response)

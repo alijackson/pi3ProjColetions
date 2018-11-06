@@ -30,7 +30,7 @@
                 <form id="form" action="cadastrar" method="post">
                     <div class="form-row">
                         <div class="col">
-                            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                            <nav class="navbar nCavbar-expand-lg navbar-light bg-light">
                                 <a class="navbar-brand" href="#">Locadora</a>
                                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,7 +42,7 @@
                                             <a class="nav-link" href="main">Home<span class="sr-only">(current)</span></a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="cadastrar">Cadastrar</a>
+                                            <a  class="nav-link" href="cadastrar">Cadastrar</a>
                                         </li>
                                     </ul>
                                 </div>

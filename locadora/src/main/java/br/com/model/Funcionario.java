@@ -5,8 +5,6 @@
  */
 package br.com.model;
 
-import java.util.Date;
-
 /**
  *
  * @author micro
@@ -16,8 +14,8 @@ public class Funcionario {
     private int id;
     private String nome;
     private String dataNascimento;
-    private char rg;
-    private char cpf;
+    private String login;
+    private String cpf;
     private String email;
     private String cargo;
     private int senha;
@@ -49,19 +47,19 @@ public class Funcionario {
         this.dataNascimento = dataNascimento;
     }
 
-    public char getRg() {
-        return rg;
+    public String getLogin() {
+        return login;
     }
 
-    public void setRg(char rg) {
-        this.rg = rg;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
-    public char getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(char cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
@@ -88,4 +86,6 @@ public class Funcionario {
     public void setSenha(int senha) {
         this.senha = senha;
     }
+
+    
 }

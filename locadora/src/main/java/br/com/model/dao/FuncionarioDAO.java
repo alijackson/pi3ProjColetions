@@ -6,7 +6,6 @@
 package br.com.model.dao;
 
 import br.com.conneticon.ConnectionFactory;
-import br.com.model.Cliente;
 import br.com.model.Funcionario;
 import java.sql.Connection;
 import java.sql.Date;
@@ -36,27 +35,26 @@ public class FuncionarioDAO {
 
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
-        ResultSet rs = null;
 
         try {
 
-            stmt = con.prepareCall("INSERT INTO FUNCIONARIO(NOME,DTNASCIMENTO,RG,CPF,EMAIL,CARGO,SENHA) VALUES (?,?,?,?,?,?,?)");
+            stmt = con.prepareCall("INSERT INTO FUNCIONARIO(NOME,DTNASCIMENTO,CPF,EMAIL,CARGO,SENHA,LOGIN,enable) VALUES (?,?,?,?,?,?,?,1s)");
 
             Date dataConvertida = converterData(dataEntrada, dataBanco, f);
 
             stmt.setString(1, f.getNome());
             stmt.setDate(2, dataConvertida);
-            stmt.setString(3, String.valueOf(f.getRg()));
-            stmt.setString(4, String.valueOf(f.getCpf()));
-            stmt.setString(5, f.getEmail());
-            stmt.setString(6, f.getCargo());
-            stmt.setInt(7, f.getSenha());
+            stmt.setString(3, f.getCpf());
+            stmt.setString(4, f.getEmail());
+            stmt.setString(5, f.getCargo());
+            stmt.setInt(6, f.getSenha());
+            stmt.setInt(7, Integer.parseInt(f.getLogin()));
 
-            JOptionPane.showMessageDialog(null, "Salvo com sucesso");
+            JOptionPane.showMessageDialog(null, "Gravado com sucesso");
 
         } catch (SQLException e) {
-
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao salvar" + e);
+            
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro" + e);
 
         } finally {
 
@@ -83,8 +81,7 @@ public class FuncionarioDAO {
                 f.setId(rs.getInt("IDFUNCIONARIO"));
                 f.setNome(rs.getString("NOME"));
                 f.setDataNascimento(rs.getString("DTNASCIMENTO"));
-                f.setRg(rs.getString("RG").charAt(0));
-                f.setCpf(rs.getString("CPF").charAt(0));
+                f.setCpf(rs.getString("CPF"));
                 f.setEmail(rs.getString("EMAIL"));
                 f.setCargo(rs.getString("EMAIL"));
                 f.setSenha(rs.getInt("SENHA"));
@@ -113,7 +110,6 @@ public class FuncionarioDAO {
 
             stmt.setString(1, f.getNome());
             stmt.setString(2, f.getDataNascimento());
-            stmt.setString(3, String.valueOf(f.getRg()));
             stmt.setString(4, String.valueOf(f.getCpf()));
             stmt.setString(5, f.getEmail());
             stmt.setString(6, f.getCargo());
@@ -146,7 +142,6 @@ public class FuncionarioDAO {
             if (rs.next()) {
                 stmt.setString(1, f.getNome());
                 stmt.setString(2, f.getDataNascimento());
-                stmt.setString(3, String.valueOf(f.getRg()));
                 stmt.setString(4, String.valueOf(f.getCpf()));
                 stmt.setString(5, f.getEmail());
                 stmt.setString(6, f.getCargo());
@@ -199,7 +194,6 @@ public class FuncionarioDAO {
             if (rs.next()) {
                 stmt.setString(1, f.getNome());
                 stmt.setString(2, f.getDataNascimento());
-                stmt.setString(3, String.valueOf(f.getRg()));
                 stmt.setString(4, String.valueOf(f.getCpf()));
                 stmt.setString(5, f.getEmail());
                 stmt.setString(6, f.getCargo());
