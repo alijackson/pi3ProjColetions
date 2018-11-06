@@ -18,7 +18,7 @@ public class Funcionario {
     private String cpf;
     private String email;
     private String cargo;
-    private int senha;
+    private String senha;
 
     public Funcionario() {
     }
@@ -79,11 +79,11 @@ public class Funcionario {
         this.cargo = cargo;
     }
 
-    public int getSenha() {
+    public String getSenha() {
         return senha;
     }
 
-    public void setSenha(int senha) {
+    public void setSenha(String senha) {
         this.senha = senha;
     }
 

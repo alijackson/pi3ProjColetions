@@ -30,8 +30,13 @@ public class CadastrarFuncionario extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-   
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException 
+    {
+        RequestDispatcher dispatcher
+                = request.getRequestDispatcher("funcionario.jsp");
+        
+        dispatcher.forward(request, response);
     }
 
     @Override
@@ -39,7 +44,7 @@ public class CadastrarFuncionario extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
 
-        JOptionPane.showMessageDialog(null, "DADASDSADASD");
+//        JOptionPane.showMessageDialog(null, "DADASDSADASD");
         
         String nome = request.getParameter("name");
         String email = request.getParameter("email");
@@ -55,15 +60,16 @@ public class CadastrarFuncionario extends HttpServlet {
         f.setEmail(email);
         f.setDataNascimento(dataNascimento);
         f.setLogin(login);
-        f.setSenha(Integer.parseInt(senha));
+        f.setSenha(senha);
         f.setCpf(cpf);
         f.setCargo(cargo);
-
-        
 
         FuncionarioDAO dao = new FuncionarioDAO();
 
         dao.inserir(f);
-
+//        RequestDispatcher dispatcher
+//                = request.getRequestDispatcher("");
+//        
+//        dispatcher.forward(request, response);
     }
 }

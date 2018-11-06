@@ -38,18 +38,22 @@ public class FuncionarioDAO {
 
         try {
 
-            stmt = con.prepareCall("INSERT INTO FUNCIONARIO(NOME,DTNASCIMENTO,CPF,EMAIL,CARGO,SENHA,LOGIN,enable) VALUES (?,?,?,?,?,?,?,1s)");
+            stmt = con.prepareStatement(
+                    "INSERT INTO FUNCIONARIO (NOME,CPF,EMAIL,CARGO,SENHA,LOGIN) VALUES "
+                            + "(?,?,?,?,?,?)");
 
-            Date dataConvertida = converterData(dataEntrada, dataBanco, f);
+//            Date dataConvertida = converterData(dataEntrada, dataBanco, f);
 
             stmt.setString(1, f.getNome());
-            stmt.setDate(2, dataConvertida);
-            stmt.setString(3, f.getCpf());
-            stmt.setString(4, f.getEmail());
-            stmt.setString(5, f.getCargo());
-            stmt.setInt(6, f.getSenha());
-            stmt.setInt(7, Integer.parseInt(f.getLogin()));
-
+//            stmt.setDate(2, dataConvertida);
+            stmt.setString(2, f.getCpf());
+            stmt.setString(3, f.getEmail());
+            stmt.setString(4, f.getCargo());
+            stmt.setString(5, f.getSenha());
+            stmt.setString(6, f.getLogin());
+            
+            stmt.execute();
+            
             JOptionPane.showMessageDialog(null, "Gravado com sucesso");
 
         } catch (SQLException e) {
@@ -84,7 +88,7 @@ public class FuncionarioDAO {
                 f.setCpf(rs.getString("CPF"));
                 f.setEmail(rs.getString("EMAIL"));
                 f.setCargo(rs.getString("EMAIL"));
-                f.setSenha(rs.getInt("SENHA"));
+                f.setSenha(rs.getString("SENHA"));
 
                 Funcionarios.add(f);
             }
@@ -113,7 +117,7 @@ public class FuncionarioDAO {
             stmt.setString(4, String.valueOf(f.getCpf()));
             stmt.setString(5, f.getEmail());
             stmt.setString(6, f.getCargo());
-            stmt.setInt(7, f.getSenha());
+            stmt.setString(7, f.getSenha());
             stmt.setInt(8, f.getId());
 
             stmt.execute();
@@ -145,7 +149,7 @@ public class FuncionarioDAO {
                 stmt.setString(4, String.valueOf(f.getCpf()));
                 stmt.setString(5, f.getEmail());
                 stmt.setString(6, f.getCargo());
-                stmt.setInt(7, f.getSenha());
+                stmt.setString(7, f.getSenha());
 
             }
 
