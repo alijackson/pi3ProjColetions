@@ -50,7 +50,10 @@
                                         <a class="nav-link" href="main">Home<span class="sr-only">(current)</span></a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="cadastrar">Cadastrar</a>
+                                        <a class="nav-link" href="cadastrar">Clientes</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="veiculos">Veiculos</a>
                                     </li>
                                 </ul>
                             </div>

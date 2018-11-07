@@ -31,34 +31,33 @@ public class FuncionarioDAO {
     private final SimpleDateFormat dataEntrada = new SimpleDateFormat("dd/MM/yyyy");
     private final SimpleDateFormat dataBanco = new SimpleDateFormat("yyyy-MM-dd");
 
-    public void inserir(Funcionario f) {
+    public int inserir(Funcionario f) {
 
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
+        String log = "";
 
         try {
 
             stmt = con.prepareStatement(
-                    "INSERT INTO FUNCIONARIO (NOME,CPF,EMAIL,CARGO,SENHA,LOGIN) VALUES "
-                            + "(?,?,?,?,?,?)");
+                    "INSERT INTO FUNCIONARIO(NOME,CPF,EMAIL,CARGO,SENHA,LOGIN,DTNASCIMENTO) VALUES (?,?,?,?,?,?,?)");
 
-//            Date dataConvertida = converterData(dataEntrada, dataBanco, f);
-
+            //    Date dataConvertida = converterData(dataEntrada, dataBanco, f);
             stmt.setString(1, f.getNome());
-//            stmt.setDate(2, dataConvertida);
             stmt.setString(2, f.getCpf());
             stmt.setString(3, f.getEmail());
             stmt.setString(4, f.getCargo());
             stmt.setString(5, f.getSenha());
             stmt.setString(6, f.getLogin());
-            
-            stmt.execute();
-            
-            JOptionPane.showMessageDialog(null, "Gravado com sucesso");
+            stmt.setString(7, f.getDataNascimento());
 
-        } catch (SQLException e) {
-            
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro" + e);
+            stmt.executeUpdate();
+
+            return 1;
+
+        } catch (SQLException ex) {
+
+            return 2;
 
         } finally {
 

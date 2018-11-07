@@ -8,15 +8,12 @@ package com.pi3.locadora.view;
 import java.io.IOException;
 import br.com.model.Funcionario;
 import br.com.model.dao.FuncionarioDAO;
-import java.io.PrintWriter;
-import static java.lang.System.out;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,12 +27,13 @@ public class CadastrarFuncionario extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
-            throws ServletException, IOException 
-    {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        //request.setAttribute("objetivo", "Cadastrar Funcionario");
         RequestDispatcher dispatcher
                 = request.getRequestDispatcher("funcionario.jsp");
-        
+
         dispatcher.forward(request, response);
     }
 
@@ -44,9 +42,7 @@ public class CadastrarFuncionario extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
 
-//        JOptionPane.showMessageDialog(null, "DADASDSADASD");
-        
-        String nome = request.getParameter("name");
+        String nome = request.getParameter("nome");
         String email = request.getParameter("email");
         String dataNascimento = request.getParameter("dataNascimento");
         String login = request.getParameter("login");
@@ -66,10 +62,21 @@ public class CadastrarFuncionario extends HttpServlet {
 
         FuncionarioDAO dao = new FuncionarioDAO();
 
-        dao.inserir(f);
-//        RequestDispatcher dispatcher
-//                = request.getRequestDispatcher("");
-//        
-//        dispatcher.forward(request, response);
+        int resultado = dao.inserir(f);
+
+        if (resultado == 1) {
+
+            //apresentar mensagem de sucesso
+            
+            RequestDispatcher dispatcher
+                    = request.getRequestDispatcher("/funcionario.jsp");
+
+            dispatcher.forward(request, response);
+
+        } else {
+
+            // apresentar mensagem de erro
+        }
+
     }
 }

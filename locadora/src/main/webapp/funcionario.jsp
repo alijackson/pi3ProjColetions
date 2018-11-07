@@ -185,20 +185,46 @@ r<%--
                         <th>Área</th>
                         <th>Email</th>
                         <th>RG</th>
-                        <th>Endereço</th>
+                        <th>Data de Nascimento</th>
                         <th></th>
                         <th></th>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>João Carlos</td>
-                        <td>Vendedor</td>
-                        <td>joaozinho@hotmail.com</td>
-                        <td>50.658.475-8</td>
-                        <td>Rua carrão</td>
-                        <td><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#novoFun">Atualizar</a></td>
-                        <td><a href="#" class="btn btn-danger" onclick="excluir();">Excluir</a></td>       
-                    </tr>
+
+                    <c:forEach items="${listaFuncionarios}" var="funcionario">
+                        <tr onclick="location.href = 'edit?id=<c:out value='${funcionario.getId()}' />'"  id="trTable"  >
+                            <td>
+                        <c:out value='${funcionario.getId()}' />
+                        </td>
+                        <td>
+                        <c:out value="${funcionario.getNome()}" />
+                        </td>
+                        <td>
+                        <c:out value="${funcionario.getCargo()}" />
+                        </td>
+                        <td>
+                        <c:out value="${funcionario.getEmail()}" />
+                        </td>
+                        <td>
+                        <c:out value="${funcionario.getRg()}" />
+                        </td>
+                        <td>
+                        <c:out value="${funcionario.getDataNascimento()}" />
+                        </td>
+                        </tr>
+                    </c:forEach>
+
+                    <!-- <tr>
+                          <td>1</td>
+                          <td>João Carlos</td>
+                          <td>Vendedor</td>
+                          <td>joaozinho@hotmail.com</td>
+                          <td>50.658.475-8</td>
+                          <td>Rua carrão</td>
+                          <td><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#novoFun">Atualizar</a></td>
+                          <td><a href="#" class="btn btn-danger" onclick="excluir();">Excluir</a></td>       
+                      </tr> -->
+
+
                 </table>
             </div>
             <!-- FIM TABLE -->
@@ -244,36 +270,36 @@ r<%--
                     <div class="modal-body">
                         <form action="CadastrarFuncionario" method="post">
                             <div class="form-group">
-                                <label for="name">Nome</label>
-                                <input type="text" class="form-control" id="name" placeholder="ex: Jose Silva">
+                                <label for="nome">Nome</label>
+                                <input type="text" class="form-control" id="nome" required name="nome" placeholder="ex: Jose Silva">
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="email">Email</label>
-                                    <input type="email" class="form-control" id="email" placeholder="ex: Augusto@gmail.com">
+                                    <input type="email" class="form-control" id="email" required name="email" placeholder="ex: Augusto@gmail.com">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="dataNascimento">Data de Nascimento</label>
-                                    <input type="date" class="form-control" id="dataNascimento" placeholder="ex: 12/12/2012">
+                                    <input type="date" class="form-control" id="dataNascimento" required name="dataNascimento" placeholder="ex: 12/12/2012">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="login">Login</label>
-                                    <input type="text" class="form-control" id="login" placeholder="ex: Rua Jão Carlos">
+                                    <input type="text" class="form-control" id="login"  required name="login" placeholder="ex: Rua Jão Carlos">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="senha">Senha</label>
-                                    <input type="password" class="form-control" id="senha" placeholder="Senha">
+                                    <input type="password" class="form-control" id="senha"  required name="senha"placeholder="Senha">
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="cpf">CPF</label>
-                                    <input type="text" class="form-control" id="cpf" name="cpf" placeholder="123.123.123-12">
+                                    <input type="text" class="form-control" id="cpf" required name="cpf" placeholder="123.123.123-12">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="cargo">Área</label>
-                                    <select id="cargo" class="form-control">
+                                    <select id="cargo" required name="cargo"class="form-control">
                                         <option selected>Vendedor</option>
                                         <option>Gerente TI</option>
                                         <option>Gerente</option>
