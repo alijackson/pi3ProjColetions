@@ -23,3 +23,4 @@ com\pi3\locadora\view\Remove.class
 br\com\model\dao\VeiculoDAO.class
 br\com\servico\ServicoVeiculo.class
 br\com\model\Funcionario.class
+com\pi3\locadora\view\CadastrarFuncionario.class
