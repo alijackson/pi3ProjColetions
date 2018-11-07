@@ -5,9 +5,7 @@
  */
 package com.pi3.locadora.view;
 
-import br.com.model.Cliente;
 import br.com.model.Veiculo;
-import br.com.model.dao.ClienteDAO;
 import br.com.model.dao.VeiculoDAO;
 import java.io.File;
 import java.io.IOException;
@@ -73,7 +71,7 @@ public class CadastrarVeiculo extends HttpServlet{
         request.setAttribute("result", "Ocorreu tudo bem\n" + "<br>" + log);
 
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("main");
+                = request.getRequestDispatcher("/veiculos");
 
         dispatcher.forward(request, response);
     }

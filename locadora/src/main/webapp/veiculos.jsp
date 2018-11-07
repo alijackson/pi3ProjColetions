@@ -1,4 +1,4 @@
-<%@page import="br.com.model.Cliente"%>
+<%@page import="br.com.model.Veiculo"%>
 <%@page import="com.pi3.locadora.view.Service"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -6,7 +6,7 @@
 <html>
 
 <head>
-    <title>Home</title>
+    <title>Veiculos</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,17 +50,14 @@
                                         <a class="nav-link" href="main">Home<span class="sr-only">(current)</span></a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="cadastrar">Clientes</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="veiculos">Veiculos</a>
+                                        <a class="nav-link" href="veiculo">Cadastrar</a>
                                     </li>
                                 </ul>
                             </div>
                         </nav>
                         <div class="center">
                                 <h1>
-                                    Clientes
+                                    Veiculos
                                 </h1>
                         </div>
                     </div>
@@ -74,25 +71,25 @@
                                     <tr>
 
                                         <th scope="col">#</th>
-                                        <th scope="col">Nome</th>
-                                        <th scope="col">CPF</th>
-                                        <th scope="col">E-mail</th>
+                                        <th scope="col">Modelo</th>
+                                        <th scope="col">Ano</th>
+                                        <th scope="col">NumeroDoc</th>
                                     </tr>
                                 </thead>
 
-                                <c:forEach items="${listaCliente}" var="cliente">
-                                    <tr onclick="location.href = 'edit?id=<c:out value='${cliente.getId()}' />'"  id="trTable"  >
+                                <c:forEach items="${listaVeiculos}" var="veiculo">
+                                    <tr onclick="location.href = 'edit?id=<c:out value='${veiculo.getId()}' />'"  id="trTable"  >
                                         <td>
-                                            <c:out value='${cliente.getId()}' />
+                                            <c:out value='${veiculo.getId()}' />
                                         </td>
                                         <td>
-                                            <c:out value="${cliente.getNome()}" />
+                                            <c:out value="${veiculo.getModelo()}" />
                                         </td>
                                         <td>
-                                            <c:out value="${cliente.getCpf()}" />
+                                            <c:out value="${veiculo.getAno()}" />
                                         </td>
                                         <td>
-                                            <c:out value="${cliente.getEmail()}" />
+                                            <c:out value="${veiculo.getNumeroDoc()}" />
                                         </td>
                                     </tr>
                                 </c:forEach>

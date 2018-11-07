@@ -73,7 +73,7 @@ public class RemoverVeiculo extends HttpServlet {
         request.setAttribute("result", "Ocorreu tudo bem\n" + "<br>" + log);
 
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("main");
+                = request.getRequestDispatcher("/veiculos");
 
         dispatcher.forward(request, response);
     }
