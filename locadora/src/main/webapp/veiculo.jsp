@@ -98,7 +98,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-2">
                             <label for="imagem">Imagem</label>
-                            <input type="file" class="form-control" id="imagem" name="imagem">
+                            <input type="file" class="form-control" id="imagem" name="imagem" accept="image/*">
                         </div>
                     </div>
 
