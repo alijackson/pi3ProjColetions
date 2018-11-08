@@ -189,6 +189,8 @@ r<%--
                         <th>Email</th>
                         <th>CPF</th>
                         <th>Data de Nascimento</th>
+                        <th></th>
+                         <th></th>
                     </tr>
 
                     <c:forEach items="${listaFuncionarios}" var="funcionario">
@@ -199,6 +201,8 @@ r<%--
                             <td><c:out value="${funcionario.getEmail()}" /> </td>
                             <td> <c:out value="${funcionario.getCpf()}" /></td>
                             <td><c:out value="${funcionario.getDataNascimento()}" /> </td>
+                            <td><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#novoFun">Atualizar</a></td>
+                            <td><a href="#" class="btn btn-danger" onclick="excluir();">Excluir</a></td>  
                         </tr>
                     </c:forEach>
 
