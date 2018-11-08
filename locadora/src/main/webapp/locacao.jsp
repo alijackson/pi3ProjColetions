@@ -146,8 +146,6 @@
                         <label for="dataNasc">Data de Retirada</label>
                         <input type="date" class="form-control" id="dataretira" name="dataretira">
                     </div>
-                </div>
-                <div class="form-row">
                     <div class="form-group col-md-4">
                         <label for="dataNasc">Data de Entrega</label>
                         <input type="date" class="form-control" id="dataentrega" name="dataentrega">
