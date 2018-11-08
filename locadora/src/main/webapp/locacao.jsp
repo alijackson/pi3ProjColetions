@@ -118,26 +118,20 @@
             <hr>
             <form id="form" action="cadastrar" method="post">
                 <div class="form-row">  
-                    <div>
-                        <input class="form-control mr-sm-1" type="search" placeholder="CPF Cliente" aria-label="Search" id="cliente">
+                    <div class="col-md-2 d-flex-inline ">  
+                        <a class="btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#clientes" id="btnd">Selecionar Cliente</a>  
                     </div>
                     <div>
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="Procurar" onclick="Cliente()">Buscar</button>
-                    </div>
-                    <div>
-                        <label for="cliente"> Cliente: <c:out value="${cliente.getNome}"/></label>
+                        <label for="cliente"> Cliente: </label>
                     </div>
                 </div>
                 <br>
                 <div class="form-row">
-                    <div>
-                        <input class="form-control mr-sm-1" type="search" placeholder="NumeroDocumento Veiculo" aria-label="Search" id="veiculo">
+                    <div class="col-md-2 d-flex-inline ">  
+                        <a class="btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#veiculos" id="btnd">Selecionar Veiculo</a>  
                     </div>
                     <div>
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="Procurar" onclick="Veiculo()">Buscar</button>
-                    </div>
-                    <div>
-                        <label for="veiculo">Veiculo: <c:out value="${veiculo.getNumeroDoc}"/></label>
+                        <label for="veiculo">Veiculo: </label>
                     </div>
                 </div>
                 <br>
@@ -233,7 +227,7 @@
             </form>
         </div>
 
-        <!--<div class="modal fade" id="novoFun" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal fade" id="clientes" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -247,21 +241,82 @@
                             <form>
                                 <table class="table table-striped">
                                     <tr>
-                                        <c:forEach items="${listaVeiculos}" var="veiculo">
-                                            <tb>
-                                                <label for="veiculo"><c:out value="${veiculo.getMarca()}"/> <c:out value="${veiculo.getModelo()}"/></label>
-                                                <button type="submit" class="btn btn-primary">Selecionar</button>
-                                            </tb>
-                                        </c:forEach>
+                                        <th>Nome</th>
+                                        <th>CPF</th>
+                                        <th>Email</th>
                                     </tr>
+                                    <c:forEach items="${listaClientes}" var="cliente">
+                                        <tr onclick="location.href = 'edit?id=<c:out value='${cliente.getId()}' />'"  id="trTable"  >
+                                            <td>
+                                                <c:out value='${cliente.getNome()}' />
+                                            </td>
+                                            <td>
+                                                <c:out value="${cliente.getCPF()}" />
+                                            </td>
+                                            <td>
+                                                <c:out value="${cliente.getEmail()}" />
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
                                 </table>
-                                <button type="submit" class="btn btn-primary">Selecionar</button>
+                                <button type="button" class="btn btn-primary">Selecionar</button>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>-->
+        </div>
+        <div class="modal fade" id="veiculos" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Veiculos</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md-12">
+                            <form>
+                                <table class="table table-striped">
+                                    <tr>
+                                        <th>Imagem</th>
+                                        <th>Marca</th>
+                                        <th>Modelo</th>
+                                        <th>Ano</th>
+                                        <th>Categoria</th>
+                                        <th>Preço</th>
+                                    </tr>
+                                    <c:forEach items="${listaVeiculos}" var="veiculo">
+                                        <tr onclick="location.href = 'edit?id=<c:out value='${veiculo.getId()}' />'"  id="trTable"  >
+                                            <td>
+                                                <img src="<c:out value='${veiculo.getImagem()}'  />">
+                                            </td>
+                                            <td>
+                                                <c:out value="${veiculo.getMarca()}" />
+                                            </td>
+                                            <td>
+                                                <c:out value="${veiculo.getModelo()}" />
+                                            </td>
+                                            <td>
+                                                <c:out value="${veiculo.getAno()}" />
+                                            </td>
+                                            <td>
+                                                <c:out value="${veiculo.getCategoria()}" />
+                                            </td>
+                                            <td>
+                                                Preço?
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                </table>
+                                <button type="button" class="btn btn-primary">Selecionar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
 

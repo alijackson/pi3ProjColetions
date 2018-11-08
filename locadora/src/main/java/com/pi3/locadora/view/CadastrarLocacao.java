@@ -7,9 +7,14 @@ package com.pi3.locadora.view;
  */
 
 
+import br.com.model.Cliente;
 import br.com.model.Locacao;
+import br.com.model.Veiculo;
+import br.com.model.dao.ClienteDAO;
+import br.com.model.dao.VeiculoDAO;
 import br.com.servico.ServicoLocacao;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,6 +37,22 @@ public class CadastrarLocacao extends HttpServlet{
                 throws ServletException, IOException
     {
         request.setAttribute("objetivo", "Fazer Locacao");
+        
+        ClienteDAO allClientes = new ClienteDAO();
+        
+        ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+        
+        clientes = allClientes.ApresentarClientes();
+        
+        request.setAttribute("listaClientes", clientes);
+        
+        VeiculoDAO allVeiculos = new VeiculoDAO();
+        
+        ArrayList<Veiculo> veiculos = new ArrayList<Veiculo>();
+        
+        veiculos = allVeiculos.ApresentarVeiculos();
+        
+        request.setAttribute("listaVeiculos", veiculos);
         
         RequestDispatcher dispatcher
                 = request.getRequestDispatcher("locacao.jsp");
