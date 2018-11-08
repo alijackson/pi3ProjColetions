@@ -73,7 +73,7 @@ public class CadastrarLocacao extends HttpServlet{
         request.setAttribute("result", "Ocorreu tudo bem\n"+"<br>"+log);
         
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("main");
+                = request.getRequestDispatcher("locacoes");
         
         dispatcher.forward(request, response);
     }
