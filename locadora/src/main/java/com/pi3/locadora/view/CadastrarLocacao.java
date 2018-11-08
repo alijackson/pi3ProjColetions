@@ -8,7 +8,6 @@ package com.pi3.locadora.view;
 
 
 import br.com.model.Locacao;
-import br.com.model.dao.LocacaoDAO;
 import br.com.servico.ServicoLocacao;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;

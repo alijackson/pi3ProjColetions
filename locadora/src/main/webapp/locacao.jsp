@@ -26,7 +26,7 @@
 
         <script type="text/JAVASCRIPT">
             function Cliente(){
-                var cliente = 
+                
             }
             function Veiculo(){
                 
@@ -159,7 +159,7 @@
                 <div>
                     <div class="form-row">
                         <div>
-                            <input type="radio" name="protect" value="0">
+                            <input type="radio" name="protect" value="basico">
                         </div>
                         <div class="form-group col-md-2">
                             <label for="basico">Proteção Básica</label>
@@ -170,7 +170,7 @@
                     </div>
                     <div class="form-row">
                         <div>
-                            <input type="radio" name="protect" value="1">
+                            <input type="radio" name="protect" value="completo">
                         </div>
                         <div class="form-group col-md-2">
                             <label for="comp">Proteção Completa</label>
@@ -181,7 +181,7 @@
                     </div>
                     <div class="form-row">
                         <div>
-                            <input type="radio" name="protect" value="2">
+                            <input type="radio" name="protect" value="super">
                         </div>
                         <div class="form-group col-md-2">
                             <label for="super">Superproteção</label>
@@ -197,7 +197,7 @@
                 <div>
                     <div class="form-row">
                         <div>
-                            <input type="radio" name="service" value="0">
+                            <input type="radio" name="service" value="bebe">
                         </div>
                         <div class="form-group col-md-2">
                             <label for="bebe">Bebê Conforto</label>
@@ -208,7 +208,7 @@
                     </div>
                     <div class="form-row">
                         <div>
-                            <input type="radio" name="service" value="1">
+                            <input type="radio" name="service" value="cadeira">
                         </div>
                         <div class="form-group col-md-2">
                             <label for="cad">Cadeira de Bebê</label>
@@ -219,7 +219,7 @@
                     </div>
                     <div class="form-row">
                         <div>
-                            <input type="radio" name="service" value="2">
+                            <input type="radio" name="service" value="gps">
                         </div>
                         <div class="form-group col-md-2">
                             <label for="nav">Navegador GPS</label>
