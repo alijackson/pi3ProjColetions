@@ -6,7 +6,6 @@
 package br.com.model.dao;
 
 import br.com.conneticon.ConnectionFactory;
-import br.com.model.Cliente;
 import br.com.model.Locacao;
 import java.sql.Connection;
 import java.sql.Date;
@@ -68,7 +67,7 @@ public class LocacaoDAO {
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
-        ArrayList<Locacao> locacoes = new ArrayList<>();
+        ArrayList<Locacao> locacoes = new ArrayList<Locacao>();
 
         try {
             stmt = con.prepareStatement("SELECT * FROM LOCACAO WHERE enable=1");
