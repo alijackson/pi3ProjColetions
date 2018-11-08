@@ -45,11 +45,11 @@ public class Locacoes extends HttpServlet{
         
         HttpSession sessao = request.getSession();
         
-        if(sessao.getAttribute("usuario") == null)
+        /*if(sessao.getAttribute("usuario") == null)
         {
-            response.sendRedirect(request.getContextPath() + "/login");
-            return;
-        }
+        response.sendRedirect(request.getContextPath() + "/login");
+        return;
+        }*/
 
         request.setAttribute("usuario", sessao.getAttribute("usuario"));
         
