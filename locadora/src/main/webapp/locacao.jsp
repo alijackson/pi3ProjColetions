@@ -238,6 +238,10 @@
                     </div>
                     <div class="modal-body">
                         <div class="col-md-12">
+                            <div class="form-row">
+                                <input class="col-md-6" type="search" placeholder="Pesquisar Cliente" aria-label="Search" id="bcliente">
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="Procurar" onclick="">Buscar</button>
+                            </div>
                             <form>
                                 <table class="table table-striped">
                                     <tr>
@@ -277,6 +281,10 @@
                     </div>
                     <div class="modal-body">
                         <div class="col-md-12">
+                            <div class="form-row">
+                                <input class="col-md-6" type="search" placeholder="Pesquisar Veiculo" aria-label="Search" id="bveiculo">
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="Procurar" onclick="">Buscar</button>
+                            </div>
                             <form>
                                 <table class="table table-striped">
                                     <tr>
