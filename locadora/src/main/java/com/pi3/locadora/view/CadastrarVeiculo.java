@@ -7,6 +7,7 @@ package com.pi3.locadora.view;
 
 import br.com.model.Veiculo;
 import br.com.model.dao.VeiculoDAO;
+import br.com.servico.ServicoVeiculo;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
@@ -64,9 +65,9 @@ public class CadastrarVeiculo extends HttpServlet{
         File file = new File(request.getParameter("imagem"));
         veiculo.setImagem(file);
         
-        VeiculoDAO dao = new VeiculoDAO();
+        ServicoVeiculo cadastrar = new ServicoVeiculo();
         
-        String log = dao.inserir(veiculo);
+        String log = cadastrar.inserir(veiculo);
 
         request.setAttribute("result", "Ocorreu tudo bem\n" + "<br>" + log);
 

@@ -11,6 +11,7 @@ br\com\validacao\ValidacaoCliente.class
 com\pi3\locadora\view\Editar.class
 com\pi3\locadora\view\CadastrarVeiculo.class
 br\com\servico\ServicoLocacao.class
+com\pi3\locadora\view\Locacoes.class
 com\pi3\locadora\view\Veiculos.class
 br\com\model\Cliente.class
 br\com\conneticon\ConnectionFactory.class
@@ -25,6 +26,7 @@ br\com\model\dao\FuncionarioDAO.class
 com\pi3\locadora\view\Remove.class
 br\com\model\dao\VeiculoDAO.class
 br\com\servico\ServicoVeiculo.class
+com\pi3\locadora\view\CadastrarLocacao.class
 br\com\model\Funcionario.class
 com\pi3\locadora\view\EditarVeiculo.class
 com\pi3\locadora\view\CadastrarFuncionario.class

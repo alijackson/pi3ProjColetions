@@ -228,6 +228,9 @@
                             <label for="valorNav">R$12,00 por dia</label>
                         </div>
                     </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
                 </div>
             </form>
         </div>

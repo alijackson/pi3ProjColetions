@@ -2,7 +2,6 @@ C:\Users\Pichau\Documents\NetBeansProjects\pi3ProjColetions\locadora\src\main\ja
 C:\Users\Pichau\Documents\NetBeansProjects\pi3ProjColetions\locadora\src\main\java\br\com\conneticon\ConnectionFactory.java
 C:\Users\Pichau\Documents\NetBeansProjects\pi3ProjColetions\locadora\src\main\java\br\com\model\Funcionario.java
 C:\Users\Pichau\Documents\NetBeansProjects\pi3ProjColetions\locadora\src\main\java\com\pi3\locadora\view\Locacoes.java
-C:\Users\Pichau\Documents\NetBeansProjects\pi3ProjColetions\locadora\src\main\java\com\pi3\locadora\view\Locacao.java
 C:\Users\Pichau\Documents\NetBeansProjects\pi3ProjColetions\locadora\src\main\java\com\pi3\locadora\user\AddUser.java
 C:\Users\Pichau\Documents\NetBeansProjects\pi3ProjColetions\locadora\src\main\java\com\pi3\locadora\view\Remove.java
 C:\Users\Pichau\Documents\NetBeansProjects\pi3ProjColetions\locadora\src\main\java\com\pi3\locadora\user\User.java
@@ -18,6 +17,7 @@ C:\Users\Pichau\Documents\NetBeansProjects\pi3ProjColetions\locadora\src\main\ja
 C:\Users\Pichau\Documents\NetBeansProjects\pi3ProjColetions\locadora\src\main\java\com\pi3\locadora\view\EditarVeiculo.java
 C:\Users\Pichau\Documents\NetBeansProjects\pi3ProjColetions\locadora\src\main\java\br\com\validacao\ValidacaoCliente.java
 C:\Users\Pichau\Documents\NetBeansProjects\pi3ProjColetions\locadora\src\main\java\br\com\model\dao\LocacaoDAO.java
+C:\Users\Pichau\Documents\NetBeansProjects\pi3ProjColetions\locadora\src\main\java\com\pi3\locadora\view\CadastrarLocacao.java
 C:\Users\Pichau\Documents\NetBeansProjects\pi3ProjColetions\locadora\src\main\java\com\pi3\locadora\view\Veiculos.java
 C:\Users\Pichau\Documents\NetBeansProjects\pi3ProjColetions\locadora\src\main\java\com\pi3\locadora\view\RemoverVeiculo.java
 C:\Users\Pichau\Documents\NetBeansProjects\pi3ProjColetions\locadora\src\main\java\com\pi3\locadora\view\Cadastrar.java

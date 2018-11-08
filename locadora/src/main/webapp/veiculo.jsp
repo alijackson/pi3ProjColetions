@@ -126,7 +126,12 @@
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="categoria">Categoria</label>
-                            <input type="text" class="form-control" id="categoria" name="categoria" placeholder="Categoria A">
+                            <select class="form-control" id="categoria" name="categoria">
+                                <option value="Categoria A">Categoria A</option>
+                                <option value="Categoria B">Categoria B</option>
+                                <option value="Categoria C">Categoria C</option>
+                                <option value="Categoria D">Categoria D</option>
+                            </select>
                         </div>
                         <div class="form-group col-md-2">
                             <label for="ano">Ano</label>

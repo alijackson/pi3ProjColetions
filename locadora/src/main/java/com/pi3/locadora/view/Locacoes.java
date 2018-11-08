@@ -6,7 +6,7 @@ package com.pi3.locadora.view;
  * and open the template in the editor.
  */
 
-
+import br.com.model.Locacao;
 import br.com.model.dao.LocacaoDAO;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ public class Locacoes extends HttpServlet{
         
         LocacaoDAO dao = new LocacaoDAO();
         
-        //locacoes = dao.ApresentarLocacoes();-NÂO SEI O PQ DE ESTA DANDO ERRO!
+        locacoes = dao.ApresentarLocacoes();
         
         request.setAttribute("listaLocacoes", locacoes);
         
