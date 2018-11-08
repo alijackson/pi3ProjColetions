@@ -8,6 +8,7 @@ package com.pi3.locadora.view;
 import java.io.IOException;
 import br.com.model.Funcionario;
 import br.com.model.dao.FuncionarioDAO;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,6 +32,14 @@ public class CadastrarFuncionario extends HttpServlet {
             throws ServletException, IOException {
 
         //request.setAttribute("objetivo", "Cadastrar Funcionario");
+        ArrayList<Funcionario> listFuncionario = new ArrayList<Funcionario>();
+
+        FuncionarioDAO dao = new FuncionarioDAO();
+
+        listFuncionario = dao.ApresentarFuncionarios();
+
+        request.setAttribute("listaFuncionarios", listFuncionario);
+
         RequestDispatcher dispatcher
                 = request.getRequestDispatcher("funcionario.jsp");
 
@@ -62,21 +71,19 @@ public class CadastrarFuncionario extends HttpServlet {
 
         FuncionarioDAO dao = new FuncionarioDAO();
 
-        int resultado = dao.inserir(f);
+        dao.inserir(f);
 
-        if (resultado == 1) {
+//            apresentar mensagem de sucesso
+        ArrayList<Funcionario> listFuncionario = new ArrayList<Funcionario>();
 
-            //apresentar mensagem de sucesso
-            
-            RequestDispatcher dispatcher
-                    = request.getRequestDispatcher("/funcionario.jsp");
+        listFuncionario = dao.ApresentarFuncionarios();
 
-            dispatcher.forward(request, response);
+        request.setAttribute("listaFuncionarios", listFuncionario);
 
-        } else {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/funcionario.jsp");
 
-            // apresentar mensagem de erro
-        }
+        dispatcher.forward(request, response);
 
     }
+
 }

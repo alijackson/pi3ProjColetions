@@ -31,7 +31,7 @@ public class FuncionarioDAO {
     private final SimpleDateFormat dataEntrada = new SimpleDateFormat("dd/MM/yyyy");
     private final SimpleDateFormat dataBanco = new SimpleDateFormat("yyyy-MM-dd");
 
-    public int inserir(Funcionario f) {
+    public void inserir(Funcionario f) {
 
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
@@ -53,11 +53,9 @@ public class FuncionarioDAO {
 
             stmt.executeUpdate();
 
-            return 1;
-
         } catch (SQLException ex) {
 
-            return 2;
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro");
 
         } finally {
 
@@ -74,7 +72,7 @@ public class FuncionarioDAO {
         ArrayList<Funcionario> Funcionarios = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM FUNCIONARIO ");
+            stmt = con.prepareStatement("SELECT * FROM FUNCIONARIO");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -86,15 +84,16 @@ public class FuncionarioDAO {
                 f.setDataNascimento(rs.getString("DTNASCIMENTO"));
                 f.setCpf(rs.getString("CPF"));
                 f.setEmail(rs.getString("EMAIL"));
-                f.setCargo(rs.getString("EMAIL"));
-                f.setSenha(rs.getString("SENHA"));
 
                 Funcionarios.add(f);
             }
 
         } catch (SQLException ex) {
+
             JOptionPane.showMessageDialog(null, "erro ao salvar" + ex);
+
         } finally {
+
             ConnectionFactory.closeConnection(con, stmt, rs);
 
         }

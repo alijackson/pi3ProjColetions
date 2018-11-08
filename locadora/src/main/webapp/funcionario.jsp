@@ -4,7 +4,9 @@ r<%--
     Author     : david.sdcruz
 --%>
 
+<%@page import="br.com.model.Funcionario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="pt-br">
     <head>
@@ -177,6 +179,7 @@ r<%--
             </div>
             <!-- FIM -->
 
+
             <div class="col-md-12">
                 <table class="table table-striped">
                     <tr>  
@@ -184,49 +187,28 @@ r<%--
                         <th>Nome</th>
                         <th>Área</th>
                         <th>Email</th>
-                        <th>RG</th>
+                        <th>CPF</th>
                         <th>Data de Nascimento</th>
-                        <th></th>
-                        <th></th>
                     </tr>
 
                     <c:forEach items="${listaFuncionarios}" var="funcionario">
                         <tr onclick="location.href = 'edit?id=<c:out value='${funcionario.getId()}' />'"  id="trTable"  >
-                            <td>
-                        <c:out value='${funcionario.getId()}' />
-                        </td>
-                        <td>
-                        <c:out value="${funcionario.getNome()}" />
-                        </td>
-                        <td>
-                        <c:out value="${funcionario.getCargo()}" />
-                        </td>
-                        <td>
-                        <c:out value="${funcionario.getEmail()}" />
-                        </td>
-                        <td>
-                        <c:out value="${funcionario.getRg()}" />
-                        </td>
-                        <td>
-                        <c:out value="${funcionario.getDataNascimento()}" />
-                        </td>
+                            <td><c:out value='${funcionario.getId()}' /></td>
+                            <td><c:out value="${funcionario.getNome()}" /> </td>
+                            <td> <c:out value="${funcionario.getCargo()}" /></td>
+                            <td><c:out value="${funcionario.getEmail()}" /> </td>
+                            <td> <c:out value="${funcionario.getCpf()}" /></td>
+                            <td><c:out value="${funcionario.getDataNascimento()}" /> </td>
                         </tr>
                     </c:forEach>
 
-                    <!-- <tr>
-                          <td>1</td>
-                          <td>João Carlos</td>
-                          <td>Vendedor</td>
-                          <td>joaozinho@hotmail.com</td>
-                          <td>50.658.475-8</td>
-                          <td>Rua carrão</td>
-                          <td><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#novoFun">Atualizar</a></td>
-                          <td><a href="#" class="btn btn-danger" onclick="excluir();">Excluir</a></td>       
-                      </tr> -->
+
+
 
 
                 </table>
             </div>
+
             <!-- FIM TABLE -->
 
             <!-- Inicio Paginação-->
