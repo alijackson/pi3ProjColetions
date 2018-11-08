@@ -117,19 +117,23 @@
             </div>
             <hr>
             <form id="form" action="cadastrar" method="post">
+                <!-- AQUI TEM UM BOTÃO QUE APRESENTA UMA TABELA DE CLIENTES -->
                 <div class="form-row">  
                     <div class="col-md-2 d-flex-inline ">  
                         <a class="btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#clientes" id="btnd">Selecionar Cliente</a>  
                     </div>
+                    <!-- APRESENTAR O CLIENTE SELECIONADO -->
                     <div>
                         <label for="cliente"> Cliente: </label>
                     </div>
                 </div>
                 <br>
+                <!-- AQUI TEM UM BOTÃO QUE APRESENTA UMA TABELA DE VEICULOS -->
                 <div class="form-row">
                     <div class="col-md-2 d-flex-inline ">  
                         <a class="btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#veiculos" id="btnd">Selecionar Veiculo</a>  
                     </div>
+                    <!-- APRESENTAR O VEICULO SELECIONADO -->
                     <div>
                         <label for="veiculo">Veiculo: </label>
                     </div>
@@ -245,12 +249,16 @@
                             <form>
                                 <table class="table table-striped">
                                     <tr>
+                                        <th>ID</th>
                                         <th>Nome</th>
                                         <th>CPF</th>
                                         <th>Email</th>
                                     </tr>
                                     <c:forEach items="${listaClientes}" var="cliente">
                                         <tr onclick="location.href = 'edit?id=<c:out value='${cliente.getId()}' />'"  id="trTable"  >
+                                            <td>
+                                                <c:out value='${cliente.getId()}' />
+                                            </td>
                                             <td>
                                                 <c:out value='${cliente.getNome()}' />
                                             </td>
@@ -263,7 +271,7 @@
                                         </tr>
                                     </c:forEach>
                                 </table>
-                                <button type="button" class="btn btn-primary">Selecionar</button>
+                                <button type="button" class="btn btn-primary" onclick="">Selecionar</button>
                             </form>
                         </div>
                     </div>
@@ -288,6 +296,7 @@
                             <form>
                                 <table class="table table-striped">
                                     <tr>
+                                        <th>ID</th>
                                         <th>Imagem</th>
                                         <th>Marca</th>
                                         <th>Modelo</th>
@@ -298,7 +307,10 @@
                                     <c:forEach items="${listaVeiculos}" var="veiculo">
                                         <tr onclick="location.href = 'edit?id=<c:out value='${veiculo.getId()}' />'"  id="trTable"  >
                                             <td>
-                                                <img src="<c:out value='${veiculo.getImagem()}'  />">
+                                                <c:out value='${veiculo.getId()}' />
+                                            </td>
+                                            <td>
+                                                <img src="<c:out value='${veiculo.getImagem()}'  />" width="100px" height="100px">
                                             </td>
                                             <td>
                                                 <c:out value="${veiculo.getMarca()}" />
@@ -318,7 +330,7 @@
                                         </tr>
                                     </c:forEach>
                                 </table>
-                                <button type="button" class="btn btn-primary">Selecionar</button>
+                                <button type="button" class="btn btn-primary" onclick="">Selecionar</button>
                             </form>
                         </div>
                     </div>
