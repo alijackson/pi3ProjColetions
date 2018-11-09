@@ -11,6 +11,12 @@ $("#idade").mask('000');
 
 $("#id").hide();
 
+$("#placa").mask('SSS-0000');
+
+$("#ano").mask('0000');
+
+$("#numerodoc").mask('00000000');
+
 //Assim que inicia o documento ocultar as mensagens de erro
 $(document).ready(function() {
     $("#erroNome").hide();

@@ -28,6 +28,7 @@ public class ConnectionFactory {
 
         try {
             Class.forName(DRIVER);
+//            System.setProperty("jdbc.Drivers", DRIVER);
             return DriverManager.getConnection(URL, USER, PASS);
             
         } catch (ClassNotFoundException | SQLException ex) {
