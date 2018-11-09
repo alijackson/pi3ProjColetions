@@ -189,6 +189,71 @@
             <!-- FIM Paginação-->
         </div>
 
+        <!-- Modal Cadastrar usuário -->
+        <div class="modal fade" id="novoFun" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Cadastrar Funcionário</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="CadastrarFuncionario" method="post">
+                            <div class="form-group">
+                                <label for="name">Nome</label>
+                                <input type="text" class="form-control" id="name" placeholder="ex: Jose Silva">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" id="email" placeholder="ex: Augusto@gmail.com">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="dataNascimento">Data de Nascimento</label>
+                                    <input type="date" class="form-control" id="dataNascimento" placeholder="ex: 12/12/2012">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="login">Login</label>
+                                    <input type="text" class="form-control" id="login" placeholder="ex: Rua Jão Carlos">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="senha">Senha</label>
+                                    <input type="password" class="form-control" id="senha" placeholder="Senha">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="cpf">CPF</label>
+                                    <input type="text" class="form-control" id="cpf" name="cpf" placeholder="123.123.123-12">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="cargo">Área</label>
+                                    <select id="cargo" class="form-control">
+                                        <option selected>Vendedor</option>
+                                        <option>Gerente TI</option>
+                                        <option>Gerente</option>
+                                        <option>Administrador</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer" >
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <!-- <a href="CadastrarFuncionario"> --><button type="submit" class="btn btn-primary">Cadastrar</button> <!-- </a> -->
+                                <%--onclick="sucesso();--%>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
     </body>
 
     <!-- JAVASCRIPT E JQUERY 

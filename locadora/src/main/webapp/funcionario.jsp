@@ -155,7 +155,7 @@ r<%--
         <!-- FIM DO MENU SUPERIOR -->
 
         <!-- INICIO TABLE -->
-    <div id="form" class="container">
+        <div id="form" class="container">
 
             <div class="row">
 
@@ -194,15 +194,13 @@ r<%--
                     </tr>
 
                     <c:forEach items="${listaFuncionarios}" var="funcionario">
-                        <tr onclick="location.href = 'edit?id=<c:out value='${funcionario.getId()}' />'"  id="trTable"  >
+                        <tr onclick="location.href = 'EditarFuncionario?id=<c:out value='${funcionario.getId()}' />'"  id="trTable"  >
                             <td><c:out value='${funcionario.getId()}' /></td>
                             <td><c:out value="${funcionario.getNome()}" /> </td>
                             <td> <c:out value="${funcionario.getCargo()}" /></td>
                             <td><c:out value="${funcionario.getEmail()}" /> </td>
                             <td> <c:out value="${funcionario.getCpf()}" /></td>
                             <td><c:out value="${funcionario.getDataNascimento()}" /> </td>
-                            <td><a href="#" class="btn btn-primary" data-toggle="modal" data-target="#novoFun">Atualizar</a></td>
-                            <td><a href="#" class="btn btn-danger" onclick="excluir();">Excluir</a></td>  
                         </tr>
                     </c:forEach>
 
@@ -296,8 +294,7 @@ r<%--
 
                             <div class="modal-footer" >
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                <!-- <a href="CadastrarFuncionario"> --><button type="submit" class="btn btn-primary">Cadastrar</button> <!-- </a> -->
-                                <%--onclick="sucesso();--%>
+                               <button type="submit" class="btn btn-primary">Cadastrar</button>
 
                             </div>
                         </form>

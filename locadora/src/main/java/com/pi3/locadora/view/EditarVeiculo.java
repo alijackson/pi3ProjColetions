@@ -7,7 +7,6 @@ package com.pi3.locadora.view;
 
 import br.com.model.Veiculo;
 import br.com.model.dao.VeiculoDAO;
-import br.com.servico.ServicoVeiculo;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
@@ -59,14 +58,23 @@ public class EditarVeiculo extends HttpServlet {
         Veiculo veiculo = new Veiculo();
         veiculo.setModelo(request.getParameter("modelo"));
         veiculo.setCategoria(request.getParameter("categoria"));
-        veiculo.setAno(request.getParameter("ano"));
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyy");
+        try {
+            veiculo.setAno(fmt.parse(request.getParameter("ano")));
+        } catch (ParseException ex) {
+            Logger.getLogger(CadastrarVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+        }
         veiculo.setPlaca(request.getParameter("marca"));
-        veiculo.setNumeroDoc(request.getParameter("numerodoc"));
+        veiculo.setNumeroDoc(Integer.parseInt(request.getParameter("numerodoc")));
         veiculo.setCaracter(request.getParameter("caracteristica"));
+        File file = new File(request.getParameter("imagem"));
+        veiculo.setImagem(file);
         
-        ServicoVeiculo dao = new ServicoVeiculo();
+        VeiculoDAO dao = new VeiculoDAO();
         
-        dao.inserir(veiculo);
+        String log = dao.inserir(veiculo);
+
+        request.setAttribute("result", "Ocorreu tudo bem\n" + "<br>" + log);
 
         RequestDispatcher dispatcher
                 = request.getRequestDispatcher("/veiculos");

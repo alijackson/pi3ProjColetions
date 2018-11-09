@@ -51,6 +51,31 @@ public class RemoverVeiculo extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException 
     {   
+        Veiculo veiculo = new Veiculo();
+        veiculo.setModelo(request.getParameter("modelo"));
+        veiculo.setCategoria(request.getParameter("categoria"));
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyy");
+        try {
+            veiculo.setAno(fmt.parse(request.getParameter("ano")));
+        } catch (ParseException ex) {
+            Logger.getLogger(CadastrarVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        veiculo.setPlaca(request.getParameter("marca"));
+        veiculo.setNumeroDoc(Integer.parseInt(request.getParameter("numerodoc")));
+        veiculo.setCaracter(request.getParameter("caracteristica"));
+        File file = new File(request.getParameter("imagem"));
+        veiculo.setImagem(file);
+        
+        VeiculoDAO dao = new VeiculoDAO();
+        
+        String log = dao.inserir(veiculo);
+
+        request.setAttribute("result", "Ocorreu tudo bem\n" + "<br>" + log);
+
+        RequestDispatcher dispatcher
+                = request.getRequestDispatcher("/veiculos");
+
+        dispatcher.forward(request, response);
     }
 
     @Override

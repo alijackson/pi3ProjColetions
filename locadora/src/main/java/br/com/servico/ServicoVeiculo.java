@@ -17,7 +17,7 @@ public class ServicoVeiculo {
     
     private VeiculoDAO dao = new VeiculoDAO();
     
-    public void inserir(Veiculo veiculo){
+    public String inserir(Veiculo veiculo){
         
         String resposta = ValidacaoVeiculo.validar(veiculo);
         
@@ -34,6 +34,8 @@ public class ServicoVeiculo {
         
             resposta = "Erro na fonte de dados";
         }
+        
+        return resposta;
         
     }
     

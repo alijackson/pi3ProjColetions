@@ -7,13 +7,12 @@ package br.com.model.dao;
 
 import br.com.conneticon.ConnectionFactory;
 import br.com.model.Veiculo;
-import java.io.IOException;
+import java.io.File;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -27,28 +26,27 @@ public class VeiculoDAO {
     
     }
     
-    private final SimpleDateFormat data = new SimpleDateFormat("yyyy");
-    
-    public String inserir(Veiculo v) throws ParseException, IOException{
+    public String inserir(Veiculo v){
         
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
-        String log = "";        
+        String log = "";
         try 
         {
             
             stmt = con.prepareStatement("INSERT INTO VEICULO "
                     + "(MODELO, CATEGORIA, ANO, PLACA, MARCA, "
-                    + "NUMERODOC, CARACTERISTICAS) VALUES "
-                    + "(?,?,?,?,?,?,?)");
+                    + "NUMERODOC, CARACTERISTICAS, IMAGEM) VALUES "
+                    + "(?,?,?,?,?,?,?,?)");
             
             stmt.setString(1, v.getModelo());
             stmt.setString(2, v.getCategoria());
-            stmt.setString(3, v.getAno());
+            stmt.setDate(3, (Date) v.getAno());
             stmt.setString(4, v.getPlaca());
             stmt.setString(5, v.getMarca());
-            stmt.setString(6, v.getNumeroDoc());
+            stmt.setInt(6, v.getNumeroDoc());
             stmt.setString(7, v.getCaracter());
+            stmt.setObject(8, v.getImagem());
 
             stmt.execute();
             
@@ -72,7 +70,7 @@ public class VeiculoDAO {
         ArrayList<Veiculo> veiculos = new ArrayList<>();
         
         try {
-            stmt = con.prepareStatement("SELECT * FROM VEICULO");
+            stmt = con.prepareStatement("SELECT * FROM VEICULO WHERE enable=1");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -82,11 +80,12 @@ public class VeiculoDAO {
                 v.setId(rs.getInt("IDVEICULO"));
                 v.setModelo(rs.getString("MODELO"));
                 v.setCategoria(rs.getString("CATEGORIA"));
-                v.setAno(rs.getString("ANO"));
+                v.setAno(rs.getDate("ANO"));
                 v.setPlaca(rs.getString("PLACA"));
                 v.setMarca(rs.getString("MARCA"));
-                v.setNumeroDoc(rs.getString("NUMERODOC"));
+                v.setNumeroDoc(rs.getInt("NUMERODOC"));
                 v.setCaracter(rs.getString("CARACTERISTICAS"));
+                v.setImagem((File) rs.getObject("IMAGEM"));
 
                 veiculos.add(v);
             }
@@ -109,16 +108,17 @@ public class VeiculoDAO {
 
             stmt = con.prepareStatement("UPDATE VEICULO SET MODELO=?, CATEGORIA=?,"
                     + " ANO=?, PLACA=?, MARCA=?, "
-                    + "NUMERODOC=?, CARACTERISTICAS=?, "
+                    + "NUMERODOC=?, CARACTERISTICAS=?, IMAGEM=? "
                     + "WHERE (IDVEICULO=?)");
 
             stmt.setString(1, v.getModelo());
             stmt.setString(2, v.getCategoria());
-            stmt.setString(3, v.getAno());
+            stmt.setDate(3, (Date) v.getAno());
             stmt.setString(4, v.getPlaca());
             stmt.setString(5, v.getMarca());
-            stmt.setString(6, v.getNumeroDoc());
-            stmt.setString(7, v.getCaracter());            
+            stmt.setInt(6, v.getNumeroDoc());
+            stmt.setString(7, v.getCaracter());
+            stmt.setObject(8, v.getImagem());
             stmt.setInt(9, v.getId());
 
             stmt.execute();
@@ -172,11 +172,12 @@ public class VeiculoDAO {
                 v.setId(rs.getInt("IDVEICULO"));
                 v.setModelo(rs.getString("MODELO"));
                 v.setCategoria(rs.getString("CATEGORIA"));
-                v.setAno(rs.getString("ANO"));
+                v.setAno(rs.getDate("ANO"));
                 v.setPlaca(rs.getString("PLACA"));
                 v.setMarca(rs.getString("MARCA"));
-                v.setNumeroDoc(rs.getString("NUMERODOC"));
+                v.setNumeroDoc(rs.getInt("NUMERODOC"));
                 v.setCaracter(rs.getString("CARACTERISTICAS"));
+                v.setImagem((File) rs.getObject("IMAGEM"));
                 
             }
 

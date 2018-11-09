@@ -5,7 +5,8 @@
  */
 package br.com.model;
 
-import javax.servlet.http.Part;
+import java.io.File;
+import java.util.Date;
 
 /**
  *
@@ -37,11 +38,11 @@ public class Veiculo {
         this.categoria = categoria;
     }
 
-    public String getAno() {
+    public Date getAno() {
         return ano;
     }
 
-    public void setAno(String ano) {
+    public void setAno(Date ano) {
         this.ano = ano;
     }
 
@@ -61,11 +62,11 @@ public class Veiculo {
         this.marca = marca;
     }
 
-    public String getNumeroDoc() {
+    public int getNumeroDoc() {
         return numeroDoc;
     }
 
-    public void setNumeroDoc(String numeroDoc) {
+    public void setNumeroDoc(int numeroDoc) {
         this.numeroDoc = numeroDoc;
     }
 
@@ -77,11 +78,11 @@ public class Veiculo {
         this.caracter = caracter;
     }
 
-    public Part getImagem() {
+    public File getImagem() {
         return imagem;
     }
 
-    public void setImagem(Part imagem) {
+    public void setImagem(File imagem) {
         this.imagem = imagem;
     }
     
@@ -90,12 +91,12 @@ public class Veiculo {
     private int id;
     private String modelo;
     private String categoria;
-    private String ano;
+    private Date ano;
     private String placa;
     private String marca;
-    private String numeroDoc;
+    private int numeroDoc;
     private String caracter;
-    private Part imagem;
+    private File imagem;
     
     public Veiculo(){}
 

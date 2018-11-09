@@ -7,7 +7,6 @@ package com.pi3.locadora.view;
 
 import br.com.model.Veiculo;
 import br.com.model.dao.VeiculoDAO;
-import br.com.servico.ServicoVeiculo;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
@@ -16,13 +15,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Pichau
  */
 
-@WebServlet(name = "CadastrarVeiculo", urlPatterns = {"/veiculos"})
+@WebServlet(name = "ListaVeiculos", urlPatterns = {"/veiculos"})
 public class Veiculos extends HttpServlet {
     
     public Veiculos(){}
@@ -40,6 +40,14 @@ public class Veiculos extends HttpServlet {
         
         request.setAttribute("listaVeiculos", veiculos);
         
+        HttpSession sessao = request.getSession();
+        
+        if(sessao.getAttribute("usuario") == null)
+        {
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
+        request.setAttribute("usuario", sessao.getAttribute("usuario"));
         RequestDispatcher dispatcher
                 = request.getRequestDispatcher("veiculos.jsp");
         
@@ -50,18 +58,6 @@ public class Veiculos extends HttpServlet {
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-        
-        Veiculo veiculo = new Veiculo();
-        veiculo.setModelo(request.getParameter("modelo"));
-        veiculo.setCategoria(request.getParameter("categoria"));
-        veiculo.setAno(request.getParameter("ano"));
-        veiculo.setPlaca(request.getParameter("marca"));
-        veiculo.setNumeroDoc(request.getParameter("numerodoc"));
-        veiculo.setCaracter(request.getParameter("caracteristica"));
-        
-        ServicoVeiculo cadastrar = new ServicoVeiculo();
-        
-        cadastrar.inserir(veiculo);
         
         ArrayList<Veiculo> veiculos = new ArrayList<Veiculo>();
         
