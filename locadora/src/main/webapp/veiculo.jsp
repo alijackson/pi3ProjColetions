@@ -126,7 +126,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="categoria">Categoria</label>
-                            <select class="form-control" id="categoria" name="categoria">
+                            <select class="form-control" id="categoria" required name="categoria">
                                 <option value="Categoria A">Categoria A</option>
                                 <option value="Categoria B">Categoria B</option>
                                 <option value="Categoria C">Categoria C</option>
@@ -150,7 +150,7 @@
                         </div>
                         <div class="form-group col-md-3">
                             <label for="marca">Marca</label>
-                            <input type="text" class="form-control" id="placa" name="placa">
+                            <input type="text" class="form-control" id="marca" name="marca">
                         </div>
                         
                         <div class="form-group col-md-4">

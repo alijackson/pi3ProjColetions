@@ -7,9 +7,7 @@ package com.pi3.locadora.view;
  */
 
 import br.com.model.Locacao;
-import br.com.model.dao.ClienteDAO;
 import br.com.model.dao.LocacaoDAO;
-import br.com.model.dao.VeiculoDAO;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
@@ -18,7 +16,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -43,7 +40,6 @@ public class Locacoes extends HttpServlet{
         
         request.setAttribute("listaLocacoes", locacoes);
         
-        HttpSession sessao = request.getSession();
         
         /*if(sessao.getAttribute("usuario") == null)
         {
@@ -51,8 +47,6 @@ public class Locacoes extends HttpServlet{
         return;
         }*/
 
-        request.setAttribute("usuario", sessao.getAttribute("usuario"));
-        
         
         RequestDispatcher dispatcher
                 = request.getRequestDispatcher("locacoes.jsp");

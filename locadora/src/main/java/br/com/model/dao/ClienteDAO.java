@@ -73,7 +73,7 @@ public class ClienteDAO {
         ArrayList<Cliente> clientes = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM cliente WHERE enable=1");
+            stmt = con.prepareStatement("SELECT * FROM cliente");
             rs = stmt.executeQuery();
 
             while (rs.next()) {

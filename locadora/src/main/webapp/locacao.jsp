@@ -324,9 +324,6 @@
                                             <td>
                                                 <c:out value="${veiculo.getCategoria()}" />
                                             </td>
-                                            <td>
-                                                Preço?
-                                            </td>
                                         </tr>
                                     </c:forEach>
                                 </table>

@@ -39,7 +39,7 @@ public class ValidacaoVeiculo {
             return "É necessário informar a marca do veiculo";
         }
         
-        if (v.getNumeroDoc()== 0
+        if (v.getNumeroDoc()== null
                 || "".equals(v.getNumeroDoc())) {
             return "É necessário informar o número de documento do veiculo";
         }
