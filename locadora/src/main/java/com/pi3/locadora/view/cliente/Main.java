@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.pi3.locadora.view;
+package com.pi3.locadora.view.cliente;
 
 import br.com.model.Cliente;
 import br.com.model.dao.ClienteDAO;
@@ -43,14 +43,14 @@ public class Main extends HttpServlet{
         
         HttpSession sessao = request.getSession();
         
-        if(sessao.getAttribute("usuario") == null)
-        {
-            response.sendRedirect(request.getContextPath() + "/login");
-            return;
-        }
+//        if(sessao.getAttribute("usuario") == null)
+//        {
+//            response.sendRedirect(request.getContextPath() + "/index.jsp");
+//            return;
+//        }
         request.setAttribute("usuario", sessao.getAttribute("usuario"));
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("index.jsp");
+                = request.getRequestDispatcher("cliente/index.jsp");
         
         dispatcher.forward(request, response);
         
@@ -69,7 +69,7 @@ public class Main extends HttpServlet{
         request.setAttribute("listaCliente", listCliente);
         
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("index.jsp");
+                = request.getRequestDispatcher("cliente/index.jsp");
         
         dispatcher.forward(request, response);
     }

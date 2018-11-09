@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.pi3.locadora.view;
+package com.pi3.locadora.view.cliente;
 
 import br.com.model.Cliente;
 import br.com.model.dao.ClienteDAO;

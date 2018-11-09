@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.pi3.locadora.view;
+package com.pi3.locadora.view.cliente;
 
 import br.com.model.Cliente;
 import br.com.model.dao.ClienteDAO;
@@ -38,7 +38,7 @@ public class Cadastrar extends HttpServlet{
         request.setAttribute("objetivo", "Cadastrar Cliente");
         
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("cliente.jsp");
+                = request.getRequestDispatcher("cliente/cliente.jsp");
         
         dispatcher.forward(request, response);
         

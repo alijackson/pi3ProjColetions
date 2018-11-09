@@ -16,10 +16,10 @@ import java.sql.SQLException;
 public class Connect {
     public static Connection getConnection() {
         
-        String caminho = "";
-        String schema = "";
-        String user = "";
-        String senha = "";
+        String caminho = "127.0.0.1";
+        String schema = "locadora";
+        String user = "root";
+        String senha = "1234";
 
         Connection conn = null;
         try 
