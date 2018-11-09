@@ -103,7 +103,9 @@ public class Cliente {
     private String dataNascimento;
     private int idade;
     
-    public Cliente(){}
+    public Cliente(){
+    }
+    
     public Cliente(String nome, String telefoneCelular,
                     String cpf, String rg,
                     int numeroCnh, String dataNascimento, int idade)

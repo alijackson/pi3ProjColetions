@@ -78,7 +78,7 @@
                         <a class="nav-link" href="locacoes">Locação</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="cadastrar">Cliente</a>
+                        <a class="nav-link disabled" href="/locadora/main">Cliente</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link disabled" href="/locadora/veiculos">Veículo</a>

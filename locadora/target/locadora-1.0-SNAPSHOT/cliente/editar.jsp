@@ -30,22 +30,35 @@
                 <form id="form" action="edit" method="post" items = "${Cliente}" var = "cliente">
                     <div class="form-row">
                         <div class="col">
-                            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                                <a class="navbar-brand" href="#">Locadora</a>
-                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                                    <span class="navbar-toggler-icon"></span>
-                                </button>
-                                <div class="collapse navbar-collapse" id="navbarNav">
-                                    <ul class="navbar-nav">
-                                        <li class="nav-item active">
-                                            <a class="nav-link" href="main">Home<span class="sr-only">(current)</span></a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="cadastrar">Cadastrar</a>
-                                        </li>
-                                    </ul>
+                            <nav class="navbar navbar-expand-lg navbar-light bg-light scrolling-navbar fixed-top">
+
+                                <div class="container">
+                                    <a class="navbar-brand" href="#">LogoTipo</a>
+                                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                                        <span class="navbar-toggler-icon"></span>
+                                    </button>
+                                    <div class="collapse navbar-collapse" id="navbarNav">
+                                        <ul class="navbar-nav">
+                                            <li class="nav-item active">
+                                                <a class="nav-link" href="/locadora/main">Home <span class="sr-only">(current)</span></a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="locacoes">LocaÃ§Ã£o</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link disabled" href="/locadora/main">Cliente</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link disabled" href="/locadora/veiculos">VeÃ­culo</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link disabled" href="CadastrarFuncionario">FuncionÃ¡rio</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                        
                                 </div>
+                        
                             </nav>
                             <div class="center">
                                 <h1>
@@ -92,12 +105,12 @@
                     <div class="form-row">
                         <!-- Inicio de telefone fixo -->
                         <div class="form-group col-md-5">
-                            <label for="tel">Nº Tel</label>
+                            <label for="tel">Nï¿½ Tel</label>
                             <input type="text" value = "${cliente.getTelefoneFixo()}" class="form-control" id="tel" name="tel">
                         </div>
                         <!-- Inicio de telefone Celular -->
                         <div class="form-group col-md-5">
-                            <label for="cel">Nº Cel</label>
+                            <label for="cel">Nï¿½ Cel</label>
                             <input type="text" value = "${cliente.getTelefoneCelular()}" class="form-control" id="cel" name="cel">
                         </div>
                     </div>
@@ -112,7 +125,7 @@
                             <input type="number" value = "${cliente.getIdade()}" class="form-control" id="idade" name="idade">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="cnh">Nº CNH</label>
+                            <label for="cnh">Nï¿½ CNH</label>
                             <input type="number" value = "${cliente.getNumeroCNH()}" class="form-control" id="cnh" name="cnh">
                         </div>
                     </div>
