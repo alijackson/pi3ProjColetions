@@ -45,7 +45,7 @@ public class Main extends HttpServlet{
         
         if(sessao.getAttribute("usuario") == null)
         {
-            response.sendRedirect(request.getContextPath() + "/login");
+            response.sendRedirect(request.getContextPath() + "/cliente/index.jsp");
             return;
         }
         request.setAttribute("usuario", sessao.getAttribute("usuario"));

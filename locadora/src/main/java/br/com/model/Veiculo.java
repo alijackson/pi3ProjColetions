@@ -38,11 +38,11 @@ public class Veiculo {
         this.categoria = categoria;
     }
 
-    public Date getAno() {
+    public String getAno() {
         return ano;
     }
 
-    public void setAno(Date ano) {
+    public void setAno(String ano) {
         this.ano = ano;
     }
 
@@ -85,18 +85,26 @@ public class Veiculo {
     public void setImagem(File imagem) {
         this.imagem = imagem;
     }
-    
-    
+
+    public byte getEnable() {
+        return enable;
+    }
+
+    public void setEnable(byte enable) {
+        this.enable = enable;
+    }
     
     private int id;
     private String modelo;
     private String categoria;
-    private Date ano;
+//    private Date ano;
+    private String ano;
     private String placa;
     private String marca;
     private int numeroDoc;
     private String caracter;
     private File imagem;
+    private byte enable;
     
     public Veiculo(){}
 

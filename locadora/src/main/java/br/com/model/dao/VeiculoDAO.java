@@ -7,6 +7,7 @@ package br.com.model.dao;
 
 import br.com.conneticon.ConnectionFactory;
 import br.com.model.Veiculo;
+import com.pi3.locadora.dao.Connect;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.Date;
@@ -27,26 +28,26 @@ public class VeiculoDAO {
     }
     
     public String inserir(Veiculo v){
-        
-        Connection con = ConnectionFactory.getConnection();
+        Connect conn = new Connect();
         PreparedStatement stmt = null;
+        Connection con = null;
         String log = "";
         try 
         {
-            
+            con = conn.getConnection();
+        
             stmt = con.prepareStatement("INSERT INTO VEICULO "
-                    + "(MODELO, CATEGORIA, ANO, PLACA, MARCA, "
-                    + "NUMERODOC, CARACTERISTICAS, IMAGEM) VALUES "
-                    + "(?,?,?,?,?,?,?,?)");
+                    + "(MODELO, CATEGORIA, ANO, PLACA, "
+                    + "MARCA, NUMERODOC, CARACTERISTICAS, ENABLE) VALUES "
+                    + "(?,?,?,?,?,?,?,1)");
             
             stmt.setString(1, v.getModelo());
             stmt.setString(2, v.getCategoria());
-            stmt.setDate(3, (Date) v.getAno());
+            stmt.setString(3, v.getAno());
             stmt.setString(4, v.getPlaca());
             stmt.setString(5, v.getMarca());
             stmt.setInt(6, v.getNumeroDoc());
             stmt.setString(7, v.getCaracter());
-            stmt.setObject(8, v.getImagem());
 
             stmt.execute();
             
@@ -63,6 +64,7 @@ public class VeiculoDAO {
     }
     
     public ArrayList<Veiculo> ApresentarVeiculos(){
+        
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -70,6 +72,7 @@ public class VeiculoDAO {
         ArrayList<Veiculo> veiculos = new ArrayList<>();
         
         try {
+            
             stmt = con.prepareStatement("SELECT * FROM VEICULO WHERE enable=1");
             rs = stmt.executeQuery();
 
@@ -80,12 +83,12 @@ public class VeiculoDAO {
                 v.setId(rs.getInt("IDVEICULO"));
                 v.setModelo(rs.getString("MODELO"));
                 v.setCategoria(rs.getString("CATEGORIA"));
-                v.setAno(rs.getDate("ANO"));
+                v.setAno(rs.getString("ANO"));
                 v.setPlaca(rs.getString("PLACA"));
                 v.setMarca(rs.getString("MARCA"));
                 v.setNumeroDoc(rs.getInt("NUMERODOC"));
                 v.setCaracter(rs.getString("CARACTERISTICAS"));
-                v.setImagem((File) rs.getObject("IMAGEM"));
+//                v.setImagem((File) rs.getObject("IMAGEM"));
 
                 veiculos.add(v);
             }
@@ -101,31 +104,33 @@ public class VeiculoDAO {
     }
     
     public String atualizar(Veiculo v){
+        
         String retur = "";
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
+        
         try {
 
             stmt = con.prepareStatement("UPDATE VEICULO SET MODELO=?, CATEGORIA=?,"
                     + " ANO=?, PLACA=?, MARCA=?, "
-                    + "NUMERODOC=?, CARACTERISTICAS=?, IMAGEM=? "
-                    + "WHERE (IDVEICULO=?)");
+                    + "NUMERODOC=?, CARACTERISTICAS=?, ENABLE=1 "
+                    + "WHERE IDVEICULO=?");
 
             stmt.setString(1, v.getModelo());
             stmt.setString(2, v.getCategoria());
-            stmt.setDate(3, (Date) v.getAno());
+            stmt.setString(3, v.getAno());
             stmt.setString(4, v.getPlaca());
             stmt.setString(5, v.getMarca());
             stmt.setInt(6, v.getNumeroDoc());
             stmt.setString(7, v.getCaracter());
-            stmt.setObject(8, v.getImagem());
-            stmt.setInt(9, v.getId());
+//            stmt.setObject(8, v.getImagem());
+            stmt.setInt(8, v.getId());
 
             stmt.execute();
-            JOptionPane.showMessageDialog(null, "Alteração feita com Sucesso!");
-
+            
         } catch (SQLException ex) {
             retur = ex.toString();
+            
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
@@ -172,12 +177,12 @@ public class VeiculoDAO {
                 v.setId(rs.getInt("IDVEICULO"));
                 v.setModelo(rs.getString("MODELO"));
                 v.setCategoria(rs.getString("CATEGORIA"));
-                v.setAno(rs.getDate("ANO"));
+                v.setAno(rs.getString("ANO"));
                 v.setPlaca(rs.getString("PLACA"));
                 v.setMarca(rs.getString("MARCA"));
                 v.setNumeroDoc(rs.getInt("NUMERODOC"));
                 v.setCaracter(rs.getString("CARACTERISTICAS"));
-                v.setImagem((File) rs.getObject("IMAGEM"));
+//                v.setImagem((File) rs.getObject("IMAGEM"));
                 
             }
 

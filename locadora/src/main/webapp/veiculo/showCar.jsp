@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -72,7 +73,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/locadora/main">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="locacoes">Locação</a>
@@ -81,7 +82,7 @@
                         <a class="nav-link disabled" href="cadastrar">Cliente</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="veiculos.jsp">Veículo</a>
+                        <a class="nav-link disabled" href="/locadora/veiculos">Veículo</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link disabled" href="CadastrarFuncionario">Funcionário</a>
@@ -105,11 +106,11 @@
 
 
                 <div class="col-md-2 d-flex-inline ">  
-                    <a class="btn btn-primary btn-block" href="cadastrarVeiculo" id="btnd"> Novo Veiculo</a>  
+                    <a class="btn btn-primary btn-block" href="cadastro/veiculo" id="btnd"> Novo Veiculo</a>  
                 </div>
             </div>
             <hr>
-            <div class="col-md-12 d-flex-inline">  
+            <div class="col-md-12 d-flex-inline"> 
                 <form class="form-inline my-2 my-lg-0 d-flex-inline" id="procura"> 
                     <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Search" id="input2">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="Procurar">Buscar</button>
@@ -130,7 +131,7 @@
                     </thead>
 
                     <c:forEach items="${listaVeiculos}" var="veiculo">
-                        <tr onclick="location.href = 'edit?id=<c:out value='${veiculo.getId()}' />'"  id="trTable"  >
+                       <tr onclick="location.href = '/locadora/editar/veiculo?id=<c:out value='${veiculo.getId()}' />'"  id="trTable"  >
                             <td>
                                 <c:out value='${veiculo.getId()}' />
                             </td>

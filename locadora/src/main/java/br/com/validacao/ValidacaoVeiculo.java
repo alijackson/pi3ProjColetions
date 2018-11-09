@@ -44,8 +44,8 @@ public class ValidacaoVeiculo {
             return "É necessário informar o número de documento do veiculo";
         }
         
-        if (v.getCaracter()== null
-                || "".equals(v.getCaracter())) {
+        if (v.getCaracter() == null
+                || v.getCaracter().equals("")) {
             return "É necessário informar as caracteristicas do veiculo";
         }
         

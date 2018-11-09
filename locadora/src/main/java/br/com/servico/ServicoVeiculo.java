@@ -19,13 +19,12 @@ public class ServicoVeiculo {
     
     public String inserir(Veiculo veiculo){
         
-        String resposta = ValidacaoVeiculo.validar(veiculo);
-        
+//        String resposta = ValidacaoVeiculo.validar(veiculo);
+        String resposta = null;
         try{
             
             if (resposta == null)
             {
-                
                 dao.inserir(veiculo);
             }
             

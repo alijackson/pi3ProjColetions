@@ -5,37 +5,88 @@
  */
 package com.pi3.locadora.dao;
 
-import com.mysql.jdbc.Connection;
+import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 
 /**
  *
  * @author alijackson.msilva
  */
 public class Connect {
-    public static Connection getConnection() {
+    
+    private static Connection conn = null;
+    private static String driver = "com.mysql.jdbc.Driver";
+    
+    public static Connection getConnection() throws SQLException {
         
-        String caminho = "";
-        String schema = "";
-        String user = "";
-        String senha = "";
+        // Informar caminho de acesso ao banco de dados. 
+        String ip = "127.0.0.1";
+        // Informar porta de acesso ao banco. Padrao 3306
+        String portaAcesso = "3306";
+        // Nome do Schema do banco        
+        String nomeSchema = "locadora";
+        String usuario = "root";
+        String senha = "1234";
+        //Informar o login senha de acesso ao banco de dados. 
+//        String usuario = "root";
+//        String senha = "";
 
-        Connection conn = null;
-        try 
-        {            
-            String url = "jdbc:mysql://"+caminho+"/"+schema;
+        System.setProperty("jdbc.Drivers", driver);
+        // Organizando dados para efetuar a conexão
+        String dbURL = "jdbc:mysql://"+ip+":"+portaAcesso+"/"+nomeSchema;
+        
+        //Propriedades para armazenamento de usuÃ¡rio e senha
+        Properties properties = new Properties();
+        properties.put("user", usuario);
+        properties.put("password", senha);
+        // Caso necessario, descomente esse comando para definir o fuso horario no banco. 
+//        properties.put("serverTimezone", "UTC");
 
-            conn = (Connection) DriverManager.getConnection(url, user, senha);
-        }
-        catch (SQLException e) {
-                e.printStackTrace();
-        }
-        catch (Exception e) {
-                e.printStackTrace();
-        }
+        // Com todos os dados informados. inicia a conexão com o banco.
+        conn = DriverManager.getConnection(dbURL, properties);
+
 
         return conn;
 
+    }
+    public static void closeConnection(java.sql.Connection con) {
+        try {
+            if (con != null) {
+                con.close();
+            }
+        } catch (SQLException ex) {
+            
+            ex.printStackTrace();
+        }
+
+    }
+
+    public static void closeConnection(java.sql.Connection con, PreparedStatement stmt) {
+        closeConnection(con);
+
+        try {
+            if (stmt != null) {
+                stmt.close();
+            }
+        } catch (SQLException ex) {
+            
+            ex.printStackTrace();
+        }
+    }
+
+    public static void closeConnection(java.sql.Connection con, PreparedStatement stmt, ResultSet rs) {
+        closeConnection(con, stmt);
+
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
