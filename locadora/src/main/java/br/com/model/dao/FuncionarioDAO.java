@@ -8,13 +8,13 @@ package br.com.model.dao;
 import br.com.conneticon.ConnectionFactory;
 import br.com.model.Funcionario;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -35,27 +35,31 @@ public class FuncionarioDAO {
 
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
-        String log = "";
 
         try {
 
             stmt = con.prepareStatement(
                     "INSERT INTO FUNCIONARIO(NOME,CPF,EMAIL,CARGO,SENHA,LOGIN,DTNASCIMENTO) VALUES (?,?,?,?,?,?,?)");
 
-            //    Date dataConvertida = converterData(dataEntrada, dataBanco, f);
+            String dataConvertida = dataEntrada.format(dataBanco.parse(f.getDataNascimento()));
+
             stmt.setString(1, f.getNome());
             stmt.setString(2, f.getCpf());
             stmt.setString(3, f.getEmail());
             stmt.setString(4, f.getCargo());
             stmt.setString(5, f.getSenha());
             stmt.setString(6, f.getLogin());
-            stmt.setString(7, f.getDataNascimento());
+            stmt.setString(7, dataConvertida);
 
             stmt.executeUpdate();
 
         } catch (SQLException ex) {
 
             JOptionPane.showMessageDialog(null, "Ocorreu um erro");
+
+        } catch (ParseException ex) {
+
+            Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
 
         } finally {
 
@@ -81,6 +85,7 @@ public class FuncionarioDAO {
 
                 f.setId(rs.getInt("IDFUNCIONARIO"));
                 f.setNome(rs.getString("NOME"));
+                f.setCargo(rs.getString("CARGO"));
                 f.setDataNascimento(rs.getString("DTNASCIMENTO"));
                 f.setCpf(rs.getString("CPF"));
                 f.setEmail(rs.getString("EMAIL"));
@@ -102,60 +107,29 @@ public class FuncionarioDAO {
 
     public void atualizar(Funcionario f) {
 
-        String retur = "";
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         try {
 
-            stmt = con.prepareStatement("UPDATE FUNCIONARIO SET NOME = ?, DTNASCIMENTO = ? RG = ?, CPF = ? "
-                    + "EMAIL = ?, EMAIL = ?,  SENHA = ?  WHERE IDFUNCIONARIO = ? ");
+            stmt = con.prepareStatement("UPDATE FUNCIONARIO SET NOME = ?, DTNASCIMENTO = ?, CPF = ? "
+                    + "EMAIL = ?, CARGO = ?,  SENHA = ?  WHERE IDFUNCIONARIO = ? ");
 
             stmt.setString(1, f.getNome());
             stmt.setString(2, f.getDataNascimento());
-            stmt.setString(4, String.valueOf(f.getCpf()));
-            stmt.setString(5, f.getEmail());
-            stmt.setString(6, f.getCargo());
-            stmt.setString(7, f.getSenha());
-            stmt.setInt(8, f.getId());
+            stmt.setString(3, f.getCpf());
+            stmt.setString(4, f.getEmail());
+            stmt.setString(5, f.getCargo());
+            stmt.setString(6, f.getSenha());
+            stmt.setInt(7, f.getId());
 
-            stmt.execute();
-            JOptionPane.showMessageDialog(null, "Alteração feita com Sucesso!");
+            stmt.executeUpdate();
 
         } catch (SQLException ex) {
+
             JOptionPane.showMessageDialog(null, "Ocorreu um erro ao salvar" + ex);
+
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
-        }
-
-    }
-
-    public void editar(Funcionario f) {
-
-        Connection con = ConnectionFactory.getConnection();
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-
-        try {
-
-            stmt = con.prepareStatement("SELECT * FROM FUNCIONARIO WHERE IDFUNCIONARIO = ?");
-            stmt.setInt(1, f.getId());
-            rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                stmt.setString(1, f.getNome());
-                stmt.setString(2, f.getDataNascimento());
-                stmt.setString(4, String.valueOf(f.getCpf()));
-                stmt.setString(5, f.getEmail());
-                stmt.setString(6, f.getCargo());
-                stmt.setString(7, f.getSenha());
-
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "erro ao salvar" + ex);
-        } finally {
-            ConnectionFactory.closeConnection(con, stmt, rs);
-
         }
 
     }
@@ -169,9 +143,8 @@ public class FuncionarioDAO {
 
             stmt = con.prepareStatement("DELETE FROM FUNCIONARIO WHERE IDFUNCIONARIO = ?");
             stmt.setInt(1, id);
-            stmt.execute();
+            stmt.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "Excluído  com sucesso");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "erro ao atualizar" + ex);
         } finally {
@@ -180,7 +153,7 @@ public class FuncionarioDAO {
 
     }
 
-    public Funcionario Pesquisa(int id) {
+    public Funcionario pesquisa(int id) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -195,20 +168,26 @@ public class FuncionarioDAO {
 
             if (rs.next()) {
 
-                stmt.setString(1, f.getNome());
-                stmt.setString(2, f.getCpf());
-                stmt.setString(3, f.getEmail());
-                stmt.setString(4, f.getCargo());
-                stmt.setString(5, f.getSenha());
-                stmt.setString(6, f.getLogin());
-                stmt.setString(7, f.getDataNascimento());
+                f.setNome(rs.getString("NOME"));
+                f.setCpf(rs.getString("CPF"));
+                f.setEmail(rs.getString("EMAIL"));
+                f.setCargo(rs.getString("CARGO"));
+                f.setSenha(rs.getString("SENHA"));
+                f.setLogin(rs.getString("LOGIN"));
+                f.setId(rs.getInt("IDFUNCIONARIO"));
+
+                String dataConvertida = dataBanco.format(dataEntrada.parse(rs.getString("DTNASCIMENTO")));
+
+                f.setDataNascimento(dataConvertida);
+
             }
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "erro ao salvar" + ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
-
         }
         return f;
     }
@@ -237,19 +216,4 @@ public class FuncionarioDAO {
         return result;
     }
 
-    public Date converterData(SimpleDateFormat dataEntrada, SimpleDateFormat dataBanco, Funcionario f) {
-
-        String data;
-        Date dataConvertida = null;
-
-        try {
-            data = dataBanco.format(dataEntrada.parse(f.getDataNascimento()));
-            dataConvertida = java.sql.Date.valueOf(data);
-        } catch (ParseException ex) {
-            Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return dataConvertida;
-
-    }
 }

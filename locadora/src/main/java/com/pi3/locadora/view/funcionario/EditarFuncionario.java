@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.pi3.locadora.view;
+package com.pi3.locadora.view.funcionario;
 
-import java.io.IOException;
 import br.com.model.Funcionario;
 import br.com.model.dao.FuncionarioDAO;
-import java.util.ArrayList;
+import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,32 +17,31 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author david.sdcruz
+ * @author micro
  */
-@WebServlet(name = "CadastrarFuncionario", urlPatterns = {"/CadastrarFuncionario"})
-public class CadastrarFuncionario extends HttpServlet {
-
-    public CadastrarFuncionario() {
-
-    }
+@WebServlet(name = "EditarFuncionario", urlPatterns = {"/EditarFuncionario"})
+public class EditarFuncionario extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request,
+            HttpServletResponse response)
             throws ServletException, IOException {
 
-        //request.setAttribute("objetivo", "Cadastrar Funcionario");
-        ArrayList<Funcionario> listFuncionario = new ArrayList<Funcionario>();
+        Funcionario funcionario = new Funcionario();
 
         FuncionarioDAO dao = new FuncionarioDAO();
 
-        listFuncionario = dao.ApresentarFuncionarios();
+        int id = Integer.parseInt(request.getParameter("id"));
 
-        request.setAttribute("listaFuncionarios", listFuncionario);
-        
+        funcionario = dao.pesquisa(id);
+
+        request.setAttribute("funcionario", funcionario);
+
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("funcionario.jsp");
+                = request.getRequestDispatcher("/editarFuncionario.jsp");
 
         dispatcher.forward(request, response);
+
     }
 
     @Override
@@ -68,21 +66,17 @@ public class CadastrarFuncionario extends HttpServlet {
         f.setSenha(senha);
         f.setCpf(cpf);
         f.setCargo(cargo);
+        int id = Integer.parseInt(request.getParameter("id"));
+        f.setId(id);
 
         FuncionarioDAO dao = new FuncionarioDAO();
 
-        dao.inserir(f);
+        dao.atualizar(f);
 
-        ArrayList<Funcionario> listFuncionario = new ArrayList<Funcionario>();
-
-        listFuncionario = dao.ApresentarFuncionarios();
-
-        request.setAttribute("listaFuncionarios", listFuncionario);
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/funcionario.jsp");
+        RequestDispatcher dispatcher
+                = request.getRequestDispatcher("/funcionario.jsp");
 
         dispatcher.forward(request, response);
-
     }
 
 }

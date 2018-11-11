@@ -25,4 +25,3 @@ br\com\model\dao\VeiculoDAO.class
 br\com\servico\ServicoVeiculo.class
 com\pi3\locadora\view\CadastrarLocacao.class
 br\com\model\Funcionario.class
-com\pi3\locadora\view\CadastrarFuncionario.class
