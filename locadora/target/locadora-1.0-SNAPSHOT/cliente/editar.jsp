@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="pt-br">
 
 <head>
@@ -43,7 +45,7 @@
                                                 <a class="nav-link" href="/locadora/main">Home <span class="sr-only">(current)</span></a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="locacoes">Locação</a>
+                                                <a class="nav-link" href="/locadora/venda/locacao">Locação</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link disabled" href="/locadora/main">Cliente</a>
@@ -52,7 +54,10 @@
                                                 <a class="nav-link disabled" href="/locadora/veiculos">Veículo</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link disabled" href="CadastrarFuncionario">Funcionário</a>
+                                                <a class="nav-link disabled" href="/locadora/CadastrarFuncionario">Funcionário</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link disabled" href="#">Filial</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -105,12 +110,12 @@
                     <div class="form-row">
                         <!-- Inicio de telefone fixo -->
                         <div class="form-group col-md-5">
-                            <label for="tel">N� Tel</label>
+                            <label for="tel">Nº Tel</label>
                             <input type="text" value = "${cliente.getTelefoneFixo()}" class="form-control" id="tel" name="tel">
                         </div>
                         <!-- Inicio de telefone Celular -->
                         <div class="form-group col-md-5">
-                            <label for="cel">N� Cel</label>
+                            <label for="cel">Nº Cel</label>
                             <input type="text" value = "${cliente.getTelefoneCelular()}" class="form-control" id="cel" name="cel">
                         </div>
                     </div>
@@ -125,7 +130,7 @@
                             <input type="number" value = "${cliente.getIdade()}" class="form-control" id="idade" name="idade">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="cnh">N� CNH</label>
+                            <label for="cnh">Nº CNH</label>
                             <input type="number" value = "${cliente.getNumeroCNH()}" class="form-control" id="cnh" name="cnh">
                         </div>
                     </div>

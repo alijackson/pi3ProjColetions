@@ -55,7 +55,7 @@ public class CadastrarLocacao extends HttpServlet{
         request.setAttribute("listaVeiculos", veiculos);
         
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("locacao.jsp");
+                = request.getRequestDispatcher("/locacao/locacao.jsp");
         
         dispatcher.forward(request, response);
         
@@ -93,7 +93,7 @@ public class CadastrarLocacao extends HttpServlet{
         request.setAttribute("result", "Ocorreu tudo bem\n"+"<br>"+log);
         
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("locacoes");
+                = request.getRequestDispatcher("/locacoes");
         
         dispatcher.forward(request, response);
     }

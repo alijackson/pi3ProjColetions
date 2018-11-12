@@ -34,7 +34,7 @@ public class EditarFuncionario extends HttpServlet {
         request.setAttribute("funcionario", f);
 //        
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("editarFuncionario.jsp");
+                = request.getRequestDispatcher("/funcionario/editarFuncionario.jsp");
 
         dispatcher.forward(request, response);
 
@@ -69,7 +69,7 @@ public class EditarFuncionario extends HttpServlet {
         dao.atualizar(f);
 
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("/funcionario.jsp");
+                = request.getRequestDispatcher("/main");
 
         dispatcher.forward(request, response);
     }

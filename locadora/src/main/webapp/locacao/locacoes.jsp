@@ -1,12 +1,4 @@
-r<%-- 
-    Document   : funcionario
-    Created on : 05/11/2018, 19:36:16
-    Author     : david.sdcruz
---%>
-
-<%@page import="br.com.model.Funcionario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="pt-br">
     <head>
@@ -14,7 +6,7 @@ r<%--
         <meta http-equiv=”content-type” content="text/html;" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="keywords" content="tags, que, eu, quiser, usar, para, os, robos, do, google" />
-        <title>Funcionarios</title>
+        <title>Locações</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -33,52 +25,6 @@ r<%--
 
         <script type="text/JAVASCRIPT">
 
-            function excluir(){
-            swal({
-            title: "Deseja excluir?",
-            text: "Você estará deletendo do sistema!",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-            })
-            .then((willDelete) => {
-            if (willDelete) {
-            swal("Poof! Funcionário deletado com sucesso!", {
-            icon: "success",
-            });
-            } else {
-            swal("Seu funcionário ainda está salvo!");
-            }
-            });
-
-            }
-            function sucesso(){
-
-            swal({
-            title: "Sucesso!",
-            text: "Funcionário cadastrado com sucesso!",
-            icon: "success",
-            button: "Ok",
-            });
-
-            $('.abrir').on('click', function(){
-
-            $('.modal').modal('show');  
-
-            });
-
-            $('.modal').on('click', function(){
-
-            $('.modal').modal('hide'); 
-
-            });
-
-            $('form').on('submit', function(){
-
-            $('.modal').modal('hide'); 
-
-            });
-            }
         </script>
 
         <!-- STYLES --> 
@@ -124,8 +70,7 @@ r<%--
 
             <div class="container">
                 <a class="navbar-brand" href="#">LogoTipo</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
-                    aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
@@ -143,16 +88,14 @@ r<%--
                             <a class="nav-link disabled" href="/locadora/veiculos">Veículo</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="CadastrarFuncionario">Funcionário</a>
+                            <a class="nav-link disabled" href="/locadora/CadastrarFuncionario">Funcionário</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link disabled" href="#">Filial</a>
                         </li>
                     </ul>
                 </div>
-    
             </div>
-    
         </nav>
 
         <!-- FIM DO MENU SUPERIOR -->
@@ -164,13 +107,13 @@ r<%--
 
                 <div class="col-md-10 d-flex-inline ">
 
-                    <h1>Funcionários</h1>
+                    <h1>Locações</h1>
                 </div>
                 <!-- AQUI QUE TEM QUE FICAR EM LINHA -->
 
 
                 <div class="col-md-2 d-flex-inline ">  
-                    <a class="btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#novoFun" id="btnd"> Novo Funcionário</a>  
+                    <a class="btn btn-primary btn-block" href="locacao" id="locacao"> Nova Locação</a>  
                 </div>
             </div>
             <hr>
@@ -182,38 +125,40 @@ r<%--
             </div>
             <!-- FIM -->
 
-
             <div class="col-md-12">
                 <table class="table table-striped">
                     <tr>  
                         <th>ID</th>
-                        <th>Nome</th>
-                        <th>Área</th>
-                        <th>Email</th>
-                        <th>CPF</th>
-                        <th>Data de Nascimento</th>
-                        <th></th>
-                         <th></th>
+                        <th>Cliente</th>
+                        <th>Veiculo</th>
+                        <th>Preço Total</th>
+                        <th>Dia Retira</th>
+                        <th>Dia Entrega</th>
                     </tr>
-
-                    <c:forEach items="${listaFuncionarios}" var="funcionario">
-                        <tr onclick="location.href = 'EditarFuncionario?id=<c:out value='${funcionario.getId()}' />'"  id="trTable"  >
-                            <td><c:out value='${funcionario.getId()}' /></td>
-                            <td><c:out value="${funcionario.getNome()}" /> </td>
-                            <td> <c:out value="${funcionario.getCargo()}" /></td>
-                            <td><c:out value="${funcionario.getEmail()}" /> </td>
-                            <td> <c:out value="${funcionario.getCpf()}" /></td>
-                            <td><c:out value="${funcionario.getDataNascimento()}" /> </td>
+                    <c:forEach items="${listaLocacoes}" var="locacao">
+                        <tr onclick="location.href = 'edit?id=<c:out value='${locacao.getId()}' />'"  id="trTable"  >
+                            <td>
+                                <c:out value='${locacao.getId()}' />
+                            </td>
+                            <td>
+                                <c:out value="${locacao.getIdCliente()}" />
+                            </td>
+                            <td>
+                                <c:out value="${locacao.getIdVeiculo()}" />
+                            </td>
+                            <td>
+                                <c:out value="${locacao.getPrecoTotal()}" />
+                            </td>
+                            <td>
+                                <c:out value="${locacao.getDiaRetira()}" />
+                            </td>
+                            <td>
+                                <c:out value="${locacao.getDiaEntrega()}" />
+                            </td>
                         </tr>
                     </c:forEach>
-
-
-
-
-
                 </table>
             </div>
-
             <!-- FIM TABLE -->
 
             <!-- Inicio Paginação-->
@@ -257,36 +202,36 @@ r<%--
                     <div class="modal-body">
                         <form action="CadastrarFuncionario" method="post">
                             <div class="form-group">
-                                <label for="nome">Nome</label>
-                                <input type="text" class="form-control" id="nome" required name="nome" placeholder="ex: Jose Silva">
+                                <label for="name">Nome</label>
+                                <input type="text" class="form-control" id="name" placeholder="ex: Jose Silva">
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="email">Email</label>
-                                    <input type="email" class="form-control" id="email" required name="email" placeholder="ex: Augusto@gmail.com">
+                                    <input type="email" class="form-control" id="email" placeholder="ex: Augusto@gmail.com">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="dataNascimento">Data de Nascimento</label>
-                                    <input type="date" class="form-control" id="dataNascimento" required name="dataNascimento" placeholder="ex: 12/12/2012">
+                                    <input type="date" class="form-control" id="dataNascimento" placeholder="ex: 12/12/2012">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="login">Login</label>
-                                    <input type="text" class="form-control" id="login"  required name="login" placeholder="ex: Rua Jão Carlos">
+                                    <input type="text" class="form-control" id="login" placeholder="ex: Rua Jão Carlos">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="senha">Senha</label>
-                                    <input type="password" class="form-control" id="senha"  required name="senha"placeholder="Senha">
+                                    <input type="password" class="form-control" id="senha" placeholder="Senha">
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="cpf">CPF</label>
-                                    <input type="text" class="form-control" id="cpf" required name="cpf" placeholder="123.123.123-12">
+                                    <input type="text" class="form-control" id="cpf" name="cpf" placeholder="123.123.123-12">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="cargo">Área</label>
-                                    <select id="cargo" required name="cargo"class="form-control">
+                                    <select id="cargo" class="form-control">
                                         <option selected>Vendedor</option>
                                         <option>Gerente TI</option>
                                         <option>Gerente</option>
@@ -297,7 +242,8 @@ r<%--
 
                             <div class="modal-footer" >
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                               <button type="submit" class="btn btn-primary">Cadastrar</button>
+                                <!-- <a href="CadastrarFuncionario"> --><button type="submit" class="btn btn-primary">Cadastrar</button> <!-- </a> -->
+                                <%--onclick="sucesso();--%>
 
                             </div>
                         </form>

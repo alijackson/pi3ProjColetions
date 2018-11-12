@@ -41,7 +41,7 @@ public class CadastrarFuncionario extends HttpServlet {
         request.setAttribute("listaFuncionarios", listFuncionario);
         
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("funcionario.jsp");
+                = request.getRequestDispatcher("/funcionario/funcionario.jsp");
 
         dispatcher.forward(request, response);
     }
@@ -79,7 +79,7 @@ public class CadastrarFuncionario extends HttpServlet {
 
         request.setAttribute("listaFuncionarios", listFuncionario);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/funcionario.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/main");
 
         dispatcher.forward(request, response);
 

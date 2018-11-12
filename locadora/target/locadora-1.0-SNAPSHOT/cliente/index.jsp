@@ -50,7 +50,7 @@
                                             <a class="nav-link" href="/locadora/main">Home <span class="sr-only">(current)</span></a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="locacoes">Locação</a>
+                                            <a class="nav-link" href="/locadora/venda/locacao">Locação</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link disabled" href="/locadora/main">Cliente</a>
@@ -59,7 +59,10 @@
                                             <a class="nav-link disabled" href="/locadora/veiculos">Veículo</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link disabled" href="CadastrarFuncionario">Funcionário</a>
+                                            <a class="nav-link disabled" href="/locadora/CadastrarFuncionario">Funcionário</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link disabled" href="#">Filial</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -67,6 +70,7 @@
                             </div>
                     
                         </nav>
+                        
                         <div class="center">
                                 <h1>
                                     Clientes

@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
  * @author Pichau
  */
 
-@WebServlet(name = "ExibirLocacoes", urlPatterns = {"/locacoes"})
+@WebServlet(name = "ExibirLocacoes", urlPatterns = {"/venda/locacao"})
 public class Locacoes extends HttpServlet{
     
     public Locacoes(){}
@@ -38,24 +38,26 @@ public class Locacoes extends HttpServlet{
         ArrayList<Locacao> locacoes = new ArrayList<Locacao>();
         
         LocacaoDAO dao = new LocacaoDAO();
-        
+        /*
         locacoes = dao.ApresentarLocacoes();
         
         request.setAttribute("listaLocacoes", locacoes);
         
+        
         HttpSession sessao = request.getSession();
         
-        /*if(sessao.getAttribute("usuario") == null)
+        if(sessao.getAttribute("usuario") == null)
         {
         response.sendRedirect(request.getContextPath() + "/login");
         return;
-        }*/
+        }
+        
 
         request.setAttribute("usuario", sessao.getAttribute("usuario"));
         
-        
+        */
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("locacoes.jsp");
+                = request.getRequestDispatcher("/locacao/locacoes.jsp");
         
         dispatcher.forward(request, response);
         

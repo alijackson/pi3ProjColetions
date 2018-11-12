@@ -124,8 +124,7 @@ r<%--
 
             <div class="container">
                 <a class="navbar-brand" href="#">LogoTipo</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
-                    aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
@@ -143,18 +142,15 @@ r<%--
                             <a class="nav-link disabled" href="/locadora/veiculos">Veículo</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="CadastrarFuncionario">Funcionário</a>
+                            <a class="nav-link disabled" href="/locadora/CadastrarFuncionario">Funcionário</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link disabled" href="#">Filial</a>
                         </li>
                     </ul>
                 </div>
-    
             </div>
-    
         </nav>
-
         <!-- FIM DO MENU SUPERIOR -->
 
         <!-- INICIO TABLE -->
@@ -197,7 +193,7 @@ r<%--
                     </tr>
 
                     <c:forEach items="${listaFuncionarios}" var="funcionario">
-                        <tr onclick="location.href = 'EditarFuncionario?id=<c:out value='${funcionario.getId()}' />'"  id="trTable"  >
+                       <tr  onclick="editarFunc(${funcionario.getId()}) "  id="trTable"  >
                             <td><c:out value='${funcionario.getId()}' /></td>
                             <td><c:out value="${funcionario.getNome()}" /> </td>
                             <td> <c:out value="${funcionario.getCargo()}" /></td>
@@ -205,11 +201,8 @@ r<%--
                             <td> <c:out value="${funcionario.getCpf()}" /></td>
                             <td><c:out value="${funcionario.getDataNascimento()}" /> </td>
                         </tr>
+                    </a>
                     </c:forEach>
-
-
-
-
 
                 </table>
             </div>
@@ -306,8 +299,7 @@ r<%--
             </div>
         </div>
 
-
-
+        <script src="JQuery/cadastroFunc.js" type="text/javascript"></script>   
     </body>
 
     <!-- JAVASCRIPT E JQUERY 

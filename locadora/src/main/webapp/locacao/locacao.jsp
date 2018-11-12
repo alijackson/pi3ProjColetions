@@ -82,27 +82,27 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
-                            <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/locadora/main">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="locacoes">Locação</a>
+                            <a class="nav-link" href="/locadora/venda/locacao">Locação</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="cadastrar">Cliente</a>
+                            <a class="nav-link disabled" href="/locadora/main">Cliente</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="veiculos">Veículo</a>
+                            <a class="nav-link disabled" href="/locadora/veiculos">Veículo</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="CadastrarFuncionario">Funcionário</a>
+                            <a class="nav-link disabled" href="/locadora/CadastrarFuncionario">Funcionário</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#">Filial</a>
                         </li>
                     </ul>
                 </div>
-
             </div>
-
         </nav>
-
 
         <div id="form" class="container">
 
