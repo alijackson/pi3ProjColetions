@@ -26,14 +26,14 @@
 
         <script type="text/JAVASCRIPT">
             function Cliente(){
-                
+
             }
             function Veiculo(){
-                
+
             }
         </script>
 
-        <!-- STYLES --> 
+        <!-- STYLES -->
         <style>
             #Body{
 
@@ -112,15 +112,15 @@
 
                     <h1>Efetuar Locação</h1>
                 </div>
-             
+
 
             </div>
             <hr>
             <form id="form" action="cadastrar" method="post">
                 <!-- AQUI TEM UM BOTÃO QUE APRESENTA UMA TABELA DE CLIENTES -->
-                <div class="form-row">  
-                    <div class="col-md-2 d-flex-inline ">  
-                        <a class="btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#clientes" id="btnd">Selecionar Cliente</a>  
+                <div class="form-row">
+                    <div class="col-md-2 d-flex-inline ">
+                        <a class="btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#clientes" id="btnd">Selecionar Cliente</a>
                     </div>
                     <!-- APRESENTAR O CLIENTE SELECIONADO -->
                     <div>
@@ -130,8 +130,8 @@
                 <br>
                 <!-- AQUI TEM UM BOTÃO QUE APRESENTA UMA TABELA DE VEICULOS -->
                 <div class="form-row">
-                    <div class="col-md-2 d-flex-inline ">  
-                        <a class="btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#veiculos" id="btnd">Selecionar Veiculo</a>  
+                    <div class="col-md-2 d-flex-inline ">
+                        <a class="btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#veiculos" id="btnd">Selecionar Veiculo</a>
                     </div>
                     <!-- APRESENTAR O VEICULO SELECIONADO -->
                     <div>
@@ -342,7 +342,7 @@
 
     </body>
 
-    <!-- JAVASCRIPT E JQUERY 
+    <!-- JAVASCRIPT E JQUERY
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
