@@ -85,4 +85,13 @@ public class CadastrarFuncionario extends HttpServlet {
 
     }
 
+    @Override
+    protected void doPut(HttpServletRequest request,
+            HttpServletResponse respose) throws ServletException,
+            IOException
+    {
+        String id = request.getParameter("id");
+        
+        
+    }
 }

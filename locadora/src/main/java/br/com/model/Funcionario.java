@@ -19,6 +19,8 @@ public class Funcionario {
     private String email;
     private String cargo;
     private String senha;
+    private byte ativo;
+    private byte enable;
 
     public Funcionario() {
     }
@@ -87,5 +89,21 @@ public class Funcionario {
         this.senha = senha;
     }
 
+    public byte getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(byte ativo) {
+        this.ativo = ativo;
+    }
+
+    public byte getEnable() {
+        return enable;
+    }
+
+    public void setEnable(byte enable) {
+        this.enable = enable;
+    }
+    
     
 }

@@ -30,7 +30,7 @@ public class CadastrarVeiculo extends HttpServlet{
 
     public CadastrarVeiculo() {
     }
-
+    
     @Override
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response)
@@ -78,5 +78,4 @@ public class CadastrarVeiculo extends HttpServlet{
 
         dispatcher.forward(request, response);
     }
-
 }

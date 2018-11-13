@@ -26,7 +26,7 @@ r<%--
         <!-- ESTILOS PARA ESTA PÁGINA -->
         <!-- Nesse caso, este estilo é apenas para inserir imagens -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
+        <link rel="stylesheet" type="text/css" href="style/buttonSeletor.css"
 
         <!-- SWEET ALERT -->
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -255,7 +255,7 @@ r<%--
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="email">Email</label>
+                                    <label for="email">E-mail</label>
                                     <input type="email" class="form-control" id="email" required name="email" placeholder="ex: Augusto@gmail.com">
                                 </div>
                                 <div class="form-group col-md-6">
@@ -288,11 +288,19 @@ r<%--
                                 </div>
                             </div>
 
-                            <div class="modal-footer" >
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                               <button type="submit" class="btn btn-primary">Cadastrar</button>
+                            <!--<div class="modal-footer" >-->
+                                <div class="switch__container float-left">
+                                    <small>Ativo
+                                        <input id="switch-shadow" class="switch switch--shadow" type="checkbox" checked="true">
+                                    
+                                    <label for="switch-shadow"></label>
+                                    </small>
+                                </div>
+                               <button type="submit" class="btn btn-primary float-right">Cadastrar</button>
+                                <button type="button" class="btn cancel btn-secondary float-right" data-dismiss="modal">Cancelar</button>
 
-                            </div>
+                            <!--</div>-->
+                            
                         </form>
                     </div>
                 </div>

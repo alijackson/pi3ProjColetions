@@ -6,10 +6,20 @@ function editarFunc(func) {
     let cpf = $("#trTable").children().eq(4).html();
     let nasc = $("#trTable").children().eq(5).html();
     
+    let checked = document.getElementById("switch-shadow");
+
     $("#nome").val(nome);
-    
+    checked.checked = true;
 
     $("#novoFun").modal("show")
+    
 }
+var checked = true;
 
+function isTrue() {
+    let checked = document.getElementById("switch-shadow");
+    console.log(checked);
+    checked.checked = true;
+    
+}
 

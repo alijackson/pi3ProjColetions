@@ -193,15 +193,20 @@ public class FuncionarioDAO {
             stmt.setInt(1, id);
             rs = stmt.executeQuery();
 
-            if (rs.next()) {
+            if (rs.next()) 
+            {
 
-                stmt.setString(1, f.getNome());
-                stmt.setString(2, f.getCpf());
-                stmt.setString(3, f.getEmail());
-                stmt.setString(4, f.getCargo());
-                stmt.setString(5, f.getSenha());
-                stmt.setString(6, f.getLogin());
-                stmt.setString(7, f.getDataNascimento());
+                f.setId(rs.getInt("IDFUNCIONARIO"));
+                f.setNome(rs.getString("NOME"));
+                f.setDataNascimento(rs.getString("DTNASCIMENTO"));
+                f.setCpf(rs.getString("CPF"));
+                f.setEmail(rs.getString("EMAIL"));
+                f.setCargo(rs.getString("CARGO"));
+                f.setLogin(rs.getString("LOGIN"));
+                f.setSenha(rs.getString("SENHA"));
+                f.setAtivo(rs.getByte("ATIVO"));
+                f.setEnable(rs.getByte("ENABLE"));
+            
             }
 
         } catch (SQLException ex) {

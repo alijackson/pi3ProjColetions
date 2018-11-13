@@ -30,7 +30,7 @@ public class Connect {
         // Nome do Schema do banco
         String nomeSchema = "locadora";
         String usuario = "root";
-        String senha = "";
+        String senha = "1234";
         //Informar o login senha de acesso ao banco de dados.
 //        String usuario = "root";
 //        String senha = "";

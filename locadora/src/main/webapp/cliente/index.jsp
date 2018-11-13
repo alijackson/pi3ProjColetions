@@ -22,7 +22,8 @@
         }
         .center{
             text-align: center;
-        }
+        }      
+
     </style>
 
 
@@ -86,7 +87,7 @@
                                 <thead>
                                     <tr>
 
-                                        <th scope="col">#</th>
+                                        <th scope="col">ID</th>
                                         <th scope="col">Nome</th>
                                         <th scope="col">CPF</th>
                                         <th scope="col">E-mail</th>
@@ -115,7 +116,8 @@
                 </div>
             </div>
             <div class="col-2">
-
+                
+                
             </div>
         </div>
     </div>
