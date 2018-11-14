@@ -8,6 +8,7 @@ package com.pi3.locadora.view;
 import java.io.IOException;
 import br.com.model.Funcionario;
 import br.com.model.dao.FuncionarioDAO;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.JSONObject;
 
 /**
  *
@@ -36,7 +38,7 @@ public class CadastrarFuncionario extends HttpServlet {
 
         FuncionarioDAO dao = new FuncionarioDAO();
 
-        listFuncionario = dao.ApresentarFuncionarios();
+        listFuncionario = dao.apresentarFuncionarios();
 
         request.setAttribute("listaFuncionarios", listFuncionario);
         
@@ -50,47 +52,105 @@ public class CadastrarFuncionario extends HttpServlet {
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
+        
+            PrintWriter saida = response.getWriter();
+            saida.println("<h1>Hello World.</h1>");
+        try {
+            String nome = request.getParameter("nome");
+            String email = request.getParameter("email");
+            String dataNascimento = request.getParameter("dataNascimento");
+            String login = request.getParameter("login");
+            String senha = request.getParameter("senha");
+            String cpf = request.getParameter("cpf");
+            String cargo = request.getParameter("cargo");
+            String ativo = request.getParameter("ativo");
+            String id = request.getParameter("id");
 
-        String nome = request.getParameter("nome");
-        String email = request.getParameter("email");
-        String dataNascimento = request.getParameter("dataNascimento");
-        String login = request.getParameter("login");
-        String senha = request.getParameter("senha");
-        String cpf = request.getParameter("cpf");
-        String cargo = request.getParameter("cargo");
+            Funcionario f = new Funcionario();
 
-        Funcionario f = new Funcionario();
+            f.setNome(nome);
+            f.setEmail(email);
+            f.setDataNascimento(dataNascimento);
+            f.setLogin(login);
+            f.setSenha(senha);
+            f.setCpf(cpf);
+            f.setCargo(cargo);
+            
+            if(ativo.trim().equals("on"))
+                f.setAtivo((byte) 1);
+            else
+                f.setAtivo((byte) 0);
 
-        f.setNome(nome);
-        f.setEmail(email);
-        f.setDataNascimento(dataNascimento);
-        f.setLogin(login);
-        f.setSenha(senha);
-        f.setCpf(cpf);
-        f.setCargo(cargo);
+            System.out.print("Segue "+dataNascimento);
 
-        FuncionarioDAO dao = new FuncionarioDAO();
+            FuncionarioDAO dao = new FuncionarioDAO();
+            
+            if(id != null)
+            {
+                f.setId(Integer.parseInt(id));
+                dao.atualizar(f);
+            }
+            else{
+                dao.inserir(f);
+            }
 
-        dao.inserir(f);
+            ArrayList<Funcionario> listFuncionario = new ArrayList<Funcionario>();
 
-        ArrayList<Funcionario> listFuncionario = new ArrayList<Funcionario>();
+            listFuncionario = dao.apresentarFuncionarios();
 
-        listFuncionario = dao.ApresentarFuncionarios();
+            request.setAttribute("listaFuncionarios", listFuncionario);
 
-        request.setAttribute("listaFuncionarios", listFuncionario);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/main");
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/main");
-
-        dispatcher.forward(request, response);
+            dispatcher.forward(request, response);
+            
+        } catch (Exception e) {
+            System.out.println("ERROOOO =======");
+            e.printStackTrace();
+        }
+        
 
     }
 
     @Override
     protected void doPut(HttpServletRequest request,
-            HttpServletResponse respose) throws ServletException,
+            HttpServletResponse response) throws ServletException,
             IOException
     {
-        String id = request.getParameter("id");
+        response.setContentType("application/json;charset=UTF-8" );
+        
+        int id = 0;
+        
+        Funcionario func = new Funcionario();
+        FuncionarioDAO bd = new FuncionarioDAO();
+        
+        PrintWriter out = response.getWriter();
+        
+        try {
+            id = Integer.parseInt(request.getParameter("id"));
+            func = bd.Pesquisa(id);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            JSONObject json = new JSONObject();
+            
+            json.put("id",func.getId());
+            json.put("nome",func.getNome());
+            json.put("cpf",func.getCpf());
+            json.put("email",func.getEmail());
+            json.put("dataNasc",func.getDataNascimento());
+            json.put("cargo",func.getCargo().toLowerCase());
+            json.put("login",func.getLogin());
+            json.put("senha",func.getSenha());
+            json.put("ativo",func.getAtivo());
+            
+            response.getWriter().write(json.toString());
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally{
+            out.close();
+        }
         
         
     }

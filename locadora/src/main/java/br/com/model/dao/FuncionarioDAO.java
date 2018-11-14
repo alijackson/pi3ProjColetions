@@ -40,23 +40,24 @@ public class FuncionarioDAO {
         try {
 
             stmt = con.prepareStatement(
-                    "INSERT INTO FUNCIONARIO(NOME,CPF,EMAIL,CARGO,SENHA,LOGIN,DTNASCIMENTO) VALUES (?,?,?,?,?,?,?)");
+                    "INSERT INTO FUNCIONARIO(NOME,DTNASCIMENTO,CPF,EMAIL,CARGO,LOGIN,SENHA,ATIVO,ENABLE) "
+                            + "VALUES (?,?,?,?,?,?,?,?,1)");
 
             //    Date dataConvertida = converterData(dataEntrada, dataBanco, f);
+            
             stmt.setString(1, f.getNome());
-            stmt.setString(2, f.getCpf());
-            stmt.setString(3, f.getEmail());
-            stmt.setString(4, f.getCargo());
-            stmt.setString(5, f.getSenha());
+            stmt.setString(2, f.getDataNascimento());
+            stmt.setString(3, f.getCpf());
+            stmt.setString(4, f.getEmail());
+            stmt.setString(5, f.getCargo());
             stmt.setString(6, f.getLogin());
-            stmt.setString(7, f.getDataNascimento());
-
+            stmt.setString(7, f.getSenha());
+            stmt.setInt(8, f.getAtivo());
             stmt.executeUpdate();
 
         } catch (SQLException ex) {
-
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro");
-
+            System.out.println("ERROOOO =======\n\n\nERRAdo");
+            ex.printStackTrace();
         } finally {
 
             ConnectionFactory.closeConnection(con, stmt);
@@ -64,7 +65,7 @@ public class FuncionarioDAO {
 
     }
 
-    public ArrayList<Funcionario> ApresentarFuncionarios() {
+    public ArrayList<Funcionario> apresentarFuncionarios() {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -89,9 +90,8 @@ public class FuncionarioDAO {
             }
 
         } catch (SQLException ex) {
-
-            JOptionPane.showMessageDialog(null, "erro ao salvar" + ex);
-
+            System.out.println("ERROOOO =======");
+            ex.printStackTrace();
         } finally {
 
             ConnectionFactory.closeConnection(con, stmt, rs);
@@ -107,22 +107,26 @@ public class FuncionarioDAO {
         PreparedStatement stmt = null;
         try {
 
-            stmt = con.prepareStatement("UPDATE FUNCIONARIO SET NOME = ?, DTNASCIMENTO = ? RG = ?, CPF = ? "
-                    + "EMAIL = ?, EMAIL = ?,  SENHA = ?  WHERE IDFUNCIONARIO = ? ");
+            stmt = con.prepareStatement("UPDATE FUNCIONARIO SET NOME = ?, DTNASCIMENTO = ?, "
+                    + "CPF = ?, EMAIL = ?, CARGO = ?, LOGIN = ?, "
+                    + "SENHA = ?, ATIVO = ?, ENABLE = 1 "
+                    + "WHERE IDFUNCIONARIO = ? ");
 
             stmt.setString(1, f.getNome());
             stmt.setString(2, f.getDataNascimento());
-            stmt.setString(4, String.valueOf(f.getCpf()));
-            stmt.setString(5, f.getEmail());
-            stmt.setString(6, f.getCargo());
+            stmt.setString(3, f.getCpf());
+            stmt.setString(4, f.getEmail());
+            stmt.setString(5, f.getCargo());
+            stmt.setString(6, f.getLogin());
             stmt.setString(7, f.getSenha());
-            stmt.setInt(8, f.getId());
+            stmt.setInt(8, f.getAtivo());
+            stmt.setInt(9, f.getId());
 
             stmt.execute();
-            JOptionPane.showMessageDialog(null, "Alteração feita com Sucesso!");
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Ocorreu um erro ao salvar" + ex);
+            System.out.println("ERROOOO =======");
+            ex.printStackTrace();
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
@@ -152,7 +156,8 @@ public class FuncionarioDAO {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "erro ao salvar" + ex);
+            System.out.println("ERROOOO =======");
+            ex.printStackTrace();
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
 
@@ -173,7 +178,8 @@ public class FuncionarioDAO {
 
             JOptionPane.showMessageDialog(null, "Excluído  com sucesso");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "erro ao atualizar" + ex);
+            System.out.println("ERROOOO =======");
+            ex.printStackTrace();
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
@@ -205,12 +211,12 @@ public class FuncionarioDAO {
                 f.setLogin(rs.getString("LOGIN"));
                 f.setSenha(rs.getString("SENHA"));
                 f.setAtivo(rs.getByte("ATIVO"));
-                f.setEnable(rs.getByte("ENABLE"));
             
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "erro ao salvar" + ex);
+            System.out.println("ERROOOO =======");
+            ex.printStackTrace();
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
 
@@ -235,7 +241,8 @@ public class FuncionarioDAO {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "erro ao verificar cadastro do cliente" + ex);
+            System.out.println("ERROOOO =======");
+            ex.printStackTrace();
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
@@ -251,7 +258,8 @@ public class FuncionarioDAO {
             data = dataBanco.format(dataEntrada.parse(f.getDataNascimento()));
             dataConvertida = java.sql.Date.valueOf(data);
         } catch (ParseException ex) {
-            Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("ERROOOO =======");
+            ex.printStackTrace();
         }
 
         return dataConvertida;

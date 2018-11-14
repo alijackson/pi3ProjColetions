@@ -1,25 +1,40 @@
 function editarFunc(func) {
-    let id = $("#trTable").children().eq(0).html();
-    let nome = $("#trTable").children().eq(1).html();
-    let area = $("#trTable").children().eq(2).html();
-    let email = $("#trTable").children().eq(3).html();
-    let cpf = $("#trTable").children().eq(4).html();
-    let nasc = $("#trTable").children().eq(5).html();
-    
-    let checked = document.getElementById("switch-shadow");
-
-    $("#nome").val(nome);
-    checked.checked = true;
+    console.log("funcao")
+    let url = "http://localhost:8080/locadora/CadastrarFuncionario?id=" + func;
+    console.log(url)
+    $.ajax({
+        url: url,
+        type: 'PUT',
+        success: function(data) {
+            console.log(data)
+            $("#idFuncionario").val(data.id)
+            $("#nome").val(data.nome)
+            $("#email").val(data.email)
+            $("#dataNascimento").val(data.dataNasc)
+            $("#login").val(data.login)
+            $("#senha").val(data.senha)
+            $("#cpf").val(data.cpf)
+            $("#cargo").val(data.cargo)
+            $("#nome").val(data.senha)
+            isTrue(data.ativo);
+        },
+        error: function(ajaxContext) {
+            console.log("error")
+        }
+    });
 
     $("#novoFun").modal("show")
-    
-}
-var checked = true;
 
-function isTrue() {
+}
+
+function isTrue(boolean) {
     let checked = document.getElementById("switch-shadow");
-    console.log(checked);
-    checked.checked = true;
-    
+    if(boolean == 1)
+        checked.checked = true;
+    else
+        checked.checked = false;
+}
+function resetFormEdit(){
+    document.formEditCads.reset();
 }
 

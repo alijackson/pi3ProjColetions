@@ -40,7 +40,7 @@ public class Remove extends HttpServlet{
 //        request.setAttribute("cliente", c);
 ////        
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("main");
+                = request.getRequestDispatcher("/locadora/main");
         
         dispatcher.forward(request, response);
         

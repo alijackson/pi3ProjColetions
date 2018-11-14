@@ -248,7 +248,11 @@ r<%--
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="CadastrarFuncionario" method="post">
+                        <form action="CadastrarFuncionario" method="post" name="formEditCads">
+                            <div class="form-group">
+                                <!-- hidden -->
+                                <input type="text" class="form-control" id="idFuncionario" name="idFuncionario" placeholder="ID">
+                            </div>
                             <div class="form-group">
                                 <label for="nome">Nome</label>
                                 <input type="text" class="form-control" id="nome" required name="nome" placeholder="ex: Jose Silva">
@@ -264,7 +268,7 @@ r<%--
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="login">Login</label>
-                                    <input type="text" class="form-control" id="login"  required name="login" placeholder="ex: Rua Jão Carlos">
+                                    <input type="text" class="form-control" id="login" required name="login" placeholder="ex: Login">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="senha">Senha</label>
@@ -280,10 +284,10 @@ r<%--
                                 <div class="form-group col-md-6">
                                     <label for="cargo">Área</label>
                                     <select id="cargo" required name="cargo"class="form-control">
-                                        <option selected>Vendedor</option>
-                                        <option>Gerente TI</option>
-                                        <option>Gerente</option>
-                                        <option>Administrador</option>
+                                        <option value="vendedor">Vendedor</option>
+                                        <option value="gerente ti">Gerente TI</option>
+                                        <option value="gerente">Gerente</option>
+                                        <option value="administrador">Administrador</option>
                                     </select>
                                 </div>
                             </div>
@@ -291,8 +295,7 @@ r<%--
                             <!--<div class="modal-footer" >-->
                                 <div class="switch__container float-left">
                                     <small>Ativo
-                                        <input id="switch-shadow" class="switch switch--shadow" type="checkbox" checked="true">
-                                    
+                                        <input id="switch-shadow" class="switch switch--shadow" type="checkbox" checked="true" name="ativo" id="ativo">
                                     <label for="switch-shadow"></label>
                                     </small>
                                 </div>
@@ -307,20 +310,20 @@ r<%--
             </div>
         </div>
 
-        <script src="JQuery/cadastroFunc.js" type="text/javascript"></script>   
+          
+        
+        <!-- JAVASCRIPT E JQUERY 
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+        -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+        <script src="JQuery/cadastroFunc.js" type="text/javascript"></script>
     </body>
-
-    <!-- JAVASCRIPT E JQUERY 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
-    -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-    crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-    crossorigin="anonymous"></script>
-
 </html>

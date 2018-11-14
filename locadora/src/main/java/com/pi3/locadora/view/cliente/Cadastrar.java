@@ -39,7 +39,7 @@ public class Cadastrar extends HttpServlet{
         request.setAttribute("objetivo", "Cadastrar Cliente");
         
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("cliente/cliente.jsp");
+                = request.getRequestDispatcher("/cliente/cliente.jsp");
         
         dispatcher.forward(request, response);
         

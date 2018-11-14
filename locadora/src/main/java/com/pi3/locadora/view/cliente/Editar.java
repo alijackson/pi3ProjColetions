@@ -43,7 +43,7 @@ public class Editar extends HttpServlet{
         request.setAttribute("cliente", c);
 //        
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("cliente/editar.jsp");
+                = request.getRequestDispatcher("/cliente/editar.jsp");
         
         dispatcher.forward(request, response);
         
