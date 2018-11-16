@@ -24,6 +24,7 @@ com\pi3\locadora\view\veiculo\EditarVeiculo.class
 com\pi3\locadora\view\RemoverFuncionario.class
 br\com\model\dao\FuncionarioDAO.class
 com\pi3\locadora\view\veiculo\RemoverVeiculo.class
+com\pi3\locadora\view\Teste.class
 br\com\model\dao\VeiculoDAO.class
 com\pi3\locadora\view\cliente\Editar.class
 br\com\servico\ServicoVeiculo.class

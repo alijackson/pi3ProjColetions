@@ -4,10 +4,8 @@
  * and open the template in the editor.
  */
 package com.pi3.locadora.view.cliente;
-
 import br.com.model.Cliente;
 import br.com.model.dao.ClienteDAO;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
@@ -16,7 +14,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *

@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package com.pi3.locadora.view;
-
 import java.io.IOException;
 import br.com.model.Funcionario;
 import br.com.model.dao.FuncionarioDAO;
