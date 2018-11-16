@@ -1,8 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
-
+<html lang="pt-br">
+    
 <head>
     <meta charset="utf-8">
     <meta http-equiv=”content-type” content="text/html;" />

@@ -53,9 +53,8 @@ public class CadastrarFuncionario extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
         
-            PrintWriter saida = response.getWriter();
-            saida.println("<h1>Hello World.</h1>");
         try {
+            
             String nome = request.getParameter("nome");
             String email = request.getParameter("email");
             String dataNascimento = request.getParameter("dataNascimento");
@@ -76,7 +75,7 @@ public class CadastrarFuncionario extends HttpServlet {
             f.setCpf(cpf);
             f.setCargo(cargo);
             
-            if(ativo.trim().equals("on"))
+            if(ativo != null && ativo.trim().equals("on"))
                 f.setAtivo((byte) 1);
             else
                 f.setAtivo((byte) 0);
@@ -85,7 +84,7 @@ public class CadastrarFuncionario extends HttpServlet {
 
             FuncionarioDAO dao = new FuncionarioDAO();
             
-            if(id != null)
+            if(id != null && !id.trim().equals(""))
             {
                 f.setId(Integer.parseInt(id));
                 dao.atualizar(f);
@@ -105,8 +104,9 @@ public class CadastrarFuncionario extends HttpServlet {
             dispatcher.forward(request, response);
             
         } catch (Exception e) {
-            System.out.println("ERROOOO =======");
-            e.printStackTrace();
+            
+            PrintWriter saida = response.getWriter();
+            saida.println(e);
         }
         
 

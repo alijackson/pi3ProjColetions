@@ -73,21 +73,21 @@ public class ClienteDAO {
         ArrayList<Cliente> clientes = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM cliente WHERE enable=1");
+            stmt = con.prepareStatement("SELECT * FROM CLIENTE  WHERE ENABLE=1");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
 
                 Cliente c = new Cliente();
 
-                c.setId(rs.getInt("idCliente"));
-                c.setNome(rs.getString("nome"));
-                c.setDataNascimento(rs.getString("dtNascimento"));
-                c.setTelefoneFixo(rs.getString("telFixo"));
-                c.setTelefoneCelular(rs.getString("telCel"));
-                c.setEmail(rs.getString("email"));
-                c.setNumeroCNH(rs.getInt("cnh"));
-                c.setCpf(rs.getString("cpf"));
+                c.setId(rs.getInt("IDCLIENTE"));
+                c.setNome(rs.getString("NOME"));
+                c.setDataNascimento(rs.getString("DTNASCIMENTO"));
+                c.setTelefoneFixo(rs.getString("TELFIXO"));
+                c.setTelefoneCelular(rs.getString("TELCEL"));
+                c.setEmail(rs.getString("EMAIL"));
+                c.setNumeroCNH(rs.getInt("CNH"));
+                c.setCpf(rs.getString("CPF"));
                 
                 clientes.add(c);
             }

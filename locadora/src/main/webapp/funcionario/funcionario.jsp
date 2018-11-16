@@ -10,7 +10,7 @@ r<%--
 <!doctype html>
 <html lang="pt-br">
     <head>
-        <meta charset="utf-8">
+        <meta charset="UTF-8">
         <meta http-equiv=”content-type” content="text/html;" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="keywords" content="tags, que, eu, quiser, usar, para, os, robos, do, google" />
@@ -166,7 +166,7 @@ r<%--
 
 
                 <div class="col-md-2 d-flex-inline ">  
-                    <a class="btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#novoFun" id="btnd"> Novo Funcionário</a>  
+                    <a class="btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#novoFun" id="btnd" onclick="resetFormEdit()"> Novo Funcionário</a>  
                 </div>
             </div>
             <hr>
@@ -250,8 +250,8 @@ r<%--
                     <div class="modal-body">
                         <form action="CadastrarFuncionario" method="post" name="formEditCads">
                             <div class="form-group">
-                                <!-- hidden -->
-                                <input type="text" class="form-control" id="idFuncionario" name="idFuncionario" placeholder="ID">
+                                <!-- hidden omite as infomações -->
+                                <input type="text" class="form-control" id="id" name="id" placeholder="ID" hidden>
                             </div>
                             <div class="form-group">
                                 <label for="nome">Nome</label>
@@ -299,8 +299,8 @@ r<%--
                                     <label for="switch-shadow"></label>
                                     </small>
                                 </div>
-                               <button type="submit" class="btn btn-primary float-right">Cadastrar</button>
-                                <button type="button" class="btn cancel btn-secondary float-right" data-dismiss="modal">Cancelar</button>
+                               <button class="btn btn-primary float-right" id="butSubmit" name="butSubmit" id="butSubmit">Cadastrar</button>
+                                <button type="reset" class="btn cancel btn-secondary float-right" data-dismiss="modal">Cancelar</button>
 
                             <!--</div>-->
                             

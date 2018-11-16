@@ -1,10 +1,9 @@
 <%@page import="br.com.model.Cliente"%>
-<!--<%//@page import="com.pi3.locadora.view.cliente.Main"%> -->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
-
+<html lang="pt-br">
+    
 <head>
     <title>Home</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

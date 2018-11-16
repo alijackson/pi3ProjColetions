@@ -82,7 +82,9 @@ public class FuncionarioDAO {
 
                 f.setId(rs.getInt("IDFUNCIONARIO"));
                 f.setNome(rs.getString("NOME"));
-                f.setDataNascimento(rs.getString("DTNASCIMENTO"));
+                
+                f.setDataNascimento(f.convertDate(
+                        rs.getString("DTNASCIMENTO")));
                 f.setCpf(rs.getString("CPF"));
                 f.setEmail(rs.getString("EMAIL"));
 
