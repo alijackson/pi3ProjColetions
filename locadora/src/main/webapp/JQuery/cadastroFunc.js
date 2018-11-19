@@ -50,7 +50,7 @@ function isTrue(boolean) {
         checked.checked = false;
 }
 function resetFormEdit(){
-    document.formEditCads.reset();
+    document.formEditCad.reset();
     
     $("#butSubmit").text("Cadastrar");
     

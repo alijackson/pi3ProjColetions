@@ -1,4 +1,4 @@
-r<%-- 
+<%-- 
     Document   : funcionario
     Created on : 05/11/2018, 19:36:16
     Author     : david.sdcruz
@@ -33,14 +33,14 @@ r<%--
 
         <script type="text/JAVASCRIPT">
 
-            function excluir(){
+            function excluir() {
             swal({
             title: "Deseja excluir?",
             text: "Você estará deletendo do sistema!",
             icon: "warning",
             buttons: true,
             dangerMode: true,
-            })
+            } )
             .then((willDelete) => {
             if (willDelete) {
             swal("Poof! Funcionário deletado com sucesso!", {
@@ -130,16 +130,16 @@ r<%--
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item active">
-                            <a class="nav-link" href="/locadora/main">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/locadora/home">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/locadora/venda/locacao">Locação</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="/locadora/main">Cliente</a>
+                            <a class="nav-link disabled" href="/locadora/cadastrarC">Cliente</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="/locadora/veiculos">Veículo</a>
+                            <a class="nav-link disabled" href="/locadora/cadastrarV">Veículo</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link disabled" href="/locadora/CadastrarFuncionario">Funcionário</a>
@@ -171,9 +171,9 @@ r<%--
             </div>
             <hr>
             <div class="col-md-12 d-flex-inline">  
-                <form class="form-inline my-2 my-lg-0 d-flex-inline" id="procura"> 
-                    <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Search" id="input2">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="Procurar">Buscar</button>
+                <form action="buscarF" method="post" class="form-inline my-2 my-lg-0 d-flex-inline" id="procura"> 
+                    <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Search" id="pesquisar" name="pesquisar">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" > Buscar</button>
                 </form><br>
             </div>
             <!-- FIM -->
@@ -188,8 +188,6 @@ r<%--
                         <th>Email</th>
                         <th>CPF</th>
                         <th>Data de Nascimento</th>
-                        <th></th>
-                         <th></th>
                     </tr>
 
                     <c:forEach items="${listaFuncionarios}" var="funcionario">
@@ -248,7 +246,7 @@ r<%--
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="CadastrarFuncionario" method="post" name="formEditCads">
+                        <form action="CadastrarFuncionario" method="post" name="formEditCad">
                             <div class="form-group">
                                 <!-- hidden omite as infomações -->
                                 <input type="text" class="form-control" id="id" name="id" placeholder="ID" hidden>

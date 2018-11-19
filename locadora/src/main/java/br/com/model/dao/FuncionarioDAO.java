@@ -15,8 +15,6 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -35,16 +33,14 @@ public class FuncionarioDAO {
 
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
-        String log = "";
 
         try {
 
             stmt = con.prepareStatement(
-                    "INSERT INTO FUNCIONARIO(NOME,DTNASCIMENTO,CPF,EMAIL,CARGO,LOGIN,SENHA,ATIVO,ENABLE) "
-                            + "VALUES (?,?,?,?,?,?,?,?,1)");
+                    "INSERT INTO FUNCIONARIO(NOME,DTNASCIMENTO,CPF,EMAIL,CARGO,LOGIN,SENHA,ATIVO) "
+                    + "VALUES (?,?,?,?,?,?,?,?)");
 
             //    Date dataConvertida = converterData(dataEntrada, dataBanco, f);
-            
             stmt.setString(1, f.getNome());
             stmt.setString(2, f.getDataNascimento());
             stmt.setString(3, f.getCpf());
@@ -53,10 +49,10 @@ public class FuncionarioDAO {
             stmt.setString(6, f.getLogin());
             stmt.setString(7, f.getSenha());
             stmt.setInt(8, f.getAtivo());
+
             stmt.executeUpdate();
 
         } catch (SQLException ex) {
-            System.out.println("ERROOOO =======\n\n\nERRAdo");
             ex.printStackTrace();
         } finally {
 
@@ -82,9 +78,8 @@ public class FuncionarioDAO {
 
                 f.setId(rs.getInt("IDFUNCIONARIO"));
                 f.setNome(rs.getString("NOME"));
-                
-                f.setDataNascimento(f.convertDate(
-                        rs.getString("DTNASCIMENTO")));
+                f.setCargo(rs.getString("CARGO"));
+                f.setDataNascimento(f.convertDate(rs.getString("DTNASCIMENTO")));
                 f.setCpf(rs.getString("CPF"));
                 f.setEmail(rs.getString("EMAIL"));
 
@@ -92,7 +87,6 @@ public class FuncionarioDAO {
             }
 
         } catch (SQLException ex) {
-            System.out.println("ERROOOO =======");
             ex.printStackTrace();
         } finally {
 
@@ -201,8 +195,7 @@ public class FuncionarioDAO {
             stmt.setInt(1, id);
             rs = stmt.executeQuery();
 
-            if (rs.next()) 
-            {
+            if (rs.next()) {
 
                 f.setId(rs.getInt("IDFUNCIONARIO"));
                 f.setNome(rs.getString("NOME"));
@@ -213,11 +206,10 @@ public class FuncionarioDAO {
                 f.setLogin(rs.getString("LOGIN"));
                 f.setSenha(rs.getString("SENHA"));
                 f.setAtivo(rs.getByte("ATIVO"));
-            
+
             }
 
         } catch (SQLException ex) {
-            System.out.println("ERROOOO =======");
             ex.printStackTrace();
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
@@ -226,7 +218,47 @@ public class FuncionarioDAO {
         return f;
     }
 
-    public boolean checarFuncionario(String rg) {
+    public ArrayList<Funcionario> buscar(String nome) {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        Funcionario f = new Funcionario();
+
+        ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
+
+        try {
+
+            stmt = con.prepareStatement("SELECT * FROM FUNCIONARIO WHERE NOME LIKE ? ");
+            stmt.setString(1, "%" + nome + "%");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                f.setId(rs.getInt("IDFUNCIONARIO"));
+                f.setNome(rs.getString("NOME"));
+                f.setDataNascimento(rs.getString("DTNASCIMENTO"));
+                f.setCpf(rs.getString("CPF"));
+                f.setEmail(rs.getString("EMAIL"));
+                f.setCargo(rs.getString("CARGO"));
+                f.setLogin(rs.getString("LOGIN"));
+                f.setSenha(rs.getString("SENHA"));
+                f.setAtivo(rs.getByte("ATIVO"));
+
+                funcionarios.add(f);
+
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+
+        }
+        return funcionarios;
+    }
+
+    public boolean checarFuncionario(String nome) {
 
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
@@ -234,16 +266,15 @@ public class FuncionarioDAO {
         boolean result = false;
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM FUNCIONARIO WHERE RG = ?");
-            stmt.setString(1, rg);
+            stmt = con.prepareStatement("SELECT * FROM FUNCIONARIO WHERE NOME LIKE ? ");
+            stmt.setString(1, "%" + nome + "%");
             rs = stmt.executeQuery();
 
-            if (rs.next()) {
+            while (rs.next()) {
                 result = true;
             }
 
         } catch (SQLException ex) {
-            System.out.println("ERROOOO =======");
             ex.printStackTrace();
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);

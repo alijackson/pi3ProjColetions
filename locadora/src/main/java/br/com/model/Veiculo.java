@@ -6,13 +6,25 @@
 package br.com.model;
 
 import java.io.File;
-import java.util.Date;
 
 /**
  *
  * @author Pichau
  */
 public class Veiculo {
+
+    public Veiculo() {
+    }
+
+    private int id;
+    private String modelo;
+    private String categoria;
+    private String ano;
+    private String placa;
+    private String marca;
+    private String numeroDocumento;
+    private String caracteristica;
+    private File imagem;
 
     public int getId() {
         return id;
@@ -62,20 +74,20 @@ public class Veiculo {
         this.marca = marca;
     }
 
-    public int getNumeroDoc() {
-        return numeroDoc;
+    public String getNumeroDocumento() {
+        return numeroDocumento;
     }
 
-    public void setNumeroDoc(int numeroDoc) {
-        this.numeroDoc = numeroDoc;
+    public void setNumeroDocumento(String numeroDocumento) {
+        this.numeroDocumento = numeroDocumento;
     }
 
-    public String getCaracter() {
-        return caracter;
+    public String getCaracteristica() {
+        return caracteristica;
     }
 
-    public void setCaracter(String caracter) {
-        this.caracter = caracter;
+    public void setCaracteristica(String caracteristica) {
+        this.caracteristica = caracteristica;
     }
 
     public File getImagem() {
@@ -85,27 +97,5 @@ public class Veiculo {
     public void setImagem(File imagem) {
         this.imagem = imagem;
     }
-
-    public byte getEnable() {
-        return enable;
-    }
-
-    public void setEnable(byte enable) {
-        this.enable = enable;
-    }
-    
-    private int id;
-    private String modelo;
-    private String categoria;
-//    private Date ano;
-    private String ano;
-    private String placa;
-    private String marca;
-    private int numeroDoc;
-    private String caracter;
-    private File imagem;
-    private byte enable;
-    
-    public Veiculo(){}
 
 }

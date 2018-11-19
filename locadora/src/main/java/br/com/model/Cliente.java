@@ -59,11 +59,11 @@ public class Cliente {
         this.cpf = cpf;
     }
 
-    public int getNumeroCNH() {
+    public String getNumeroCNH() {
         return numeroCNH;
     }
 
-    public void setNumeroCNH(int numeroCNH) {
+    public void setNumeroCNH(String numeroCNH) {
         this.numeroCNH = numeroCNH;
     }
 
@@ -83,40 +83,17 @@ public class Cliente {
         this.rg = rg;
     }
 
-    public int getIdade() {
-        return idade;
-    }
-
-    public void setIdade(int idade) {
-        this.idade = idade;
-    }
-        
     private int id;
     private String nome;
     private String cpf;
     private String rg;
-
     private String telefoneFixo;
     private String telefoneCelular;
     private String email;
-    private Integer numeroCNH;
+    private String numeroCNH;
     private String dataNascimento;
-    private int idade;
-    
-    public Cliente(){
+
+    public Cliente() {
     }
-    
-    public Cliente(String nome, String telefoneCelular,
-                    String cpf, String rg,
-                    int numeroCnh, String dataNascimento, int idade)
-    {
-        setNome(nome);
-        setTelefoneCelular(telefoneCelular);
-        setCpf(cpf);
-        setRg(rg);
-        setIdade(idade);
-        setNumeroCNH(numeroCnh);
-        setDataNascimento(dataNascimento);
-    
-    }
+
 }

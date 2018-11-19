@@ -7,73 +7,75 @@ package br.com.model.dao;
 
 import br.com.conneticon.ConnectionFactory;
 import br.com.model.Veiculo;
-import com.pi3.locadora.dao.Connect;
-import java.io.File;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author Pichau
  */
 public class VeiculoDAO {
-    
-    public VeiculoDAO(){
-    
+
+    public VeiculoDAO() {
+
     }
-    
-    public String inserir(Veiculo v){
-        Connect conn = new Connect();
+
+    private final SimpleDateFormat dataEntrada = new SimpleDateFormat("dd/MM/yyyy");
+    private final SimpleDateFormat dataBanco = new SimpleDateFormat("yyyy-MM-dd");
+
+    public void inserir(Veiculo v) {
+
+        Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
-        Connection con = null;
-        String log = "";
-        try 
-        {
-            con = conn.getConnection();
-        
+
+        try {
+
             stmt = con.prepareStatement("INSERT INTO VEICULO "
                     + "(MODELO, CATEGORIA, ANO, PLACA, "
-                    + "MARCA, NUMERODOC, CARACTERISTICAS, ENABLE) VALUES "
-                    + "(?,?,?,?,?,?,?,1)");
-            
+                    + "MARCA, NUMERODOC, CARACTERISTICAS) VALUES "
+                    + "(?,?,?,?,?,?,?)");
+
+            String dataConvertida = dataEntrada.format(dataBanco.parse(v.getAno()));
+
             stmt.setString(1, v.getModelo());
             stmt.setString(2, v.getCategoria());
-            stmt.setString(3, v.getAno());
+            stmt.setString(3, dataConvertida);
             stmt.setString(4, v.getPlaca());
             stmt.setString(5, v.getMarca());
-            stmt.setInt(6, v.getNumeroDoc());
-            stmt.setString(7, v.getCaracter());
+            stmt.setString(6, v.getNumeroDocumento());
+            stmt.setString(7, v.getCaracteristica());
 
-            stmt.execute();
-            
-        }
-        catch(SQLException ex)
-        {
-            log = ex.toString();
-        }
-        finally
-        {
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+
+            ex.printStackTrace();
+
+        } catch (ParseException ex) {
+
+            ex.printStackTrace();
+
+        } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
-        return log;
     }
-    
-    public ArrayList<Veiculo> ApresentarVeiculos(){
-        
+
+    public ArrayList<Veiculo> apresentarVeiculos() {
+
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
         ArrayList<Veiculo> veiculos = new ArrayList<>();
-        
+
         try {
-            
-            stmt = con.prepareStatement("SELECT * FROM VEICULO WHERE enable=1");
+
+            stmt = con.prepareStatement("SELECT * FROM VEICULO");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -86,80 +88,82 @@ public class VeiculoDAO {
                 v.setAno(rs.getString("ANO"));
                 v.setPlaca(rs.getString("PLACA"));
                 v.setMarca(rs.getString("MARCA"));
-                v.setNumeroDoc(rs.getInt("NUMERODOC"));
-                v.setCaracter(rs.getString("CARACTERISTICAS"));
+                v.setNumeroDocumento(rs.getString("NUMERODOC"));
+                v.setCaracteristica(rs.getString("CARACTERISTICAS"));
 //                v.setImagem((File) rs.getObject("IMAGEM"));
 
                 veiculos.add(v);
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "erro ao salvar" + ex);
+            ex.printStackTrace();
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
 
         }
-        
+
         return veiculos;
     }
-    
-    public String atualizar(Veiculo v){
-        
-        String retur = "";
+
+    public void atualizar(Veiculo v) {
+
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
-        
+
         try {
 
             stmt = con.prepareStatement("UPDATE VEICULO SET MODELO=?, CATEGORIA=?,"
                     + " ANO=?, PLACA=?, MARCA=?, "
-                    + "NUMERODOC=?, CARACTERISTICAS=?, ENABLE=1 "
+                    + "NUMERODOC=?, CARACTERISTICAS=? "
                     + "WHERE IDVEICULO=?");
+
+            String dataConvertida = dataEntrada.format(dataBanco.parse(v.getAno()));
 
             stmt.setString(1, v.getModelo());
             stmt.setString(2, v.getCategoria());
-            stmt.setString(3, v.getAno());
+            stmt.setString(3, dataConvertida);
             stmt.setString(4, v.getPlaca());
             stmt.setString(5, v.getMarca());
-            stmt.setInt(6, v.getNumeroDoc());
-            stmt.setString(7, v.getCaracter());
+            stmt.setString(6, v.getNumeroDocumento());
+            stmt.setString(7, v.getCaracteristica());
 //            stmt.setObject(8, v.getImagem());
             stmt.setInt(8, v.getId());
 
-            stmt.execute();
-            
+            stmt.executeUpdate();
+
         } catch (SQLException ex) {
-            retur = ex.toString();
-            
+            ex.printStackTrace();
+
+        } catch (ParseException ex) {
+            ex.printStackTrace();
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
-        
-        return retur;
+
     }
-    
-    public void excluir(int id){
-        
+
+    public void excluir(int id) {
+
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
 
         try {
 
-            stmt = con.prepareStatement("UPDATE VEICULO SET enable=2 WHERE IDVEICULO = ?");
+            stmt = con.prepareStatement("DELETE FROM  VEICULO WHERE IDVEICULO = ?");
             stmt.setInt(1, id);
-            stmt.execute();
-            
-            JOptionPane.showMessageDialog(null, id);
-            JOptionPane.showMessageDialog(null, "Excluído  com sucesso");
+            stmt.executeUpdate();
+
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "erro ao atualizar" + ex);
+
+            ex.printStackTrace();
+
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
-        
+
     }
-    
-    public Veiculo Pesquisa(int id){
+
+    public Veiculo pesquisa(int id) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -167,7 +171,6 @@ public class VeiculoDAO {
         Veiculo v = new Veiculo();
 
         try {
-            
 
             stmt = con.prepareStatement("SELECT * FROM VEICULO WHERE IDVEICULO = ?");
             stmt.setInt(1, id);
@@ -177,50 +180,90 @@ public class VeiculoDAO {
                 v.setId(rs.getInt("IDVEICULO"));
                 v.setModelo(rs.getString("MODELO"));
                 v.setCategoria(rs.getString("CATEGORIA"));
-                v.setAno(rs.getString("ANO"));
                 v.setPlaca(rs.getString("PLACA"));
                 v.setMarca(rs.getString("MARCA"));
-                v.setNumeroDoc(rs.getInt("NUMERODOC"));
-                v.setCaracter(rs.getString("CARACTERISTICAS"));
+                v.setNumeroDocumento(rs.getString("NUMERODOC"));
+                v.setCaracteristica(rs.getString("CARACTERISTICAS"));
+                String dataConvertida = dataBanco.format(dataEntrada.parse(rs.getString("ANO")));
+                v.setAno(dataConvertida);
 //                v.setImagem((File) rs.getObject("IMAGEM"));
-                
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "erro ao salvar" + ex);
+            ex.printStackTrace();
+        } catch (ParseException ex) {
+            ex.printStackTrace();
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
 
         }
         return v;
     }
-    
-    public boolean ChecarVeiculo(int numeroDoc){
+
+    public ArrayList<Veiculo> buscar(String modelo) {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        ArrayList<Veiculo> veiculos = new ArrayList<Veiculo>();
+
+        try {
+
+            stmt = con.prepareStatement("SELECT * FROM VEICULO WHERE MODELO LIKE ? ");
+            stmt.setString(1, "%" + modelo + "%");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                Veiculo v = new Veiculo();
+
+                v.setId(rs.getInt("IDVEICULO"));
+                v.setModelo(rs.getString("MODELO"));
+                v.setCategoria(rs.getString("CATEGORIA"));
+                v.setPlaca(rs.getString("PLACA"));
+                v.setMarca(rs.getString("MARCA"));
+                v.setNumeroDocumento(rs.getString("NUMERODOC"));
+                v.setCaracteristica(rs.getString("CARACTERISTICAS"));
+                v.setAno(rs.getString("ANO"));
+//              v.setImagem((File) rs.getObject("IMAGEM"));
+
+                veiculos.add(v);
+            }
+
+        } catch (SQLException ex) {
+
+            ex.printStackTrace();
+
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+
+        }
+        return veiculos;
+    }
+
+    public boolean checarVeiculo(String modelo) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         boolean result = false;
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM VEICULO WHERE NUMERODOC = ?");
-            stmt.setInt(1, numeroDoc);
+            stmt = con.prepareStatement("SELECT * FROM VEICULO WHERE MODELO LIKE ? ");
+            stmt.setString(1, "%" + modelo + "%");
             rs = stmt.executeQuery();
 
-            if (rs.next()) 
-            {    
+            while (rs.next()) {
                 result = true;
             }
 
-        } 
-        catch (SQLException ex) 
-        {
-            JOptionPane.showMessageDialog(null, "erro ao verificar cadastro do veiculo" + ex);
-        } 
-        finally 
-        {
+        } catch (SQLException ex) {
+            
+              ex.printStackTrace();
+              
+        } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
         return result;
     }
-    
+
 }
