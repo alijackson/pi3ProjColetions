@@ -24,13 +24,17 @@ public class Connect {
     public static Connection getConnection() throws SQLException {
 
         // Informar caminho de acesso ao banco de dados.
-        String ip = "127.0.0.1";
+//        String ip = "127.0.0.1";
+        String ip = "pi3groupfive.mysql.dbaas.com.br";
         // Informar porta de acesso ao banco. Padrao 3306
         String portaAcesso = "3306";
         // Nome do Schema do banco
-        String nomeSchema = "locadora";
-        String usuario = "root";
-        String senha = "1234";
+        String nomeSchema = "pi3groupfive";
+//        String usuario = "root";
+//        String senha = "1234";
+        
+        String usuario = "pi3groupfive";
+        String senha = "pi3groupfive";
         //Informar o login senha de acesso ao banco de dados.
 //        String usuario = "root";
 //        String senha = "";

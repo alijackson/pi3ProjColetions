@@ -32,9 +32,9 @@ public class ClienteDAO {
         try 
         {
 
-            stmt = con.prepareStatement("INSERT INTO cliente "
-                    + "(nome,dtNascimento,telFixo, "
-                    + "telCel,email,cnh,cpf,rg,idade,enable) "
+            stmt = con.prepareStatement("INSERT INTO CLIENTE "
+                    + "(NOME,DTNASCIMENTO,TELFIXO, "
+                    + "TELCEL,EMAIL,CNH,CPF,RG,IDADE,ENABLE) "
                     + "VALUES(?,?,?,?,?,?,?,?,?,1)");
 
             stmt.setString(1, c.getNome());
@@ -73,21 +73,21 @@ public class ClienteDAO {
         ArrayList<Cliente> clientes = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM cliente WHERE enable=1");
+            stmt = con.prepareStatement("SELECT * FROM CLIENTE WHERE ENABLE=1");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
 
                 Cliente c = new Cliente();
 
-                c.setId(rs.getInt("idCliente"));
-                c.setNome(rs.getString("nome"));
-                c.setDataNascimento(rs.getString("dtNascimento"));
-                c.setTelefoneFixo(rs.getString("telFixo"));
-                c.setTelefoneCelular(rs.getString("telCel"));
-                c.setEmail(rs.getString("email"));
-                c.setNumeroCNH(rs.getInt("cnh"));
-                c.setCpf(rs.getString("cpf"));
+                c.setId(rs.getInt("IDCLIENTE"));
+                c.setNome(rs.getString("NOME"));
+                c.setDataNascimento(rs.getString("DTNASCIMENTO"));
+                c.setTelefoneFixo(rs.getString("TELFIXO"));
+                c.setTelefoneCelular(rs.getString("TELCEL"));
+                c.setEmail(rs.getString("EMAIL"));
+                c.setNumeroCNH(rs.getInt("CNH"));
+                c.setCpf(rs.getString("CPF"));
                 
                 clientes.add(c);
             }
@@ -149,7 +149,7 @@ public class ClienteDAO {
 
         try {
 
-            stmt = con.prepareStatement("SELECT * FROM Cliente WHERE id = ?");
+            stmt = con.prepareStatement("SELECT * FROM CLIENTE WHERE ID = ?");
             stmt.setInt(1, c.getId());
             rs = stmt.executeQuery();
 
@@ -180,7 +180,7 @@ public class ClienteDAO {
 
         try {
 
-            stmt = con.prepareStatement("UPDATE Cliente SET enable=2 WHERE idcliente = ?");
+            stmt = con.prepareStatement("UPDATE Cliente SET enable=0 WHERE idcliente = ?");
             stmt.setInt(1, id);
             stmt.execute();
             
@@ -204,21 +204,21 @@ public class ClienteDAO {
         try {
             
 
-            stmt = con.prepareStatement("SELECT * FROM cliente WHERE idcliente = ?");
+            stmt = con.prepareStatement("SELECT * FROM CLIENTE WHERE IDCLIENTE = ?");
             stmt.setInt(1, id);
             rs = stmt.executeQuery();
 
             if (rs.first()) {
-                c.setId(rs.getInt("idcliente"));
-                c.setNome(rs.getString("nome"));
-                c.setDataNascimento(rs.getString("dtNascimento"));
-                c.setIdade(rs.getInt("idade"));
-                c.setTelefoneFixo(rs.getString("telFixo"));
-                c.setTelefoneCelular(rs.getString("telCel"));
-                c.setEmail(rs.getString("email"));
-                c.setNumeroCNH(rs.getInt("cnh"));
-                c.setCpf(rs.getString("cpf"));
-                c.setRg(rs.getString("rg"));
+                c.setId(rs.getInt("IDCLIENTE"));
+                c.setNome(rs.getString("NOME"));
+                c.setDataNascimento(rs.getString("DTNASCIMENTO"));
+                c.setIdade(rs.getInt("IDADE"));
+                c.setTelefoneFixo(rs.getString("TELFIXO"));
+                c.setTelefoneCelular(rs.getString("TELCEL"));
+                c.setEmail(rs.getString("EMAIL"));
+                c.setNumeroCNH(rs.getInt("CNH"));
+                c.setCpf(rs.getString("CPF"));
+                c.setRg(rs.getString("RG"));
                 
             }
 

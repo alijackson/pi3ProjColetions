@@ -20,10 +20,14 @@ import java.util.logging.Logger;
 public class ConnectionFactory {
 
     private static final String DRIVER = "com.mysql.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost:3306/locadora";
-    private static final String USER = "root";
-    private static final String PASS = "";
+//    private static final String URL = "jdbc:mysql://localhost:3306/locadora";
+//    private static final String USER = "root";
+//    private static final String PASS = "";
 
+    private static final String URL = "jdbc:mysql://pi3groupfive.mysql.dbaas.com.br:3306/pi3groupfive";
+    private static final String USER = "pi3groupfive";
+    private static final String PASS = "pi3groupfive";
+    
     public static Connection getConnection() {
 
         try {
