@@ -12,7 +12,6 @@ import br.com.model.Locacao;
 import br.com.model.Veiculo;
 import br.com.model.dao.ClienteDAO;
 import br.com.model.dao.VeiculoDAO;
-import br.com.servico.ServicoLocacao;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
@@ -42,7 +41,7 @@ public class CadastrarLocacao extends HttpServlet{
         
         ArrayList<Cliente> clientes = new ArrayList<Cliente>();
         
-        clientes = allClientes.ApresentarClientes();
+        clientes = allClientes.apresentarClientes();
         
         request.setAttribute("listaClientes", clientes);
         
@@ -50,7 +49,7 @@ public class CadastrarLocacao extends HttpServlet{
         
         ArrayList<Veiculo> veiculos = new ArrayList<Veiculo>();
         
-        veiculos = allVeiculos.ApresentarVeiculos();
+        veiculos = allVeiculos.apresentarVeiculos();
         
         request.setAttribute("listaVeiculos", veiculos);
         
@@ -86,11 +85,9 @@ public class CadastrarLocacao extends HttpServlet{
         l.setDiaRetira(retira);
         l.setDiaEntrega(entrega);
         
-        ServicoLocacao salvar = new ServicoLocacao();
         
-        String log = salvar.inserir(l);
+//        String log = salvar.inserir(l);
                 
-        request.setAttribute("result", "Ocorreu tudo bem\n"+"<br>"+log);
         
         RequestDispatcher dispatcher
                 = request.getRequestDispatcher("/locacoes");

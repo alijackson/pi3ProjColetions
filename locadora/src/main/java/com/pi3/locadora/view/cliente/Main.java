@@ -34,7 +34,7 @@ public class Main extends HttpServlet{
 
         ClienteDAO getAllCliente = new ClienteDAO();
 
-        listCliente = getAllCliente.ApresentarClientes();
+        listCliente = getAllCliente.apresentarClientes();
 
         request.setAttribute("listaCliente", listCliente);
 //
@@ -61,7 +61,7 @@ public class Main extends HttpServlet{
 
         ClienteDAO getAllCliente = new ClienteDAO();
 
-        listCliente = getAllCliente.ApresentarClientes();
+        listCliente = getAllCliente.apresentarClientes();
 
         request.setAttribute("listaCliente", listCliente);
 

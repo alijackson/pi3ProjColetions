@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.pi3.locadora.view;
+package com.pi3.locadora.view.home;
 
-import br.com.model.dao.FuncionarioDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,21 +18,18 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author micro
  */
-@WebServlet(name = "RemoverFuncionario", urlPatterns = {"/RemoverFuncionario"})
-public class RemoverFuncionario extends HttpServlet {
+@WebServlet(name = "Home", urlPatterns = {"/home"})
+public class Home extends HttpServlet {
 
-   
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        FuncionarioDAO dao =  new FuncionarioDAO();
         
-        dao.excluir(Integer.parseInt(request.getParameter("id")));
-        
-         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("funcionario.jsp");
-        
+          RequestDispatcher dispatcher
+                = request.getRequestDispatcher("/index.jsp");
+
         dispatcher.forward(request, response);
     }
 
@@ -40,10 +37,6 @@ public class RemoverFuncionario extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }
-    
-    
-    
-    
 
-
+   
 }

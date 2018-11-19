@@ -5,11 +5,13 @@
  */
 package br.com.model;
 
+import br.pi3.servico.Convert;
+
 /**
  *
  * @author micro
  */
-public class Funcionario {
+public class Funcionario extends Convert{
 
     private int id;
     private String nome;

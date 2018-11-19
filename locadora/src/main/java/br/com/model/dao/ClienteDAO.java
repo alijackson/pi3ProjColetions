@@ -11,7 +11,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,14 +28,14 @@ public class ClienteDAO {
 
     }
 
-    public String inserir(Cliente c) {
+    private final SimpleDateFormat dataEntrada = new SimpleDateFormat("dd/MM/yyyy");
+    private final SimpleDateFormat dataBanco = new SimpleDateFormat("yyyy-MM-dd");
+
+    public void inserir(Cliente c) {
 
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
-        String log = "";
-        try 
-        {
-
+        try{
             stmt = con.prepareStatement("INSERT INTO CLIENTE "
                     + "(NOME,DTNASCIMENTO,TELFIXO, "
                     + "TELCEL,EMAIL,CNH,CPF,RG,IDADE,ENABLE) "
@@ -42,30 +46,24 @@ public class ClienteDAO {
             stmt.setString(3, c.getTelefoneFixo());
             stmt.setString(4, c.getTelefoneCelular());
             stmt.setString(5, c.getEmail());
-            stmt.setLong(6, c.getNumeroCNH());
+            stmt.setString(6, c.getNumeroCNH());
             stmt.setString(7, c.getCpf());
             stmt.setString(8, c.getRg());
-            stmt.setInt(9, c.getIdade());
 
-            stmt.execute();
+            stmt.executeUpdate();
 
-        } 
-        catch (SQLException ex) 
-        {
-            log = ex.toString();
-        } 
-        finally 
-        {
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
-        return log;
     }
 
     /**
      *
      * @return
      */
-    public ArrayList<Cliente> ApresentarClientes() {
+    public ArrayList<Cliente> apresentarClientes() {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -73,7 +71,135 @@ public class ClienteDAO {
         ArrayList<Cliente> clientes = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM CLIENTE WHERE ENABLE=1");
+            stmt = con.prepareStatement("SELECT * FROM CLIENTE WHERE ENABLE = 1");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                Cliente c = new Cliente();
+
+                c.setId(rs.getInt("IDCLIENTE"));
+                c.setNome(rs.getString("NOME"));
+                c.setDataNascimento(c.convertDate(rs.getString("DTNASCIMENTO")));
+                c.setTelefoneFixo(rs.getString("TELFIXO"));
+                c.setTelefoneCelular(rs.getString("TELCEL"));
+                c.setEmail(rs.getString("EMAIL"));
+                c.setNumeroCNH(rs.getString("CNH"));
+                c.setCpf(rs.getString("CPF"));
+                
+                clientes.add(c);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+
+        }
+        return clientes;
+    }
+
+    public void atualizar(Cliente c) {
+
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        try {
+
+            stmt = con.prepareStatement("UPDATE CLIENTE SET NOME = ?, DTNASCIMENTO = ?, "
+                    + "TELFIXO = ?, TELCEL = ?, "
+                    + "EMAIL = ?, CNH = ?,  RG = ?, "
+                    + "CPF = ? WHERE IDCLIENTE = ? ");
+
+            String dataConvertida = dataEntrada.format(dataBanco.parse(c.getDataNascimento()));
+
+            stmt.setString(1, c.getNome());
+            stmt.setString(2, dataConvertida);
+            stmt.setString(3, c.getTelefoneFixo());
+            stmt.setString(4, c.getTelefoneCelular());
+            stmt.setString(5, c.getEmail());
+            stmt.setString(6, c.getNumeroCNH());
+            stmt.setString(7, c.getRg());
+            stmt.setString(8, c.getCpf());
+            stmt.setInt(9, c.getId());
+
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+
+    }
+
+    public void excluir(int id) {
+
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+
+        try {
+
+            stmt = con.prepareStatement("UPDATE CLIENTE SET ENABLE = 0 WHERE IDCLIENTE = ?");
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+
+    }
+
+    public Cliente pesquisa(int id) {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        Cliente c = new Cliente();
+
+        try {
+
+            stmt = con.prepareStatement("SELECT * FROM CLIENTE WHERE IDCLIENTE = ?");
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+
+            if (rs.first()) {
+                c.setId(rs.getInt("IDCLIENTE"));
+                c.setNome(rs.getString("NOME"));
+                c.setDataNascimento(rs.getString("DTNASCIMENTO"));
+                c.setTelefoneFixo(rs.getString("TELFIXO"));
+                c.setTelefoneCelular(rs.getString("TELCEL"));
+                c.setEmail(rs.getString("EMAIL"));
+                c.setNumeroCNH(rs.getString("CNH"));
+                c.setCpf(rs.getString("CPF"));
+                c.setRg(rs.getString("RG"));
+
+            }
+
+        } catch (SQLException ex) {
+
+            ex.printStackTrace();
+
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+
+        }
+        return c;
+    }
+
+    public ArrayList<Cliente> buscar(String nome) {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        ArrayList<Cliente> clientes = new ArrayList<>();
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM CLIENTE WHERE NOME LIKE ? ");
+            stmt.setString(1, "%" + nome + "%");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -86,14 +212,14 @@ public class ClienteDAO {
                 c.setTelefoneFixo(rs.getString("TELFIXO"));
                 c.setTelefoneCelular(rs.getString("TELCEL"));
                 c.setEmail(rs.getString("EMAIL"));
-                c.setNumeroCNH(rs.getInt("CNH"));
+                c.setNumeroCNH(rs.getString("CNH"));
                 c.setCpf(rs.getString("CPF"));
-                
+
                 clientes.add(c);
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "erro ao salvar" + ex);
+            ex.printStackTrace();
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
 
@@ -101,137 +227,7 @@ public class ClienteDAO {
         return clientes;
     }
 
-    public String atualizar(Cliente c) {
-        
-        String retur = "";
-        Connection con = ConnectionFactory.getConnection();
-        PreparedStatement stmt = null;
-        try {
-
-            stmt = con.prepareStatement("UPDATE cliente SET nome = ?, dtNascimento = ?, "
-                    + "idade = ?, cpf = ?, "
-                    + "telFixo = ?, telCel = ?,  email = ?, "
-                    + "CNH = ?, rg = ?  WHERE idCliente = ? ");
-
-            stmt.setString(1, c.getNome());
-            stmt.setString(2, c.getDataNascimento());
-            stmt.setInt(3, c.getIdade());
-            stmt.setString(4, c.getCpf());
-            stmt.setString(5, c.getTelefoneFixo());
-            stmt.setString(6, c.getTelefoneCelular());
-            stmt.setString(7, c.getEmail());
-            stmt.setInt(8, c.getNumeroCNH());
-            stmt.setString(9, c.getRg());
-            stmt.setInt(10, c.getId());
-            
-            stmt.execute();
-            JOptionPane.showMessageDialog(null, "Alteração feita com Sucesso!");
-
-        } catch (SQLException ex) {
-            retur = ex.toString();
-        } finally {
-            ConnectionFactory.closeConnection(con, stmt);
-        }
-        
-        return retur;     
-    }
-    /**
-     * Função edita o usuario, 
-     * Dando um update no banco de dados.
-     * @param c
-     * Infomação para fazer o update no banco.
-     */
-    public void editar(Cliente c) {
-
-        Connection con = ConnectionFactory.getConnection();
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-
-        try {
-
-            stmt = con.prepareStatement("SELECT * FROM CLIENTE WHERE ID = ?");
-            stmt.setInt(1, c.getId());
-            rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                c.setNome(rs.getString("nome"));
-                c.setDataNascimento(rs.getString("dtNascimento"));
-                c.setTelefoneFixo(rs.getString("telFixo"));
-                c.setTelefoneCelular(rs.getString("telCel"));
-                c.setEmail(rs.getString("email"));
-                c.setNumeroCNH(rs.getInt("cnh"));
-                c.setCpf(rs.getString("cpf"));
-
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "erro ao salvar" + ex);
-        } finally {
-            ConnectionFactory.closeConnection(con, stmt, rs);
-
-        }
-
-    }
-
-    public void excluir(int id) {
-
-        Connection con = ConnectionFactory.getConnection();
-        PreparedStatement stmt = null;
-
-        try {
-
-            stmt = con.prepareStatement("UPDATE Cliente SET enable=0 WHERE idcliente = ?");
-            stmt.setInt(1, id);
-            stmt.execute();
-            
-            JOptionPane.showMessageDialog(null, id);
-            JOptionPane.showMessageDialog(null, "Excluído  com sucesso");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "erro ao atualizar" + ex);
-        } finally {
-            ConnectionFactory.closeConnection(con, stmt);
-        }
-
-    }
-
-    public Cliente Pesquisa(int id) {
-        Connection con = ConnectionFactory.getConnection();
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-
-        Cliente c = new Cliente();
-
-        try {
-            
-
-            stmt = con.prepareStatement("SELECT * FROM CLIENTE WHERE IDCLIENTE = ?");
-            stmt.setInt(1, id);
-            rs = stmt.executeQuery();
-
-            if (rs.first()) {
-                c.setId(rs.getInt("IDCLIENTE"));
-                c.setNome(rs.getString("NOME"));
-                c.setDataNascimento(rs.getString("DTNASCIMENTO"));
-                c.setIdade(rs.getInt("IDADE"));
-                c.setTelefoneFixo(rs.getString("TELFIXO"));
-                c.setTelefoneCelular(rs.getString("TELCEL"));
-                c.setEmail(rs.getString("EMAIL"));
-                c.setNumeroCNH(rs.getInt("CNH"));
-                c.setCpf(rs.getString("CPF"));
-                c.setRg(rs.getString("RG"));
-                
-            }
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "erro ao salvar" + ex);
-        } finally {
-            ConnectionFactory.closeConnection(con, stmt, rs);
-
-        }
-        return c;
-    }
-
-    public boolean ChecarCliente(String cpf) {
+    public boolean checarCliente(String nome) {
 
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
@@ -239,22 +235,17 @@ public class ClienteDAO {
         boolean result = false;
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM Cliente WHERE cpf = ?");
-            stmt.setString(1, cpf);
+            stmt = con.prepareStatement("SELECT * FROM CLIENTE WHERE NOME LIKE ? ");
+            stmt.setString(1, "%" + nome + "%");
             rs = stmt.executeQuery();
 
-            if (rs.next()) 
-            {    
+            if (rs.next()) {
                 result = true;
             }
 
-        } 
-        catch (SQLException ex) 
-        {
-            JOptionPane.showMessageDialog(null, "erro ao verificar cadastro do cliente" + ex);
-        } 
-        finally 
-        {
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
         return result;
