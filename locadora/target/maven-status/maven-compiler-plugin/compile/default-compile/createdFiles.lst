@@ -1,5 +1,6 @@
 br\com\model\dao\ClienteDAO.class
 com\pi3\locadora\user\User.class
+br\com\model\Filial.class
 br\com\model\Locacao.class
 com\pi3\locadora\view\funcionario\CadastrarFuncionario.class
 com\pi3\locadora\model\Login.class
@@ -17,10 +18,12 @@ com\pi3\locadora\view\cliente\CadastrarCliente.class
 com\pi3\locadora\dao\Connect.class
 br\com\model\Veiculo.class
 com\pi3\locadora\view\veiculo\ExcluirVeiculo.class
+com\pi3\locadora\filial\CadastrarFilial.class
 br\com\model\dao\FuncionarioDAO.class
 br\com\model\dao\VeiculoDAO.class
 com\pi3\locadora\view\CadastrarLocacao.class
 com\pi3\locadora\view\veiculo\BuscarVeiculos.class
+br\com\model\dao\FilialDAO.class
 com\pi3\locadora\view\cliente\BuscarCliente.class
 br\com\model\Funcionario.class
 com\pi3\locadora\view\veiculo\CadastrarVeiculo.class

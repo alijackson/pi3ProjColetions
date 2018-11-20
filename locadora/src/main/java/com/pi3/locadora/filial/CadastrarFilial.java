@@ -5,6 +5,8 @@
  */
 package com.pi3.locadora.filial;
 
+import br.com.model.Filial;
+import br.com.model.dao.FilialDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -32,19 +34,19 @@ public class CadastrarFilial extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        //request.setAttribute("objetivo", "Cadastrar Funcionario");
-      /*  ArrayList<Funcionario> listFuncionario = new ArrayList<Funcionario>();
+        request.setAttribute("objetivo", "Cadastrar Filial");
+        ArrayList<Filial> listFilial = new ArrayList<Filial>();
 
-        FuncionarioDAO dao = new FuncionarioDAO();
+        FilialDAO dao = new FilialDAO();
 
-        listFuncionario = dao.apresentarFuncionarios();
+        listFilial = dao.apresentarFiliais();
 
-        request.setAttribute("listaFuncionarios", listFuncionario);
+        request.setAttribute("listaFiliais", listFilial);
 
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("/funcionario/funcionario.jsp");
+                = request.getRequestDispatcher("/Filial/filiais.jsp");
 
-        dispatcher.forward(request, response);*/
+        dispatcher.forward(request, response);
     }
 
     @Override
