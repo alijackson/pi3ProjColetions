@@ -109,8 +109,8 @@ public class CadastrarCliente extends HttpServlet {
         id = Integer.parseInt(req.getParameter("idCliente"));
         c = dao.pesquisa(id);
         resp.setContentType("application/json");
-        resp.setCharacterEncoding("UTF-8");
-        JSONObject json = new JSONObject();
+        resp.setCharacterEncoding("UTF-8");    
+       JSONObject json = new JSONObject();
 
         json.put("idCliente", c.getId());
         json.put("nome", c.getNome());
