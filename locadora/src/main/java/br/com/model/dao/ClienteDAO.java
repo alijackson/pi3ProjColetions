@@ -109,11 +109,11 @@ public class ClienteDAO {
                     + "TELFIXO = ?, TELCEL = ?, "
                     + "EMAIL = ?, CNH = ?,  RG = ?, "
                     + "CPF = ? WHERE IDCLIENTE = ? ");
-
-            String dataConvertida = dataEntrada.format(dataBanco.parse(c.getDataNascimento()));
+//
+//            String dataConvertida = dataEntrada.format(dataBanco.parse(c.getDataNascimento()));
 
             stmt.setString(1, c.getNome());
-            stmt.setString(2, dataConvertida);
+            stmt.setString(2, c.getDataNascimento());
             stmt.setString(3, c.getTelefoneFixo());
             stmt.setString(4, c.getTelefoneCelular());
             stmt.setString(5, c.getEmail());
@@ -126,15 +126,13 @@ public class ClienteDAO {
 
         } catch (SQLException ex) {
             ex.printStackTrace();
-        } catch (ParseException ex) {
-            ex.printStackTrace();
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
 
     }
 
-    public void excluir(int id) {
+    public String excluir(int id) {
 
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
@@ -143,14 +141,14 @@ public class ClienteDAO {
 
             stmt = con.prepareStatement("UPDATE CLIENTE SET ENABLE = 0 WHERE IDCLIENTE = ?");
             stmt.setInt(1, id);
-            stmt.executeUpdate();
+            stmt.execute();
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            return ex.toString();
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
-
+        return null;
     }
 
     public Cliente pesquisa(int id) {
@@ -235,7 +233,7 @@ public class ClienteDAO {
         boolean result = false;
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM CLIENTE WHERE NOME LIKE ? ");
+            stmt = con.prepareStatement("SELECT * FROM CLIENTE WHERE ENABLE = 1 AND NOME LIKE ? ");
             stmt.setString(1, "%" + nome + "%");
             rs = stmt.executeQuery();
 

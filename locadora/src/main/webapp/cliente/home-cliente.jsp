@@ -126,7 +126,6 @@
             <div class="col-md-12">
                 <table class="table table-striped">
                     <tr>  
-                        <th >ID</th>
                         <th>Nome</th>
                         <th>Data Nascimento</th>
                         <th>Email</th>
@@ -136,7 +135,7 @@
 
                     <c:forEach items="${listarCliente}" var="cliente">
                         <tr onclick="editarCliente(${cliente.getId()})"  id="trTable"  >
-                            <td><c:out value='${cliente.getId()}' /></td>
+                            <td hidden><c:out value='${cliente.getId()}' /></td>
                             <td><c:out value="${cliente.getNome()}" /> </td>
                             <td> <c:out value="${cliente.getDataNascimento()}" /></td>
                             <td><c:out value="${cliente.getEmail()}" /> </td>
@@ -233,35 +232,52 @@
 
                             </div>
 
-
                             <button type="reset"  class="btn cancel btn-secondary " data-dismiss="modal" >Cancelar</button>
 
                             <div class="modal-foote float-right" >
-                                <button  class="btn  btn-danger " id="excluir" name="excluir" hidden> Excluir </button>
+                                <button type="button" class="btn btn-danger " id="excluir" name="excluir" onclick="confirmarExcluir()"> Excluir </button>
 
-                                <button class="btn btn-primary " id="butSubmit" name="butSubmit" >Cadastrar</button>
+                                <button type="submit" class="btn btn-primary" id="butSubmit" name="butSubmit" >Cadastrar</button>
 
                             </div>
 
                         </form>
-
-
                     </div>
                 </div>
             </div>
         </div>
-
-
-
-
+        <!-- Modal de confirmação -->
+        <div class="modal" tabindex="-1" role="dialog" id="mod-confirmar">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Confirmação</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p> Deseja realmente excluir o cliente </p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" onclick="excluirCliente()">Sim</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                </div>
+              </div>
+            </div>
+          </div>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-
-
         <script src="JQuery/editar-cliente.js" type="text/javascript"></script>
+        
+        <script src="JQuery/jquery.mask.js" type="text/javascript"></script>
+        
+        <script src="JQuery/validar.js" type="text/javascript"></script>
+                  
+
     </body>
 
 

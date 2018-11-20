@@ -7,7 +7,10 @@ package com.pi3.locadora.view.cliente;
 
 import br.com.model.Cliente;
 import br.com.model.dao.ClienteDAO;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,7 +18,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 import org.json.JSONObject;
 
 /**
@@ -99,14 +101,13 @@ public class CadastrarCliente extends HttpServlet {
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        resp.setContentType("application/json;charset=UTF-8");
-
+       
         int id;
 
         Cliente c = new Cliente();
         ClienteDAO dao = new ClienteDAO();
 
-        id = Integer.parseInt(req.getParameter("idCliente"));
+        id = Integer.parseInt(req.getParameter("id"));
         c = dao.pesquisa(id);
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
@@ -125,5 +126,46 @@ public class CadastrarCliente extends HttpServlet {
         resp.getWriter().write(json.toString());
 
     }
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
+    {
+        int id;
+        ClienteDAO dao = new ClienteDAO();
+        String resposta;
+            
+        try {
+            
+            resp.setContentType("application/json");
+            resp.setCharacterEncoding("UTF-8");
+            
+            JSONObject json = new JSONObject();
+        
+            id = Integer.parseInt(req.getParameter("cod"));
+                
+            dao = new ClienteDAO();
+            resposta = dao.excluir(id);
+            
+            if(resposta != null && !resposta.trim().equals(""))
+            {
+                json.put("resp", "Erro ao excluir.");
 
+                resp.getWriter().write(json.toString());   
+                return;
+                
+            }
+            json.put("resp", "Cliente excluído com sucesso");
+
+            resp.getWriter().write(json.toString());
+                   
+            
+        } catch (Exception e) {
+            
+            JSONObject json = new JSONObject();
+        
+            json.put("resp", "Erro ao interpretar dados");
+
+            resp.getWriter().write(json.toString());
+        }
+        
+    }
 }

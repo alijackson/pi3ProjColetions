@@ -51,7 +51,10 @@ public class CadastrarVeiculo extends HttpServlet {
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-
+        
+//        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        
         String modelo = request.getParameter("modelo");
         String ano = request.getParameter("ano");
         String placa = request.getParameter("placa");
@@ -72,15 +75,7 @@ public class CadastrarVeiculo extends HttpServlet {
         v.setCategoria(categoria);
 
         VeiculoDAO dao = new VeiculoDAO();
-
-//
-//        if (id != null && !id.trim().equals("")) {
-//            v.setId(Integer.parseInt(id));
-//            dao.atualizar(v);
-//        } else {
-//            dao.inserir(v);
-//        }
-        if (id == null) {
+        if (id == null || id.trim().equals("")) {
             dao.inserir(v);
         } else {
             v.setId(Integer.parseInt(id));
@@ -109,7 +104,7 @@ public class CadastrarVeiculo extends HttpServlet {
 
         Veiculo v = new Veiculo();
         VeiculoDAO dao = new VeiculoDAO();
-
+        
         id = Integer.parseInt(req.getParameter("id"));
         v = dao.pesquisa(id);
         resp.setContentType("application/json");
@@ -126,6 +121,100 @@ public class CadastrarVeiculo extends HttpServlet {
         json.put("categoria", v.getCategoria());
 
         resp.getWriter().write(json.toString());
+
+    }
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
+    {
+        int id;
+        VeiculoDAO dao = new VeiculoDAO();
+        String resposta;
+            
+        try {
+            
+            resp.setContentType("application/json");
+            resp.setCharacterEncoding("UTF-8");
+            
+            JSONObject json = new JSONObject();
+        
+            id = Integer.parseInt(req.getParameter("cod"));
+                
+            dao = new VeiculoDAO();
+            resposta = dao.excluir(id);
+            
+            if(resposta != null && !resposta.trim().equals(""))
+            {
+                json.put("resp", "Erro ao excluir.");
+
+                resp.getWriter().write(json.toString());   
+                return;
+                
+            }
+            json.put("resp", "Veículo excluído com sucesso");
+
+            resp.getWriter().write(json.toString());
+                   
+            
+        } catch (Exception e) {
+            
+            JSONObject json = new JSONObject();
+        
+            json.put("resp", "Erro ao interpretar dados");
+
+            resp.getWriter().write(json.toString());
+        }
+        
+    }
+    
+    @Override
+    protected void doHead(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        VeiculoDAO dao = new VeiculoDAO();
+
+        ArrayList<Veiculo> listVeiculos = new ArrayList<Veiculo>();
+
+        String pesquisar = request.getParameter("pesquisar");
+
+        if ("".equalsIgnoreCase(pesquisar) || pesquisar == null) {
+
+            listVeiculos = dao.apresentarVeiculos();
+
+            request.setAttribute("listarVeiculos", listVeiculos);
+
+            RequestDispatcher dispatcher
+                    = request.getRequestDispatcher("/veiculo/home-veiculo.jsp");
+
+            dispatcher.forward(request, response);
+
+        } else {
+
+            boolean resultado = dao.checarVeiculo(pesquisar);
+
+            if (resultado == true) {
+
+                listVeiculos = dao.buscar(pesquisar);
+                request.setAttribute("listarVeiculos", listVeiculos);
+
+                RequestDispatcher dispatcher
+                        = request.getRequestDispatcher("/veiculo/home-veiculo.jsp");
+
+                dispatcher.forward(request, response);
+
+            } else {
+
+                //request.setAttribute("veiculoErro", "Veiculo não localizado");
+                listVeiculos = dao.apresentarVeiculos();
+
+                request.setAttribute("listarVeiculos", listVeiculos);
+
+                RequestDispatcher dispatcher
+                        = request.getRequestDispatcher("/veiculo/home-veiculo.jsp");
+
+                dispatcher.forward(request, response);
+            }
+
+        }
 
     }
 

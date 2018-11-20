@@ -24,6 +24,8 @@ function editarFunc(func) {
         }
     });
 
+    document.getElementById('excluir').style.visibility = 'visible';
+
     $("#novoFun").modal("show")
 
 }
@@ -51,9 +53,39 @@ function isTrue(boolean) {
 }
 function resetFormEdit(){
     document.formEditCad.reset();
+
+    document.getElementById('excluir').style.visibility = 'hidden';
     
     $("#butSubmit").text("Cadastrar");
     
     $("#exampleModalCenterTitle").text("Cadastrar Funcionário");
 }
+function confirmarExcluir() {
+    
+    $("#mod-confirmar").modal("show");
 
+}
+
+function excluirFunc(){
+    $("#mod-confirmar").modal("hide");
+    let id = document.getElementById('id').value;
+    let  url = "http://localhost:8080/locadora/CadastrarFuncionario?id="+id;
+
+    $.ajax({
+        url: url,
+        type: 'DELETE',
+
+        success: function(data) {
+            
+            alert(data.resp);
+            location.reload()
+            $("#novoFun").modal("hide");
+
+         },
+         error: function(ajaxContext) {
+            alert("Erro ");
+            $("#novoFun").modal("hide");
+         }
+    });
+    
+}

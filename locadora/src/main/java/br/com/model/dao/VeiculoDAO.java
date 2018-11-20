@@ -37,14 +37,14 @@ public class VeiculoDAO {
 
             stmt = con.prepareStatement("INSERT INTO VEICULO "
                     + "(MODELO, CATEGORIA, ANO, PLACA, "
-                    + "MARCA, NUMERODOC, CARACTERISTICAS) VALUES "
-                    + "(?,?,?,?,?,?,?)");
+                    + "MARCA, NUMERODOC, CARACTERISTICAS, ENABLE) VALUES "
+                    + "(?,?,?,?,?,?,?,1)");
 
-            String dataConvertida = dataEntrada.format(dataBanco.parse(v.getAno()));
+//            String dataConvertida = dataEntrada.format(dataBanco.parse(v.getAno()));
 
             stmt.setString(1, v.getModelo());
             stmt.setString(2, v.getCategoria());
-            stmt.setString(3, dataConvertida);
+            stmt.setString(3, v.getAno());
             stmt.setString(4, v.getPlaca());
             stmt.setString(5, v.getMarca());
             stmt.setString(6, v.getNumeroDocumento());
@@ -53,10 +53,6 @@ public class VeiculoDAO {
             stmt.executeUpdate();
 
         } catch (SQLException ex) {
-
-            ex.printStackTrace();
-
-        } catch (ParseException ex) {
 
             ex.printStackTrace();
 
@@ -75,7 +71,7 @@ public class VeiculoDAO {
 
         try {
 
-            stmt = con.prepareStatement("SELECT * FROM VEICULO");
+            stmt = con.prepareStatement("SELECT * FROM VEICULO WHERE ENABLE = 1");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -142,25 +138,25 @@ public class VeiculoDAO {
 
     }
 
-    public void excluir(int id) {
+    public String excluir(int id) {
 
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
 
         try {
 
-            stmt = con.prepareStatement("DELETE FROM  VEICULO WHERE IDVEICULO = ?");
+            stmt = con.prepareStatement("UPDATE VEICULO SEt ENABLE = 0 WHERE IDVEICULO = ?");
             stmt.setInt(1, id);
             stmt.executeUpdate();
 
         } catch (SQLException ex) {
 
-            ex.printStackTrace();
+            return ex.toString();
 
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
-
+        return null;
     }
 
     public Veiculo pesquisa(int id) {
@@ -184,14 +180,11 @@ public class VeiculoDAO {
                 v.setMarca(rs.getString("MARCA"));
                 v.setNumeroDocumento(rs.getString("NUMERODOC"));
                 v.setCaracteristica(rs.getString("CARACTERISTICAS"));
-                String dataConvertida = dataBanco.format(dataEntrada.parse(rs.getString("ANO")));
-                v.setAno(dataConvertida);
+                v.setAno(rs.getString("ANO"));
 //                v.setImagem((File) rs.getObject("IMAGEM"));
             }
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
-        } catch (ParseException ex) {
             ex.printStackTrace();
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
@@ -209,7 +202,7 @@ public class VeiculoDAO {
 
         try {
 
-            stmt = con.prepareStatement("SELECT * FROM VEICULO WHERE MODELO LIKE ? ");
+            stmt = con.prepareStatement("SELECT * FROM VEICULO WHERE ENABLE = 1 AND MODELO LIKE ? ");
             stmt.setString(1, "%" + modelo + "%");
             rs = stmt.executeQuery();
 
@@ -220,11 +213,11 @@ public class VeiculoDAO {
                 v.setId(rs.getInt("IDVEICULO"));
                 v.setModelo(rs.getString("MODELO"));
                 v.setCategoria(rs.getString("CATEGORIA"));
+                v.setAno(rs.getString("ANO"));
                 v.setPlaca(rs.getString("PLACA"));
                 v.setMarca(rs.getString("MARCA"));
                 v.setNumeroDocumento(rs.getString("NUMERODOC"));
                 v.setCaracteristica(rs.getString("CARACTERISTICAS"));
-                v.setAno(rs.getString("ANO"));
 //              v.setImagem((File) rs.getObject("IMAGEM"));
 
                 veiculos.add(v);
@@ -248,7 +241,7 @@ public class VeiculoDAO {
         boolean result = false;
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM VEICULO WHERE MODELO LIKE ? ");
+            stmt = con.prepareStatement("SELECT * FROM VEICULO WHERE ENABLE = 1 AND MODELO LIKE ? ");
             stmt.setString(1, "%" + modelo + "%");
             rs = stmt.executeQuery();
 

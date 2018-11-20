@@ -161,7 +161,7 @@ public class FuncionarioDAO {
 
     }
 
-    public void excluir(int id) {
+    public String excluir(int id) {
 
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
@@ -172,13 +172,12 @@ public class FuncionarioDAO {
             stmt.setInt(1, id);
             stmt.execute();
 
-            JOptionPane.showMessageDialog(null, "Excluído  com sucesso");
         } catch (SQLException ex) {
-            System.out.println("ERROOOO =======");
-            ex.printStackTrace();
+            return "Erro";
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
+        return null;
 
     }
 
@@ -291,7 +290,6 @@ public class FuncionarioDAO {
             data = dataBanco.format(dataEntrada.parse(f.getDataNascimento()));
             dataConvertida = java.sql.Date.valueOf(data);
         } catch (ParseException ex) {
-            System.out.println("ERROOOO =======");
             ex.printStackTrace();
         }
 

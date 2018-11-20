@@ -128,7 +128,6 @@ public class CadastrarFuncionario extends HttpServlet {
         Funcionario func = new Funcionario();
         FuncionarioDAO bd = new FuncionarioDAO();
 
-        PrintWriter out = response.getWriter();
 
         try {
             id = Integer.parseInt(request.getParameter("id"));
@@ -151,9 +150,48 @@ public class CadastrarFuncionario extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            out.close();
         }
+    }
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
+    {
+        int id;
+        FuncionarioDAO dao = new FuncionarioDAO();
+        String resposta;
+            
+        try {
+            
+            resp.setContentType("application/json");
+            resp.setCharacterEncoding("UTF-8");
+            
+            JSONObject json = new JSONObject();
+        
+            id = Integer.parseInt(req.getParameter("id"));
+                
+            dao = new FuncionarioDAO();
+            resposta = dao.excluir(id);
+            
+            if(resposta != null && !resposta.trim().equals(""))
+            {
+                json.put("resp", "Erro ao excluir.");
 
+                resp.getWriter().write(json.toString());   
+                return;
+                
+            }
+            json.put("resp", "Funcionário excluído com sucesso");
+
+            resp.getWriter().write(json.toString());
+                   
+            
+        } catch (Exception e) {
+            
+            JSONObject json = new JSONObject();
+        
+            json.put("resp", "Erro ao interpretar dados");
+
+            resp.getWriter().write(json.toString());
+        }
+        
     }
 }
