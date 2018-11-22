@@ -7,10 +7,7 @@ package com.pi3.locadora.view.cliente;
 
 import br.com.model.Cliente;
 import br.com.model.dao.ClienteDAO;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -55,6 +52,9 @@ public class CadastrarCliente extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
 
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        
         String nome = request.getParameter("nome");
         String numerocnh = request.getParameter("numerocnh");
         String cpf = request.getParameter("cpf");
@@ -78,7 +78,7 @@ public class CadastrarCliente extends HttpServlet {
 
         ClienteDAO dao = new ClienteDAO();
 
-        if (id == null) {
+        if (id == null || id.trim().equals("")) {
             dao.inserir(c);
         } else {
             c.setId(Integer.parseInt(id));

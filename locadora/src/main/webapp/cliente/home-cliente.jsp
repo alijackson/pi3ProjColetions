@@ -227,7 +227,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="datanascimento">Data Nascimento</label>
-                                    <input type="date" class="form-control" id="datanascimento"  required name="datanascimento"placeholder="ex: 25/06/1998">
+                                    <input type="date" class="form-control" id="datanascimento"  required name="datanascimento" placeholder="ex: 25/06/1998">
                                 </div>
 
                             </div>

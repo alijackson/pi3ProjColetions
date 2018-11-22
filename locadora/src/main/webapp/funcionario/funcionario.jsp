@@ -319,7 +319,7 @@
 
                         <button type="reset" class="btn cancel btn-secondary float-right" data-dismiss="modal">Cancelar</button>
 
-                        <button class="btn btn-primary float-right" id="butSubmit" name="butSubmit" id="butSubmit">Cadastrar</button>
+                        <button type="submit" class="btn btn-primary float-right" id="butSubmit" name="butSubmit" id="butSubmit">Cadastrar</button>
                         <button type="button" class="btn btn-danger " id="excluir" name="excluir" onclick="confirmarExcluir()">
                             Excluir </button>
                         <!--</div>-->

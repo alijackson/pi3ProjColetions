@@ -34,7 +34,6 @@ public class CadastrarFuncionario extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        //request.setAttribute("objetivo", "Cadastrar Funcionario");
         ArrayList<Funcionario> listFuncionario = new ArrayList<Funcionario>();
 
         FuncionarioDAO dao = new FuncionarioDAO();
@@ -82,17 +81,9 @@ public class CadastrarFuncionario extends HttpServlet {
                 f.setAtivo((byte) 0);
             }
 
-            System.out.print("Segue " + dataNascimento);
-
             FuncionarioDAO dao = new FuncionarioDAO();
 
-//            if (id != null && !id.trim().equals("")) {
-//                f.setId(Integer.parseInt(id));
-//                dao.atualizar(f);
-//            } else {
-//                dao.inserir(f);
-//            }
-            if (id == null) {
+            if (id == null || id.trim().equals("")) {
                 dao.inserir(f);
             } else {
                 f.setId(Integer.parseInt(id));
@@ -110,9 +101,7 @@ public class CadastrarFuncionario extends HttpServlet {
             dispatcher.forward(request, response);
 
         } catch (Exception e) {
-
-            PrintWriter saida = response.getWriter();
-            saida.println(e);
+            JOptionPane.showMessageDialog(null, e);
         }
 
     }

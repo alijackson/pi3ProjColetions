@@ -83,7 +83,7 @@ function excluirFunc(){
 
          },
          error: function(ajaxContext) {
-            alert("Erro ");
+            alert("Erro no servidor");
             $("#novoFun").modal("hide");
          }
     });
