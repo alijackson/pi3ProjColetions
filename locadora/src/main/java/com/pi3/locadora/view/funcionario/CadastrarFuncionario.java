@@ -54,6 +54,7 @@ public class CadastrarFuncionario extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
 
+        request.setCharacterEncoding("UTF-8");
         try {
 
             String nome = request.getParameter("nome");
@@ -82,17 +83,9 @@ public class CadastrarFuncionario extends HttpServlet {
                 f.setAtivo((byte) 0);
             }
 
-            System.out.print("Segue " + dataNascimento);
-
             FuncionarioDAO dao = new FuncionarioDAO();
 
-//            if (id != null && !id.trim().equals("")) {
-//                f.setId(Integer.parseInt(id));
-//                dao.atualizar(f);
-//            } else {
-//                dao.inserir(f);
-//            }
-            if (id == null) {
+            if (id == null || id.trim().equals("")) {
                 dao.inserir(f);
             } else {
                 f.setId(Integer.parseInt(id));
@@ -113,6 +106,7 @@ public class CadastrarFuncionario extends HttpServlet {
 
             PrintWriter saida = response.getWriter();
             saida.println(e);
+            
         }
 
     }

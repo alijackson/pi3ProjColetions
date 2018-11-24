@@ -37,10 +37,9 @@ public class FuncionarioDAO {
         try {
 
             stmt = con.prepareStatement(
-                    "INSERT INTO FUNCIONARIO(NOME,DTNASCIMENTO,CPF,EMAIL,CARGO,LOGIN,SENHA,ATIVO) "
-                    + "VALUES (?,?,?,?,?,?,?,?)");
+                    "INSERT INTO FUNCIONARIO(NOME,DTNASCIMENTO,CPF,EMAIL,CARGO,LOGIN,SENHA,ATIVO,ENABLE) "
+                    + "VALUES (?,?,?,?,?,?,?,?,1)");
 
-            //    Date dataConvertida = converterData(dataEntrada, dataBanco, f);
             stmt.setString(1, f.getNome());
             stmt.setString(2, f.getDataNascimento());
             stmt.setString(3, f.getCpf());
@@ -50,12 +49,11 @@ public class FuncionarioDAO {
             stmt.setString(7, f.getSenha());
             stmt.setInt(8, f.getAtivo());
 
-            stmt.executeUpdate();
+            stmt.execute();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
-
             ConnectionFactory.closeConnection(con, stmt);
         }
 

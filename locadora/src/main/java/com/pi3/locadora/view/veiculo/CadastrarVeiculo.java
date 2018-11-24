@@ -52,7 +52,6 @@ public class CadastrarVeiculo extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
         
-//        response.setCharacterEncoding("UTF-8");
         request.setCharacterEncoding("UTF-8");
         
         String modelo = request.getParameter("modelo");
@@ -170,6 +169,8 @@ public class CadastrarVeiculo extends HttpServlet {
     protected void doHead(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        request.setCharacterEncoding("UTF-8");
+        
         VeiculoDAO dao = new VeiculoDAO();
 
         ArrayList<Veiculo> listVeiculos = new ArrayList<Veiculo>();
