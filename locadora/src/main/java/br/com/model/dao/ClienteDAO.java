@@ -38,8 +38,8 @@ public class ClienteDAO {
         try{
             stmt = con.prepareStatement("INSERT INTO CLIENTE "
                     + "(NOME,DTNASCIMENTO,TELFIXO, "
-                    + "TELCEL,EMAIL,CNH,CPF,RG,IDADE,ENABLE) "
-                    + "VALUES(?,?,?,?,?,?,?,?,?,1)");
+                    + "TELCEL,EMAIL,CNH,CPF,RG,ENABLE) "
+                    + "VALUES(?,?,?,?,?,?,?,?,1)");
 
             stmt.setString(1, c.getNome());
             stmt.setString(2, c.getDataNascimento());

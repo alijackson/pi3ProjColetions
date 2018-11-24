@@ -78,7 +78,7 @@ public class CadastrarCliente extends HttpServlet {
 
         ClienteDAO dao = new ClienteDAO();
 
-        if (id == null) {
+        if (id == null || id.trim().equals("")) {
             dao.inserir(c);
         } else {
             c.setId(Integer.parseInt(id));
