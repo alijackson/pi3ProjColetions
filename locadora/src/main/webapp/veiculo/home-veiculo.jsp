@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="/util/verificacao.jsp"></jsp:include>
 <!DOCTYPE html>
 <html>
 
@@ -73,16 +74,16 @@
                         <a class="nav-link" href="/locadora/venda/locacao">Locação</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="/locadora/cadastrarC">Cliente</a>
+                        <a class="nav-link " href="/locadora/cadastrarC">Cliente</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="/locadora/cadastrarV">Veículo</a>
+                        <a class="nav-link " href="/locadora/cadastrarV">Veículo</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="/locadora/CadastrarFuncionario">Funcionário</a>
+                        <a class="nav-link " href="/locadora/CadastrarFuncionario">Funcionário</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Filial</a>
+                        <a class="nav-link " href="#">Filial</a>
                     </li>
                 </ul>
             </div>

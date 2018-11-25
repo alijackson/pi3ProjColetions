@@ -7,6 +7,7 @@
 <%@page import="br.com.model.Funcionario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="/util/verificacao.jsp"></jsp:include>
 <!doctype html>
 <html lang="pt-br">
 
@@ -137,16 +138,16 @@
                         <a class="nav-link" href="/locadora/venda/locacao">Locação</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="/locadora/cadastrarC">Cliente</a>
+                        <a class="nav-link " href="/locadora/cadastrarC">Cliente</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="/locadora/cadastrarV">Veículo</a>
+                        <a class="nav-link " href="/locadora/cadastrarV">Veículo</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="/locadora/CadastrarFuncionario">Funcionário</a>
+                        <a class="nav-link " href="/locadora/CadastrarFuncionario">Funcionário</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Filial</a>
+                        <a class="nav-link " href="#">Filial</a>
                     </li>
                 </ul>
             </div>
@@ -307,14 +308,13 @@
                                 </select>
                             </div>
 
-                            <!--<div class="modal-footer" >-->
-                            <div class="switch__container float-left">
+                            <!--<div class="switch__container float-left">
                                 <small>Ativo
                                     <input id="switch-shadow" class="switch switch--shadow" type="checkbox" checked="true"
                                         name="ativo" id="ativo">
                                     <label for="switch-shadow"></label>
                                 </small>
-                            </div>
+                            </div>-->
                         </div>
 
                         <button type="reset" class="btn cancel btn-secondary float-right" data-dismiss="modal">Cancelar</button>
@@ -322,7 +322,6 @@
                         <button class="btn btn-primary float-right" id="butSubmit" name="butSubmit" id="butSubmit">Cadastrar</button>
                         <button type="button" class="btn btn-danger " id="excluir" name="excluir" onclick="confirmarExcluir()">
                             Excluir </button>
-                        <!--</div>-->
 
                     </form>
                 </div>

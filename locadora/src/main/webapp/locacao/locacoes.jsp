@@ -1,160 +1,161 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!doctype html>
-<html lang="pt-br">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv=”content-type” content="text/html;" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="keywords" content="tags, que, eu, quiser, usar, para, os, robos, do, google" />
-        <title>Locações</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<jsp:include page="/util/verificacao.jsp"></jsp:include>
+    <!doctype html>
+    <html lang="pt-br">
+        <head>
+            <meta charset="utf-8">
+            <meta http-equiv=”content-type” content="text/html;" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+            <meta name="keywords" content="tags, que, eu, quiser, usar, para, os, robos, do, google" />
+            <title>Locações</title>
+            <meta name="description" content="">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-              crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <!-- Bootstrap CSS -->
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+                  crossorigin="anonymous">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-        <!-- ESTILOS PARA ESTA PÁGINA -->
-        <!-- Nesse caso, este estilo é apenas para inserir imagens -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
-
-        <!-- SWEET ALERT -->
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-        <script type="text/JAVASCRIPT">
-
-        </script>
-
-        <!-- STYLES --> 
-        <style>
-            #Body{
-
-                margin-top: 10%;
-                margin-left: 8%;
-
-            }
-
-            #menu{
-
-                margin-left: 5%;
-            }
-            #logout{
-
-                margin-right: 1%;
-            }
+            <!-- ESTILOS PARA ESTA PÁGINA -->
+            <!-- Nesse caso, este estilo é apenas para inserir imagens -->
+            <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 
-            #lol{
+            <!-- SWEET ALERT -->
+            <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-                display: inline-block;
-            }
-            #form{
+            <script type="text/JAVASCRIPT">
 
-                margin-top: 5%;
-            }
-            #pagination{
+            </script>
 
-                margin-left: 40%;
-                margin-right: 40%;
-            }
+            <!-- STYLES --> 
+            <style>
+                #Body{
 
-        </style>
+                    margin-top: 10%;
+                    margin-left: 8%;
 
-    </head>
-    <body>
+                }
 
-        <!-- INÍCIO DO MENU SUPERIOR -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light scrolling-navbar fixed-top">
+                #menu{
 
-            <div class="container">
-                <a class="navbar-brand" href="#">LogoTipo</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/locadora/main">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/locadora/venda/locacao">Locação</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="/locadora/main">Cliente</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="/locadora/veiculos">Veículo</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="/locadora/CadastrarFuncionario">Funcionário</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="#">Filial</a>
-                        </li>
-                    </ul>
+                    margin-left: 5%;
+                }
+                #logout{
+
+                    margin-right: 1%;
+                }
+
+
+                #lol{
+
+                    display: inline-block;
+                }
+                #form{
+
+                    margin-top: 5%;
+                }
+                #pagination{
+
+                    margin-left: 40%;
+                    margin-right: 40%;
+                }
+
+            </style>
+
+        </head>
+        <body>
+
+            <!-- INÍCIO DO MENU SUPERIOR -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light scrolling-navbar fixed-top">
+
+                <div class="container">
+                    <a class="navbar-brand" href="#">LogoTipo</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/locadora/home">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/locadora/venda/locacao">Locação</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="/locadora/cadastrarC">Cliente</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="/locadora/cadastrarV">Veículo</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="/locadora/CadastrarFuncionario">Funcionário</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="#">Filial</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
 
-        <!-- FIM DO MENU SUPERIOR -->
+            <!-- FIM DO MENU SUPERIOR -->
 
-        <!-- INICIO TABLE -->
-        <div id="form" class="container">
+            <!-- INICIO TABLE -->
+            <div id="form" class="container">
 
-            <div class="row">
+                <div class="row">
 
-                <div class="col-md-10 d-flex-inline ">
+                    <div class="col-md-10 d-flex-inline ">
 
-                    <h1>Locações</h1>
+                        <h1>Locações</h1>
+                    </div>
+                    <!-- AQUI QUE TEM QUE FICAR EM LINHA -->
+
+
+                    <div class="col-md-2 d-flex-inline ">  
+                        <a class="btn btn-primary btn-block" href="locacao" id="locacao"> Nova Locação</a>  
+                    </div>
                 </div>
-                <!-- AQUI QUE TEM QUE FICAR EM LINHA -->
-
-
-                <div class="col-md-2 d-flex-inline ">  
-                    <a class="btn btn-primary btn-block" href="locacao" id="locacao"> Nova Locação</a>  
+                <hr>
+                <div class="col-md-12 d-flex-inline">  
+                    <form class="form-inline my-2 my-lg-0 d-flex-inline" id="procura"> 
+                        <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Search" id="input2">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="Procurar">Buscar</button>
+                    </form><br>
                 </div>
-            </div>
-            <hr>
-            <div class="col-md-12 d-flex-inline">  
-                <form class="form-inline my-2 my-lg-0 d-flex-inline" id="procura"> 
-                    <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Search" id="input2">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="Procurar">Buscar</button>
-                </form><br>
-            </div>
-            <!-- FIM -->
+                <!-- FIM -->
 
-            <div class="col-md-12">
-                <table class="table table-striped">
-                    <tr>  
-                        <th>ID</th>
-                        <th>Cliente</th>
-                        <th>Veiculo</th>
-                        <th>Preço Total</th>
-                        <th>Dia Retira</th>
-                        <th>Dia Entrega</th>
-                    </tr>
-                    <c:forEach items="${listaLocacoes}" var="locacao">
+                <div class="col-md-12">
+                    <table class="table table-striped">
+                        <tr>  
+                            <th>ID</th>
+                            <th>Cliente</th>
+                            <th>Veiculo</th>
+                            <th>Preço Total</th>
+                            <th>Dia Retira</th>
+                            <th>Dia Entrega</th>
+                        </tr>
+                        <c:forEach items="${listaLocacoes}" var="locacao">
                         <tr onclick="location.href = 'edit?id=<c:out value='${locacao.getId()}' />'"  id="trTable"  >
                             <td>
-                                <c:out value='${locacao.getId()}' />
-                            </td>
-                            <td>
-                                <c:out value="${locacao.getIdCliente()}" />
-                            </td>
-                            <td>
-                                <c:out value="${locacao.getIdVeiculo()}" />
-                            </td>
-                            <td>
-                                <c:out value="${locacao.getPrecoTotal()}" />
-                            </td>
-                            <td>
-                                <c:out value="${locacao.getDiaRetira()}" />
-                            </td>
-                            <td>
-                                <c:out value="${locacao.getDiaEntrega()}" />
-                            </td>
+                        <c:out value='${locacao.getId()}' />
+                        </td>
+                        <td>
+                        <c:out value="${locacao.getIdCliente()}" />
+                        </td>
+                        <td>
+                        <c:out value="${locacao.getIdVeiculo()}" />
+                        </td>
+                        <td>
+                        <c:out value="${locacao.getPrecoTotal()}" />
+                        </td>
+                        <td>
+                        <c:out value="${locacao.getDiaRetira()}" />
+                        </td>
+                        <td>
+                        <c:out value="${locacao.getDiaEntrega()}" />
+                        </td>
                         </tr>
                     </c:forEach>
                 </table>

@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -40,11 +42,11 @@ public class VeiculoDAO {
                     + "MARCA, NUMERODOC, CARACTERISTICAS, ENABLE) VALUES "
                     + "(?,?,?,?,?,?,?,1)");
 
-//            String dataConvertida = dataEntrada.format(dataBanco.parse(v.getAno()));
+            String dataConvertida = dataEntrada.format(dataBanco.parse(v.getAno()));
 
             stmt.setString(1, v.getModelo());
             stmt.setString(2, v.getCategoria());
-            stmt.setString(3, v.getAno());
+            stmt.setString(3, dataConvertida);
             stmt.setString(4, v.getPlaca());
             stmt.setString(5, v.getMarca());
             stmt.setString(6, v.getNumeroDocumento());
@@ -53,9 +55,9 @@ public class VeiculoDAO {
             stmt.executeUpdate();
 
         } catch (SQLException ex) {
-
             ex.printStackTrace();
-
+        } catch (ParseException ex) {
+            ex.printStackTrace();
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
@@ -250,9 +252,9 @@ public class VeiculoDAO {
             }
 
         } catch (SQLException ex) {
-            
-              ex.printStackTrace();
-              
+
+            ex.printStackTrace();
+
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }

@@ -35,14 +35,17 @@ public class ClienteDAO {
 
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
-        try{
+
+        try {
             stmt = con.prepareStatement("INSERT INTO CLIENTE "
                     + "(NOME,DTNASCIMENTO,TELFIXO, "
                     + "TELCEL,EMAIL,CNH,CPF,RG,ENABLE) "
                     + "VALUES(?,?,?,?,?,?,?,?,1)");
 
+            String dataConvertida = dataEntrada.format(dataBanco.parse(c.getDataNascimento()));
+
             stmt.setString(1, c.getNome());
-            stmt.setString(2, c.getDataNascimento());
+            stmt.setString(2, dataConvertida);
             stmt.setString(3, c.getTelefoneFixo());
             stmt.setString(4, c.getTelefoneCelular());
             stmt.setString(5, c.getEmail());
@@ -53,6 +56,8 @@ public class ClienteDAO {
             stmt.executeUpdate();
 
         } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ParseException ex) {
             ex.printStackTrace();
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
@@ -86,7 +91,7 @@ public class ClienteDAO {
                 c.setEmail(rs.getString("EMAIL"));
                 c.setNumeroCNH(rs.getString("CNH"));
                 c.setCpf(rs.getString("CPF"));
-                
+
                 clientes.add(c);
             }
 
@@ -109,11 +114,11 @@ public class ClienteDAO {
                     + "TELFIXO = ?, TELCEL = ?, "
                     + "EMAIL = ?, CNH = ?,  RG = ?, "
                     + "CPF = ? WHERE IDCLIENTE = ? ");
-//
-//            String dataConvertida = dataEntrada.format(dataBanco.parse(c.getDataNascimento()));
+
+            String dataConvertida = dataEntrada.format(dataBanco.parse(c.getDataNascimento()));
 
             stmt.setString(1, c.getNome());
-            stmt.setString(2, c.getDataNascimento());
+            stmt.setString(2, dataConvertida);
             stmt.setString(3, c.getTelefoneFixo());
             stmt.setString(4, c.getTelefoneCelular());
             stmt.setString(5, c.getEmail());
@@ -125,6 +130,8 @@ public class ClienteDAO {
             stmt.executeUpdate();
 
         } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ParseException ex) {
             ex.printStackTrace();
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
