@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:include page="/util/topo.jsp"></jsp:include>
 <!doctype html>
 <html lang="pt-br">
     <head>
@@ -73,28 +74,31 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/locadora/main">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/locadora/venda/locacao">Locação</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="/locadora/main">Cliente</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="/locadora/veiculos">Veículo</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="/locadora/CadastrarFuncionario">Funcionário</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="#">Filial</a>
-                        </li>
-                    </ul>
-                </div>
+               <div class="collapse navbar-collapse" id="navbarNav">
+                                        <ul class="navbar-nav">
+                                            <li class="nav-item active">
+                                                <a class="nav-link" href="/locadora/home">HOME <span class="sr-only">(current)</span></a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="/locadora/venda/locacao">LOCAÇÃO</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link disabled" href="/locadora/cadastrarC">CLIENTE</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link disabled" href="/locadora/cadastrarV">VEÍCULO</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link disabled" href="/locadora/CadastrarFuncionario">FUNCIONÁRIO</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link disabled" href="#">FILIAL</a>
+                                            </li>
+                                            <li class="nav-item pulç">
+                                                <a style="margin-left: 500px"href="logout"  class="nav-link active">LOGOUT</a>
+                                            </li> 
+                                        </ul>
+                                    </div>
             </div>
         </nav>
 
