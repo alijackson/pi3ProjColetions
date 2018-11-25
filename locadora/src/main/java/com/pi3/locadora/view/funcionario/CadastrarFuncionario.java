@@ -64,7 +64,7 @@ public class CadastrarFuncionario extends HttpServlet {
             String senha = request.getParameter("senha");
             String cpf = request.getParameter("cpf");
             String cargo = request.getParameter("cargo");
-//            String ativo = request.getParameter("ativo");
+           String ativo = request.getParameter("ativo");
             String id = request.getParameter("id");
 
             Funcionario f = new Funcionario();
@@ -77,11 +77,11 @@ public class CadastrarFuncionario extends HttpServlet {
             f.setCpf(cpf);
             f.setCargo(cargo);
 
-//            if (ativo != null && ativo.trim().equals("on")) {
-//                f.setAtivo((byte) 1);
-//            } else {
-//                f.setAtivo((byte) 0);
-//            }
+            if (ativo != null && ativo.trim().equals("on")) {
+                f.setAtivo((byte) 1);
+            } else {
+                f.setAtivo((byte) 0);
+            }
 
             FuncionarioDAO dao = new FuncionarioDAO();
 
