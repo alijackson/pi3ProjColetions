@@ -8,14 +8,14 @@ package br.com.model.dao;
 import br.com.conneticon.ConnectionFactory;
 import br.com.model.Funcionario;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -209,7 +209,7 @@ public class FuncionarioDAO {
             ConnectionFactory.closeConnection(con, stmt, rs);
 
         }
-        return f ;
+        return f;
     }
 
     public ArrayList<Funcionario> buscar(String nome) {
@@ -217,21 +217,23 @@ public class FuncionarioDAO {
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
-        Funcionario f = new Funcionario();
-
         ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
 
         try {
 
-            stmt = con.prepareStatement("SELECT * FROM FUNCIONARIO WHERE NOME LIKE ? ");
+            stmt = con.prepareStatement("SELECT * FROM FUNCIONARIO WHERE ENABLE = 1 AND NOME LIKE ? ");
             stmt.setString(1, "%" + nome + "%");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
 
+                Funcionario f = new Funcionario();
+
+                String dataConvertida = dataEntrada.format(dataBanco.parse(rs.getString("DTNASCIMENTO")));
+
                 f.setId(rs.getInt("IDFUNCIONARIO"));
                 f.setNome(rs.getString("NOME"));
-                f.setDataNascimento(rs.getString("DTNASCIMENTO"));
+                f.setDataNascimento(dataConvertida);
                 f.setCpf(rs.getString("CPF"));
                 f.setEmail(rs.getString("EMAIL"));
                 f.setCargo(rs.getString("CARGO"));
@@ -244,6 +246,8 @@ public class FuncionarioDAO {
             }
 
         } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ParseException ex) {
             ex.printStackTrace();
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);

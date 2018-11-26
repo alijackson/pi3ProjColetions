@@ -57,7 +57,7 @@ public class Locacoes extends HttpServlet{
         
         */
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("/locacao/locacoes.jsp");
+                = request.getRequestDispatcher("/locacoes.jsp");
         
         dispatcher.forward(request, response);
         

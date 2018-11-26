@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package br.com.model.dao;
-
 import br.com.conneticon.ConnectionFactory;
 import br.com.model.Cliente;
 import java.sql.Connection;
@@ -16,8 +15,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author David
@@ -196,17 +193,20 @@ public class ClienteDAO {
         ArrayList<Cliente> clientes = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM CLIENTE WHERE NOME LIKE ? ");
+            stmt = con.prepareStatement("SELECT * FROM CLIENTE WHERE ENABLE = 1 AND NOME LIKE ? ");
             stmt.setString(1, "%" + nome + "%");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-
+                
                 Cliente c = new Cliente();
+                
+                     
+                String dataConvertida = dataEntrada.format(dataBanco.parse(rs.getString("DTNASCIMENTO")));
 
                 c.setId(rs.getInt("IDCLIENTE"));
                 c.setNome(rs.getString("NOME"));
-                c.setDataNascimento(rs.getString("DTNASCIMENTO"));
+                c.setDataNascimento(dataConvertida);
                 c.setTelefoneFixo(rs.getString("TELFIXO"));
                 c.setTelefoneCelular(rs.getString("TELCEL"));
                 c.setEmail(rs.getString("EMAIL"));
@@ -218,6 +218,8 @@ public class ClienteDAO {
 
         } catch (SQLException ex) {
             ex.printStackTrace();
+        } catch (ParseException ex) {
+           ex.printStackTrace();
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
 

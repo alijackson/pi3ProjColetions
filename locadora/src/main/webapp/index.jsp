@@ -47,18 +47,18 @@
                     <nav class="navbar navbar-expand-lg navbar-light bg-light scrolling-navbar fixed-top">
 
                         <div class="container">
-                            <a class="navbar-brand" href="#">LogoTipo</a>
+                            <a class="navbar-brand" ><img src="imagens/free_horizontal_on_white_by_logaster (1) (1).png"></a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
                             <div class="collapse navbar-collapse" id="navbarNav">
                                 <div class="collapse navbar-collapse" id="navbarNav">
                                     <ul class="navbar-nav">
-                                        <li class="nav-item active">
-                                            <a class="nav-link" href="/locadora/home">HOME <span class="sr-only">(current)</span></a>
+                                        <li class="nav-item">
+                                            <a class="nav-link disabled" href="/locadora/home">HOME <span class="sr-only">(current)</span></a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/locadora/venda/locacao">LOCAÇÃO</a>
+                                            <a class="nav-link disabled" href="#">LOCAÇÃO</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link disabled" href="/locadora/cadastrarC">CLIENTE</a>
@@ -84,7 +84,7 @@
 
                 <div class="col-6">
                     <br><br><br><br>
-                    <h1 style="text-align: center">LOCADORA FIVE</h1>
+                    <h1 style="text-align: center"><img src="imagens/login.png"></h1>
 
 
 
