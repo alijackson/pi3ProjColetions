@@ -28,7 +28,7 @@ public class Home extends HttpServlet {
         
         
           RequestDispatcher dispatcher
-                = request.getRequestDispatcher("/index.jsp");
+                = request.getRequestDispatcher("tela-principal/tela-principal.jsp");
 
         dispatcher.forward(request, response);
     }
