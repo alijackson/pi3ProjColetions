@@ -89,6 +89,12 @@
                     margin-left: 8%;
 
                 }
+                #mensagem{
+
+                    text-align: center;
+
+
+                }
 
                 #menu{
 
@@ -224,6 +230,8 @@
                 </table>
             </div>
 
+            <p id="mensagem">${mensagem}</p>
+
             <!-- FIM TABLE -->
 
             <!-- Inicio Paginação-->
@@ -321,9 +329,11 @@
                                 </div>
                             </div>
 
-                            <button type="reset" class="btn cancel btn-secondary float-right" data-dismiss="modal">Cancelar</button>
 
                             <button class="btn btn-primary float-right" id="butSubmit" name="butSubmit" id="butSubmit">Cadastrar</button>
+
+                            <button type="reset" class="btn cancel btn-secondary float-right" data-dismiss="modal">Cancelar</button>
+
                             <button type="button" class="btn btn-danger " id="excluir" name="excluir" onclick="confirmarExcluir()">
                                 Excluir </button>
                             <!--</div>-->

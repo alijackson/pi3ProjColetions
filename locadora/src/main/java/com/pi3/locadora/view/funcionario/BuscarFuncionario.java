@@ -63,10 +63,7 @@ public class BuscarFuncionario extends HttpServlet {
 
             } else {
 
-                //request.setAttribute("veiculoErro", "Veiculo não localizado");
-                listFuncionarios = dao.buscar(pesquisar);
-
-                request.setAttribute("listaFuncionarios", listFuncionarios);
+                request.setAttribute("mensagem", "Funcionário não localizado");
 
                 RequestDispatcher dispatcher
                         = request.getRequestDispatcher("/funcionario/funcionario.jsp");

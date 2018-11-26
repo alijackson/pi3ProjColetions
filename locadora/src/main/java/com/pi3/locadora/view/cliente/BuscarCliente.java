@@ -62,10 +62,7 @@ public class BuscarCliente extends HttpServlet {
 
             } else {
 
-                //request.setAttribute("veiculoErro", "Veiculo não localizado");
-                listaCliente = dao.apresentarClientes();
-
-                request.setAttribute("listarCliente", listaCliente);
+                request.setAttribute("mensagem", "Cliente não localizado");
 
                 RequestDispatcher dispatcher
                         = request.getRequestDispatcher("/cliente/home-cliente.jsp");

@@ -37,8 +37,8 @@ public class FuncionarioDAO {
         try {
 
             stmt = con.prepareStatement(
-                    "INSERT INTO FUNCIONARIO(NOME,DTNASCIMENTO,CPF,EMAIL,CARGO,LOGIN,SENHA,ATIVO,ENABLE) "
-                    + "VALUES (?,?,?,?,?,?,?,?,1)");
+                    "INSERT INTO FUNCIONARIO(NOME,DTNASCIMENTO,CPF,EMAIL,CARGO,LOGIN,SENHA,ATIVO) "
+                    + "VALUES (?,?,?,?,?,?,?,?)");
 
             stmt.setString(1, f.getNome());
             stmt.setString(2, f.getDataNascimento());
@@ -103,7 +103,7 @@ public class FuncionarioDAO {
 
             stmt = con.prepareStatement("UPDATE FUNCIONARIO SET NOME = ?, DTNASCIMENTO = ?, "
                     + "CPF = ?, EMAIL = ?, CARGO = ?, LOGIN = ?, "
-                    + "SENHA = ?, ATIVO = ?, ENABLE = 1 "
+                    + "SENHA = ?, ATIVO = ? "
                     + "WHERE IDFUNCIONARIO = ? ");
 
             stmt.setString(1, f.getNome());
@@ -119,7 +119,6 @@ public class FuncionarioDAO {
             stmt.execute();
 
         } catch (SQLException ex) {
-            System.out.println("ERROOOO =======");
             ex.printStackTrace();
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
@@ -150,7 +149,6 @@ public class FuncionarioDAO {
             }
 
         } catch (SQLException ex) {
-            System.out.println("ERROOOO =======");
             ex.printStackTrace();
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
@@ -267,7 +265,7 @@ public class FuncionarioDAO {
             stmt.setString(1, "%" + nome + "%");
             rs = stmt.executeQuery();
 
-            while (rs.next()) {
+            if (rs.next()) {
                 result = true;
             }
 
@@ -279,19 +277,4 @@ public class FuncionarioDAO {
         return result;
     }
 
-    public Date converterData(SimpleDateFormat dataEntrada, SimpleDateFormat dataBanco, Funcionario f) {
-
-        String data;
-        Date dataConvertida = null;
-
-        try {
-            data = dataBanco.format(dataEntrada.parse(f.getDataNascimento()));
-            dataConvertida = java.sql.Date.valueOf(data);
-        } catch (ParseException ex) {
-            ex.printStackTrace();
-        }
-
-        return dataConvertida;
-
-    }
 }

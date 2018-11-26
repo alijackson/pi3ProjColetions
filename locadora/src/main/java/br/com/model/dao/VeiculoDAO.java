@@ -145,7 +145,7 @@ public class VeiculoDAO {
 
         try {
 
-            stmt = con.prepareStatement("UPDATE VEICULO SEt ENABLE = 0 WHERE IDVEICULO = ?");
+            stmt = con.prepareStatement("UPDATE VEICULO SET ENABLE = 0 WHERE IDVEICULO = ?");
             stmt.setInt(1, id);
             stmt.executeUpdate();
 
@@ -202,7 +202,7 @@ public class VeiculoDAO {
 
         try {
 
-            stmt = con.prepareStatement("SELECT * FROM VEICULO WHERE ENABLE = 1 AND MODELO LIKE ? ");
+            stmt = con.prepareStatement("SELECT * FROM VEICULO WHERE MODELO LIKE ? ");
             stmt.setString(1, "%" + modelo + "%");
             rs = stmt.executeQuery();
 
@@ -241,7 +241,7 @@ public class VeiculoDAO {
         boolean result = false;
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM VEICULO WHERE ENABLE = 1 AND MODELO LIKE ? ");
+            stmt = con.prepareStatement("SELECT * FROM VEICULO WHERE MODELO LIKE ? ");
             stmt.setString(1, "%" + modelo + "%");
             rs = stmt.executeQuery();
 

@@ -60,10 +60,7 @@ public class BuscarVeiculos extends HttpServlet {
 
             } else {
 
-                //request.setAttribute("veiculoErro", "Veiculo não localizado");
-                listVeiculos = dao.apresentarVeiculos();
-
-                request.setAttribute("listarVeiculos", listVeiculos);
+                request.setAttribute("mensagem", "Veiculos não localizado");
 
                 RequestDispatcher dispatcher
                         = request.getRequestDispatcher("/veiculo/home-veiculo.jsp");

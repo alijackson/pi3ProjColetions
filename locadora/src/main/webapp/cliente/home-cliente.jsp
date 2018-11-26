@@ -23,7 +23,6 @@
             <!-- Nesse caso, este estilo � apenas para inserir imagens -->
             <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-
             <!-- SWEET ALERT -->
             <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
@@ -35,7 +34,13 @@
                     margin-left: 8%;
 
                 }
-
+                
+                #mensagem{
+                    
+                    text-align: center;
+                    
+                    
+                }
                 #menu{
 
                     margin-left: 5%;
@@ -148,9 +153,10 @@
                         </tr>
                         </a>
                     </c:forEach>
-
                 </table>
             </div>
+
+            <p id="mensagem">${mensagem}</p>
             <!-- FIM TABLE -->
 
             <!-- Inicio Paginação-->

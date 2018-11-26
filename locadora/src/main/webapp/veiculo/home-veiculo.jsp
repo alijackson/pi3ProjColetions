@@ -27,6 +27,13 @@
 
                 }
 
+                #mensagem{
+
+                    text-align: center;
+
+
+                }
+
                 #menu{
 
                     margin-left: 5%;
@@ -111,7 +118,7 @@
                 </div>
                 <hr>
                 <div class="col-md-12 d-flex-inline">
-                    <form action="cadastrarV" method="head" class="form-inline my-2 my-lg-0 d-flex-inline" id="procura">
+                    <form action="buscarV" method="post" class="form-inline my-2 my-lg-0 d-flex-inline" id="procura">
                         <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Search" id="pesquisar"
                                name="pesquisar">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="procurar" name="procurar">Buscar</button>
@@ -158,6 +165,8 @@
                 </table>
             </div>
             <!-- FIM TABLE -->
+
+            <p id="mensagem">${mensagem}</p>
 
             <!-- Inicio Paginação-->
             <div class="container" id="pagination">
