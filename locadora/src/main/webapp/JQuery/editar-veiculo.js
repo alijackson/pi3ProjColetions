@@ -1,6 +1,6 @@
 function editarVeiculo(id) {
 
-    let  url = "http://localhost:8080/locadora/cadastrarV?id=" + id;
+    let  url = "http://localhost:8081/locadora/cadastrarV?id=" + id;
 
     console.log(url)
 
@@ -49,7 +49,7 @@ function confirmeExcluir(){
 function excluirVeiculo(){
     $("#mod-confirmar").modal("hide");
     let id = document.getElementById('idVeiculo').value;
-    let  url = "http://localhost:8080/locadora/cadastrarV?cod="+id;
+    let  url = "http://localhost:8081/locadora/cadastrarV?cod="+id;
 
     $.ajax({
         url: url,

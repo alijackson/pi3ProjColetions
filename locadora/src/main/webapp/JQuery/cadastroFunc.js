@@ -1,6 +1,6 @@
 function editarFunc(func) {
     console.log("funcao")
-    let url = "http://localhost:8080/locadora/CadastrarFuncionario?id=" + func;
+    let url = "http://localhost:8081/locadora/CadastrarFuncionario?id=" + func;
     console.log(url)
     $.ajax({
         url: url,
@@ -69,7 +69,7 @@ function confirmarExcluir() {
 function excluirFunc(){
     $("#mod-confirmar").modal("hide");
     let id = document.getElementById('id').value;
-    let  url = "http://localhost:8080/locadora/CadastrarFuncionario?id="+id;
+    let  url = "http://localhost:8081/locadora/CadastrarFuncionario?id="+id;
 
     $.ajax({
         url: url,

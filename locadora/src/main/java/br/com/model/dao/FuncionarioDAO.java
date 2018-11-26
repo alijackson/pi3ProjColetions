@@ -37,8 +37,8 @@ public class FuncionarioDAO {
         try {
 
             stmt = con.prepareStatement(
-                    "INSERT INTO FUNCIONARIO(NOME,DTNASCIMENTO,CPF,EMAIL,CARGO,LOGIN,SENHA,ATIVO) "
-                    + "VALUES (?,?,?,?,?,?,?,?)");
+                    "INSERT INTO FUNCIONARIO(NOME,DTNASCIMENTO,CPF,EMAIL,CARGO,LOGIN,SENHA,ATIVO,ENABLE) "
+                    + "VALUES (?,?,?,?,?,?,?,?,1)");
 
             stmt.setString(1, f.getNome());
             stmt.setString(2, f.getDataNascimento());
@@ -67,7 +67,7 @@ public class FuncionarioDAO {
         ArrayList<Funcionario> Funcionarios = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM FUNCIONARIO");
+            stmt = con.prepareStatement("SELECT * FROM FUNCIONARIO ");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -96,7 +96,6 @@ public class FuncionarioDAO {
 
     public void atualizar(Funcionario f) {
 
-        String retur = "";
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         try {
@@ -163,7 +162,7 @@ public class FuncionarioDAO {
         PreparedStatement stmt = null;
 
         try {
-
+            //stmt = con.prepareStatement("UPDATE FUNCIONARIO SET ENABLE = 0 WHERE IDFUNCIONARIO = ?");
             stmt = con.prepareStatement("DELETE FROM FUNCIONARIO WHERE IDFUNCIONARIO = ?");
             stmt.setInt(1, id);
             stmt.execute();
@@ -210,7 +209,7 @@ public class FuncionarioDAO {
             ConnectionFactory.closeConnection(con, stmt, rs);
 
         }
-        return f;
+        return f ;
     }
 
     public ArrayList<Funcionario> buscar(String nome) {

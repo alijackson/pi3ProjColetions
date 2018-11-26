@@ -1,6 +1,6 @@
 function editarCliente(id) {
 
-    let  url = "http://localhost:8080/locadora/cadastrarC?id=" + id;
+    let  url = "http://localhost:8081/locadora/cadastrarC?id=" + id;
 
     console.log(url)
 
@@ -53,7 +53,7 @@ function confirmarExcluir() {
 function excluirCliente(){
     $("#mod-confirmar").modal("hide");
     let id = document.getElementById('idCliente').value;
-    let  url = "http://localhost:8080/locadora/cadastrarC?cod="+id;
+    let  url = "http://localhost:8081/locadora/cadastrarC?cod="+id;
 
     $.ajax({
         url: url,
