@@ -1,3 +1,8 @@
+<%-- 
+    Document   : locacaoV2
+    Created on : 25/11/2018, 10:09:54
+    Author     : Kujikeo
+--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
@@ -65,7 +70,16 @@
                 margin-left: 40%;
                 margin-right: 40%;
             }
+            #Procurar{
+                margin-left: 10px;
+            }
+            #cliente{
+                margin-top: 5px;
+            }
 
+            #veiculo{
+                margin-top: 5px;
+            }
         </style>
 
     </head>
@@ -75,7 +89,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light scrolling-navbar fixed-top">
 
             <div class="container">
-                <a class="navbar-brand" href="#"><img src="imagens/logo.png"></a>
+                <a class="navbar-brand" href="#">LogoTipo</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -112,130 +126,158 @@
 
                     <h1>Efetuar Locação</h1>
                 </div>
-
-
             </div>
             <hr>
-            <form id="form" action="cadastrar" method="post">
-                <!-- AQUI TEM UM BOTÃO QUE APRESENTA UMA TABELA DE CLIENTES -->
-                <div class="form-row">
-                    <div class="col-md-2 d-flex-inline ">
-                        <a class="btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#clientes" id="btnd">Selecionar Cliente</a>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#cliente" role="tab" aria-controls="home" aria-selected="true">Cliente</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#veiculo" role="tab" aria-controls="profile" aria-selected="false">Veículo</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="contact-tab" data-toggle="tab" href="#protecoes" role="tab" aria-controls="contact" aria-selected="false">Proteções</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#servicos" role="tab" aria-controls="contact" aria-selected="false">Serviços</a>
+                  </li>
+              </ul>
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="cliente" role="tabpanel" aria-labelledby="home-tab">
+                    <br>
+             <!-- AQUI TEM UM BOTÃO QUE APRESENTA UMA TABELA DE CLIENTES -->
+                    <div class="form-row">
+                        <div class="col-md-2 d-flex-inline ">
+                            <a class="btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#clientes" id="btnd">Selecionar Cliente</a>
+                        </div>
                     </div>
-                    <!-- APRESENTAR O CLIENTE SELECIONADO -->
+                    <hr>
+             <!-- APRESENTAR O CLIENTE SELECIONADO -->
                     <div>
                         <label for="cliente"> Cliente: </label>
                     </div>
                 </div>
-                <br>
-                <!-- AQUI TEM UM BOTÃO QUE APRESENTA UMA TABELA DE VEICULOS -->
-                <div class="form-row">
-                    <div class="col-md-2 d-flex-inline ">
+
+                <div class="tab-pane fade" id="veiculo" role="tabpanel" aria-labelledby="profile-tab">
+                    <br>
+             <!-- AQUI TEM UM BOTÃO QUE APRESENTA UMA TABELA DE VEICULOS -->
+                    <div class="form-row">
+                      <div class="col-md-2 d-flex-inline ">
                         <a class="btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#veiculos" id="btnd">Selecionar Veiculo</a>
                     </div>
-                    <!-- APRESENTAR O VEICULO SELECIONADO -->
+                </div>
+              <!-- APRESENTAR O VEICULO SELECIONADO -->
+                    <hr>  
                     <div>
                         <label for="veiculo">Veiculo: </label>
                     </div>
-                </div>
-                <br>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label for="dataNasc">Data de Retirada</label>
-                        <input type="date" class="form-control" id="dataretira" name="dataretira">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="dataNasc">Data de Entrega</label>
-                        <input type="date" class="form-control" id="dataentrega" name="dataentrega">
-                    </div>
-                </div>
-                <div>
-                    <h2>Proteções</h2>
-                </div>
-                <div>
                     <div class="form-row">
-                        <div>
-                            <input type="radio" name="protect" value="basico">
+                        <div class="form-group col-md-4">
+                            <label for="dataNasc">Data de Retirada</label>
+                            <input type="date" class="form-control" id="dataretira" name="dataretira">
                         </div>
-                        <div class="form-group col-md-2">
-                            <label for="basico">Proteção Básica</label>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="valorBas">R$25,00 por dia</label>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div>
-                            <input type="radio" name="protect" value="completo">
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="comp">Proteção Completa</label>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="valorComp">R$35,00 por dia</label>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div>
-                            <input type="radio" name="protect" value="super">
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="super">Superproteção</label>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="valorSuper">R$45,00 por dia</label>
+                        <div class="form-group col-md-4">
+                            <label for="dataNasc">Data de Entrega</label>
+                            <input type="date" class="form-control" id="dataentrega" name="dataentrega">
                         </div>
                     </div>
                 </div>
-                <div>
-                    <h2>Serviços</h2>
-                </div>
-                <div>
-                    <div class="form-row">
-                        <div>
-                            <input type="radio" name="service" value="bebe">
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="bebe">Bebê Conforto</label>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="valorBebe">R$25,00 por dia</label>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div>
-                            <input type="radio" name="service" value="cadeira">
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="cad">Cadeira de Bebê</label>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="valorCad">R$30,00 por dia</label>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div>
-                            <input type="radio" name="service" value="gps">
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="nav">Navegador GPS</label>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="valorNav">R$12,00 por dia</label>
-                        </div>
-                    </div>
+
+                
+              <div class="tab-pane fade" id="protecoes" role="tabpanel" aria-labelledby="contact-tab">
+                    <br>
                     <div>
-                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <div class="form-row">
+                            <div>
+                                <input type="radio" name="protect" value="basico">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="basico">Proteção Básica</label>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="valorBas">R$25,00 por dia</label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div>
+                                <input type="radio" name="protect" value="completo">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="comp">Proteção Completa</label>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="valorComp">R$35,00 por dia</label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div>
+                                <input type="radio" name="protect" value="super">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="super">Superproteção</label>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="valorSuper">R$45,00 por dia</label>
+                            </div>
+                        </div>
                     </div>
+
+
+
                 </div>
-            </form>
+                <div class="tab-pane fade" id="servicos" role="tabpanel" aria-labelledby="contact-tab">
+                    <br>
+                    <div>
+                        <div class="form-row">
+                            <div>
+                                <input type="radio" name="service" value="bebe">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="bebe">Bebê Conforto</label>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="valorBebe">R$25,00 por dia</label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div>
+                                <input type="radio" name="service" value="cadeira">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="cad">Cadeira de Bebê</label>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="valorCad">R$30,00 por dia</label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div>
+                                <input type="radio" name="service" value="gps">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="nav">Navegador GPS</label>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="valorNav">R$12,00 por dia</label>
+                            </div>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </div>
+
+
+
+                </div>
+              </div>
+      
         </div>
 
         <div class="modal fade" id="clientes" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalCenterTitle">Veiculos</h5>
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Clientes</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -247,7 +289,7 @@
                                 <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="Procurar" onclick="">Buscar</button>
                             </div>
                             <form>
-                                <table class="table table-striped">
+                                <table class="table table-striped" id="cliente">
                                     <tr>
                                         <th>ID</th>
                                         <th>Nome</th>
@@ -279,7 +321,7 @@
             </div>
         </div>
         <div class="modal fade" id="veiculos" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalCenterTitle">Veiculos</h5>
@@ -294,7 +336,7 @@
                                 <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="Procurar" onclick="">Buscar</button>
                             </div>
                             <form>
-                                <table class="table table-striped">
+                                <table class="table table-striped" id="veiculo">
                                     <tr>
                                         <th>ID</th>
                                         <th>Imagem</th>
