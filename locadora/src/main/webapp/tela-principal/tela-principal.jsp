@@ -65,6 +65,9 @@
                                             <li class="nav-item">
                                                 <a class="nav-link " href="#">FILIAL</a>
                                             </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link " href="/locadora/relatorio">RELATORIO</a>
+                                            </li>
                                             <li class="nav-item pulç">
                                                 <a style="margin-left: 500px"href="logout"  class="nav-link active">LOGOUT</a>
                                             </li> 
