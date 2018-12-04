@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Pichau
  */
-@WebServlet(name = "GerarRelatorio", urlPatterns = {"/relatorio"})
+@WebServlet(name = "GerarRelatorio", urlPatterns = {"/GerarRelatorio"})
 public class GerarRelatorio extends HttpServlet {
 
     public GerarRelatorio() {
@@ -35,67 +35,15 @@ public class GerarRelatorio extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        LocacaoDAO daoLocacao = new LocacaoDAO();
+            throws ServletException, IOException {       
 
         ArrayList<Locacao> locacoes = new ArrayList<Locacao>();
+        
+        LocacaoDAO daoLocacao = new LocacaoDAO();
 
         locacoes = daoLocacao.ApresentarLocacoes();
-
-        FuncionarioDAO daoFuncionario = new FuncionarioDAO();
-
-        VeiculoDAO daoVeiculo = new VeiculoDAO();
-
-        ClienteDAO daoCliente = new ClienteDAO();
-
-        ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
-
-        ArrayList<Veiculo> veiculos = new ArrayList<Veiculo>();
-
-        ArrayList<Cliente> clientes = new ArrayList<Cliente>();
-
+                
         request.setAttribute("listaLocacoes", locacoes);
-
-        Funcionario funcionario = new Funcionario();
-
-        Cliente cliente = new Cliente();
-
-        Veiculo veiculo = new Veiculo();
-
-        for (int i = 0; i < locacoes.size(); i++) {
-
-            funcionario = daoFuncionario.Pesquisa(Integer.parseInt(locacoes.get(i).getIdFuncionario()));
-
-            if (funcionario != null) {
-
-                funcionarios.add(funcionario);
-
-            }
-
-            cliente = daoCliente.pesquisa(Integer.parseInt(locacoes.get(i).getIdCliente()));
-
-            if (cliente != null) {
-
-                clientes.add(cliente);
-
-            }
-
-            veiculo = daoVeiculo.pesquisa(Integer.parseInt(locacoes.get(i).getIdVeiculo()));
-
-            if (veiculo != null) {
-
-                veiculos.add(veiculo);
-
-            }
-
-        }
-
-        request.setAttribute("listaFuncionarios", funcionarios);
-
-        request.setAttribute("listaClientes", clientes);
-
-        request.setAttribute("listaVeiculos", veiculos);
 
         RequestDispatcher dispatcher
                 = request.getRequestDispatcher("/relatorio/relatorio.jsp");
@@ -108,154 +56,7 @@ public class GerarRelatorio extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
 
-        LocacaoDAO daoLocacao = new LocacaoDAO();
-
-        FuncionarioDAO daoFuncionario = new FuncionarioDAO();
-
-        VeiculoDAO daoVeiculo = new VeiculoDAO();
-
-        ClienteDAO daoCliente = new ClienteDAO();
-
-        ArrayList<Locacao> locacoes = new ArrayList<Locacao>();
-
-        ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
-
-        ArrayList<Veiculo> veiculos = new ArrayList<Veiculo>();
-
-        ArrayList<Cliente> clientes = new ArrayList<Cliente>();
-
-        String pesquisar = request.getParameter("pesquisar");
-
-        if ("".equalsIgnoreCase(pesquisar)
-                || pesquisar == null) {
-
-            locacoes = daoLocacao.ApresentarLocacoes();
-
-            request.setAttribute("listaLocacoes", locacoes);
-
-            RequestDispatcher dispatcher
-                    = request.getRequestDispatcher("/relatorio/relatorio.jsp");
-
-            dispatcher.forward(request, response);
-
-        } else {
-
-            if (daoFuncionario.checarFuncionario(pesquisar)) {
-
-                funcionarios = daoFuncionario.buscar(pesquisar);
-
-                //locacoes = daoLocacao.buscarFuncionarios(funcionarios);
-                request.setAttribute("listaLocacoes", locacoes);
-
-                Funcionario funcionario = new Funcionario();
-
-                Cliente cliente = new Cliente();
-
-                Veiculo veiculo = new Veiculo();
-
-                for (int i = 0; i < locacoes.size(); i++) {
-
-                    funcionario = daoFuncionario.Pesquisa(Integer.parseInt(locacoes.get(i).getIdFuncionario()));
-
-                    if (funcionario != null) {
-
-                        funcionarios.add(funcionario);
-
-                    }
-
-                    cliente = daoCliente.pesquisa(Integer.parseInt(locacoes.get(i).getIdCliente()));
-
-                    if (cliente != null) {
-
-                        clientes.add(cliente);
-
-                    }
-
-                    veiculo = daoVeiculo.pesquisa(Integer.parseInt(locacoes.get(i).getIdVeiculo()));
-
-                    if (veiculo != null) {
-
-                        veiculos.add(veiculo);
-
-                    }
-
-                }
-
-                request.setAttribute("listaFuncionarios", funcionarios);
-
-                request.setAttribute("listaClientes", clientes);
-
-                request.setAttribute("listaVeiculos", veiculos);
-
-                RequestDispatcher dispatcher
-                        = request.getRequestDispatcher("/relatorio/relatorio.jsp");
-
-                dispatcher.forward(request, response);
-
-            } else if (daoVeiculo.checarVeiculo(pesquisar)) {
-
-                veiculos = daoVeiculo.buscar(pesquisar);
-
-                //locacoes = daoLocacao.buscarVeiculos(funcionarios);
-                request.setAttribute("listaLocacoes", locacoes);
-
-                Funcionario funcionario = new Funcionario();
-
-                Cliente cliente = new Cliente();
-
-                Veiculo veiculo = new Veiculo();
-
-                for (int i = 0; i < locacoes.size(); i++) {
-
-                    funcionario = daoFuncionario.Pesquisa(Integer.parseInt(locacoes.get(i).getIdFuncionario()));
-
-                    if (funcionario != null) {
-
-                        funcionarios.add(funcionario);
-
-                    }
-
-                    cliente = daoCliente.pesquisa(Integer.parseInt(locacoes.get(i).getIdCliente()));
-
-                    if (cliente != null) {
-
-                        clientes.add(cliente);
-
-                    }
-
-                    veiculo = daoVeiculo.pesquisa(Integer.parseInt(locacoes.get(i).getIdVeiculo()));
-
-                    if (veiculo != null) {
-
-                        veiculos.add(veiculo);
-
-                    }
-
-                }
-
-                request.setAttribute("listaFuncionarios", funcionarios);
-
-                request.setAttribute("listaClientes", clientes);
-
-                request.setAttribute("listaVeiculos", veiculos);
-
-                RequestDispatcher dispatcher
-                        = request.getRequestDispatcher("/relatorio/relatorio.jsp");
-
-                dispatcher.forward(request, response);
-
-            } else {
-
-                request.setAttribute("mensagem", "Pesquisa não localizado");
-
-                RequestDispatcher dispatcher
-                        = request.getRequestDispatcher("/relatorio/relatorio.jsp");
-
-                dispatcher.forward(request, response);
-
-            }
-
-        }
+        
 
     }
 

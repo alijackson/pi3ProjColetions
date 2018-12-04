@@ -70,7 +70,7 @@ public class LocacaoDAO {
         ArrayList<Locacao> locacoes = new ArrayList<Locacao>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM LOCACAO WHERE enable=1");
+            stmt = con.prepareStatement("SELECT * FROM LOCACAO");
             rs = stmt.executeQuery();
             SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
 

@@ -37,58 +37,7 @@
 
             <link rel="stylesheet" href="../Morris/css/morris.css">
             <script src="../Morris/js/morris.min.js" charset="utf-8"></script>
-
-            <script type="text/JAVASCRIPT">
-
-                function excluir() {
-                swal({
-                title: "Deseja excluir?",
-                text: "Você estará deletendo do sistema!",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-                } )
-                .then((willDelete) => {
-                if (willDelete) {
-                swal("Poof! Funcionário deletado com sucesso!", {
-                icon: "success",
-                });
-                } else {
-                swal("Seu funcionário ainda está salvo!");
-                }
-                });
-
-                }
-                function sucesso(){
-
-                swal({
-                title: "Sucesso!",
-                text: "Funcionário cadastrado com sucesso!",
-                icon: "success",
-                button: "Ok",
-                });
-
-                $('.abrir').on('click', function(){
-
-                $('.modal').modal('show');  
-
-                });
-
-                $('.modal').on('click', function(){
-
-                $('.modal').modal('hide'); 
-
-                });
-
-                $('form').on('submit', function(){
-
-                $('.modal').modal('hide'); 
-
-                });
-                }
-
-
-            </script>
+            
 
             <!-- STYLES -->
             <style>
@@ -165,7 +114,7 @@
                                 <a class="nav-link " href="#">FILIAL</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="/locadora/relatorio">RELATORIO</a>
+                                <a class="nav-link " href="/locadora/GerarRelatorio">RELATORIO</a>
                             </li>
                             <li class="nav-item pulç">
                                 <a style="margin-left: 500px"href="logout"  class="nav-link active">LOGOUT</a>
@@ -202,137 +151,130 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <h2>Grafico</h2>
+                            <lavel for="relatorios">Relatorio de Graficos:</lavel>
+                            <select name="relatorios" id="relatorios" onchange="relatorio()">
+                                <option value="locacao">Locações</option>
+                                <option value="veiculo">Veiculos</option>
+                                <option value="funcionario">Funcionarios</option>
+                            </select>
                             <hr>
-                            <div id="locacoes"></div>
+                            <div id="locacoes">
+                            </div>
                         </div>
                     </div>
+
+                    <div class="col-md-12">
+                        <table class="table table-striped">
+                            <tr>
+                                <th>ID</th>
+                                <th>Cliente</th>
+                                <th>Veiculo</th>
+                                <th>Funcionario</th>
+                                <th>Preço Total</th>
+                                <th>Dia de Retirada</th>
+                                <th>Dia de Entrega</th>
+                            </tr>
+
+                        <c:forEach items="${listaLocacoes}" var="locacao">
+                            <tr onclick="editarFunc(${locacao.getId()})" id="trTable">
+                                <td>
+                                    <c:out value='${locacao.getId()}' />
+                                </td>
+                                <td>
+                                    <c:out value="${locacao.getIdCliente()}" />
+                                </td>
+                                <td>
+                                    <c:out value="${locacao.getIdVeiculo()}" />
+                                </td>
+                                <td>
+                                    <c:out value="${locacao.getIdFuncionario()}" />
+                                </td>
+                                <td>
+                                    <c:out value="${locacao.getPrecoTotal()}" />
+                                </td>
+                                <td>
+                                    <c:out value="${locacao.getDiaRetira()}" />
+                                </td>
+                                <td>
+                                    <c:out value="${locacao.getDiaEntrega()}" />
+                                </td>
+                            </tr>
+                            </a>
+                        </c:forEach>
+
+                    </table>
                 </div>
 
-                <div class="col-md-12">
-                    <table class="table table-striped">
-                        <tr>
-                            <th>ID</th>
-                            <th>Cliente</th>
-                            <th>Veiculo</th>
-                            <th>Funcionario</th>
-                            <th>Preço Total</th>
-                            <th>Dia de Retirada</th>
-                            <th>Dia de Entrega</th>
-                        </tr>
+                <p id="mensagem">${mensagem}</p>
 
-                    <c:forEach items="${listaLocacoes}" var="locacao">
-                        <tr onclick="editarFunc(${locacao.getId()})" id="trTable">
-                            <td>
-                                <c:out value='${locacao.getId()}' />
-                            </td>
-                            <td>
-                                <c:forEach items="${listaClientes}" var="cliente">
-                                    <c:if test="${cliente.getId = locacao.getIdCliente}">
-                                        <c:out value="${cliente.getNome}" />
-                                    </c:if>
-                                </c:forEach>
-                            </td>
-                            <td>
-                                <c:forEach items="${listaVeiculos}" var="veiculo">
-                                    <c:if test="${veiculo.getId = locacao.getIdVeiculo}">
-                                        <c:out value="${veiculo.getModelo}" />
-                                    </c:if>
-                                </c:forEach>
-                            </td>
-                            <td>
-                                <c:forEach items="${listaFuncionarios}" var="funcionario">
-                                    <c:if test="${funcionario.getId = locacao.getIdFuncionario}">
-                                        <c:out value="${funcionario.getNome}" />
-                                    </c:if>
-                                </c:forEach>
-                            </td>
-                            <td>
-                                <c:out value="${locacao.getPrecoTotal()}" />
-                            </td>
-                            <td>
-                                <c:out value="${locacao.getDiaRetira()}" />
-                            </td>
-                            <td>
-                                <c:out value="${locacao.getDiaEntrega()}" />
-                            </td>
-                        </tr>
-                        </a>
-                    </c:forEach>
+                <!-- FIM TABLE -->
 
-                </table>
+                <!-- Inicio Paginação-->
+
+                <div class="container" id="pagination">
+                    <nav aria-label="Page navigation ">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+
+
+                </div>
+                <!-- FIM Paginação-->
             </div>
 
-            <p id="mensagem">${mensagem}</p>
+            <!-- JAVASCRIPT E JQUERY 
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+                <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+            -->
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
 
-            <!-- FIM TABLE -->
+            <script src="JQuery/cadastroFunc.js" type="text/javascript"></script>
 
-            <!-- Inicio Paginação-->
+            <script src="JQuery/jquery.mask.js" type="text/javascript"></script>
 
-            <div class="container" id="pagination">
-                <nav aria-label="Page navigation ">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
+            <script src="JQuery/validar.js" type="text/javascript"></script>
 
-
-            </div>
-            <!-- FIM Paginação-->
-        </div>
-
-        <!-- JAVASCRIPT E JQUERY 
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
-        -->
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
-
-        <script src="JQuery/cadastroFunc.js" type="text/javascript"></script>
-
-        <script src="JQuery/jquery.mask.js" type="text/javascript"></script>
-
-        <script src="JQuery/validar.js" type="text/javascript"></script>
-
-        <script type="text/javascript">
-            new Morris.Line({
-                // ID of the element in which to draw the chart.
-                element: 'locacoes',
-                // Chart data records -- each entry in this array corresponds to a point on
-                // the chart.
-                data: [
-                    <c:forEach items="${listaLocacoes}" var="locacao">
-                        {retirada: '<c:out value='${locacao.getDiaRetira()}' />', value: <c:out value='${locacao.getPrecoTotal()}' />},
-                    </c:forEach>
-                ],
-                // The name of the data record attribute that contains x-values.
-                xkey: 'retirada',
-                // A list of names of data record attributes that contain y-values.
-                ykeys: ['a', 'b'],
-                // Labels for the ykeys -- will be displayed when you hover over the
-                // chart.
-                labels: ['Retirada de Veiculo']
-            });
-        </script>
+            <script type="text/javascript">
+                new Morris.Line({
+                    // ID of the element in which to draw the chart.
+                    element: 'locacoes',
+                    // Chart data records -- each entry in this array corresponds to a point on
+                    // the chart.
+                    data: [
+                        <c:forEach items="${listaLocacoes}" var="locacao">
+                            { relatorio: '<c:out value="${locacao.getDiaRetira()}" />', total: <c:out value="${locacao.getPrecoTotal()}" /> },
+                        </c:forEach>
+                    ],
+                    // The name of the data record attribute that contains x-values.
+                    xkey: 'relatorio',
+                    // A list of names of data record attributes that contain y-values.
+                    ykeys: ['total'],
+                    // Labels for the ykeys -- will be displayed when you hover over the
+                    // chart.
+                    labels: ['Valor da Locação']
+                });
+            </script>
 
     </body>
 
