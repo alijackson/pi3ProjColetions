@@ -57,9 +57,19 @@ public class VerificarLogin extends HttpServlet {
         } else {
 
             boolean resposta = dao.checarLogin(login, senha);
-
-            if (resposta == true) {
+            
+            if(dao.getAtivo() == 0){
                 
+                request.setAttribute("mensagem", "Usuário não permitido");
+
+                RequestDispatcher dispatcher
+                        = request.getRequestDispatcher("/index.jsp");
+
+                dispatcher.forward(request, response);
+                
+                return;
+            }
+            if (resposta == true) {
                 HttpSession session = request.getSession(true);
                 
                 session.setAttribute("login", "true");

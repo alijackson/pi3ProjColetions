@@ -17,7 +17,7 @@ import java.sql.SQLException;
  * @author micro
  */
 public class LoginDAO {
-
+    private byte ativo;
     public LoginDAO() {
     }
 
@@ -37,7 +37,7 @@ public class LoginDAO {
             rs = stmt.executeQuery();
 
             if (rs.next()) {
-                
+                setAtivo((byte) rs.getInt("ATIVO"));
                 result = true;
             }
 
@@ -49,6 +49,14 @@ public class LoginDAO {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
         return result;
+    }
+
+    public byte getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(byte ativo) {
+        this.ativo = ativo;
     }
 
 }
