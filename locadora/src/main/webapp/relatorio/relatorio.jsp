@@ -37,7 +37,7 @@
 
             <link rel="stylesheet" href="../Morris/css/morris.css">
             <script src="../Morris/js/morris.min.js" charset="utf-8"></script>
-            
+
 
             <!-- STYLES -->
             <style>
@@ -88,9 +88,8 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light scrolling-navbar fixed-top">
 
                 <div class="container">
-                    <a class="navbar-brand" href="#"><img src="imagens/logo.png"></a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
-                            aria-expanded="false" aria-label="Toggle navigation">
+                    <a class="navbar-brand" href="#"><img src="imagens/logotipo.png"></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
@@ -111,14 +110,14 @@
                                 <a class="nav-link " href="/locadora/CadastrarFuncionario">FUNCIONÁRIO</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="#">FILIAL</a>
+                                <a class="nav-link " href="/locadora/filial">FILIAL</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link " href="/locadora/GerarRelatorio">RELATORIO</a>
                             </li>
                             <li class="nav-item pulç">
                                 <a style="margin-left: 500px"href="logout"  class="nav-link active">LOGOUT</a>
-                            </li>
+                            </li> 
                         </ul>
                     </div>
                 </div>
@@ -256,24 +255,24 @@
             <script src="JQuery/validar.js" type="text/javascript"></script>
 
             <script type="text/javascript">
-                new Morris.Line({
-                    // ID of the element in which to draw the chart.
-                    element: 'locacoes',
-                    // Chart data records -- each entry in this array corresponds to a point on
-                    // the chart.
-                    data: [
-                        <c:forEach items="${listaLocacoes}" var="locacao">
-                            { relatorio: '<c:out value="${locacao.getDiaRetira()}" />', total: <c:out value="${locacao.getPrecoTotal()}" /> },
-                        </c:forEach>
-                    ],
-                    // The name of the data record attribute that contains x-values.
-                    xkey: 'relatorio',
-                    // A list of names of data record attributes that contain y-values.
-                    ykeys: ['total'],
-                    // Labels for the ykeys -- will be displayed when you hover over the
-                    // chart.
-                    labels: ['Valor da Locação']
-                });
+                                new Morris.Line({
+                                    // ID of the element in which to draw the chart.
+                                    element: 'locacoes',
+                                    // Chart data records -- each entry in this array corresponds to a point on
+                                    // the chart.
+                                    data: [
+                <c:forEach items="${listaLocacoes}" var="locacao">
+                                        {relatorio: '<c:out value="${locacao.getDiaRetira()}" />', total: <c:out value="${locacao.getPrecoTotal()}" />},
+                </c:forEach>
+                                    ],
+                                    // The name of the data record attribute that contains x-values.
+                                    xkey: 'relatorio',
+                                    // A list of names of data record attributes that contain y-values.
+                                    ykeys: ['total'],
+                                    // Labels for the ykeys -- will be displayed when you hover over the
+                                    // chart.
+                                    labels: ['Valor da Locação']
+                                });
             </script>
 
     </body>

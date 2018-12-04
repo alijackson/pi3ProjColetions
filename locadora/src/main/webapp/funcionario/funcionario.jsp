@@ -130,7 +130,7 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light scrolling-navbar fixed-top">
 
                 <div class="container">
-                    <a class="navbar-brand" href="#"><img src="imagens/logo.png"></a>
+                    <a class="navbar-brand" href="#"><img src="imagens/logotipo.png"></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
                             aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -153,7 +153,7 @@
                                 <a class="nav-link " href="/locadora/CadastrarFuncionario">FUNCIONÁRIO</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="#">FILIAL</a>
+                                <a class="nav-link " href="/locadora/filial">FILIAL</a>
                             </li>
                             <li class="nav-item pulç">
                                 <a style="margin-left: 500px"href="logout"  class="nav-link active">LOGOUT</a>
