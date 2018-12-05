@@ -46,14 +46,6 @@ public class Locacao extends HttpServlet{
             dispatcher.forward(request, response);
 
     }
-
-    @Override
-    protected void doPut(HttpServletRequest request,
-            HttpServletResponse response) throws ServletException,
-            IOException {
-        response.setContentType("application/json;charset=UTF-8");
-
-    }
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
     {
@@ -67,26 +59,24 @@ public class Locacao extends HttpServlet{
         
     }
     @Override
-    protected void doHead(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
     {
         
-        resp.setContentType("application/json");
-        resp.setCharacterEncoding("UTF-8");
-        
-        ArrayList<Cliente> listClientes = new ArrayList<Cliente>();
-        
-        ClienteDAO dao = new ClienteDAO();
-
-        listClientes = dao.apresentarClientes();
-        
-        JSONArray array = new JSONArray();
-                JSONObject json = new JSONObject();
-        
-        PrintWriter out = resp.getWriter();
-        
         try {
+
+            ArrayList<Cliente> listClientes = new ArrayList<Cliente>();
+
+            ClienteDAO dao = new ClienteDAO();
+
+            listClientes = dao.apresentarClientes();
+
+            JSONArray array = new JSONArray();
+
+            PrintWriter out = resp.getWriter();
+            
             for(Cliente c : listClientes)
             {
+                JSONObject json = new JSONObject();
 
                 json.put("idCliente", c.getId());
                 json.put("nome", c.getNome());
@@ -98,17 +88,15 @@ public class Locacao extends HttpServlet{
                 json.put("telefonecelular", c.getTelefoneCelular());
                 json.put("datanascimento", c.getDataNascimento());
                 
-//                array.put(json);
-//                resp.getWriter().write(json.toString());
+                array.put(json);
                 
-                break;
             }
-            resp.getWriter().write(json.toString());
-//            out.print(array);
+            out.print(array);
+//            resp.getWriter().write(array.toString());
             
         } catch (Exception e) {
             
-//            JSONObject json = new JSONObject();
+            JSONObject json = new JSONObject();
         
             json.put("resp", "Erro ao interpretar dados "+ e);
 
