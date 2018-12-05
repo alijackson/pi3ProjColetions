@@ -13,8 +13,6 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 /**
  *
  * @author David
@@ -106,8 +104,6 @@ public class ClienteDAO {
                     + "TELFIXO = ?, TELCEL = ?, "
                     + "EMAIL = ?, CNH = ?,  RG = ?, "
                     + "CPF = ? WHERE IDCLIENTE = ? ");
-//
-//            String dataConvertida = dataEntrada.format(dataBanco.parse(c.getDataNascimento()));
 
             stmt.setString(1, c.getNome());
             stmt.setString(2, c.getDataNascimento());

@@ -205,7 +205,7 @@
 
                     <c:forEach items="${listaFuncionarios}" var="funcionario">
                         <tr onclick="editarFunc(${funcionario.getId()})" id="trTable">
-                            <td>
+                            <td >
                                 <c:out value='${funcionario.getId()}' />
                             </td>
                             <td>

@@ -70,7 +70,7 @@
                                             <a class="nav-link disabled" href="/locadora/CadastrarFuncionario">FUNCIONÁRIO</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link disabled" href="#">FILIAL</a>
+                                            <a class="nav-link disabled" href="/locadora/filial">FILIAL</a>
                                         </li>
 
                                     </ul>

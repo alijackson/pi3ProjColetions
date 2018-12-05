@@ -10,17 +10,24 @@ package br.com.model;
  * @author Kujikeo
  */
 public class Filial {
-    private String nome;
-    private int id;
-    private String endereco;
-    private String descricao;
 
-    public String getNome() {
-        return nome;
+    private int id;
+    private String nome;
+    private String telefonefixo;
+    private String telefonecelular;
+    private String rua;
+    private String numero;
+    private String complemento;
+    private String cep;
+    private String email;
+    private String cidade;
+
+    public String getCidade() {
+        return cidade;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
     }
 
     public int getId() {
@@ -31,21 +38,68 @@ public class Filial {
         this.id = id;
     }
 
-    public String getEndereco() {
-        return endereco;
+    public String getNome() {
+        return nome;
     }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getTelefonefixo() {
+        return telefonefixo;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setTelefonefixo(String telefonefixo) {
+        this.telefonefixo = telefonefixo;
     }
-    
-    
+
+    public String getTelefonecelular() {
+        return telefonecelular;
+    }
+
+    public void setTelefonecelular(String telefonecelular) {
+        this.telefonecelular = telefonecelular;
+    }
+
+    public String getRua() {
+        return rua;
+    }
+
+    public void setRua(String rua) {
+        this.rua = rua;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 }

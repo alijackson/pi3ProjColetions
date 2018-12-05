@@ -140,7 +140,7 @@
 
                     <c:forEach items="${listarVeiculos}" var="veiculo">
                         <tr onclick="editarVeiculo(${veiculo.getId()})" id="trTable">
-                            <td>
+                            <td >
                                 <c:out value='${veiculo.getId()}' />
                             </td>
                             <td>
