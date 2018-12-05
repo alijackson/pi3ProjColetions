@@ -3,6 +3,8 @@
     Created on : 25/11/2018, 10:09:54
     Author     : Kujikeo
 --%>
+
+<%@page import="br.com.model.Cliente"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
@@ -24,63 +26,11 @@
         <!-- ESTILOS PARA ESTA PÁGINA -->
         <!-- Nesse caso, este estilo é apenas para inserir imagens -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" type="text/css" href="../style/style-generic.css">
 
 
         <!-- SWEET ALERT -->
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-        <script type="text/JAVASCRIPT">
-            function Cliente(){
-
-            }
-            function Veiculo(){
-
-            }
-        </script>
-
-        <!-- STYLES -->
-        <style>
-            #Body{
-
-                margin-top: 10%;
-                margin-left: 8%;
-
-            }
-
-            #menu{
-
-                margin-left: 5%;
-            }
-            #logout{
-
-                margin-right: 1%;
-            }
-
-
-            #lol{
-
-                display: inline-block;
-            }
-            #form{
-
-                margin-top: 5%;
-            }
-            #pagination{
-
-                margin-left: 40%;
-                margin-right: 40%;
-            }
-            #Procurar{
-                margin-left: 10px;
-            }
-            #cliente{
-                margin-top: 5px;
-            }
-
-            #veiculo{
-                margin-top: 5px;
-            }
-        </style>
 
     </head>
     <body>
@@ -89,7 +39,7 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light scrolling-navbar fixed-top">
 
                 <div class="container">
-                    <a class="navbar-brand" href="#"><img src="imagens/logotipo.png"></a>
+                    <a class="navbar-brand" href="#"><img src="../imagens/logotipo.png"></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
                             aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -100,7 +50,7 @@
                                 <a class="nav-link" href="/locadora/home">HOME <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">LOCAÇÃO</a>
+                                <a class="nav-link" href="/locadora/new/locacao">LOCAÇÃO</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link " href="/locadora/cadastrarC">CLIENTE</a>
@@ -301,8 +251,8 @@
                                         <th>CPF</th>
                                         <th>Email</th>
                                     </tr>
-                                    <c:forEach items="${listaClientes}" var="cliente">
-                                        <tr onclick="location.href = 'edit?id=<c:out value='${cliente.getId()}' />'"  id="trTable"  >
+                                    <c:forEach items="${listClient}" var="cliente">
+                                        <tr id="trTable" >
                                             <td>
                                                 <c:out value='${cliente.getId()}' />
                                             </td>
@@ -384,9 +334,6 @@
                 </div>
             </div>
         </div>
-
-
-
     </body>
 
     <!-- JAVASCRIPT E JQUERY
@@ -401,7 +348,7 @@
     crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
     crossorigin="anonymous"></script>
-    <script src="jquery.mask.js"></script>
-    <script src="javascript.js"></script>
+    <script src="../JQuery/jquery.mask.js"></script>
+    <script src="../JQuery/newLocacao.js"></script>
 
 </html>

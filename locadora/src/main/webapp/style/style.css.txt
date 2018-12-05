@@ -1,0 +1,40 @@
+ #Body{
+
+                margin-top: 10%;
+                margin-left: 8%;
+                overflow-x: hidden; /* Elimina barra de rolagem no rodapé */
+            }
+
+            #menu{
+
+                margin-left: 5%;
+            }
+            #logout{
+
+                margin-right: 1%;
+            }
+
+
+            #lol{
+
+                display: inline-block;
+            }
+            #form{
+
+                margin-top: 5%;
+            }
+            #pagination{
+
+                margin-left: 40%;
+                margin-right: 40%;
+            }
+            #Procurar{
+                margin-left: 10px;
+            }
+            #cliente{
+                margin-top: 5px;
+            }
+
+            #veiculo{
+                margin-top: 5px;
+            }

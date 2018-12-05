@@ -5,7 +5,10 @@
  */
 package com.pi3.locadora.view.locacao;
 
+import br.com.model.Cliente;
+import br.com.model.dao.ClienteDAO;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,12 +21,20 @@ import org.json.JSONObject;
  *
  * @author jackson
  */
-@WebServlet(name = "CadastrarFuncionario", urlPatterns = {"/CadastrarFuncionario"})
+@WebServlet(name = "locacao", urlPatterns = {"/new/locacao"})
 public class Locacao extends HttpServlet{
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        ArrayList<Cliente> listClientes = new ArrayList<Cliente>();
+
+        ClienteDAO dao = new ClienteDAO();
+
+        listClientes = dao.apresentarClientes();
+
+        request.setAttribute("listClient", listClientes);
 
         RequestDispatcher dispatcher
                 = request.getRequestDispatcher("/locacao/home-locacao.jsp");
@@ -53,6 +64,25 @@ public class Locacao extends HttpServlet{
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
     {
         
+        try {
+            
+            
+        } catch (Exception e) {
+            
+        }
+        
+    }
+    @Override
+    protected void doHead(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
+    {
+        
+        ArrayList<Cliente> listClientes = new ArrayList<Cliente>();
+
+        ClienteDAO dao = new ClienteDAO();
+
+        listClientes = dao.apresentarClientes();
+
+        req.setAttribute("listClient", listClientes);
         try {
             
             

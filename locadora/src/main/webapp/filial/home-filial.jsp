@@ -80,7 +80,7 @@
                             <a class="nav-link" href="/locadora/home">HOME <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">LOCAÇÃO</a>
+                            <a class="nav-link" href="/locadora/new/locacao">LOCAÇÃO</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link " href="/locadora/cadastrarC">CLIENTE</a>
