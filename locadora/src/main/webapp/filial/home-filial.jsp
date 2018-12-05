@@ -136,7 +136,7 @@
                         <th>Endereço</th>
                         <th>Cidade</th>
                         <th>Telefone Fixo</th>
-                         <th>Telefone Celular</th>
+                        <th>Telefone Celular</th>
                     </tr>
                     <c:forEach items="${listaFilial}" var="filial">
                         <tr onclick="location.href = 'edit?id=<c:out value='${filial.getId()}' />'"  id="trTable"  >
@@ -155,7 +155,7 @@
                         <td>
                         <c:out value="${locacao.getTelefoneFixo()}" />
                         </td>
-                         <td>
+                        <td>
                         <c:out value="${locacao.getTelefoneCelular()}" />
                         </td>
                         </tr>
@@ -209,9 +209,42 @@
                                 <!-- hidden omite as infomações -->
                                 <input type="text" class="form-control" id="id" name="id" placeholder="ID" hidden>
                             </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" required name="email" placeholder="ex: filial@filial.com.br">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="nomefilial">Nome Filial</label>
+                                    <input type="text" class="form-control" id="nomefilial" required name="nomefilial" placeholder="ex: SP-Matriz">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="cidade">Cidade</label>
+                                    <select id="cidade" required name="cidade" class="form-control">
+                                        <option value="Sao Paulo">São Paulo (SP)</option>
+                                        <option value="Alagoas">Alagoas (AL)</option>
+                                        <option value="Amapa">Amapá (AP)</option>
+                                        <option value="Amazonas">Amazonas (AM)</option>
+                                        <option value="Bahia">Bahia (BA)</option>
+                                        <option value="Ceara">Ceará (CE)</option>
+                                        <option value="Distrito Federal">Distrito Federal (DF)</option>
+                                        <option value="Espirito Santo">Espírito Santo (ES)</option>
+                                        <option value="Goias">Goiás (GO)</option>
+                                        <option value="Maranhão">Maranhão (MA)</option>
+                                        <option value="Mato Grosso">Mato Grosso (MT)</option>
+                                        <option value="Mato Grosso do Sul">Mato Grosso do Sul (MS)</option>
+                                        <option value="Minas Gerais">Minas Gerais (MG)</option>
+                                        <option value="Para">Pará (PA)</option>
+                                        <option value="Paraiba">Paraíba (PB)</option>
+                                        <option value="Parana">Paraná (PR)</option>
+                                        <option value="Pernambuco">Pernambuco(PE)</option>
+                                        <option value="Piaui">Piauí(PI)</option>
+                                        <option value="Rio de Janeiro">Rio de Janeiro (RN)</option>
+                                        <option value="Rio Grande do Norte">Rio Grande do Norte (RN)</option>
+                                        <option value="Rio Grande do Sul">Rio Grande do Sul (RS)</option>
+                                        <option value="Rondonia">Rondônia (RO)</option>
+                                        <option value="Roraima">Roraima (RR)</option>
+                                        <option value="Santa Catarina">Santa Catarina (SC)</option>
+                                        <option value="Sergipe">Sergipe (SE)</option>
+                                        <option value="Tocantins">Tocantins (TO)</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
@@ -245,72 +278,16 @@
                                            placeholder="05831-200">
                                 </div>
                             </div>
+
                             <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="estado">Estado</label>
-                                    <select id="estado" required name="estado" class="form-control">
-                                        <option value="SP">SP</option>
-                                        <option value="AL">AL</option>
-                                        <option value="AP">AP</option>
-                                        <option value="AM">AM</option>
-                                        <option value="BA">BA</option>
-                                        <option value="CE">CE</option>
-                                        <option value="DF">DF</option>
-                                        <option value="ES">ES</option>
-                                        <option value="GO">GO</option>
-                                        <option value="MA">MA</option>
-                                        <option value="MT">MT</option>
-                                        <option value="MS">MS</option>
-                                        <option value="MG">MG</option>
-                                        <option value="PA">PA</option>
-                                        <option value="PB">PB</option>
-                                        <option value="PR">PR</option>
-                                        <option value="PE">PE</option>
-                                        <option value="PI">PI</option>
-                                        <option value="RJ">RJ</option>
-                                        <option value="RN">RN</option>
-                                        <option value="RS">RS</option>
-                                        <option value="RO">RO</option>
-                                        <option value="RR">RR</option>
-                                        <option value="SC">SC</option>
-                                        <option value="SE">SE</option>
-                                        <option value="TO">TO</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="cidade">Cidade</label>
-                                    <select id="cidade" required name="cidade" class="form-control">
-                                        <option value="Sao Paulo">São Paulo</option>
-                                        <option value="Alagoas">Amapá</option>
-                                        <option value="Amapa">Amapá</option>
-                                        <option value="Amazonas">Amazonas</option>
-                                        <option value="Bahia">Bahia</option>
-                                        <option value="Ceara">Ceará</option>
-                                        <option value="Distrito Federal">Distrito Federal</option>
-                                        <option value="Espirito Santo">Espírito Santo</option>
-                                        <option value="Goias">Goiás</option>
-                                        <option value="Maranhão">Maranhão</option>
-                                        <option value="Mato Grosso">Mato Grosso</option>
-                                        <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
-                                        <option value="Minas Gerais">Minas Gerais</option>
-                                        <option value="Para">Pará</option>
-                                        <option value="Paraiba">Paraíba</option>
-                                        <option value="Parana">Paraná</option>
-                                        <option value="Pernambuco">Pernambuco</option>
-                                        <option value="Piaui">Piauí</option>
-                                        <option value="Rio de Janeiro">Rio de Janeiro</option>
-                                        <option value="Rio Grande do Norte">Rio Grande do Norte</option>
-                                        <option value="Rio Grande do Sul">Rio Grande do Sul</option>
-                                        <option value="Rondonia">Rondônia</option>
-                                        <option value="Roraima">Roraima</option>
-                                        <option value="Santa Catarina">Santa Catarina</option>
-                                        <option value="Sergipe">Sergipe</option>
-                                        <option value="Tocantins">Tocantins</option>
-                                    </select>
+                                <div class="form-group col-md-12">
+                                    <label for="email">E-mail </label>
+                                    <input type="text" class="form-control" id="email" required name="email" placeholder="ex: filial@filial.com.br">
                                 </div>
                             </div>
 
-                               <button type="reset" class="btn cancel btn-secondary " data-dismiss="modal" floa>Cancelar</button>
+
+                            <button type="reset" class="btn cancel btn-secondary " data-dismiss="modal" floa>Cancelar</button>
 
                             <div class="modal-foote float-right">
                                 <button type="button" class="btn  btn-danger " id="excluir" name="excluir" onclick="confirmeExcluir()">
