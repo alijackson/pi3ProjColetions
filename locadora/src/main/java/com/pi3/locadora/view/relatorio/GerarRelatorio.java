@@ -14,7 +14,9 @@ import br.com.model.dao.FuncionarioDAO;
 import br.com.model.dao.LocacaoDAO;
 import br.com.model.dao.VeiculoDAO;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -60,6 +62,20 @@ public class GerarRelatorio extends HttpServlet {
         veiculos = daoVeiculo.apresentarVeiculos();
         
         clientes = daoCliente.apresentarClientes();
+        
+        Calendar cal = Calendar.getInstance();
+        
+        SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+        
+        String max = fmt.format(cal.getTime());
+        
+        cal.add(Calendar.DAY_OF_YEAR, -7);
+        
+        String min = fmt.format(cal.getTime());
+        
+        request.setAttribute("max", max);
+        
+        request.setAttribute("min", min);
         
         request.setAttribute("listaClientes", clientes);
         
@@ -107,6 +123,20 @@ public class GerarRelatorio extends HttpServlet {
             veiculos = daoVeiculo.apresentarVeiculos();
 
             clientes = daoCliente.apresentarClientes();
+            
+            Calendar cal = Calendar.getInstance();
+        
+            SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+
+            String max = fmt.format(cal.getTime());
+
+            cal.add(Calendar.DAY_OF_YEAR, -7);
+
+            String min = fmt.format(cal.getTime());
+
+            request.setAttribute("max", max);
+
+            request.setAttribute("min", min);
 
             request.setAttribute("listaClientes", clientes);
 
@@ -130,6 +160,20 @@ public class GerarRelatorio extends HttpServlet {
             veiculos = daoVeiculo.apresentarVeiculos();
 
             clientes = daoCliente.apresentarClientes();
+            
+            Calendar cal = Calendar.getInstance();
+        
+            SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+
+            String max = fmt.format(cal.getTime());
+
+            cal.add(Calendar.DAY_OF_YEAR, -30);
+
+            String min = fmt.format(cal.getTime());
+
+            request.setAttribute("max", max);
+
+            request.setAttribute("min", min);
 
             request.setAttribute("listaClientes", clientes);
 
@@ -153,6 +197,20 @@ public class GerarRelatorio extends HttpServlet {
             veiculos = daoVeiculo.apresentarVeiculos();
 
             clientes = daoCliente.apresentarClientes();
+            
+            Calendar cal = Calendar.getInstance();
+        
+            SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+
+            String max = fmt.format(cal.getTime());
+
+            cal.add(Calendar.DAY_OF_YEAR, -15);
+
+            String min = fmt.format(cal.getTime());
+
+            request.setAttribute("max", max);
+
+            request.setAttribute("min", min);
 
             request.setAttribute("listaClientes", clientes);
 

@@ -20,9 +20,6 @@
             <meta name="description" content="">
             <meta name="viewport" content="width=device-width, initial-scale=1">
 
-            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-            <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-
             <!-- Bootstrap CSS -->
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
                   crossorigin="anonymous">
@@ -34,10 +31,11 @@
             <link rel="stylesheet" type="text/css" href="style/buttonSeletor.css" <!-- SWEET ALERT -->
             <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+            <!-- HIGHCHARTS -->
 
-            <link rel="stylesheet" href="../Morris/css/morris.css">
-            <script src="../Morris/js/morris.min.js" charset="utf-8"></script>
+            <script src="http://code.highcharts.com/modules/exporting.js"></script>
 
+            <script src="https://code.highcharts.com/highcharts.js"></script>
 
             <!-- STYLES -->
             <style>
@@ -276,68 +274,77 @@
 
                     var se = document.getElementById("relatorios");
 
-                    var op = se.options[e.selectedIndex].value;
+                    var op = se.options[se.selectedIndex].value;
 
                     if (op = "locacao") {
 
-                        new Morris.Line({
-                            // ID of the element in which to draw the chart.
-                            element: 'locacoes',
-                            // Chart data records -- each entry in this array corresponds to a point on
-                            // the chart.
-                            data: [
-                                {relatorio: '2015', total: 10},
-                                {relatorio: '2016', total: 20},
-                                {relatorio: '2013', total: 25},
-                                {relatorio: '2017', total: 30},
-                                {relatorio: '2012', total: 15},
+                        Highcharts.chart('locacoes', {
+
+                            chart: {
+                                type: 'column'
+                            },
+                            title: {
+                                text: 'Relatorio de Locações de Veiculos'
+                            },
+                            subtitle: {
+                                text: '<c:out value="${min}" /> a <c:out value="${max}" />'
+                                },
+                            xAxis: {
+                                type: 'category'
+                            },
+                            yAxis: {
+                                title: {
+                                    text: 'Valor total das Locações'
+                                }
+                            },
+                            legend: {
+                                layout: 'vertical',
+                                align: 'right',
+                                verticalAlign: 'middle'
+                            },
+                            plotOptions: {
+                                series: {
+                                    borderWidth: 0,
+                                    dataLabels: {
+                                        enabled: true,
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>R$:{point.y:.2f}</b> of total<br/>'
+                            },
+                            "series": [
+                                {
+                                    "name": "Locações",
+                                    "colorByPoint": true,
+                                    "data": [
+                                    <c:forEach items="${listaLocacoes}" var="locacao">
+                                        {"name": <c:out value="${locacao.getId()}" />,
+                                            "y": <c:out value="${locacao.getPrecoTotal()}" />},
+                                    </c:forEach>
+                                    ]
+                                }
                             ],
-                            // The name of the data record attribute that contains x-values.
-                            xkey: 'relatorio',
-                            // A list of names of data record attributes that contain y-values.
-                            ykeys: ['total'],
-                            // Labels for the ykeys -- will be displayed when you hover over the
-                            // chart.
-                            labels: ['Valor da Locação']
+                            responsive: {
+                                rules: [{
+                                        condition: {
+                                            maxWidth: 500
+                                        },
+                                    }]
+                            }
+
                         });
                     } else if (op = "veiculo") {
 
-                        Morris.Area({
-                            element: 'locacoes',
-                            data: [
-                                {y: '2006', a: 100, b: 90},
-                                {y: '2007', a: 75, b: 65},
-                                {y: '2008', a: 50, b: 40},
-                                {y: '2009', a: 75, b: 65},
-                                {y: '2010', a: 50, b: 40},
-                                {y: '2011', a: 75, b: 65},
-                                {y: '2012', a: 100, b: 90}
-                            ],
-                            xkey: 'y',
-                            ykeys: ['a', 'b'],
-                            labels: ['Series A', 'Series B']
-                        });
+                        
 
-                    } else {
+                    } else if (op = "funcionario") {
 
-                        Morris.Area({
-                            element: 'locacoes',
-                            data: [
-                                {y: '2006', a: 100, b: 90},
-                                {y: '2007', a: 75, b: 65},
-                                {y: '2008', a: 50, b: 40},
-                                {y: '2009', a: 75, b: 65},
-                                {y: '2010', a: 50, b: 40},
-                                {y: '2011', a: 75, b: 65},
-                                {y: '2012', a: 100, b: 90}
-                            ],
-                            xkey: 'y',
-                            ykeys: ['a', 'b'],
-                            labels: ['Series A', 'Series B']
-                        });
+                        
 
                     }
-                }
+                                    }
             </script>
 
     </body>
