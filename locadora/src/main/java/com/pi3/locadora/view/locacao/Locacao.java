@@ -8,6 +8,7 @@ package com.pi3.locadora.view.locacao;
 import br.com.model.Cliente;
 import br.com.model.dao.ClienteDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -27,14 +29,6 @@ public class Locacao extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        ArrayList<Cliente> listClientes = new ArrayList<Cliente>();
-
-        ClienteDAO dao = new ClienteDAO();
-
-        listClientes = dao.apresentarClientes();
-
-        request.setAttribute("listClient", listClientes);
 
         RequestDispatcher dispatcher
                 = request.getRequestDispatcher("/locacao/home-locacao.jsp");
@@ -76,18 +70,49 @@ public class Locacao extends HttpServlet{
     protected void doHead(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
     {
         
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+        
         ArrayList<Cliente> listClientes = new ArrayList<Cliente>();
-
+        
         ClienteDAO dao = new ClienteDAO();
 
         listClientes = dao.apresentarClientes();
-
-        req.setAttribute("listClient", listClientes);
+        
+        JSONArray array = new JSONArray();
+                JSONObject json = new JSONObject();
+        
+        PrintWriter out = resp.getWriter();
+        
         try {
-            
+            for(Cliente c : listClientes)
+            {
+
+                json.put("idCliente", c.getId());
+                json.put("nome", c.getNome());
+                json.put("numerocnh", c.getNumeroCNH());
+                json.put("cpf", c.getCpf());
+                json.put("rg", c.getRg());
+                json.put("email", c.getEmail());
+                json.put("telefonefixo", c.getTelefoneFixo());
+                json.put("telefonecelular", c.getTelefoneCelular());
+                json.put("datanascimento", c.getDataNascimento());
+                
+//                array.put(json);
+//                resp.getWriter().write(json.toString());
+                
+                break;
+            }
+            resp.getWriter().write(json.toString());
+//            out.print(array);
             
         } catch (Exception e) {
             
+//            JSONObject json = new JSONObject();
+        
+            json.put("resp", "Erro ao interpretar dados "+ e);
+
+            resp.getWriter().write(json.toString());
         }
         
     }
