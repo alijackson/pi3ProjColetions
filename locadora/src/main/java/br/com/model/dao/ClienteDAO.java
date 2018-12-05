@@ -65,7 +65,7 @@ public class ClienteDAO {
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
-        ArrayList<Cliente> clientes = new ArrayList<>();
+        ArrayList<Cliente> clientes = new ArrayList<Cliente>();
 
         try {
             stmt = con.prepareStatement("SELECT * FROM CLIENTE WHERE ENABLE = 1");

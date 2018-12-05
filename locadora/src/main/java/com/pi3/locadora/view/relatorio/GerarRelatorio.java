@@ -39,9 +39,33 @@ public class GerarRelatorio extends HttpServlet {
 
         ArrayList<Locacao> locacoes = new ArrayList<Locacao>();
         
+        ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
+        
+        ArrayList<Veiculo> veiculos = new ArrayList<Veiculo>();
+        
+        ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+        
         LocacaoDAO daoLocacao = new LocacaoDAO();
+        
+        FuncionarioDAO daoFuncionario = new FuncionarioDAO();
+        
+        VeiculoDAO daoVeiculo = new VeiculoDAO();
+        
+        ClienteDAO daoCliente = new ClienteDAO();
 
-        locacoes = daoLocacao.ApresentarLocacoes();
+        locacoes = daoLocacao.relatorioSemanal();
+        
+        funcionarios = daoFuncionario.apresentarFuncionarios();
+        
+        veiculos = daoVeiculo.apresentarVeiculos();
+        
+        clientes = daoCliente.apresentarClientes();
+        
+        request.setAttribute("listaClientes", clientes);
+        
+        request.setAttribute("listaVeiculos", veiculos);
+        
+        request.setAttribute("listaFuncionarios", funcionarios);
                 
         request.setAttribute("listaLocacoes", locacoes);
 
@@ -56,7 +80,94 @@ public class GerarRelatorio extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
 
+        String opcao = request.getParameter("rel");
         
+        ArrayList<Locacao> locacoes = new ArrayList<Locacao>();
+        
+        ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
+        
+        ArrayList<Veiculo> veiculos = new ArrayList<Veiculo>();
+        
+        ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+        
+        LocacaoDAO daoLocacao = new LocacaoDAO();
+        
+        FuncionarioDAO daoFuncionario = new FuncionarioDAO();
+        
+        VeiculoDAO daoVeiculo = new VeiculoDAO();
+        
+        ClienteDAO daoCliente = new ClienteDAO();
+        
+        if(opcao.equalsIgnoreCase("semanal")){
+            
+            locacoes = daoLocacao.relatorioSemanal();
+        
+            funcionarios = daoFuncionario.apresentarFuncionarios();
+
+            veiculos = daoVeiculo.apresentarVeiculos();
+
+            clientes = daoCliente.apresentarClientes();
+
+            request.setAttribute("listaClientes", clientes);
+
+            request.setAttribute("listaVeiculos", veiculos);
+
+            request.setAttribute("listaFuncionarios", funcionarios);
+
+            request.setAttribute("listaLocacoes", locacoes);
+
+            RequestDispatcher dispatcher
+                    = request.getRequestDispatcher("/relatorio/relatorio.jsp");
+
+            dispatcher.forward(request, response);
+            
+        } else if (opcao.equalsIgnoreCase("mensal")) {
+        
+            locacoes = daoLocacao.relatorioMensal();
+        
+            funcionarios = daoFuncionario.apresentarFuncionarios();
+
+            veiculos = daoVeiculo.apresentarVeiculos();
+
+            clientes = daoCliente.apresentarClientes();
+
+            request.setAttribute("listaClientes", clientes);
+
+            request.setAttribute("listaVeiculos", veiculos);
+
+            request.setAttribute("listaFuncionarios", funcionarios);
+
+            request.setAttribute("listaLocacoes", locacoes);
+
+            RequestDispatcher dispatcher
+                    = request.getRequestDispatcher("/relatorio/relatorio.jsp");
+
+            dispatcher.forward(request, response);
+            
+        } else {
+        
+            locacoes = daoLocacao.relatorioQuinzenal();
+        
+            funcionarios = daoFuncionario.apresentarFuncionarios();
+
+            veiculos = daoVeiculo.apresentarVeiculos();
+
+            clientes = daoCliente.apresentarClientes();
+
+            request.setAttribute("listaClientes", clientes);
+
+            request.setAttribute("listaVeiculos", veiculos);
+
+            request.setAttribute("listaFuncionarios", funcionarios);
+
+            request.setAttribute("listaLocacoes", locacoes);
+
+            RequestDispatcher dispatcher
+                    = request.getRequestDispatcher("/relatorio/relatorio.jsp");
+
+            dispatcher.forward(request, response);
+            
+        }
 
     }
 

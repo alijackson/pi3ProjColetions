@@ -139,10 +139,13 @@
                 </div>
                 <hr>
                 <div class="col-md-12 d-flex-inline">
-                    <form action="buscarF" method="post" class="form-inline my-2 my-lg-0 d-flex-inline" id="procura">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Search" id="pesquisar"
-                               name="pesquisar">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"> Buscar</button>
+                    <form action="GerarRelatorio" method="post" class="form-inline my-2 my-lg-0 d-flex-inline" id="atualizar">
+                        <select id="rel" name="rel" class="form-control">
+                            <option value="semanal">Semanal</option>
+                            <option value="quinzenal">Quinzenal</option>
+                            <option value="mensal">Mensal</option>
+                        </select>
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Atualizar</button>
                     </form><br>
                 </div>
                 <!-- FIM -->
@@ -151,7 +154,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <lavel for="relatorios">Relatorio de Graficos:</lavel>
-                            <select name="relatorios" id="relatorios" onchange="relatorio()">
+                            <select name="relatorios" id="relatorios" class="form-control col-md-2" onchange="relatorio()">
                                 <option value="locacao">Locações</option>
                                 <option value="veiculo">Veiculos</option>
                                 <option value="funcionario">Funcionarios</option>
@@ -180,13 +183,25 @@
                                     <c:out value='${locacao.getId()}' />
                                 </td>
                                 <td>
-                                    <c:out value="${locacao.getIdCliente()}" />
+                                    <c:forEach items="${listaClientes}" var="cliente">
+                                        <c:if test="${cliente.getId() == locacao.getIdCliente()}">
+                                            <c:out value="${cliente.getNome()}" />
+                                        </c:if>
+                                    </c:forEach>
                                 </td>
                                 <td>
-                                    <c:out value="${locacao.getIdVeiculo()}" />
+                                    <c:forEach items="${listaVeiculos}" var="veiculo">
+                                        <c:if test="${veiculo.getId() == locacao.getIdVeiculo()}">
+                                            <c:out value="${veiculo.getMarca()}" /> <c:out value="${veiculo.getModelo()}" />
+                                        </c:if>
+                                    </c:forEach>
                                 </td>
                                 <td>
-                                    <c:out value="${locacao.getIdFuncionario()}" />
+                                    <c:forEach items="${listaFuncionarios}" var="funcionario">
+                                        <c:if test="${funcionario.getId()  == locacao.getIdFuncionario()}">
+                                            <c:out value="${funcionario.getNome()}" />
+                                        </c:if>
+                                    </c:forEach>
                                 </td>
                                 <td>
                                     <c:out value="${locacao.getPrecoTotal()}" />
@@ -255,24 +270,74 @@
             <script src="JQuery/validar.js" type="text/javascript"></script>
 
             <script type="text/javascript">
-                                new Morris.Line({
-                                    // ID of the element in which to draw the chart.
-                                    element: 'locacoes',
-                                    // Chart data records -- each entry in this array corresponds to a point on
-                                    // the chart.
-                                    data: [
-                <c:forEach items="${listaLocacoes}" var="locacao">
-                                        {relatorio: '<c:out value="${locacao.getDiaRetira()}" />', total: <c:out value="${locacao.getPrecoTotal()}" />},
-                </c:forEach>
-                                    ],
-                                    // The name of the data record attribute that contains x-values.
-                                    xkey: 'relatorio',
-                                    // A list of names of data record attributes that contain y-values.
-                                    ykeys: ['total'],
-                                    // Labels for the ykeys -- will be displayed when you hover over the
-                                    // chart.
-                                    labels: ['Valor da Locação']
-                                });
+                function relatorio() {
+
+                    document.getElementById("locacoes").innerHTML = "";
+
+                    var se = document.getElementById("relatorios");
+
+                    var op = se.options[e.selectedIndex].value;
+
+                    if (op = "locacao") {
+
+                        new Morris.Line({
+                            // ID of the element in which to draw the chart.
+                            element: 'locacoes',
+                            // Chart data records -- each entry in this array corresponds to a point on
+                            // the chart.
+                            data: [
+                                {relatorio: '2015', total: 10},
+                                {relatorio: '2016', total: 20},
+                                {relatorio: '2013', total: 25},
+                                {relatorio: '2017', total: 30},
+                                {relatorio: '2012', total: 15},
+                            ],
+                            // The name of the data record attribute that contains x-values.
+                            xkey: 'relatorio',
+                            // A list of names of data record attributes that contain y-values.
+                            ykeys: ['total'],
+                            // Labels for the ykeys -- will be displayed when you hover over the
+                            // chart.
+                            labels: ['Valor da Locação']
+                        });
+                    } else if (op = "veiculo") {
+
+                        Morris.Area({
+                            element: 'locacoes',
+                            data: [
+                                {y: '2006', a: 100, b: 90},
+                                {y: '2007', a: 75, b: 65},
+                                {y: '2008', a: 50, b: 40},
+                                {y: '2009', a: 75, b: 65},
+                                {y: '2010', a: 50, b: 40},
+                                {y: '2011', a: 75, b: 65},
+                                {y: '2012', a: 100, b: 90}
+                            ],
+                            xkey: 'y',
+                            ykeys: ['a', 'b'],
+                            labels: ['Series A', 'Series B']
+                        });
+
+                    } else {
+
+                        Morris.Area({
+                            element: 'locacoes',
+                            data: [
+                                {y: '2006', a: 100, b: 90},
+                                {y: '2007', a: 75, b: 65},
+                                {y: '2008', a: 50, b: 40},
+                                {y: '2009', a: 75, b: 65},
+                                {y: '2010', a: 50, b: 40},
+                                {y: '2011', a: 75, b: 65},
+                                {y: '2012', a: 100, b: 90}
+                            ],
+                            xkey: 'y',
+                            ykeys: ['a', 'b'],
+                            labels: ['Series A', 'Series B']
+                        });
+
+                    }
+                }
             </script>
 
     </body>
