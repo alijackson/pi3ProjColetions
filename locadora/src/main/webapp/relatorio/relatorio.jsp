@@ -138,6 +138,7 @@
                 <hr>
                 <div class="col-md-12 d-flex-inline">
                     <form action="GerarRelatorio" method="post" class="form-inline my-2 my-lg-0 d-flex-inline" id="atualizar">
+                        <label for="rel">Relatorio: </label>
                         <select id="rel" name="rel" class="form-control">
                             <option value="semanal">Semanal</option>
                             <option value="quinzenal">Quinzenal</option>
@@ -151,7 +152,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <lavel for="relatorios">Relatorio de Graficos:</lavel>
+                            <label for="relatorios">Relatorio de Graficos:</label>
                             <select name="relatorios" id="relatorios" class="form-control col-md-2" onchange="relatorio()">
                                 <option value="locacao">Locações</option>
                                 <option value="veiculo">Veiculos</option>
@@ -166,7 +167,7 @@
                     <div class="col-md-12">
                         <table class="table table-striped">
                             <tr>
-                                <th>ID</th>
+                                <th style="display:none;">ID</th>
                                 <th>Cliente</th>
                                 <th>Veiculo</th>
                                 <th>Funcionario</th>
@@ -177,7 +178,7 @@
 
                         <c:forEach items="${listaLocacoes}" var="locacao">
                             <tr onclick="editarFunc(${locacao.getId()})" id="trTable">
-                                <td>
+                                <td style="display:none;">
                                     <c:out value='${locacao.getId()}' />
                                 </td>
                                 <td>
@@ -276,7 +277,7 @@
 
                     var op = se.options[se.selectedIndex].value;
 
-                    if (op = "locacao") {
+                    if (op == "locacao") {
 
                         Highcharts.chart('locacoes', {
 
@@ -312,11 +313,11 @@
                             },
                             tooltip: {
                                 headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-                                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>R$:{point.y:.2f}</b> of total<br/>'
+                                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>R$:{point.y:.2f}</b> valor total<br/>'
                             },
                             "series": [
                                 {
-                                    "name": "Locações",
+
                                     "colorByPoint": true,
                                     "data": [
                                     <c:forEach items="${listaLocacoes}" var="locacao">
@@ -335,13 +336,135 @@
                             }
 
                         });
-                    } else if (op = "veiculo") {
+                    } 
+                    else if (op == "veiculo") {
 
-                        
+                        Highcharts.chart('locacoes', {
 
-                    } else if (op = "funcionario") {
+                            chart: {
+                                type: 'column'
+                            },
+                            title: {
+                                text: 'Relatorio de Veiculos Alugados'
+                            },
+                            subtitle: {
+                                text: '<c:out value="${min}" /> a <c:out value="${max}" />'
+                                },
+                            xAxis: {
+                                type: 'category'
+                            },
+                            yAxis: {
+                                title: {
+                                    text: 'Total de Veiculos Alugados'
+                                }
+                            },
+                            legend: {
+                                layout: 'vertical',
+                                align: 'right',
+                                verticalAlign: 'middle'
+                            },
+                            plotOptions: {
+                                series: {
+                                    borderWidth: 0,
+                                    stacking: 'normal',
+                                    dataLabels: {
+                                        enabled: false,
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                            },
+                            "series": [
+                                {
+                                    "name": "Locações",
+                                    "colorByPoint": false,
+                                    "data": [
+                                        <c:forEach items="${listaLocacoes}" var="locacao">
+                                                    {"name": <c:forEach items="${listaVeiculos}" var="veiculo">
+                                                        <c:if test="${veiculo.getId() == locacao.getIdVeiculo()}">
+                                                            "<c:out value="${veiculo.getMarca()} ${veiculo.getModelo()}" />"
+                                                        </c:if>
+                                                    </c:forEach>,
+                                                "y": 1},
+                                        </c:forEach>
+                                    ]
+                                }
+                            ],
+                            responsive: {
+                                rules: [{
+                                        condition: {
+                                            maxWidth: 500
+                                        },
+                                    }]
+                            }
 
-                        
+                        });
+
+                    } 
+                    else if (op == "funcionario") {
+
+                        Highcharts.chart('locacoes', {
+
+                            chart: {
+                                type: 'column'
+                            },
+                            title: {
+                                text: 'Relatorio de Locações dos Funcionarios'
+                            },
+                            subtitle: {
+                                text: '<c:out value="${min}" /> a <c:out value="${max}" />'
+                                },
+                            xAxis: {
+                                type: 'category'
+                            },
+                            yAxis: {
+                                title: {
+                                    text: 'Total de Locações'
+                                }
+                            },
+                            legend: {
+                                layout: 'vertical',
+                                align: 'right',
+                                verticalAlign: 'middle'
+                            },
+                            plotOptions: {
+                                series: {
+                                    borderWidth: 0,
+                                    stacking: 'normal',
+                                    dataLabels: {
+                                        enabled: false,
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                            },
+                            "series": [
+                                {
+
+                                    "colorByPoint": false,
+                                    "data": [
+                                    <c:forEach items="${listaLocacoes}" var="locacao">
+                                                    {"name": <c:forEach items="${listaFuncionarios}" var="funcionario">
+                                                        <c:if test="${funcionario.getId() == locacao.getIdFuncionario()}">
+                                                            "<c:out value="${funcionario.getNome()}" />"
+                                                        </c:if>
+                                                    </c:forEach>,
+                                                "y": 1},
+                                        </c:forEach>
+                                    ]
+                                }
+                            ],
+                            responsive: {
+                                rules: [{
+                                        condition: {
+                                            maxWidth: 500
+                                        },
+                                    }]
+                            }
+
+                        });
 
                     }
                                     }

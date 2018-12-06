@@ -6,6 +6,7 @@
 package br.com.model.dao;
 
 import br.com.conneticon.ConnectionFactory;
+import br.com.model.Locacao;
 import br.com.model.Veiculo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -69,7 +70,7 @@ public class VeiculoDAO {
 
         try {
 
-            stmt = con.prepareStatement("SELECT * FROM VEICULO WHERE ENABLE = 1");
+            stmt = con.prepareStatement("SELECT * FROM VEICULO");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
