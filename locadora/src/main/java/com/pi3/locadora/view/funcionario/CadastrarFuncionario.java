@@ -5,8 +5,10 @@
  */
 package com.pi3.locadora.view.funcionario;
 
+import br.com.model.Filial;
 import java.io.IOException;
 import br.com.model.Funcionario;
+import br.com.model.dao.FilialDAO;
 import br.com.model.dao.FuncionarioDAO;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -33,7 +35,14 @@ public class CadastrarFuncionario extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        //request.setAttribute("objetivo", "Cadastrar Funcionario");
+        FilialDAO filial = new FilialDAO();
+
+        ArrayList<Filial> listaFiliais = new ArrayList<Filial>();
+
+        listaFiliais = filial.apresentarFiliais();
+
+        request.setAttribute("filiasCadastradas", listaFiliais);
+
         ArrayList<Funcionario> listFuncionario = new ArrayList<Funcionario>();
 
         FuncionarioDAO dao = new FuncionarioDAO();
@@ -105,7 +114,7 @@ public class CadastrarFuncionario extends HttpServlet {
 
             PrintWriter saida = response.getWriter();
             saida.println(e);
-            
+
         }
 
     }
@@ -120,7 +129,6 @@ public class CadastrarFuncionario extends HttpServlet {
 
         Funcionario func = new Funcionario();
         FuncionarioDAO bd = new FuncionarioDAO();
-
 
         try {
             id = Integer.parseInt(request.getParameter("id"));
@@ -145,46 +153,44 @@ public class CadastrarFuncionario extends HttpServlet {
             e.printStackTrace();
         }
     }
+
     @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
-    {
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id;
         FuncionarioDAO dao = new FuncionarioDAO();
         String resposta;
-            
+
         try {
-            
+
             resp.setContentType("application/json");
             resp.setCharacterEncoding("UTF-8");
-            
+
             JSONObject json = new JSONObject();
-        
+
             id = Integer.parseInt(req.getParameter("id"));
-                
+
             dao = new FuncionarioDAO();
             resposta = dao.excluir(id);
-            
-            if(resposta != null && !resposta.trim().equals(""))
-            {
+
+            if (resposta != null && !resposta.trim().equals("")) {
                 json.put("resp", "Erro ao excluir.");
 
-                resp.getWriter().write(json.toString());   
+                resp.getWriter().write(json.toString());
                 return;
-                
+
             }
             json.put("resp", "Funcionário excluído com sucesso");
 
             resp.getWriter().write(json.toString());
-                   
-            
+
         } catch (Exception e) {
-            
+
             JSONObject json = new JSONObject();
-        
+
             json.put("resp", "Erro ao interpretar dados");
 
             resp.getWriter().write(json.toString());
         }
-        
+
     }
 }

@@ -15,7 +15,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 import org.json.JSONObject;
 
 /**
@@ -35,7 +34,7 @@ public class CadastrarFilial extends HttpServlet {
 
         listFilial = dao.apresentarFiliais();
 
-        request.setAttribute("listaFilial", listFilial);
+        request.setAttribute("listarFilial", listFilial);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("filial/home-filial.jsp");
 
@@ -83,7 +82,7 @@ public class CadastrarFilial extends HttpServlet {
 
         listFilial = dao.apresentarFiliais();
 
-        request.setAttribute("listaFilial", listFilial);
+        request.setAttribute("listarFilial", listFilial);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("filial/home-filial.jsp");
 
@@ -114,6 +113,7 @@ public class CadastrarFilial extends HttpServlet {
         json.put("numero", f.getNumero());
         json.put("cep", f.getCep());
         json.put("email", f.getEmail());
+        json.put("complemento", f.getComplemento());
 
         resp.getWriter().write(json.toString());
 

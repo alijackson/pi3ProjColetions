@@ -19,6 +19,7 @@ function editarFilial(id) {
             $("#numero").val(data.numero);
             $("#cep").val(data.cep);
             $("#email").val(data.email);
+            $("#complemento").val(data.complemento);
             $("#butSubmit").text("Salvar");
 
             $("#modalFilial").text("Editar Filial");
@@ -45,35 +46,35 @@ function resetFormularioFilial() {
 }
 
 function confirmarExcluir() {
-    
+
     $("#mod-confirmar").modal("show");
 
 }
 
-function excluirFilial(){
+function excluirFilial() {
     $("#mod-confirmar").modal("hide");
     let id = document.getElementById('id').value;
-    let  url = "http://localhost:8080/locadora/filial?cod="+id;
+    let  url = "http://localhost:8080/locadora/filial?cod=" + id;
 
     $.ajax({
         url: url,
         type: 'DELETE',
 
-        success: function(data) {
-            
+        success: function (data) {
+
             alert(data.resp);
             location.reload()
             $("#novaFilial").modal("hide");
 
-         },
-         error: function(ajaxContext) {
+        },
+        error: function (ajaxContext) {
             alert("Erro ");
             $("#novaFilial").modal("hide");
-         }
+        }
     });
-    
+
 }
-    
+
 
 
 

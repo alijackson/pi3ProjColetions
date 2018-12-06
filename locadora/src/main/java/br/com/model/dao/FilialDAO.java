@@ -31,7 +31,7 @@ public class FilialDAO {
         try {
 
             stmt = con.prepareStatement(
-                    "INSERT INTO FILIAL(CIDADE,TELFIXO,TELCEL,RUA,NUMERO,COMPLEMENTO,CEP,NOME,EMAIL) "
+                    "INSERT INTO FILIAL(CIDADE,TELFIXO,TELCEL,RUA,NUMERO,COMPLEMENTO,CEP,NOME,EMAIL)"
                     + "VALUES (?,?,?,?,?,?,?,?,?)");
 
             stmt.setString(1, f.getCidade());
@@ -56,6 +56,43 @@ public class FilialDAO {
         }
 
     }
+    
+    
+    
+      public ArrayList<Filial> filiaisCadastradas() {
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        ArrayList<Filial> filiais = new ArrayList<>();
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM FILIAL");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                Filial f = new Filial();
+
+                f.setId(rs.getInt("IDFILIAL"));
+                f.setNome(rs.getString("NOME"));
+                f.setRua(rs.getString("RUA"));
+
+                filiais.add(f);
+            }
+
+        } catch (SQLException ex) {
+
+            ex.printStackTrace();
+
+        } finally {
+
+            ConnectionFactory.closeConnection(con, stmt, rs);
+
+        }
+        return filiais;
+    }
+
 
     public ArrayList<Filial> apresentarFiliais() {
         Connection con = ConnectionFactory.getConnection();
@@ -72,7 +109,7 @@ public class FilialDAO {
 
                 Filial f = new Filial();
 
-                f.setId(rs.getInt("ID"));
+                f.setId(rs.getInt("IDFILIAL"));
                 f.setNome(rs.getString("NOME"));
                 f.setRua(rs.getString("RUA"));
                 f.setTelefonefixo(rs.getString("TELFIXO"));
@@ -99,9 +136,8 @@ public class FilialDAO {
         PreparedStatement stmt = null;
         try {
 
-            stmt = con.prepareStatement("UPDATE FILIAL SET CIDADE = ?,TELFIXO = ?,TELCEL = ?,RUA"
-                    + ",NUMERO = ?,COMPLEMENTO = ?,CEP = ?,NOME = ?,EMAIL = ? "
-                    + "WHERE IDFILIAL = ? ");
+            stmt = con.prepareStatement("UPDATE FILIAL SET CIDADE = ?,TELFIXO = ?,TELCEL = ?,RUA = ?,"
+                    + "NUMERO = ?,COMPLEMENTO = ?,CEP = ?,NOME = ?,EMAIL = ? WHERE IDFILIAL = ? ");
 
             stmt.setString(1, f.getCidade());
             stmt.setString(2, f.getTelefonefixo());
@@ -112,7 +148,8 @@ public class FilialDAO {
             stmt.setString(7, f.getCep());
             stmt.setString(8, f.getNome());
             stmt.setString(9, f.getEmail());
-            stmt.execute();
+            stmt.setInt(10, f.getId());
+            stmt.executeUpdate();
 
         } catch (SQLException ex) {
 
@@ -146,6 +183,7 @@ public class FilialDAO {
                 stmt.setString(7, f.getCep());
                 stmt.setString(8, f.getNome());
                 stmt.setString(9, f.getEmail());
+                stmt.setInt(10, f.getId());
             }
 
         } catch (SQLException ex) {
@@ -191,13 +229,17 @@ public class FilialDAO {
             stmt.setInt(1, id);
             rs = stmt.executeQuery();
 
-            if (rs.next()) {
+            if (rs.first()) {
 
-                f.setId(rs.getInt("ID"));
+                f.setId(rs.getInt("IDFILIAL"));
                 f.setNome(rs.getString("NOME"));
                 f.setRua(rs.getString("RUA"));
-                f.setTelefonefixo("TELFIXO");
-                f.setTelefonecelular("TELCEL");
+                f.setTelefonefixo(rs.getString("TELFIXO"));
+                f.setEmail(rs.getString("EMAIL"));
+                f.setComplemento(rs.getString("COMPLEMENTO"));
+                f.setNumero(rs.getString("NUMERO"));
+                f.setCep(rs.getString("CEP"));
+                f.setCidade(rs.getString("CIDADE"));
 
             }
 
@@ -227,7 +269,7 @@ public class FilialDAO {
 
                 Filial f = new Filial();
 
-                f.setId(rs.getInt("ID"));
+                f.setId(rs.getInt("IDFILIAL"));
                 f.setNome(rs.getString("NOME"));
                 f.setRua(rs.getString("RUA"));
                 f.setTelefonefixo("TELFIXO");

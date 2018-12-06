@@ -319,6 +319,7 @@
                                     </select>
                                 </div>
 
+
                                 <!--<div class="modal-footer" >-->
                                 <div class="switch__container float-left">
                                     <small>Ativo

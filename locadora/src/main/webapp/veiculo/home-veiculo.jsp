@@ -159,7 +159,6 @@
                                 <c:out value="${veiculo.getPlaca()}" />
                             </td>
                         </tr>
-                        </a>
                     </c:forEach>
 
                 </table>
