@@ -109,7 +109,8 @@
                     <hr>
              <!-- APRESENTAR O CLIENTE SELECIONADO -->
                     <div>
-                        <label for="cliente"> Cliente: </label>
+                        <label for="cliente" id="labelClient"> Cliente: </label>
+                        <label for="idClient" id="labelIdClient" hidden>ID</label>
                     </div>
                 </div>
 
@@ -118,13 +119,14 @@
              <!-- AQUI TEM UM BOTÃO QUE APRESENTA UMA TABELA DE VEICULOS -->
                     <div class="form-row">
                       <div class="col-md-2 d-flex-inline ">
-                        <a class="btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#veiculos" id="btnd">Selecionar Veiculo</a>
+                        <a class="btn btn-primary btn-block" href="#" data-toggle="modal" data-target="#veiculos" id="btnd" onclick="buscarCar()">Selecionar Veiculo</a>
                     </div>
                 </div>
               <!-- APRESENTAR O VEICULO SELECIONADO -->
                     <hr>  
                     <div>
-                        <label for="veiculo">Veiculo: </label>
+                        <label for="veiculo" id="labelNomeCar">Veiculo: </label>
+                        <label for="idClient" id="labelIdCar" hidden>ID</label>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
@@ -227,7 +229,7 @@
               </div>
       
         </div>
-
+ 
         <div class="modal fade" id="clientes" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
@@ -243,30 +245,15 @@
                                 <input class="form-control col-md-6" type="search" placeholder="Pesquisar Cliente" aria-label="Search" id="bcliente">
                                 <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="Procurar" onclick="">Buscar</button>
                             </div>
+                          
                             <form>
-                                <table class="table table-striped" id="cliente">
+                                <table class="table table-striped" id="listaCliente">
                                     <tr>
                                         <th>ID</th>
                                         <th>Nome</th>
                                         <th>CPF</th>
                                         <th>Email</th>
                                     </tr>
-                                    <c:forEach items="${listClient}" var="cliente">
-                                        <tr id="trTable" >
-                                            <td>
-                                                <c:out value='${cliente.getId()}' />
-                                            </td>
-                                            <td>
-                                                <c:out value='${cliente.getNome()}' />
-                                            </td>
-                                            <td>
-                                                <c:out value="${cliente.getCPF()}" />
-                                            </td>
-                                            <td>
-                                                <c:out value="${cliente.getEmail()}" />
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
                                 </table>
                                 <button type="button" class="btn btn-primary" onclick="">Selecionar</button>
                             </form>
@@ -291,41 +278,16 @@
                                 <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="Procurar" onclick="">Buscar</button>
                             </div>
                             <form>
-                                <table class="table table-striped" id="veiculo">
+                                <table class="table table-striped" id="listVeiculos">
                                     <tr>
                                         <th>ID</th>
-                                        <th>Imagem</th>
                                         <th>Marca</th>
                                         <th>Modelo</th>
                                         <th>Ano</th>
                                         <th>Categoria</th>
                                         <th>Preço</th>
                                     </tr>
-                                    <c:forEach items="${listaVeiculos}" var="veiculo">
-                                        <tr onclick="location.href = 'edit?id=<c:out value='${veiculo.getId()}' />'"  id="trTable"  >
-                                            <td>
-                                                <c:out value='${veiculo.getId()}' />
-                                            </td>
-                                            <td>
-                                                <img src="<c:out value='${veiculo.getImagem()}'  />" width="100px" height="100px">
-                                            </td>
-                                            <td>
-                                                <c:out value="${veiculo.getMarca()}" />
-                                            </td>
-                                            <td>
-                                                <c:out value="${veiculo.getModelo()}" />
-                                            </td>
-                                            <td>
-                                                <c:out value="${veiculo.getAno()}" />
-                                            </td>
-                                            <td>
-                                                <c:out value="${veiculo.getCategoria()}" />
-                                            </td>
-                                            <td>
-                                                Preço?
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
+                                    <!-- RECORTEI O CODIGO DAQUI E COLEI NO NOTEPAD ++ PARA PESQUISA FUTURA>-->
                                 </table>
                                 <button type="button" class="btn btn-primary" onclick="">Selecionar</button>
                             </form>

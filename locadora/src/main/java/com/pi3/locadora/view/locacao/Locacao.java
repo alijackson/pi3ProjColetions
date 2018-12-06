@@ -6,7 +6,9 @@
 package com.pi3.locadora.view.locacao;
 
 import br.com.model.Cliente;
+import br.com.model.Veiculo;
 import br.com.model.dao.ClienteDAO;
+import br.com.model.dao.VeiculoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -41,23 +43,59 @@ public class Locacao extends HttpServlet{
             HttpServletResponse response)
             throws ServletException, IOException {
         
+        
+        
             RequestDispatcher dispatcher = request.getRequestDispatcher("");
 
             dispatcher.forward(request, response);
 
     }
-    @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
-    {
-        
-        try {
-            
-            
-        } catch (Exception e) {
-            
-        }
-        
-    }
+//    @Override
+//    protected void doTrace(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
+//    {
+//        resp.setContentType("application/json;charset=UTF-8");
+//
+//        ArrayList <Veiculo> cars;
+//
+//        VeiculoDAO dao = new VeiculoDAO();
+//        
+//        cars = dao.apresentarVeiculos();
+//
+//        JSONArray array = new JSONArray();
+//
+//        PrintWriter out = resp.getWriter();
+//        
+//        for(Veiculo v : cars)
+//        {
+//            JSONObject json = new JSONObject();
+//
+//            json.put("idVeiculo", v.getId());
+//            json.put("modelo", v.getModelo());
+//            json.put("ano", v.getAno());
+//            json.put("placa", v.getPlaca());
+//            json.put("marca", v.getMarca());
+//            json.put("numerodedocumento", v.getNumeroDocumento());
+//            json.put("caracteristica", v.getCaracteristica());
+//            json.put("categoria", v.getCategoria());
+//            
+//            array.put(json);
+//        }
+//        
+//        out.print(array);
+//    }
+//    
+//    @Override
+//    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
+//    {
+//        
+//        try {
+//            
+//            
+//        } catch (Exception e) {
+//            
+//        }
+//        
+//    }
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
     {
@@ -92,7 +130,6 @@ public class Locacao extends HttpServlet{
                 
             }
             out.print(array);
-//            resp.getWriter().write(array.toString());
             
         } catch (Exception e) {
             

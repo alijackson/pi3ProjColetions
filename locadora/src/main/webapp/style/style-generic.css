@@ -1,40 +1,37 @@
-#Body{
-
-    margin-top: 10%;
-    margin-left: 8%;
-    overflow-x: hidden;  /* Elimina barra de rolagem no rodapé */ 
+#Body {
+  margin-top: 10%;
+  margin-left: 8%;
+  overflow-x: hidden; /* Elimina barra de rolagem no rodapé */
 }
 
-#menu{
-
-    margin-left: 5%;
-}
-#logout{
-
-    margin-right: 1%;
+#clientes {
+  width: 1000px;
 }
 
-
-#lol{
-
-    display: inline-block;
+#menu {
+  margin-left: 5%;
 }
-#form{
-
-    margin-top: 5%;
-}
-#pagination{
-
-    margin-left: 40%;
-    margin-right: 40%;
-}
-#Procurar{
-    margin-left: 10px;
-}
-#cliente{
-    margin-top: 5px;
+#logout {
+  margin-right: 1%;
 }
 
-#veiculo{
-    margin-top: 5px;
+#lol {
+  display: inline-block;
+}
+#form {
+  margin-top: 5%;
+}
+#pagination {
+  margin-left: 40%;
+  margin-right: 40%;
+}
+#Procurar {
+  margin-left: 10px;
+}
+#cliente {
+  margin-top: 5px;
+}
+
+#veiculo {
+  margin-top: 5px;
 }
