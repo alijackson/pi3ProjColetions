@@ -15,6 +15,7 @@ function editarFunc(func) {
             $("#senha").val(data.senha)
             $("#cpf").val(data.cpf)
             $("#cargo").val(data.cargo)
+            $("#idFilial").val(data.idFilial)
             $("#butSubmit").text("Salvar")
             $("#exampleModalCenterTitle").text("Editar Funcionário")
             isTrue(data.ativo);

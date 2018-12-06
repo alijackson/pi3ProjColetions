@@ -56,10 +56,8 @@ public class FilialDAO {
         }
 
     }
-    
-    
-    
-      public ArrayList<Filial> filiaisCadastradas() {
+
+    public ArrayList<Filial> filiaisCadastradas() {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -76,7 +74,6 @@ public class FilialDAO {
 
                 f.setId(rs.getInt("IDFILIAL"));
                 f.setNome(rs.getString("NOME"));
-                f.setRua(rs.getString("RUA"));
 
                 filiais.add(f);
             }
@@ -92,7 +89,6 @@ public class FilialDAO {
         }
         return filiais;
     }
-
 
     public ArrayList<Filial> apresentarFiliais() {
         Connection con = ConnectionFactory.getConnection();

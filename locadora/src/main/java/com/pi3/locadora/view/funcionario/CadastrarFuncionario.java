@@ -35,17 +35,15 @@ public class CadastrarFuncionario extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        FilialDAO filial = new FilialDAO();
-
-        ArrayList<Filial> listaFiliais = new ArrayList<Filial>();
-
-        listaFiliais = filial.apresentarFiliais();
-
-        request.setAttribute("filiasCadastradas", listaFiliais);
-
+//        ArrayList<Filial> listaFiliais = new ArrayList<Filial>();
         ArrayList<Funcionario> listFuncionario = new ArrayList<Funcionario>();
 
+//        FilialDAO filial = new FilialDAO();
         FuncionarioDAO dao = new FuncionarioDAO();
+
+//        listaFiliais = filial.filiaisCadastradas();
+//
+//        request.setAttribute("filiasCadastradas", listaFiliais);
 
         listFuncionario = dao.apresentarFuncionarios();
 
@@ -74,6 +72,7 @@ public class CadastrarFuncionario extends HttpServlet {
             String cargo = request.getParameter("cargo");
             String ativo = request.getParameter("ativo");
             String id = request.getParameter("id");
+            String idFilial = request.getParameter("idFilial");
 
             Funcionario f = new Funcionario();
 
@@ -84,6 +83,7 @@ public class CadastrarFuncionario extends HttpServlet {
             f.setSenha(senha);
             f.setCpf(cpf);
             f.setCargo(cargo);
+            f.setNomeFilial(idFilial);
 
             if (ativo != null && ativo.trim().equals("on")) {
                 f.setAtivo((byte) 1);
@@ -145,6 +145,7 @@ public class CadastrarFuncionario extends HttpServlet {
             json.put("cargo", func.getCargo().toLowerCase());
             json.put("login", func.getLogin());
             json.put("senha", func.getSenha());
+            json.put("idFilial", func.getNomeFilial());
             json.put("ativo", func.getAtivo());
 
             response.getWriter().write(json.toString());
