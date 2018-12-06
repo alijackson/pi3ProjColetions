@@ -126,16 +126,16 @@
                     <hr>  
                     <div>
                         <label for="veiculo" id="labelNomeCar">Veiculo: </label>
-                        <label for="idClient" id="labelIdCar" hidden>ID</label>
+                        <label for="idClient" id="labelIdCar" hidden>0</label>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="dataNasc">Data de Retirada</label>
-                            <input type="date" class="form-control" id="dataretira" name="dataretira">
+                            <input type="date" class="form-control" id="dateSaida" name="dataretira">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="dataNasc">Data de Entrega</label>
-                            <input type="date" class="form-control" id="dataentrega" name="dataentrega">
+                            <input type="date" class="form-control" id="dateReturn" name="dataentrega">
                         </div>
                     </div>
                 </div>
@@ -219,12 +219,9 @@
                             </div>
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-primary">Salvar</button>
+                            <button type="submit" class="btn btn-primary" onclick="enviarBd()">Salvar</button>
                         </div>
                     </div>
-
-
-
                 </div>
               </div>
       

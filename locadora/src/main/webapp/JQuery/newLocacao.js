@@ -75,6 +75,8 @@ function selCliente(id) {
 
       document.getElementById("labelClient").innerHTML =
         "<label>" + "Cliente: " + data.nome + "</label> ";
+        
+        $("#clientes").modal("hide");
     },
     error: function(ajaxContext) {
       console.log("error");
@@ -146,14 +148,14 @@ function buscarCar() {
  */
 $(document).on("click", ".oneRowCar", function() {
   let aux = $(this).html();
-  selCliente(aux.charAt(4));
+  selCar(aux.charAt(4));
 });
 /**
  * Função chama uma função do Servlets para efetuar a busca do cliente selecionado
  * Preeche a label com o nome do cliente.
  * @param  id ID do cliente para efetuar a busca.
  */
-function selCliente(id) {
+function selCar(id) {
   let url = "/locadora/cadastrarV?id=" + id;
 
   $.ajax({
@@ -165,10 +167,23 @@ function selCliente(id) {
         "<label>" + data.idVeiculo + "</label> ";
 
       document.getElementById("labelNomeCar").innerHTML =
-        "<label>" + "Cliente: " + data.modelo + "</label> ";
+        "<label>" + "Veiculo: " + data.modelo + "</label> ";
+        
+        $("#veiculos").modal("hide");
     },
     error: function(ajaxContext) {
       console.log("error");
     }
   });
+}
+
+
+function enviarBd(){
+  let idclient = document.getElementById("labelIdClient").innerText;
+  let idCar = document.getElementById("labelIdCar").innerText;
+
+  let dateSaida = document.getElementById("dateSaida").value;
+  let dateReturn = document.getElementById("dateReturn").value;
+
+  console.log(idclient +" "+idCar +" "+ dateSaida +" " +dateReturn);
 }
