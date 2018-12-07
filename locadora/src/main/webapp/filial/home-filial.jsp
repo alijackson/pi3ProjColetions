@@ -77,7 +77,7 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item active">
-                                <a class="nav-link" href="/locadora/home">HOME <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="/locadora/GerarRelatorio">HOME <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/locadora/new/locacao">LOCAÇÃO</a>
@@ -92,7 +92,7 @@
                                 <a class="nav-link " href="/locadora/CadastrarFuncionario">FUNCIONÁRIO</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " href="/locadora/filial">FILIAL</a>
+                                <a class="nav-link " href="/locadora/filiais">FILIAL</a>
                             </li>
                             <li class="nav-item pulç">
                                 <a style="margin-left: 500px"href="logout"  class="nav-link active">LOGOUT</a>
