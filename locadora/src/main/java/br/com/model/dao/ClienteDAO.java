@@ -14,7 +14,6 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -105,7 +104,7 @@ public class ClienteDAO {
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
+            ex.printStackTrace();
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
 
