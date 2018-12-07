@@ -57,7 +57,6 @@ public class LocacaoDAO {
         } 
         catch (SQLException ex) 
         {
-            JOptionPane.showMessageDialog(null, "Erro!! DB "+ex);
                     
         } 
         finally 
@@ -148,10 +147,7 @@ public class LocacaoDAO {
             stmt.setInt(1, id);
             stmt.execute();
             
-            JOptionPane.showMessageDialog(null, id);
-            JOptionPane.showMessageDialog(null, "Excluído  com sucesso");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "erro ao atualizar" + ex);
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
