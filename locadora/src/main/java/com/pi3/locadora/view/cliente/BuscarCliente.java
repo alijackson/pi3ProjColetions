@@ -17,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -35,9 +36,15 @@ public class BuscarCliente extends HttpServlet {
 
         String pesquisar = request.getParameter("pesquisar");
 
+        HttpSession session = request.getSession(true);
+
+        Object filial = session.getAttribute("filialLocalizada");
+
+        String filialConvertida = String.valueOf(filial);
+
         if ("".equalsIgnoreCase(pesquisar) || pesquisar == null) {
 
-            listaCliente = dao.apresentarClientes();
+            listaCliente = dao.apresentarClientes(filialConvertida);
 
             request.setAttribute("listarCliente", listaCliente);
 
@@ -52,7 +59,7 @@ public class BuscarCliente extends HttpServlet {
 
             if (resultado == true) {
 
-                listaCliente = dao.buscar(pesquisar);
+                listaCliente = dao.buscar(pesquisar, filialConvertida);
                 request.setAttribute("listarCliente", listaCliente);
 
                 RequestDispatcher dispatcher

@@ -197,6 +197,7 @@
                     </div>
                     <div class="modal-body">
                         <form action="cadastrarC" method="post" name="formEditCliente">
+                             <input type="text" id="nomefilial" name="nomefilial" value="${filialLocalizada}" hidden/>
                             <div class="form-group">
                                 <!-- hidden omite as infomações -->
                                 <input type="text" class="form-control" id="idCliente" name="idCliente" hidden>

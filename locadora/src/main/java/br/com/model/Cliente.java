@@ -94,6 +94,15 @@ public class Cliente extends Convert{
     private String email;
     private String numeroCNH;
     private String dataNascimento;
+    private String nomeFilial;
+
+    public String getNomeFilial() {
+        return nomeFilial;
+    }
+
+    public void setNomeFilial(String nomeFilial) {
+        this.nomeFilial = nomeFilial;
+    }
 
     public Cliente() {
     }

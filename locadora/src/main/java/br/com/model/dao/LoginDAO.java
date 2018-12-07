@@ -11,13 +11,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
  * @author micro
  */
 public class LoginDAO {
+
     private byte ativo;
+
     public LoginDAO() {
     }
 
@@ -49,6 +52,37 @@ public class LoginDAO {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
         return result;
+    }
+
+    public String retornarFilial(String login, String senha) {
+
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String filial = null;
+        try {
+
+            stmt = con.prepareStatement("SELECT * FROM FUNCIONARIO WHERE LOGIN = ? AND SENHA = ?");
+            stmt.setString(1, login);
+            stmt.setString(2, senha);
+
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                Funcionario f = new Funcionario();
+
+                filial = rs.getString("FILIALFUNCIONARIO");
+
+            }
+
+        } catch (SQLException ex) {
+
+            ex.printStackTrace();
+
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return filial;
     }
 
     public byte getAtivo() {
