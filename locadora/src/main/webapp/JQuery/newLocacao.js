@@ -75,8 +75,8 @@ function selCliente(id) {
 
       document.getElementById("labelClient").innerHTML =
         "<label>" + "Cliente: " + data.nome + "</label> ";
-        
-        $("#clientes").modal("hide");
+
+      $("#clientes").modal("hide");
     },
     error: function(ajaxContext) {
       console.log("error");
@@ -168,8 +168,8 @@ function selCar(id) {
 
       document.getElementById("labelNomeCar").innerHTML =
         "<label>" + "Veiculo: " + data.modelo + "</label> ";
-        
-        $("#veiculos").modal("hide");
+
+      $("#veiculos").modal("hide");
     },
     error: function(ajaxContext) {
       console.log("error");
@@ -177,17 +177,30 @@ function selCar(id) {
   });
 }
 
+function enviarBd() {
+  let idclient = document.getElementById("labelIdClient").innerText;
+  let idCar = document.getElementById("labelIdCar").innerText;
 
-function enviarBd(){
-    let idclient = document.getElementById("labelIdClient").innerText;
-    let idCar = document.getElementById("labelIdCar").innerText;
+  let dateSaida = new Date(document.getElementById("dateSaida").value);
+  let dateReturn = new Date(document.getElementById("dateReturn").value);
 
-    let dateSaida = new Date(document.getElementById("dateSaida").value);
-    let dateReturn = new Date(document.getElementById("dateReturn").value);
-  
-    let diff = Math.abs(date2.getTime() - date1.getTime());
-    
-    let dias = Math.ceil(timeDiff / (1000 * 3600 * 24));
+  let diff = Math.abs(dateSaida.getTime() - dateReturn.getTime());
+  if (dateSaida > dateReturn) {
+    console.log("Data de saida maior que a de retorno");
+  }
+  let dias = Math.ceil(diff / (1000 * 3600 * 24));
 
-    console.log(idclient +" "+idCar +" "+ dateSaida +" " +dateReturn);
+  console.log(
+    idclient +
+      " " +
+      idCar +
+      " " +
+      dateSaida +
+      " " +
+      dateReturn +
+      " " +
+      diff +
+      "\n===== DIAS ====\n" +
+      dias
+  );
 }
