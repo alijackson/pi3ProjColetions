@@ -76,8 +76,7 @@ function selCliente(id) {
     type: "PUT",
 
     success: function(data) {
-      document.getElementById("labelIdClient").innerHTML =
-        "<label>" + data.idCliente + "</label> ";
+      $('#labelIdClient').val(data.idCliente );
 
       document.getElementById("labelClient").innerHTML =
         "<label>" + "Cliente: " + data.nome + "</label> ";
@@ -175,8 +174,7 @@ function selCar(id) {
     type: "PUT",
 
     success: function(data) {
-      document.getElementById("labelIdCar").innerHTML =
-        "<label>" + data.idVeiculo + "</label> ";
+      $('#labelIdCar').val(data.idVeiculo);
 
       document.getElementById("labelNomeCar").innerHTML =
         "<label>" + "Veiculo: " + data.modelo + "</label> ";
@@ -218,7 +216,7 @@ function enviarBd() {
       dias
   );
 }
-$(document).on("click", ".dataEntrega", function() {
+$(document).on("click", ".valorTotal", function() {
   let dateSaida = new Date(document.getElementById("dateSaida").value);
   let dateReturn = new Date(document.getElementById("dateReturn").value);
 
@@ -232,10 +230,10 @@ $(document).on("click", ".dataEntrega", function() {
 });
 $("#form").submit(function(event) {
   // validações
-  if (document.getElementById("totalDias").value == "") {
-    alert("Preencha o campo de titulo");
+  if (document.getElementById("valorTotal").value == "") {
+    alert("Favor. informar o valor total da locação");
     return false;
   }
-  alert("Enviou");
+  alert("Locação efetuada com sucesso!");
   document.form.submit();
 });

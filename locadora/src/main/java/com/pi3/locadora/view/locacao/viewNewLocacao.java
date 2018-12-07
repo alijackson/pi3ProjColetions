@@ -6,12 +6,18 @@
 package com.pi3.locadora.view.locacao;
 
 import br.com.model.Cliente;
+import br.com.model.Funcionario;
 import br.com.model.Locacao;
+import br.com.model.Veiculo;
 import br.com.model.dao.ClienteDAO;
+import br.com.model.dao.FuncionarioDAO;
 import br.com.model.dao.LocacaoDAO;
+import br.com.model.dao.VeiculoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,6 +40,44 @@ public class viewNewLocacao extends HttpServlet{
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+//        ArrayList<Locacao> locacoes = new ArrayList<Locacao>();
+//
+//        ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
+//
+//        ArrayList<Veiculo> veiculos = new ArrayList<Veiculo>();
+//
+//        ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+//
+//        LocacaoDAO daoLocacao = new LocacaoDAO();
+//
+//        FuncionarioDAO daoFuncionario = new FuncionarioDAO();
+//
+//        VeiculoDAO daoVeiculo = new VeiculoDAO();
+//
+//        ClienteDAO daoCliente = new ClienteDAO();
+//
+//        locacoes = daoLocacao.relatorioSemanal();
+//        
+//        HttpSession session = request.getSession(true);
+//
+//        Object filial = session.getAttribute("filialLocalizada");
+//
+//        String filialConvertida = String.valueOf(filial);
+//
+//        funcionarios = daoFuncionario.apresentarFuncionarios();
+//
+//        veiculos = daoVeiculo.apresentarVeiculos(filialConvertida);
+//
+//        clientes = daoCliente.apresentarClientes(filialConvertida);
+//
+//        request.setAttribute("listaClientes", clientes);
+//
+//        request.setAttribute("listaVeiculos", veiculos);
+//
+//        request.setAttribute("listaFuncionarios", funcionarios);
+//
+//        request.setAttribute("listaLocacoes", locacoes);
+
         RequestDispatcher dispatcher
                 = request.getRequestDispatcher("/locacao/oneLocacao.jsp");
 
@@ -52,26 +96,16 @@ public class viewNewLocacao extends HttpServlet{
         Locacao newLoc = new Locacao();
 
         newLoc.setIdCliente(request.getParameter("idClient"));
-        newLoc.setIdVeiculo(request.getParameter("labelIdCar"));
+        newLoc.setIdVeiculo(request.getParameter("idCar"));
         newLoc.setDiaRetira(request.getParameter("dataSaida"));
         newLoc.setDiaEntrega(request.getParameter("dataReturn"));
         newLoc.setProtecao(request.getParameter("protect"));
         newLoc.setServicos(request.getParameter("service"));
-        newLoc.setTotalDias(request.getParameter("allDias"));
+//        newLoc.setTotalDias(request.getParameter("allDias"));
         newLoc.setPrecoTotal(request.getParameter("valorTotal"));
         
-        JOptionPane.showMessageDialog(null, "Segue Locacao "+
-                newLoc.getIdCliente()+" "+ 
-                newLoc.getIdVeiculo()+" "+
-                newLoc.getDiaRetira()+" "+
-                newLoc.getDiaEntrega()+" "+
-                newLoc.getProtecao()+" "+
-                newLoc.getServicos()+" "+
-                newLoc.getTotalDias()+" "+
-                newLoc.getPrecoTotal());
-               
-            JOptionPane.showMessageDialog(null, "Segue loc " +loc.inserir(newLoc));
-        
+        loc.inserir(newLoc);
+       
         RequestDispatcher dispatcher = 
                 request.getRequestDispatcher("/locacao/listlocacao.jsp");
         

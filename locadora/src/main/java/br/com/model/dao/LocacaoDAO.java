@@ -38,9 +38,9 @@ public class LocacaoDAO {
             stmt = con.prepareStatement("INSERT INTO LOCACAO (IDCLIENTE, "
                     + "IDVEICULO, SERVICO, PROTECAO, "
                     + "PRECO_TOTAL, DIARETIRA, DIAENTREGA " 
-                    + ", TOTALDIAS"
+//                    + ", TOTALDIAS"
                     + ") VALUES "
-                    + "(?,?,?,?,?,?,?,?)");
+                    + "(?,?,?,?,?,?,?)");
 
 //            stmt.setInt(2, Integer.parseInt(l.getIdFuncionario()));
             stmt.setInt(1, Integer.parseInt(l.getIdCliente()));
@@ -48,16 +48,17 @@ public class LocacaoDAO {
             stmt.setString(3, l.getServicos());
             stmt.setString(4, l.getProtecao());
             stmt.setString(5, l.getPrecoTotal());
-            stmt.setString(6, l.getDiaRetira());
-            stmt.setString(7, l.getDiaEntrega());
-            stmt.setString(8, l.getTotalDias());
+            stmt.setDate(6, Date.valueOf(l.getDiaRetira()));
+            stmt.setDate(7, Date.valueOf(l.getDiaEntrega()));
+//            stmt.setString(8, l.getTotalDias());
 
             stmt.execute();
 
         } 
         catch (SQLException ex) 
         {
-            log = ex.toString();
+            JOptionPane.showMessageDialog(null, "Erro!! DB "+ex);
+                    
         } 
         finally 
         {

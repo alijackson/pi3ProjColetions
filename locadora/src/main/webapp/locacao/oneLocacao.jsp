@@ -132,7 +132,7 @@
                     <!-- APRESENTAR O CLIENTE SELECIONADO -->
                     <div>
                         <label for="cliente" id="labelClient"> Cliente: </label>
-                        <label for="idClient" id="labelIdClient" name="idClient">0</label>
+                        <input type="text" id="labelIdClient" name="idClient" hidden>
                     </div>
                 </div>
                 <br>
@@ -147,7 +147,7 @@
                         <!-- APRESENTAR O VEICULO SELECIONADO -->
                     <div>
                         <label for="veiculo" id="labelNomeCar">Veiculo: </label>
-                        <label for="idClient" id="labelIdCar" name="labelIdCar">0</label>
+                        <input type="text" id="labelIdCar" name="idCar" hidden>
                     </div>
                 </div>
                 <br>
@@ -161,7 +161,7 @@
                         <input type="date" class="form-control" id="dateReturn" name="dataReturn">
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="total" id="totalDias" name="totalDias" hidden>0</label>
+                        <input type="text" id="totalDias" name="allDias" hidden>
                     </div>
                 </div>
                 <div>
@@ -243,7 +243,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-2">
                             <label for="totalLoc">Valor Total: </label>
-                            <input type="text" id="valorTotal" name="valorTotal" placeholder="R$: ">
+                            <input type="text" id="valorTotal" name="valorTotal" class="valorTotal" placeholder="R$: ">
                         </div>
                     </div>
                     <div>

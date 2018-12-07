@@ -127,37 +127,55 @@
 
             <div class="col-md-12">
                 <table class="table table-striped">
-                    <tr>  
-                        <th>ID</th>
-                        <th>Cliente</th>
-                        <th>Veiculo</th>
-                        <th>Preço Total</th>
-                        <th>Dia Retira</th>
-                        <th>Dia Entrega</th>
-                    </tr>
-                    <c:forEach items="${listaLocacoes}" var="locacao">
-                        <tr onclick="location.href = 'edit?id=<c:out value='${locacao.getId()}' />'"  id="trTable"  >
-                            <td>
-                                <c:out value='${locacao.getId()}' />
-                            </td>
-                            <td>
-                                <c:out value="${locacao.getIdCliente()}" />
-                            </td>
-                            <td>
-                                <c:out value="${locacao.getIdVeiculo()}" />
-                            </td>
-                            <td>
-                                <c:out value="${locacao.getPrecoTotal()}" />
-                            </td>
-                            <td>
-                                <c:out value="${locacao.getDiaRetira()}" />
-                            </td>
-                            <td>
-                                <c:out value="${locacao.getDiaEntrega()}" />
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </table>
+                            <tr>
+                                <th style="display:none;">ID</th>
+                                <th>Cliente</th>
+                                <th>Veiculo</th>
+                                <th>Funcionario</th>
+                                <th>Preço Total</th>
+                                <th>Dia de Retirada</th>
+                                <th>Dia de Entrega</th>
+                            </tr>
+
+                        <c:forEach items="${listaLocacoes}" var="locacao">
+                            <tr onclick="editarFunc(${locacao.getId()})" id="trTable">
+                                <td style="display:none;">
+                                    <c:out value='${locacao.getId()}' />
+                                </td>
+                                <td>
+                                    <c:forEach items="${listaClientes}" var="cliente">
+                                        <c:if test="${cliente.getId() == locacao.getIdCliente()}">
+                                            <c:out value="${cliente.getNome()}" />
+                                        </c:if>
+                                    </c:forEach>
+                                </td>
+                                <td>
+                                    <c:forEach items="${listaVeiculos}" var="veiculo">
+                                        <c:if test="${veiculo.getId() == locacao.getIdVeiculo()}">
+                                            <c:out value="${veiculo.getMarca()}" /> <c:out value="${veiculo.getModelo()}" />
+                                        </c:if>
+                                    </c:forEach>
+                                </td>
+                                <td>
+                                    <c:forEach items="${listaFuncionarios}" var="funcionario">
+                                        <c:if test="${funcionario.getId()  == locacao.getIdFuncionario()}">
+                                            <c:out value="${funcionario.getNome()}" />
+                                        </c:if>
+                                    </c:forEach>
+                                </td>
+                                <td>
+                                    <c:out value="${locacao.getPrecoTotal()}" />
+                                </td>
+                                <td>
+                                    <c:out value="${locacao.getDiaRetira()}" />
+                                </td>
+                                <td>
+                                    <c:out value="${locacao.getDiaEntrega()}" />
+                                </td>
+                            </tr>
+                            </a>
+                        </c:forEach>
+                    </table>
             </div>
             <!-- FIM TABLE -->
 
