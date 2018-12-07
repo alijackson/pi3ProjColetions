@@ -18,6 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.swing.JOptionPane;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -85,13 +86,18 @@ public class viewNewLocacao extends HttpServlet{
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
     {
         
+        HttpSession session = req.getSession(true);
+
+        Object filial = session.getAttribute("filialLocalizada");
+
+        String filialConvertida = String.valueOf(filial);
         try {
 
             ArrayList<Cliente> listClientes = new ArrayList<Cliente>();
 
             ClienteDAO dao = new ClienteDAO();
 
-            listClientes = dao.apresentarClientes();
+            listClientes = dao.apresentarClientes(filialConvertida);
 
             JSONArray array = new JSONArray();
 

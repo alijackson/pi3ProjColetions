@@ -57,25 +57,35 @@ public class VerificarLogin extends HttpServlet {
         } else {
 
             boolean resposta = dao.checarLogin(login, senha);
-            
-            if(dao.getAtivo() == 0){
-                
+
+            if (dao.getAtivo() == 0) {
+
                 request.setAttribute("mensagem", "Usuário não permitido");
 
                 RequestDispatcher dispatcher
                         = request.getRequestDispatcher("/index.jsp");
 
                 dispatcher.forward(request, response);
-                
+
                 return;
             }
+
             if (resposta == true) {
+
+                String filial = dao.retornarFilial(login, senha);
+
                 HttpSession session = request.getSession(true);
-                
+
                 session.setAttribute("login", "true");
 
+                session.setAttribute("filialLocalizada", filial);
+
+//                RequestDispatcher dispatcher
+//                        = request.getRequestDispatcher("/tela-principal/tela-principal.jsp");
+//
+//                dispatcher.forward(request, response);
                 RequestDispatcher dispatcher
-                        = request.getRequestDispatcher("/tela-principal/tela-principal.jsp");
+                        = request.getRequestDispatcher("/relatorio/relatorio.jsp");
 
                 dispatcher.forward(request, response);
 

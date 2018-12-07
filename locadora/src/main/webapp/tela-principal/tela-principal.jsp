@@ -1,32 +1,33 @@
+<%@page import="javax.swing.JOptionPane"%>
+<%@page import="br.com.model.dao.FuncionarioDAO"%>
 <%@page import="br.com.model.Cliente"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/util/topo.jsp"></jsp:include>
-<!DOCTYPE html>
-<html lang="pt-br">
+    <!DOCTYPE html>
+    <html lang="pt-br">
 
-    <head>
-        <title>Home</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <head>
+            <title>Home</title>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-              crossorigin="anonymous">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+            <!-- Bootstrap CSS -->
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+                  crossorigin="anonymous">
 
-        <style>
-            #trTable.a.hover{
+            <style>
+                #trTable.a.hover{
 
-                background-color: red;
-            }
-            .center{
-                text-align: center;
-            }      
+                    background-color: red;
+                }
+                .center{
+                    text-align: center;
+                }      
 
-        </style>
-
-
+            </style>
+     
     </head>
 
     <body>
@@ -57,7 +58,7 @@
                                                 <a class="nav-link " href="/locadora/cadastrarC">CLIENTE</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link " href="/locadora/cadastrarV">VEÍCULO</a>
+                                                <a class="nav-link "  href="/locadora/cadastrarV">VEÍCULO</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link " href="/locadora/CadastrarFuncionario">FUNCIONÁRIO</a>
@@ -73,12 +74,13 @@
 
                                 </div>
 
+
+
                             </nav>
 
                             <p>${login}</p>
 
                             </body>
-
 
 
                             </html>

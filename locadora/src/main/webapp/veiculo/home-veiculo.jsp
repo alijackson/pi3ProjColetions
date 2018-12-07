@@ -1,3 +1,4 @@
+<%@page import="javax.swing.JOptionPane"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/util/topo.jsp"></jsp:include>
@@ -59,6 +60,7 @@
                 }
 
             </style>
+
         </head>
 
         <body>
@@ -75,7 +77,7 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item active">
-                                <a class="nav-link" href="/locadora/home">HOME <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="/locadora/GerarRelatorio">HOME <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/locadora/new/locacao">LOCAÇÃO</a>
@@ -98,6 +100,7 @@
                         </ul>
                     </div>
                 </div>
+
             </nav>
             <!-- FIM DO MENU SUPERIOR -->
 
@@ -130,7 +133,7 @@
                 <div class="col-md-12">
                     <table class="table table-striped">
                         <tr>
-                            <th>ID</th>
+                            <th style="display:none;">ID</th>
                             <th>Modelo</th>
                             <th>Ano</th>
                             <th>Número de Documento</th>
@@ -140,7 +143,7 @@
 
                     <c:forEach items="${listarVeiculos}" var="veiculo">
                         <tr onclick="editarVeiculo(${veiculo.getId()})" id="trTable">
-                            <td>
+                            <td style="display:none;" >
                                 <c:out value='${veiculo.getId()}' />
                             </td>
                             <td>
@@ -159,7 +162,6 @@
                                 <c:out value="${veiculo.getPlaca()}" />
                             </td>
                         </tr>
-                        </a>
                     </c:forEach>
 
                 </table>
@@ -206,7 +208,8 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="cadastrarV" method="post" name="formEditVeiculo">
+                        <form action="cadastrarV" method="post" name="formEditVeiculo" >
+                            <input type="text" id="nomefilial" name="nomefilial" value="${filialLocalizada}" hidden/>
                             <div class="form-group">
                                 <!-- hidden omite as infomações -->
                                 <input type="text" class="form-control" id="idVeiculo" name="idVeiculo" hidden>
@@ -226,10 +229,32 @@
                                     <label for="placa">Placa</label>
                                     <input type="text" class="form-control" id="placa" required name="placa" placeholder="ex: XXX-XXXX">
                                 </div>
+                                <!--                                <div class="form-group col-md-6">
+                                                                    <label for="marca">Marca</label>
+                                                                    <input type="text" class="form-control" id="marca" required name="marca" placeholder="ex: Fiat">
+                                                                </div>-->
+
                                 <div class="form-group col-md-6">
-                                    <label for="marca">Marca</label>
-                                    <input type="text" class="form-control" id="marca" required name="marca" placeholder="ex: Fiat">
+                                    <label for="marca">Caracteristicas</label>
+                                    <select id="marca" required name="marca" class="form-control">
+                                        <option value="Land Rover">Land Rover</option>
+                                        <option value="Jeep">Jeep</option>
+                                        <option value="Mercedes-Benz">Mercedes-Benz</option>
+                                        <option value="Maserati">Maserati</option>
+                                        <option value="Jaguar">Jaguar</option>
+                                        <option value="Ford">Ford</option>
+                                        <option value="Hyundai">Hyundai</option>
+                                        <option value="Fiat">Fiat</option>
+                                        <option value="Ferrari">Ferrari</option>
+                                        <option value="Citroen">Citroen</option>
+                                        <option value="BMW">BMW</option>
+                                        <option value="Audi">Audi</option>
+                                        <option value="Honda">Honda</option>
+                                        <option value="Citroen">Citroen</option>
+                                        <option value="Nissan">Nissan</option>
+                                    </select>
                                 </div>
+
                                 <div class="form-group col-md-6">
                                     <label for="numerodedocumento">Número de Documeto</label>
                                     <input type="text" class="form-control" id="numerodedocumento" required name="numerodedocumento"
@@ -260,6 +285,8 @@
                                     </select>
                                 </div>
                             </div>
+
+
 
                             <button type="reset" class="btn cancel btn-secondary " data-dismiss="modal" floa>Cancelar</button>
 

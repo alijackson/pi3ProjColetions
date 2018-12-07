@@ -25,6 +25,15 @@ public class Veiculo {
     private String numeroDocumento;
     private String caracteristica;
     private File imagem;
+    private String nomeFilial;
+
+    public String getNomeFilial() {
+        return nomeFilial;
+    }
+
+    public void setNomeFilial(String nomeFilial) {
+        this.nomeFilial = nomeFilial;
+    }
 
     public int getId() {
         return id;

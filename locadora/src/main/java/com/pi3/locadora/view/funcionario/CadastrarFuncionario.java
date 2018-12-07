@@ -33,10 +33,15 @@ public class CadastrarFuncionario extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        //request.setAttribute("objetivo", "Cadastrar Funcionario");
+//        ArrayList<Filial> listaFiliais = new ArrayList<Filial>();
         ArrayList<Funcionario> listFuncionario = new ArrayList<Funcionario>();
 
+//        FilialDAO filial = new FilialDAO();
         FuncionarioDAO dao = new FuncionarioDAO();
+
+//        listaFiliais = filial.filiaisCadastradas();
+//
+//        request.setAttribute("filiasCadastradas", listaFiliais);
 
         listFuncionario = dao.apresentarFuncionarios();
 
@@ -65,6 +70,7 @@ public class CadastrarFuncionario extends HttpServlet {
             String cargo = request.getParameter("cargo");
             String ativo = request.getParameter("ativo");
             String id = request.getParameter("id");
+            String idFilial = request.getParameter("idFilial");
 
             Funcionario f = new Funcionario();
 
@@ -75,6 +81,7 @@ public class CadastrarFuncionario extends HttpServlet {
             f.setSenha(senha);
             f.setCpf(cpf);
             f.setCargo(cargo);
+            f.setNomeFilial(idFilial);
 
             if (ativo != null && ativo.trim().equals("on")) {
                 f.setAtivo((byte) 1);
@@ -105,7 +112,7 @@ public class CadastrarFuncionario extends HttpServlet {
 
             PrintWriter saida = response.getWriter();
             saida.println(e);
-            
+
         }
 
     }
@@ -120,7 +127,6 @@ public class CadastrarFuncionario extends HttpServlet {
 
         Funcionario func = new Funcionario();
         FuncionarioDAO bd = new FuncionarioDAO();
-
 
         try {
             id = Integer.parseInt(request.getParameter("id"));
@@ -137,6 +143,7 @@ public class CadastrarFuncionario extends HttpServlet {
             json.put("cargo", func.getCargo().toLowerCase());
             json.put("login", func.getLogin());
             json.put("senha", func.getSenha());
+            json.put("idFilial", func.getNomeFilial());
             json.put("ativo", func.getAtivo());
 
             response.getWriter().write(json.toString());
@@ -145,46 +152,44 @@ public class CadastrarFuncionario extends HttpServlet {
             e.printStackTrace();
         }
     }
+
     @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
-    {
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id;
         FuncionarioDAO dao = new FuncionarioDAO();
         String resposta;
-            
+
         try {
-            
+
             resp.setContentType("application/json");
             resp.setCharacterEncoding("UTF-8");
-            
+
             JSONObject json = new JSONObject();
-        
+
             id = Integer.parseInt(req.getParameter("id"));
-                
+
             dao = new FuncionarioDAO();
             resposta = dao.excluir(id);
-            
-            if(resposta != null && !resposta.trim().equals(""))
-            {
+
+            if (resposta != null && !resposta.trim().equals("")) {
                 json.put("resp", "Erro ao excluir.");
 
-                resp.getWriter().write(json.toString());   
+                resp.getWriter().write(json.toString());
                 return;
-                
+
             }
             json.put("resp", "Funcionário excluído com sucesso");
 
             resp.getWriter().write(json.toString());
-                   
-            
+
         } catch (Exception e) {
-            
+
             JSONObject json = new JSONObject();
-        
+
             json.put("resp", "Erro ao interpretar dados");
 
             resp.getWriter().write(json.toString());
         }
-        
+
     }
 }

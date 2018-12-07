@@ -11,7 +11,7 @@ import br.pi3.servico.Convert;
  *
  * @author micro
  */
-public class Funcionario extends Convert{
+public class Funcionario extends Convert {
 
     private int id;
     private String nome;
@@ -23,6 +23,15 @@ public class Funcionario extends Convert{
     private String senha;
     private byte ativo;
     private byte enable;
+    private String nomeFilial;
+
+    public String getNomeFilial() {
+        return nomeFilial;
+    }
+
+    public void setNomeFilial(String nomeFilial) {
+        this.nomeFilial = nomeFilial;
+    }
 
     public Funcionario() {
     }
@@ -106,6 +115,5 @@ public class Funcionario extends Convert{
     public void setEnable(byte enable) {
         this.enable = enable;
     }
-    
-    
+
 }

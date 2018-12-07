@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -36,9 +37,15 @@ public class BuscarVeiculos extends HttpServlet {
 
         String pesquisar = request.getParameter("pesquisar");
 
+        HttpSession session = request.getSession(true);
+
+        Object filial = session.getAttribute("filialLocalizada");
+
+        String filialConvertida = String.valueOf(filial);
+
         if ("".equalsIgnoreCase(pesquisar) || pesquisar == null) {
 
-            listVeiculos = dao.apresentarVeiculos();
+            listVeiculos = dao.apresentarVeiculos(filialConvertida);
 
             request.setAttribute("listarVeiculos", listVeiculos);
 
@@ -53,7 +60,8 @@ public class BuscarVeiculos extends HttpServlet {
 
             if (resultado == true) {
 
-                listVeiculos = dao.buscar(pesquisar);
+                listVeiculos = dao.buscar(pesquisar, filialConvertida);
+
                 request.setAttribute("listarVeiculos", listVeiculos);
 
                 RequestDispatcher dispatcher
@@ -83,7 +91,13 @@ public class BuscarVeiculos extends HttpServlet {
 
         VeiculoDAO dao = new VeiculoDAO();
         
-        cars = dao.apresentarVeiculos();
+        HttpSession session = req.getSession(true);
+
+        Object filial = session.getAttribute("filialLocalizada");
+
+        String filialConvertida = String.valueOf(filial);
+        
+        cars = dao.apresentarVeiculos(filialConvertida);
 
         JSONArray array = new JSONArray();
 

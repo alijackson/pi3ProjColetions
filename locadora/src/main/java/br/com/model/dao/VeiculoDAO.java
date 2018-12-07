@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -36,8 +37,8 @@ public class VeiculoDAO {
 
             stmt = con.prepareStatement("INSERT INTO VEICULO "
                     + "(MODELO, CATEGORIA, ANO, PLACA, "
-                    + "MARCA, NUMERODOC, CARACTERISTICAS, ENABLE) VALUES "
-                    + "(?,?,?,?,?,?,?,1)");
+                    + "MARCA, NUMERODOC, CARACTERISTICAS,FILIALVEICULO, ENABLE) VALUES "
+                    + "(?,?,?,?,?,?,?,?,1)");
 
 //            String dataConvertida = dataEntrada.format(dataBanco.parse(v.getAno()));
             stmt.setString(1, v.getModelo());
@@ -47,6 +48,7 @@ public class VeiculoDAO {
             stmt.setString(5, v.getMarca());
             stmt.setString(6, v.getNumeroDocumento());
             stmt.setString(7, v.getCaracteristica());
+            stmt.setString(8, v.getNomeFilial());
 
             stmt.executeUpdate();
 
@@ -59,7 +61,7 @@ public class VeiculoDAO {
         }
     }
 
-    public ArrayList<Veiculo> apresentarVeiculos() {
+    public ArrayList<Veiculo> apresentarVeiculos(String filial) {
 
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
@@ -69,8 +71,18 @@ public class VeiculoDAO {
 
         try {
 
-            stmt = con.prepareStatement("SELECT * FROM VEICULO WHERE ENABLE = 1");
-            rs = stmt.executeQuery();
+            if ("MATRIZ-SP".equals(filial)) {
+
+                stmt = con.prepareStatement("SELECT * FROM VEICULO WHERE ENABLE = 1");
+                rs = stmt.executeQuery();
+
+            } else {
+
+                stmt = con.prepareStatement("SELECT * FROM VEICULO WHERE ENABLE = 1 AND FILIALVEICULO = ?");
+                stmt.setString(1, filial);
+                rs = stmt.executeQuery();
+
+            }
 
             while (rs.next()) {
 
@@ -90,7 +102,7 @@ public class VeiculoDAO {
             }
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, ex);
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
 
@@ -188,7 +200,7 @@ public class VeiculoDAO {
         return v;
     }
 
-    public ArrayList<Veiculo> buscar(String modelo) {
+    public ArrayList<Veiculo> buscar(String modelo, String filial) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -197,10 +209,26 @@ public class VeiculoDAO {
 
         try {
 
-            stmt = con.prepareStatement("SELECT * FROM VEICULO WHERE ENABLE = 1 AND MODELO LIKE ? ");
-            stmt.setString(1, "%" + modelo + "%");
-            rs = stmt.executeQuery();
+            if ("MATRIZ-SP".equals(filial)) {
 
+                stmt = con.prepareStatement("SELECT * FROM VEICULO WHERE ENABLE = 1 AND MODELO LIKE ?");
+                stmt.setString(1, "%" + modelo + "%");
+                rs = stmt.executeQuery();
+
+            } else {
+
+                stmt = con.prepareStatement("SELECT * FROM VEICULO WHERE ENABLE = 1 AND MODELO LIKE ? AND FILIALVEICULO = ?");
+                stmt.setString(1, "%" + modelo + "%");
+                stmt.setString(2, filial);
+
+                rs = stmt.executeQuery();
+
+            }
+
+//            stmt = con.prepareStatement("SELECT * FROM VEICULO WHERE ENABLE = 1 AND MODELO LIKE ? AND FILIALVEICULO = ?");
+//            stmt.setString(1, "%" + modelo + "%");
+//            stmt.setString(2, filial);
+//            rs = stmt.executeQuery();
             while (rs.next()) {
 
                 Veiculo v = new Veiculo();
@@ -236,7 +264,8 @@ public class VeiculoDAO {
         boolean result = false;
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM VEICULO WHERE MODELO LIKE ? ");
+
+            stmt = con.prepareStatement("SELECT * FROM VEICULO WHERE MODELO LIKE ?");
             stmt.setString(1, "%" + modelo + "%");
             rs = stmt.executeQuery();
 

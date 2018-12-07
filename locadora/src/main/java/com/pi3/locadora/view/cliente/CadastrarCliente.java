@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.json.JSONObject;
 
 /**
@@ -35,8 +36,14 @@ public class CadastrarCliente extends HttpServlet {
         ArrayList<Cliente> listClientes = new ArrayList<Cliente>();
 
         ClienteDAO dao = new ClienteDAO();
+        
+         HttpSession session = request.getSession(true);
 
-        listClientes = dao.apresentarClientes();
+        Object filial = session.getAttribute("filialLocalizada");
+
+        String filialConvertida = String.valueOf(filial);
+
+        listClientes = dao.apresentarClientes(filialConvertida);
 
         request.setAttribute("listarCliente", listClientes);
 
@@ -61,6 +68,7 @@ public class CadastrarCliente extends HttpServlet {
         String telefonecelular = request.getParameter("telefonecelular");
         String datanascimento = request.getParameter("datanascimento");
         String id = request.getParameter("idCliente");
+        String nomefilial = request.getParameter("nomefilial");
 
         Cliente c = new Cliente();
 
@@ -72,6 +80,7 @@ public class CadastrarCliente extends HttpServlet {
         c.setTelefoneFixo(telefonefixo);
         c.setTelefoneCelular(telefonecelular);
         c.setDataNascimento(datanascimento);
+        c.setNomeFilial(nomefilial);
 
         ClienteDAO dao = new ClienteDAO();
 
@@ -83,8 +92,14 @@ public class CadastrarCliente extends HttpServlet {
         }
 
         ArrayList<Cliente> listClientes = new ArrayList<Cliente>();
+        
+         HttpSession session = request.getSession(true);
 
-        listClientes = dao.apresentarClientes();
+        Object filial = session.getAttribute("filialLocalizada");
+
+        String filialConvertida = String.valueOf(filial);
+
+        listClientes = dao.apresentarClientes(filialConvertida);
 
         request.setAttribute("listarCliente", listClientes);
 
@@ -122,46 +137,44 @@ public class CadastrarCliente extends HttpServlet {
         resp.getWriter().write(json.toString());
 
     }
+
     @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
-    {
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id;
         ClienteDAO dao = new ClienteDAO();
         String resposta;
-            
+
         try {
-            
+
             resp.setContentType("application/json");
             resp.setCharacterEncoding("UTF-8");
-            
+
             JSONObject json = new JSONObject();
-        
+
             id = Integer.parseInt(req.getParameter("cod"));
-                
+
             dao = new ClienteDAO();
             resposta = dao.excluir(id);
-            
-            if(resposta != null && !resposta.trim().equals(""))
-            {
+
+            if (resposta != null && !resposta.trim().equals("")) {
                 json.put("resp", "Erro ao excluir.");
 
-                resp.getWriter().write(json.toString());   
+                resp.getWriter().write(json.toString());
                 return;
-                
+
             }
             json.put("resp", "Cliente excluído com sucesso");
 
             resp.getWriter().write(json.toString());
-                   
-            
+
         } catch (Exception e) {
-            
+
             JSONObject json = new JSONObject();
-        
+
             json.put("resp", "Erro ao interpretar dados");
 
             resp.getWriter().write(json.toString());
         }
-        
+
     }
 }

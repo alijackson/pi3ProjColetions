@@ -1,28 +1,29 @@
 function editarFunc(func) {
-  console.log("funcao");
-  let url = "http://localhost:8080/locadora/CadastrarFuncionario?id=" + func;
-  console.log(url);
-  $.ajax({
-    url: url,
-    type: "PUT",
-    success: function(data) {
-      console.log(data);
-      $("#id").val(data.id);
-      $("#nome").val(data.nome);
-      $("#email").val(data.email);
-      $("#dataNascimento").val(data.dataNasc);
-      $("#login").val(data.login);
-      $("#senha").val(data.senha);
-      $("#cpf").val(data.cpf);
-      $("#cargo").val(data.cargo);
-      $("#butSubmit").text("Salvar");
-      $("#exampleModalCenterTitle").text("Editar Funcionário");
-      isTrue(data.ativo);
-    },
-    error: function(ajaxContext) {
-      console.log("error");
-    }
-  });
+    console.log("funcao")
+    let url = "http://localhost:8080/locadora/CadastrarFuncionario?id=" + func;
+    console.log(url)
+    $.ajax({
+        url: url,
+        type: 'PUT',
+        success: function(data) {
+            console.log(data)
+            $("#id").val(data.id)
+            $("#nome").val(data.nome)
+            $("#email").val(data.email)
+            $("#dataNascimento").val(data.dataNasc)
+            $("#login").val(data.login)
+            $("#senha").val(data.senha)
+            $("#cpf").val(data.cpf)
+            $("#cargo").val(data.cargo)
+            $("#idFilial").val(data.idFilial)
+            $("#butSubmit").text("Salvar")
+            $("#exampleModalCenterTitle").text("Editar Funcionário")
+            isTrue(data.ativo);
+        },
+        error: function(ajaxContext) {
+            console.log("error")
+        }
+    });
 
   document.getElementById("excluir").style.visibility = "visible";
 

@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -37,8 +38,8 @@ public class FuncionarioDAO {
         try {
 
             stmt = con.prepareStatement(
-                    "INSERT INTO FUNCIONARIO(NOME,DTNASCIMENTO,CPF,EMAIL,CARGO,LOGIN,SENHA,ATIVO,ENABLE) "
-                    + "VALUES (?,?,?,?,?,?,?,?,1)");
+                    "INSERT INTO FUNCIONARIO(NOME,DTNASCIMENTO,CPF,EMAIL,CARGO,LOGIN,SENHA,FILIALFUNCIONARIO,ATIVO,ENABLE) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?,1)");
 
             stmt.setString(1, f.getNome());
             stmt.setString(2, f.getDataNascimento());
@@ -47,12 +48,13 @@ public class FuncionarioDAO {
             stmt.setString(5, f.getCargo());
             stmt.setString(6, f.getLogin());
             stmt.setString(7, f.getSenha());
-            stmt.setInt(8, f.getAtivo());
+            stmt.setString(8, f.getNomeFilial());
+            stmt.setInt(9, f.getAtivo());
 
             stmt.execute();
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, ex);
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
@@ -102,7 +104,7 @@ public class FuncionarioDAO {
 
             stmt = con.prepareStatement("UPDATE FUNCIONARIO SET NOME = ?, DTNASCIMENTO = ?, "
                     + "CPF = ?, EMAIL = ?, CARGO = ?, LOGIN = ?, "
-                    + "SENHA = ?, ATIVO = ? "
+                    + "SENHA = ?,ATIVO = ?, FILIALFUNCIONARIO  = ? "
                     + "WHERE IDFUNCIONARIO = ? ");
 
             stmt.setString(1, f.getNome());
@@ -113,7 +115,8 @@ public class FuncionarioDAO {
             stmt.setString(6, f.getLogin());
             stmt.setString(7, f.getSenha());
             stmt.setInt(8, f.getAtivo());
-            stmt.setInt(9, f.getId());
+            stmt.setString(9, f.getNomeFilial());
+            stmt.setInt(10, f.getId());
 
             stmt.execute();
 
@@ -199,6 +202,7 @@ public class FuncionarioDAO {
                 f.setCargo(rs.getString("CARGO"));
                 f.setLogin(rs.getString("LOGIN"));
                 f.setSenha(rs.getString("SENHA"));
+                f.setNomeFilial(rs.getString("FILIALFUNCIONARIO"));
                 f.setAtivo(rs.getByte("ATIVO"));
 
             }
@@ -239,6 +243,7 @@ public class FuncionarioDAO {
                 f.setCargo(rs.getString("CARGO"));
                 f.setLogin(rs.getString("LOGIN"));
                 f.setSenha(rs.getString("SENHA"));
+                f.setNomeFilial(rs.getString("FILIALFUNCIONARIO"));
                 f.setAtivo(rs.getByte("ATIVO"));
 
                 funcionarios.add(f);

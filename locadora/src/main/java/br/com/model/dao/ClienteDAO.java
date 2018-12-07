@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package br.com.model.dao;
+
 import br.com.conneticon.ConnectionFactory;
 import br.com.model.Cliente;
 import java.sql.Connection;
@@ -13,8 +14,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 /**
  *
  * @author David
@@ -32,11 +32,11 @@ public class ClienteDAO {
 
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
-        try{
+        try {
             stmt = con.prepareStatement("INSERT INTO CLIENTE "
                     + "(NOME,DTNASCIMENTO,TELFIXO, "
-                    + "TELCEL,EMAIL,CNH,CPF,RG,ENABLE) "
-                    + "VALUES(?,?,?,?,?,?,?,?,1)");
+                    + "TELCEL,EMAIL,CNH,CPF,RG,FILIALCLIENTE,ENABLE) "
+                    + "VALUES(?,?,?,?,?,?,?,?,?,1)");
 
             stmt.setString(1, c.getNome());
             stmt.setString(2, c.getDataNascimento());
@@ -46,6 +46,7 @@ public class ClienteDAO {
             stmt.setString(6, c.getNumeroCNH());
             stmt.setString(7, c.getCpf());
             stmt.setString(8, c.getRg());
+            stmt.setString(9, c.getNomeFilial());
 
             stmt.executeUpdate();
 
@@ -58,9 +59,10 @@ public class ClienteDAO {
 
     /**
      *
+     * @param filial
      * @return
      */
-    public ArrayList<Cliente> apresentarClientes() {
+    public ArrayList<Cliente> apresentarClientes(String filial) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -68,9 +70,23 @@ public class ClienteDAO {
         ArrayList<Cliente> clientes = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM CLIENTE ");
-            rs = stmt.executeQuery();
 
+            if ("MATRIZ-SP".equals(filial)) {
+
+                stmt = con.prepareStatement("SELECT * FROM CLIENTE WHERE ENABLE = 1");
+                rs = stmt.executeQuery();
+
+            } else {
+
+                stmt = con.prepareStatement("SELECT * FROM CLIENTE WHERE ENABLE = 1 AND FILIALCLIENTE = ?");
+                stmt.setString(1, filial);
+                rs = stmt.executeQuery();
+
+            }
+
+//            stmt = con.prepareStatement("SELECT * FROM CLIENTE WHERE ENABLE = 1 AND FILIALCLIENTE = ?");
+//            stmt.setString(1, filial);
+//            rs = stmt.executeQuery();
             while (rs.next()) {
 
                 Cliente c = new Cliente();
@@ -83,7 +99,7 @@ public class ClienteDAO {
                 c.setEmail(rs.getString("EMAIL"));
                 c.setNumeroCNH(rs.getString("CNH"));
                 c.setCpf(rs.getString("CPF"));
-                
+
                 clientes.add(c);
             }
 
@@ -106,8 +122,6 @@ public class ClienteDAO {
                     + "TELFIXO = ?, TELCEL = ?, "
                     + "EMAIL = ?, CNH = ?,  RG = ?, "
                     + "CPF = ? WHERE IDCLIENTE = ? ");
-//
-//            String dataConvertida = dataEntrada.format(dataBanco.parse(c.getDataNascimento()));
 
             stmt.setString(1, c.getNome());
             stmt.setString(2, c.getDataNascimento());
@@ -185,7 +199,7 @@ public class ClienteDAO {
         return c;
     }
 
-    public ArrayList<Cliente> buscar(String nome) {
+    public ArrayList<Cliente> buscar(String nome, String filial) {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -193,15 +207,29 @@ public class ClienteDAO {
         ArrayList<Cliente> clientes = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM CLIENTE WHERE ENABLE = 1 AND NOME LIKE ? ");
-            stmt.setString(1, "%" + nome + "%");
-            rs = stmt.executeQuery();
+            if ("MATRIZ-SP".equals(filial)) {
 
+                stmt = con.prepareStatement("SELECT * FROM CLIENTE WHERE ENABLE = 1 AND NOME LIKE ? ");
+                stmt.setString(1, "%" + nome + "%");
+                rs = stmt.executeQuery();
+
+            } else {
+
+                stmt = con.prepareStatement("SELECT * FROM CLIENTE WHERE ENABLE = 1 AND NOME LIKE ? AND FILIALCLIENTE = ? ");
+                stmt.setString(1, "%" + nome + "%");
+                stmt.setString(2, filial);
+                rs = stmt.executeQuery();
+
+            }
+
+//            stmt = con.prepareStatement("SELECT * FROM CLIENTE WHERE ENABLE = 1 AND NOME LIKE ? AND FILIALCLIENTE = ? ");
+//            stmt.setString(1, "%" + nome + "%");
+//            stmt.setString(2, filial);
+//            rs = stmt.executeQuery();
             while (rs.next()) {
-                
+
                 Cliente c = new Cliente();
-                
-                     
+
                 String dataConvertida = dataEntrada.format(dataBanco.parse(rs.getString("DTNASCIMENTO")));
 
                 c.setId(rs.getInt("IDCLIENTE"));
@@ -219,7 +247,7 @@ public class ClienteDAO {
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (ParseException ex) {
-           ex.printStackTrace();
+            ex.printStackTrace();
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
 
@@ -235,7 +263,7 @@ public class ClienteDAO {
         boolean result = false;
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM CLIENTE WHERE ENABLE = 1 AND NOME LIKE ? ");
+            stmt = con.prepareStatement("SELECT * FROM CLIENTE WHERE ENABLE = 1 AND NOME LIKE ?");
             stmt.setString(1, "%" + nome + "%");
             rs = stmt.executeQuery();
 
