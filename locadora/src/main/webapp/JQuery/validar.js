@@ -15,4 +15,6 @@ $("#placa").mask('SSS-0000');
 $("#ano").mask('0000');
 
 $("#numerodedocumento").mask('00000000');
+
+$("#valorTotal").mask('#.##0,00',{reverse:true});
 });
