@@ -43,14 +43,6 @@ public class Locacao {
         this.idVeiculo = idVeiculo;
     }
 
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
     public String getProtecao() {
         return protecao;
     }
@@ -82,16 +74,33 @@ public class Locacao {
     public void setDiaEntrega(String diaEntrega) {
         this.diaEntrega = diaEntrega;
     }
+
+    public String getServicos() {
+        return servicos;
+    }
+
+    public void setServicos(String servicos) {
+        this.servicos = servicos;
+    }
+
+    public String getTotalDias() {
+        return totalDias;
+    }
+
+    public void setTotalDias(String totalDias) {
+        this.totalDias = totalDias;
+    }
     
     private String id;
     private String idCliente;
     private String idFuncionario;
     private String idVeiculo;
-    private String codigo;
+    private String servicos;
     private String protecao;
     private String precoTotal;
     private String diaRetira;
     private String diaEntrega;
+    private String totalDias;
     
     public Locacao(){}
     

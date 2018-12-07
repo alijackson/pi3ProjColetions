@@ -6,9 +6,9 @@
 package com.pi3.locadora.view.locacao;
 
 import br.com.model.Cliente;
-import br.com.model.Veiculo;
+import br.com.model.Locacao;
 import br.com.model.dao.ClienteDAO;
-import br.com.model.dao.VeiculoDAO;
+import br.com.model.dao.LocacaoDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -18,6 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -25,15 +26,15 @@ import org.json.JSONObject;
  *
  * @author jackson
  */
-@WebServlet(name = "locacao", urlPatterns = {"/new/locacao"})
-public class Locacao extends HttpServlet{
+@WebServlet(name = "viewNewLocacao", urlPatterns = {"/new/locacao"})
+public class viewNewLocacao extends HttpServlet{
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("/locacao/home-locacao.jsp");
+                = request.getRequestDispatcher("/locacao/oneLocacao.jsp");
 
         dispatcher.forward(request, response);
     }
@@ -43,59 +44,43 @@ public class Locacao extends HttpServlet{
             HttpServletResponse response)
             throws ServletException, IOException {
         
+        try {
+            
+        LocacaoDAO loc = new LocacaoDAO();
         
-        
-            RequestDispatcher dispatcher = request.getRequestDispatcher("");
+        Locacao newLoc = new Locacao();
 
-            dispatcher.forward(request, response);
+        newLoc.setIdCliente(request.getParameter("idClient"));
+        newLoc.setIdVeiculo(request.getParameter("labelIdCar"));
+        newLoc.setDiaRetira(request.getParameter("dataSaida"));
+        newLoc.setDiaEntrega(request.getParameter("dataReturn"));
+        newLoc.setProtecao(request.getParameter("protect"));
+        newLoc.setServicos(request.getParameter("service"));
+        newLoc.setTotalDias(request.getParameter("allDias"));
+        newLoc.setPrecoTotal(request.getParameter("valorTotal"));
+        
+        JOptionPane.showMessageDialog(null, "Segue Locacao "+
+                newLoc.getIdCliente()+" "+ 
+                newLoc.getIdVeiculo()+" "+
+                newLoc.getDiaRetira()+" "+
+                newLoc.getDiaEntrega()+" "+
+                newLoc.getProtecao()+" "+
+                newLoc.getServicos()+" "+
+                newLoc.getTotalDias()+" "+
+                newLoc.getPrecoTotal());
+               
+            JOptionPane.showMessageDialog(null, "Segue loc " +loc.inserir(newLoc));
+        
+        RequestDispatcher dispatcher = 
+                request.getRequestDispatcher("/locacao/listlocacao.jsp");
+        
+        dispatcher.forward(request, response);
+        
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Segue erro \n"+e);
+        }
 
     }
-//    @Override
-//    protected void doTrace(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
-//    {
-//        resp.setContentType("application/json;charset=UTF-8");
-//
-//        ArrayList <Veiculo> cars;
-//
-//        VeiculoDAO dao = new VeiculoDAO();
-//        
-//        cars = dao.apresentarVeiculos();
-//
-//        JSONArray array = new JSONArray();
-//
-//        PrintWriter out = resp.getWriter();
-//        
-//        for(Veiculo v : cars)
-//        {
-//            JSONObject json = new JSONObject();
-//
-//            json.put("idVeiculo", v.getId());
-//            json.put("modelo", v.getModelo());
-//            json.put("ano", v.getAno());
-//            json.put("placa", v.getPlaca());
-//            json.put("marca", v.getMarca());
-//            json.put("numerodedocumento", v.getNumeroDocumento());
-//            json.put("caracteristica", v.getCaracteristica());
-//            json.put("categoria", v.getCategoria());
-//            
-//            array.put(json);
-//        }
-//        
-//        out.print(array);
-//    }
-//    
-//    @Override
-//    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
-//    {
-//        
-//        try {
-//            
-//            
-//        } catch (Exception e) {
-//            
-//        }
-//        
-//    }
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
     {

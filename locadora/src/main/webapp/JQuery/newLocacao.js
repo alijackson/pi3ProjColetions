@@ -55,7 +55,13 @@ function buscarCliente() {
  */
 $(document).on("click", ".oneRowClient", function() {
   let aux = $(this).html();
-  selCliente(aux.charAt(4));
+  let id = aux.charAt(4);
+  let position = 5;
+  while (aux.charAt(position) != "<") {
+    id += aux.charAt(position);
+    position++;
+  }
+  selCliente(id);
 });
 /**
  * Função chama uma função do Servlets para efetuar a busca do cliente selecionado
@@ -148,7 +154,13 @@ function buscarCar() {
  */
 $(document).on("click", ".oneRowCar", function() {
   let aux = $(this).html();
-  selCar(aux.charAt(4));
+  let id = aux.charAt(4);
+  let position = 5;
+  while (aux.charAt(position) != "<") {
+    id += aux.charAt(position);
+    position++;
+  }
+  selCar(id);
 });
 /**
  * Função chama uma função do Servlets para efetuar a busca do cliente selecionado
@@ -190,6 +202,8 @@ function enviarBd() {
   }
   let dias = Math.ceil(diff / (1000 * 3600 * 24));
 
+  document.getElementById("totalDias").innerHTML =
+    "<label>" + "Cliente: " + data.nome + "</label> ";
   console.log(
     idclient +
       " " +
@@ -204,3 +218,24 @@ function enviarBd() {
       dias
   );
 }
+$(document).on("click", ".dataEntrega", function() {
+  let dateSaida = new Date(document.getElementById("dateSaida").value);
+  let dateReturn = new Date(document.getElementById("dateReturn").value);
+
+  let diff = Math.abs(dateSaida.getTime() - dateReturn.getTime());
+  if (dateSaida > dateReturn) {
+    console.log("Data de saida maior que a de retorno");
+  }
+  let dias = Math.ceil(diff / (1000 * 3600 * 24));
+  document.getElementById("totalDias").innerHTML =
+    "<label>" + "Cliente: " + data.nome + "</label> ";
+});
+$("#form").submit(function(event) {
+  // validações
+  if (document.getElementById("totalDias").value == "") {
+    alert("Preencha o campo de titulo");
+    return false;
+  }
+  alert("Enviou");
+  document.form.submit();
+});

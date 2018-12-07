@@ -35,18 +35,21 @@ public class LocacaoDAO {
         {
 
             stmt = con.prepareStatement("INSERT INTO LOCACAO (IDCLIENTE, "
-                    + "IDFUNCIONARIO, IDVEICULO, CODIGO, PROTECAO, "
-                    + "PRECO_TOTAL, DIARETIRA, DIAENTREGA) VALUES "
+                    + "IDVEICULO, SERVICO, PROTECAO, "
+                    + "PRECO_TOTAL, DIARETIRA, DIAENTREGA " 
+                    + ", TOTALDIAS"
+                    + ") VALUES "
                     + "(?,?,?,?,?,?,?,?)");
 
+//            stmt.setInt(2, Integer.parseInt(l.getIdFuncionario()));
             stmt.setInt(1, Integer.parseInt(l.getIdCliente()));
-            stmt.setInt(2, Integer.parseInt(l.getIdFuncionario()));
-            stmt.setInt(3, Integer.parseInt(l.getIdVeiculo()));
-            stmt.setString(4, l.getCodigo());
-            stmt.setString(5, l.getProtecao());
-            stmt.setDouble(6, Double.parseDouble(l.getPrecoTotal()));
-            stmt.setDate(7, Date.valueOf(l.getDiaRetira()));
-            stmt.setDate(8, Date.valueOf(l.getDiaEntrega()));
+            stmt.setInt(2, Integer.parseInt(l.getIdVeiculo()));
+            stmt.setString(3, l.getServicos());
+            stmt.setString(4, l.getProtecao());
+            stmt.setString(5, l.getPrecoTotal());
+            stmt.setString(6, l.getDiaRetira());
+            stmt.setString(7, l.getDiaEntrega());
+            stmt.setString(8, l.getTotalDias());
 
             stmt.execute();
 
@@ -54,6 +57,7 @@ public class LocacaoDAO {
         catch (SQLException ex) 
         {
             log = ex.toString();
+            JOptionPane.showMessageDialog(null, "Banco de dados "+ex);
         } 
         finally 
         {
@@ -82,7 +86,7 @@ public class LocacaoDAO {
                 l.setIdCliente(Integer.toString(rs.getInt("IDCLIENTE")));
                 l.setIdFuncionario(Integer.toString(rs.getInt("IDFUNCIONARIO")));
                 l.setIdVeiculo(Integer.toString(rs.getInt("IDVEICULO")));
-                l.setCodigo(rs.getString("CODIGO"));
+                l.setServicos(rs.getString("CODIGO"));
                 l.setProtecao(rs.getString("PROTECAO"));
                 l.setPrecoTotal(Double.toString(rs.getDouble("PRECO_TOTAL")));
                 l.setDiaRetira(fmt.format(rs.getDate("DIARETIRA")));
@@ -115,7 +119,7 @@ public class LocacaoDAO {
             stmt.setInt(1, Integer.parseInt(l.getIdCliente()));
             stmt.setInt(2, Integer.parseInt(l.getIdFuncionario()));
             stmt.setInt(3, Integer.parseInt(l.getIdVeiculo()));
-            stmt.setString(4, l.getCodigo());
+            stmt.setString(4, l.getServicos());
             stmt.setString(5, l.getProtecao());
             stmt.setDouble(6, Double.parseDouble(l.getPrecoTotal()));
             stmt.setDate(7, Date.valueOf(l.getDiaRetira()));
@@ -175,7 +179,7 @@ public class LocacaoDAO {
                 l.setIdCliente(Integer.toString(rs.getInt("IDCLIENTE")));
                 l.setIdFuncionario(Integer.toString(rs.getInt("IDFUNCIONARIO")));
                 l.setIdVeiculo(Integer.toString(rs.getInt("IDVEICULO")));
-                l.setCodigo(rs.getString("CODIGO"));
+                l.setServicos(rs.getString("CODIGO"));
                 l.setProtecao(rs.getString("PROTECAO"));
                 l.setPrecoTotal(Double.toString(rs.getDouble("PRECO_TOTAL")));
                 l.setDiaRetira(fmt.format(rs.getDate("DIARETIRA")));
