@@ -5,10 +5,8 @@
  */
 package com.pi3.locadora.view.funcionario;
 
-import br.com.model.Filial;
 import java.io.IOException;
 import br.com.model.Funcionario;
-import br.com.model.dao.FilialDAO;
 import br.com.model.dao.FuncionarioDAO;
 import java.io.PrintWriter;
 import java.util.ArrayList;

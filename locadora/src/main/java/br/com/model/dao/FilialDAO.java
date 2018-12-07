@@ -268,8 +268,8 @@ public class FilialDAO {
                 f.setId(rs.getInt("IDFILIAL"));
                 f.setNome(rs.getString("NOME"));
                 f.setRua(rs.getString("RUA"));
-                f.setTelefonefixo("TELFIXO");
-                f.setTelefonecelular("TELCEL");
+                f.setTelefonefixo(rs.getString("TELFIXO"));
+                f.setTelefonecelular(rs.getString("TELCEL"));
 
                 filiais.add(f);
 
