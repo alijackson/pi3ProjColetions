@@ -165,7 +165,7 @@
             <div class="col-md-12">
                 <table class="table table-striped">
                     <tr>
-                        <th>ID</th>
+                        <th style="display:none;">ID</th>
                         <th>Nome</th>
                         <th>Área</th>
                         <th>Email</th>
@@ -175,7 +175,7 @@
 
                     <c:forEach items="${listaFuncionarios}" var="funcionario">
                         <tr onclick="editarFunc(${funcionario.getId()})" id="trTable">
-                            <td >
+                            <td  style="display:none;" >
                                 <c:out value='${funcionario.getId()}' />
                             </td>
                             <td>

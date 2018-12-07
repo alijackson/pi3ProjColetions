@@ -36,7 +36,7 @@ public class CadastrarFilial extends HttpServlet {
 
         request.setAttribute("listarFilial", listFilial);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("filial/home-filial.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/filial/home-filial.jsp");
 
         dispatcher.forward(request, response);
 
@@ -84,7 +84,7 @@ public class CadastrarFilial extends HttpServlet {
 
         request.setAttribute("listarFilial", listFilial);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("filial/home-filial.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/filial/home-filial.jsp");
 
         dispatcher.forward(request, response);
 

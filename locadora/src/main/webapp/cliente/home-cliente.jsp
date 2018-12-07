@@ -34,12 +34,12 @@
                     margin-left: 8%;
 
                 }
-                
+
                 #mensagem{
-                    
+
                     text-align: center;
-                    
-                    
+
+
                 }
                 #menu{
 
@@ -135,7 +135,7 @@
                 <div class="col-md-12">
                     <table class="table table-striped">
                         <tr>  
-                            <th>Nome</th>
+                            <th >Nome</th>
                             <th>Data Nascimento</th>
                             <th>Email</th>
                             <th>Número CNH</th>
@@ -197,7 +197,7 @@
                     </div>
                     <div class="modal-body">
                         <form action="cadastrarC" method="post" name="formEditCliente">
-                             <input type="text" id="nomefilial" name="nomefilial" value="${filialLocalizada}" hidden/>
+                            <input type="text" id="nomefilial" name="nomefilial" value="${filialLocalizada}" hidden/>
                             <div class="form-group">
                                 <!-- hidden omite as infomações -->
                                 <input type="text" class="form-control" id="idCliente" name="idCliente" hidden>

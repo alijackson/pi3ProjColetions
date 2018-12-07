@@ -133,7 +133,7 @@
                 <div class="col-md-12">
                     <table class="table table-striped">
                         <tr>
-                            <th>ID</th>
+                            <th style="display:none;">ID</th>
                             <th>Modelo</th>
                             <th>Ano</th>
                             <th>Número de Documento</th>
@@ -143,7 +143,7 @@
 
                     <c:forEach items="${listarVeiculos}" var="veiculo">
                         <tr onclick="editarVeiculo(${veiculo.getId()})" id="trTable">
-                            <td >
+                            <td style="display:none;" >
                                 <c:out value='${veiculo.getId()}' />
                             </td>
                             <td>

@@ -132,7 +132,7 @@
                 <div class="col-md-12">
                     <table class="table table-striped">
                         <tr>
-                            <th>ID</th>
+                            <th style="display:none;">ID</th>
                             <th>Nome</th>
                             <th>Endereço</th>
                             <th>Telefone Fixo</th>
@@ -140,7 +140,7 @@
                         </tr>
                     <c:forEach items="${listarFilial}" var="filial">
                         <tr onclick="editarFilial(${filial.getId()})" id="trTable">
-                            <td >
+                            <td  style="display:none;">
                                 <c:out value='${filial.getId()}' />
                             </td>
                             <td>
