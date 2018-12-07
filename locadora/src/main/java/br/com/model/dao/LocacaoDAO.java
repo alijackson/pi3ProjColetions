@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 
 /**
@@ -220,6 +221,173 @@ public class LocacaoDAO {
         }
         return result;
     }
+    
+    
+       public ArrayList<Locacao> relatorioSemanal() {
+
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        ArrayList<Locacao> locacoes = new ArrayList<Locacao>();
+
+        Calendar cal = Calendar.getInstance();
+        
+        Date max = new Date(cal.getTimeInMillis());
+        
+        cal.add(Calendar.DAY_OF_YEAR, -7);
+        
+        Date min = new Date(cal.getTimeInMillis());
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM LOCACAO");
+            rs = stmt.executeQuery();
+
+            SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+
+            while (rs.next()) {
+                
+                Date data = rs.getDate("DIARETIRA");
+
+                if (data.after(min) && data.before(max)) {
+
+                    Locacao l = new Locacao();
+
+                    l.setId(Integer.toString(rs.getInt("IDLOCACAO")));
+                    l.setIdCliente(Integer.toString(rs.getInt("IDCLIENTE")));
+                    l.setIdFuncionario(Integer.toString(rs.getInt("IDFUNCIONARIO")));
+                    l.setIdVeiculo(Integer.toString(rs.getInt("IDVEICULO")));
+                    l.setCodigo(rs.getString("CODIGO"));
+                    l.setProtecao(rs.getString("PROTECAO"));
+                    l.setPrecoTotal(Double.toString(rs.getDouble("PRECO_TOTAL")));
+                    l.setDiaRetira(fmt.format(rs.getDate("DIARETIRA")));
+                    l.setDiaEntrega(fmt.format(rs.getDate("DIAENTREGA")));
+
+                    locacoes.add(l);
+                    
+                }
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "erro ao salvar" + ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+
+        }
+        return locacoes;
+
+    }
+    
+    public ArrayList<Locacao> relatorioQuinzenal() {
+
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        ArrayList<Locacao> locacoes = new ArrayList<Locacao>();
+
+        Calendar cal = Calendar.getInstance();
+        
+        Date max = new Date(cal.getTimeInMillis());
+        
+        cal.add(Calendar.DAY_OF_YEAR, -15);
+        
+        Date min = new Date(cal.getTimeInMillis());
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM LOCACAO");
+            rs = stmt.executeQuery();
+
+            SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+
+            while (rs.next()) {
+                
+                Date data = rs.getDate("DIARETIRA");
+
+                if (data.after(min) && data.before(max)) {
+
+                    Locacao l = new Locacao();
+
+                    l.setId(Integer.toString(rs.getInt("IDLOCACAO")));
+                    l.setIdCliente(Integer.toString(rs.getInt("IDCLIENTE")));
+                    l.setIdFuncionario(Integer.toString(rs.getInt("IDFUNCIONARIO")));
+                    l.setIdVeiculo(Integer.toString(rs.getInt("IDVEICULO")));
+                    l.setCodigo(rs.getString("CODIGO"));
+                    l.setProtecao(rs.getString("PROTECAO"));
+                    l.setPrecoTotal(Double.toString(rs.getDouble("PRECO_TOTAL")));
+                    l.setDiaRetira(fmt.format(rs.getDate("DIARETIRA")));
+                    l.setDiaEntrega(fmt.format(rs.getDate("DIAENTREGA")));
+
+                    locacoes.add(l);
+                    
+                }
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "erro ao salvar" + ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+
+        }
+        return locacoes;
+
+    }
+    
+    public ArrayList<Locacao> relatorioMensal() {
+
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        ArrayList<Locacao> locacoes = new ArrayList<Locacao>();
+
+        Calendar cal = Calendar.getInstance();
+        
+        Date max = new Date(cal.getTimeInMillis());
+        
+        cal.add(Calendar.DAY_OF_YEAR, -30);
+        
+        Date min = new Date(cal.getTimeInMillis());
+
+        try {
+            stmt = con.prepareStatement("SELECT * FROM LOCACAO");
+            rs = stmt.executeQuery();
+
+            SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+
+            while (rs.next()) {
+                
+                Date data = rs.getDate("DIARETIRA");
+
+                if (data.after(min) && data.before(max)) {
+
+                    Locacao l = new Locacao();
+
+                    l.setId(Integer.toString(rs.getInt("IDLOCACAO")));
+                    l.setIdCliente(Integer.toString(rs.getInt("IDCLIENTE")));
+                    l.setIdFuncionario(Integer.toString(rs.getInt("IDFUNCIONARIO")));
+                    l.setIdVeiculo(Integer.toString(rs.getInt("IDVEICULO")));
+                    l.setCodigo(rs.getString("CODIGO"));
+                    l.setProtecao(rs.getString("PROTECAO"));
+                    l.setPrecoTotal(Double.toString(rs.getDouble("PRECO_TOTAL")));
+                    l.setDiaRetira(fmt.format(rs.getDate("DIARETIRA")));
+                    l.setDiaEntrega(fmt.format(rs.getDate("DIAENTREGA")));
+
+                    locacoes.add(l);
+                    
+                }
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "erro ao salvar" + ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+
+        }
+        return locacoes;
+
+    }
+    
 
     
 }

@@ -57,12 +57,18 @@ public class GerarRelatorio extends HttpServlet {
         ClienteDAO daoCliente = new ClienteDAO();
 
         locacoes = daoLocacao.relatorioSemanal();
+        
+        HttpSession session = request.getSession(true);
+
+        Object filial = session.getAttribute("filialLocalizada");
+
+        String filialConvertida = String.valueOf(filial);
 
         funcionarios = daoFuncionario.apresentarFuncionarios();
 
-        veiculos = daoVeiculo.apresentarVeiculos();
+        veiculos = daoVeiculo.apresentarVeiculos(filialConvertida);
 
-        clientes = daoCliente.apresentarClientes();
+        clientes = daoCliente.apresentarClientes(filialConvertida);
 
         Calendar cal = Calendar.getInstance();
 
