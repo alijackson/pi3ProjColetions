@@ -179,11 +179,15 @@ function selCar(id) {
 
 
 function enviarBd(){
-  let idclient = document.getElementById("labelIdClient").innerText;
-  let idCar = document.getElementById("labelIdCar").innerText;
+    let idclient = document.getElementById("labelIdClient").innerText;
+    let idCar = document.getElementById("labelIdCar").innerText;
 
-  let dateSaida = document.getElementById("dateSaida").value;
-  let dateReturn = document.getElementById("dateReturn").value;
+    let dateSaida = new Date(document.getElementById("dateSaida").value);
+    let dateReturn = new Date(document.getElementById("dateReturn").value);
+  
+    let diff = Math.abs(date2.getTime() - date1.getTime());
+    
+    let dias = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
-  console.log(idclient +" "+idCar +" "+ dateSaida +" " +dateReturn);
+    console.log(idclient +" "+idCar +" "+ dateSaida +" " +dateReturn);
 }
