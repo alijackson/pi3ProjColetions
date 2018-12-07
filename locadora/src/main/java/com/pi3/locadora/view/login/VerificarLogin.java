@@ -80,8 +80,12 @@ public class VerificarLogin extends HttpServlet {
 
                 session.setAttribute("filialLocalizada", filial);
 
+//                RequestDispatcher dispatcher
+//                        = request.getRequestDispatcher("/tela-principal/tela-principal.jsp");
+//
+//                dispatcher.forward(request, response);
                 RequestDispatcher dispatcher
-                        = request.getRequestDispatcher("/tela-principal/tela-principal.jsp");
+                        = request.getRequestDispatcher("/relatorio/relatorio.jsp");
 
                 dispatcher.forward(request, response);
 
