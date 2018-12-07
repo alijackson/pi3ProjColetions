@@ -34,8 +34,8 @@ import org.json.JSONObject;
  * @author jackson
  */
 @WebServlet(name = "viewNewLocacao", urlPatterns = {"/new/locacao"})
-public class viewNewLocacao extends HttpServlet{
-    
+public class viewNewLocacao extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -77,7 +77,6 @@ public class viewNewLocacao extends HttpServlet{
 //        request.setAttribute("listaFuncionarios", funcionarios);
 //
 //        request.setAttribute("listaLocacoes", locacoes);
-
         RequestDispatcher dispatcher
                 = request.getRequestDispatcher("/locacao/oneLocacao.jsp");
 
@@ -88,38 +87,45 @@ public class viewNewLocacao extends HttpServlet{
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-        
-        try {
-            
-        LocacaoDAO loc = new LocacaoDAO();
-        
-        Locacao newLoc = new Locacao();
 
-        newLoc.setIdCliente(request.getParameter("idClient"));
-        newLoc.setIdVeiculo(request.getParameter("idCar"));
-        newLoc.setDiaRetira(request.getParameter("dataSaida"));
-        newLoc.setDiaEntrega(request.getParameter("dataReturn"));
-        newLoc.setProtecao(request.getParameter("protect"));
-        newLoc.setServicos(request.getParameter("service"));
+        try {
+
+            LocacaoDAO loc = new LocacaoDAO();
+
+            Locacao newLoc = new Locacao();
+
+            HttpSession session = request.getSession(true);
+
+            Object loginLogado = session.getAttribute("loginLogado");
+
+            String loginL = String.valueOf(loginLogado);
+
+            newLoc.setIdCliente(request.getParameter("idClient"));
+            newLoc.setIdVeiculo(request.getParameter("idCar"));
+            newLoc.setIdFuncionario(loginL);
+            newLoc.setDiaRetira(request.getParameter("dataSaida"));
+            newLoc.setDiaEntrega(request.getParameter("dataReturn"));
+            newLoc.setProtecao(request.getParameter("protect"));
+            newLoc.setServicos(request.getParameter("service"));
 //        newLoc.setTotalDias(request.getParameter("allDias"));
-        newLoc.setPrecoTotal(request.getParameter("valorTotal"));
-        
-        loc.inserir(newLoc);
-       
-        RequestDispatcher dispatcher = 
-                request.getRequestDispatcher("/locacao/listlocacao.jsp");
-        
-        dispatcher.forward(request, response);
-        
+            newLoc.setPrecoTotal(request.getParameter("valorTotal"));
+
+            loc.inserir(newLoc);
+
+            RequestDispatcher dispatcher
+                    = request.getRequestDispatcher("/locacao/listlocacao.jsp");
+
+            dispatcher.forward(request, response);
+
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Segue erro \n"+e);
+            JOptionPane.showMessageDialog(null, "Segue erro \n" + e);
         }
 
     }
+
     @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
-    {
-        
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         HttpSession session = req.getSession(true);
 
         Object filial = session.getAttribute("filialLocalizada");
@@ -136,9 +142,8 @@ public class viewNewLocacao extends HttpServlet{
             JSONArray array = new JSONArray();
 
             PrintWriter out = resp.getWriter();
-            
-            for(Cliente c : listClientes)
-            {
+
+            for (Cliente c : listClientes) {
                 JSONObject json = new JSONObject();
 
                 json.put("idCliente", c.getId());
@@ -150,20 +155,20 @@ public class viewNewLocacao extends HttpServlet{
                 json.put("telefonefixo", c.getTelefoneFixo());
                 json.put("telefonecelular", c.getTelefoneCelular());
                 json.put("datanascimento", c.getDataNascimento());
-                
+
                 array.put(json);
-                
+
             }
             out.print(array);
-            
+
         } catch (Exception e) {
-            
+
             JSONObject json = new JSONObject();
-        
-            json.put("resp", "Erro ao interpretar dados "+ e);
+
+            json.put("resp", "Erro ao interpretar dados " + e);
 
             resp.getWriter().write(json.toString());
         }
-        
+
     }
 }

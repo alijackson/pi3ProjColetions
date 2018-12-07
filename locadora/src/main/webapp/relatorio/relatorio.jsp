@@ -31,10 +31,6 @@
             <link rel="stylesheet" type="text/css" href="style/buttonSeletor.css" <!-- SWEET ALERT -->
             <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-            <!-- HIGHCHARTS -->
-
-            <script src="http://code.highcharts.com/modules/exporting.js"></script>
-            <script src="http://code.highcharts.com/modules/export-data.js"></script>
 
             <script src="https://code.highcharts.com/highcharts.js"></script>
 
@@ -187,7 +183,7 @@
                                 </td>
                                 <td>
                                     <c:forEach items="${listaVeiculos}" var="veiculo">
-                                        <c:if test="${veiculo.getId() == locacao.getIdVeiculo()}">
+                                       <c:if test="${veiculo.getId() == locacao.getIdVeiculo()}">
                                             <c:out value="${veiculo.getMarca()}" /> <c:out value="${veiculo.getModelo()}" />
                                         </c:if>
                                     </c:forEach>
@@ -471,5 +467,8 @@
     
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
     <script src="http://code.highcharts.com/modules/export-data.js"></script>
+    
+            <!-- HIGHCHARTS -->
+
 
 </html>

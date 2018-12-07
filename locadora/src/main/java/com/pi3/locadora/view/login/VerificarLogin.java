@@ -74,7 +74,11 @@ public class VerificarLogin extends HttpServlet {
 
                 String filial = dao.retornarFilial(login, senha);
 
+                String idFunc = dao.retornarID(login, senha);
+
                 HttpSession session = request.getSession(true);
+
+                session.setAttribute("loginLogado", idFunc);
 
                 session.setAttribute("login", "true");
 

@@ -84,6 +84,38 @@ public class LoginDAO {
         }
         return filial;
     }
+    
+    
+    public String retornarID(String login, String senha) {
+
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        String idFunc = null;
+        try {
+
+            stmt = con.prepareStatement("SELECT * FROM FUNCIONARIO WHERE LOGIN = ? AND SENHA = ?");
+            stmt.setString(1, login);
+            stmt.setString(2, senha);
+
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                Funcionario f = new Funcionario();
+
+                idFunc = rs.getString("IDFUNCIONARIO");
+
+            }
+
+        } catch (SQLException ex) {
+
+            ex.printStackTrace();
+
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return idFunc;
+    }
 
     public byte getAtivo() {
         return ativo;

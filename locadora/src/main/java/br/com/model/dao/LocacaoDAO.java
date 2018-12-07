@@ -37,10 +37,8 @@ public class LocacaoDAO {
 
             stmt = con.prepareStatement("INSERT INTO LOCACAO (IDCLIENTE, "
                     + "IDVEICULO, SERVICO, PROTECAO, "
-                    + "PRECO_TOTAL, DIARETIRA, DIAENTREGA " 
-//                    + ", TOTALDIAS"
-                    + ") VALUES "
-                    + "(?,?,?,?,?,?,?)");
+                    + "PRECO_TOTAL, DIARETIRA, DIAENTREGA,IDFUNCIONARIO) VALUES "
+                    + "(?,?,?,?,?,?,?,?)");
 
 //            stmt.setInt(2, Integer.parseInt(l.getIdFuncionario()));
             stmt.setInt(1, Integer.parseInt(l.getIdCliente()));
@@ -50,7 +48,7 @@ public class LocacaoDAO {
             stmt.setString(5, l.getPrecoTotal());
             stmt.setDate(6, Date.valueOf(l.getDiaRetira()));
             stmt.setDate(7, Date.valueOf(l.getDiaEntrega()));
-//            stmt.setString(8, l.getTotalDias());
+            stmt.setString(8, l.getIdFuncionario());
 
             stmt.execute();
 
@@ -66,7 +64,7 @@ public class LocacaoDAO {
         return log;
     }
     
-    public ArrayList<Locacao> ApresentarLocacoes(){
+   public ArrayList<Locacao> ApresentarLocacoes() {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -74,7 +72,7 @@ public class LocacaoDAO {
         ArrayList<Locacao> locacoes = new ArrayList<Locacao>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM LOCACAO WHERE enable=1");
+            stmt = con.prepareStatement("SELECT * FROM LOCACAO");
             rs = stmt.executeQuery();
             SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -82,13 +80,14 @@ public class LocacaoDAO {
 
                 Locacao l = new Locacao();
 
-                l.setId(Integer.toString(rs.getInt("IDLOCACAO")));
+                l.setId(Integer.toString(rs.getInt("ID")));
                 l.setIdCliente(Integer.toString(rs.getInt("IDCLIENTE")));
                 l.setIdFuncionario(Integer.toString(rs.getInt("IDFUNCIONARIO")));
                 l.setIdVeiculo(Integer.toString(rs.getInt("IDVEICULO")));
                 l.setServicos(rs.getString("SERVICO"));
                 l.setProtecao(rs.getString("PROTECAO"));
-                l.setPrecoTotal(Double.toString(rs.getDouble("PRECO_TOTAL")));
+               // l.setPrecoTotal(Double.toString(rs.getDouble("PRECO_TOTAL")));                
+                l.setPrecoTotal(rs.getString("PRECO_TOTAL"));
                 l.setDiaRetira(fmt.format(rs.getDate("DIARETIRA")));
                 l.setDiaEntrega(fmt.format(rs.getDate("DIAENTREGA")));
 
@@ -96,65 +95,70 @@ public class LocacaoDAO {
             }
 
         } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "erro ao salvar" + ex);
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
 
         }
         return locacoes;
     }
-    
-    public String atualizar(Locacao l){
-        
+
+    public String atualizar(Locacao l) {
+
         String retur = "";
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         try {
 
             stmt = con.prepareStatement("UPDATE VEICULO SET IDCLIENTE=?, IDFUNCIONARIO=?,"
-                + " IDVEICULO=?, SERVICO=?, PROTECAO=?, "
-                + "PRECO_TOTAL=?, DIARETIRA=?, DIAENTREGA=? "
-                + "WHERE (IDLOCACAO=?)");
+                    + " IDVEICULO=?, SERVICO=?, PROTECAO=?, "
+                    + "PRECO_TOTAL=?, DIARETIRA=?, DIAENTREGA=? "
+                    + "WHERE (IDLOCACAO=?)");
 
             stmt.setInt(1, Integer.parseInt(l.getIdCliente()));
             stmt.setInt(2, Integer.parseInt(l.getIdFuncionario()));
             stmt.setInt(3, Integer.parseInt(l.getIdVeiculo()));
             stmt.setString(4, l.getServicos());
             stmt.setString(5, l.getProtecao());
-            stmt.setDouble(6, Double.parseDouble(l.getPrecoTotal()));
+            stmt.setString(6, l.getPrecoTotal());
             stmt.setDate(7, Date.valueOf(l.getDiaRetira()));
             stmt.setDate(8, Date.valueOf(l.getDiaEntrega()));
             stmt.setInt(9, Integer.parseInt(l.getId()));
 
             stmt.execute();
+            JOptionPane.showMessageDialog(null, "Alteração feita com Sucesso!");
 
         } catch (SQLException ex) {
             retur = ex.toString();
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
-        
+
         return retur;
     }
-    
-    public void excluir(int id){
-        
+
+    public void excluir(int id) {
+
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
 
         try {
 
-            stmt = con.prepareStatement("UPDATE LOCACAO SET enable=2 WHERE IDLOCACAO = ?");
+            stmt = con.prepareStatement("UPDATE LOCACAO SET enable=2 WHERE ID = ?");
             stmt.setInt(1, id);
             stmt.execute();
-            
+
+            JOptionPane.showMessageDialog(null, id);
+            JOptionPane.showMessageDialog(null, "Excluído  com sucesso");
         } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "erro ao atualizar" + ex);
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
     }
-    
-    public Locacao Pesquisa(int id){
-        
+
+    public Locacao Pesquisa(int id) {
+
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -162,7 +166,6 @@ public class LocacaoDAO {
         Locacao l = new Locacao();
 
         try {
-            
 
             stmt = con.prepareStatement("SELECT * FROM LOCACAO WHERE IDLOCACAO = ?");
             stmt.setInt(1, id);
@@ -170,28 +173,29 @@ public class LocacaoDAO {
             SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
 
             if (rs.first()) {
-                l.setId(Integer.toString(rs.getInt("IDLOCACAO")));
+                l.setId(Integer.toString(rs.getInt("ID")));
                 l.setIdCliente(Integer.toString(rs.getInt("IDCLIENTE")));
                 l.setIdFuncionario(Integer.toString(rs.getInt("IDFUNCIONARIO")));
                 l.setIdVeiculo(Integer.toString(rs.getInt("IDVEICULO")));
                 l.setServicos(rs.getString("SERVICO"));
-                l.setProtecao(rs.getString("PROTECAO"));
-                l.setPrecoTotal(Double.toString(rs.getDouble("PRECO_TOTAL")));
+                l.setProtecao(rs.getString("PROTECAO"));         
+                l.setPrecoTotal(rs.getString("PRECO_TOTAL"));
                 l.setDiaRetira(fmt.format(rs.getDate("DIARETIRA")));
                 l.setDiaEntrega(fmt.format(rs.getDate("DIAENTREGA")));
-                
+
             }
 
         } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "erro ao salvar" + ex);
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
 
         }
         return l;
     }
-    
-    public boolean ChecarLocacao(String codigo){
-        
+
+    public boolean ChecarLocacao(String codigo) {
+
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -202,24 +206,19 @@ public class LocacaoDAO {
             stmt.setString(1, codigo);
             rs = stmt.executeQuery();
 
-            if (rs.next()) 
-            {    
+            if (rs.next()) {
                 result = true;
             }
 
-        } 
-        catch (SQLException ex) 
-        {
-        } 
-        finally 
-        {
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "erro ao verificar locacao" + ex);
+        } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
         return result;
     }
-    
-    
-       public ArrayList<Locacao> relatorioSemanal() {
+
+    public ArrayList<Locacao> relatorioSemanal() {
 
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
@@ -249,13 +248,13 @@ public class LocacaoDAO {
 
                     Locacao l = new Locacao();
 
-                    l.setId(Integer.toString(rs.getInt("IDLOCACAO")));
+                    l.setId(Integer.toString(rs.getInt("ID")));
                     l.setIdCliente(Integer.toString(rs.getInt("IDCLIENTE")));
                     l.setIdFuncionario(Integer.toString(rs.getInt("IDFUNCIONARIO")));
                     l.setIdVeiculo(Integer.toString(rs.getInt("IDVEICULO")));
                     l.setServicos(rs.getString("SERVICO"));
-                    l.setProtecao(rs.getString("PROTECAO"));
-                    l.setPrecoTotal(Double.toString(rs.getDouble("PRECO_TOTAL")));
+                    l.setProtecao(rs.getString("PROTECAO"));         
+                    l.setPrecoTotal(rs.getString("PRECO_TOTAL"));
                     l.setDiaRetira(fmt.format(rs.getDate("DIARETIRA")));
                     l.setDiaEntrega(fmt.format(rs.getDate("DIAENTREGA")));
 
@@ -265,7 +264,7 @@ public class LocacaoDAO {
             }
 
         } catch (SQLException ex) {
-            
+            JOptionPane.showMessageDialog(null, "erro ao salvar" + ex);
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
 
@@ -304,13 +303,13 @@ public class LocacaoDAO {
 
                     Locacao l = new Locacao();
 
-                    l.setId(Integer.toString(rs.getInt("IDLOCACAO")));
+                    l.setId(Integer.toString(rs.getInt("ID")));
                     l.setIdCliente(Integer.toString(rs.getInt("IDCLIENTE")));
                     l.setIdFuncionario(Integer.toString(rs.getInt("IDFUNCIONARIO")));
                     l.setIdVeiculo(Integer.toString(rs.getInt("IDVEICULO")));
                     l.setServicos(rs.getString("SERVICO"));
-                    l.setProtecao(rs.getString("PROTECAO"));
-                    l.setPrecoTotal(Double.toString(rs.getDouble("PRECO_TOTAL")));
+                    l.setProtecao(rs.getString("PROTECAO"));         
+                    l.setPrecoTotal(rs.getString("PRECO_TOTAL"));
                     l.setDiaRetira(fmt.format(rs.getDate("DIARETIRA")));
                     l.setDiaEntrega(fmt.format(rs.getDate("DIAENTREGA")));
 
@@ -320,6 +319,7 @@ public class LocacaoDAO {
             }
 
         } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "erro ao salvar" + ex);
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
 
@@ -358,13 +358,13 @@ public class LocacaoDAO {
 
                     Locacao l = new Locacao();
 
-                    l.setId(Integer.toString(rs.getInt("IDLOCACAO")));
+                    l.setId(Integer.toString(rs.getInt("ID")));
                     l.setIdCliente(Integer.toString(rs.getInt("IDCLIENTE")));
                     l.setIdFuncionario(Integer.toString(rs.getInt("IDFUNCIONARIO")));
                     l.setIdVeiculo(Integer.toString(rs.getInt("IDVEICULO")));
                     l.setServicos(rs.getString("SERVICO"));
-                    l.setProtecao(rs.getString("PROTECAO"));
-                    l.setPrecoTotal(Double.toString(rs.getDouble("PRECO_TOTAL")));
+                    l.setProtecao(rs.getString("PROTECAO"));         
+                    l.setPrecoTotal(rs.getString("PRECO_TOTAL"));
                     l.setDiaRetira(fmt.format(rs.getDate("DIARETIRA")));
                     l.setDiaEntrega(fmt.format(rs.getDate("DIAENTREGA")));
 
@@ -374,6 +374,7 @@ public class LocacaoDAO {
             }
 
         } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "erro ao salvar" + ex);
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
 
@@ -381,7 +382,4 @@ public class LocacaoDAO {
         return locacoes;
 
     }
-    
-
-    
 }

@@ -68,34 +68,39 @@
         <!-- INÍCIO DO MENU SUPERIOR -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light scrolling-navbar fixed-top">
 
-            <div class="container">
-                <a class="navbar-brand" href="#">LogoTipo</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="locacoes">Locação</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="cadastrar">Cliente</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="veiculos.jsp">Veículo</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="CadastrarFuncionario">Funcionário</a>
-                        </li>
-                    </ul>
+                <div class="container">
+                    <a class="navbar-brand" href="#"><img src="../imagens/logotipo.png"></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/locadora/GerarRelatorio">HOME <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/locadora/new/locacao">LOCAÇÃO</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="/locadora/cadastrarC">CLIENTE</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="/locadora/cadastrarV">VEÍCULO</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="/locadora/CadastrarFuncionario">FUNCIONÁRIO</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="/locadora/filial">FILIAL</a>
+                            </li>
+                            <li class="nav-item pulç">
+                                <a style="margin-left: 500px"href="logout"  class="nav-link active">LOGOUT</a>
+                            </li> 
+                        </ul>
+                    </div>
                 </div>
-
-            </div>
-
-        </nav>
+            </nav>
 
 
         <!-- FIM DO MENU SUPERIOR -->
