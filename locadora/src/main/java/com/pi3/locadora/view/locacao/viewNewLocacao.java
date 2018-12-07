@@ -59,17 +59,17 @@ public class viewNewLocacao extends HttpServlet{
         newLoc.setTotalDias(request.getParameter("allDias"));
         newLoc.setPrecoTotal(request.getParameter("valorTotal"));
         
-        JOptionPane.showMessageDialog(null, "Segue Locacao "+
-                newLoc.getIdCliente()+" "+ 
-                newLoc.getIdVeiculo()+" "+
-                newLoc.getDiaRetira()+" "+
-                newLoc.getDiaEntrega()+" "+
-                newLoc.getProtecao()+" "+
-                newLoc.getServicos()+" "+
-                newLoc.getTotalDias()+" "+
-                newLoc.getPrecoTotal());
-               
-            JOptionPane.showMessageDialog(null, "Segue loc " +loc.inserir(newLoc));
+//        JOptionPane.showMessageDialog(null, "Segue Locacao "+
+//                newLoc.getIdCliente()+" "+ 
+//                newLoc.getIdVeiculo()+" "+
+//                newLoc.getDiaRetira()+" "+
+//                newLoc.getDiaEntrega()+" "+
+//                newLoc.getProtecao()+" "+
+//                newLoc.getServicos()+" "+
+//                newLoc.getTotalDias()+" "+
+//                newLoc.getPrecoTotal());
+//               
+//            JOptionPane.showMessageDialog(null, "Segue loc " +loc.inserir(newLoc));
         
         RequestDispatcher dispatcher = 
                 request.getRequestDispatcher("/locacao/listlocacao.jsp");
