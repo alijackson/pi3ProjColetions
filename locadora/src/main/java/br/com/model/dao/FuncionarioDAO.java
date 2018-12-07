@@ -87,7 +87,7 @@ public class FuncionarioDAO {
             }
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, ex);
         } finally {
 
             ConnectionFactory.closeConnection(con, stmt, rs);
